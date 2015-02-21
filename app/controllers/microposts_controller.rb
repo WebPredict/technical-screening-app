@@ -14,7 +14,6 @@ class MicropostsController < ApplicationController
     @feed_items = Micropost.where(query, searchparam).paginate(page: params[:page], per_page: 10)
 
     @searched = query != ''
-#    @feed_items = Micropost.paginate(page: params[:page], conditions: condarr, per_page: 10)
   end
 
   def create

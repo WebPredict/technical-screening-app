@@ -7,9 +7,18 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.paginate(page: params[:page])
-  end
+    query = ''
+    searchparam = ""
+    paramarr = []
+    if params[:search] && params[:search] != ''
+        query += ' lower(name) LIKE ? OR lower(interests) LIKE ?'
+        searchparam = "%#{params[:search].downcase}%"
+    end
 
+    @users = User.where(query, searchparam, searchparam).paginate(page: params[:page])
+    @searched = query != ''
+  end
+  
   # GET /users/1
   # GET /users/1.json
   def show
@@ -84,7 +93,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :password,
+      params.require(:user).permit(:name, :email, :interests, :password,
                                    :password_confirmation)
     end
     

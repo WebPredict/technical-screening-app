@@ -6,6 +6,9 @@
       <%= f.label :name %>
       <%= f.text_field :name, class: 'form-control' %>
 
+      <%= f.label :interests %>
+      <%= f.text_field :interests, class: 'form-control' %>
+
       <%= f.label :email %>
       <%= f.email_field :email, class: 'form-control' %>
 
@@ -20,7 +23,7 @@
 
     <div class="gravatar_edit">
       <%= gravatar_for @user %>
-      <a href="http://gravatar.com/emails" target=_blank>change your "gravatar"</a>
+      <a href="http://gravatar.com/emails" target=_blank>change your gravatar</a>
     </div>
   </div>
 </div>
