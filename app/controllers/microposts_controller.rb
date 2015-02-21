@@ -2,6 +2,21 @@ class MicropostsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
   before_action :correct_user,   only: :destroy
   
+  def index
+    query = ''
+    searchparam = ""
+    paramarr = []
+    if params[:search] && params[:search] != ''
+        query += ' lower(content) LIKE ? '
+        searchparam = "%#{params[:search].downcase}%"
+    end
+
+    @feed_items = Micropost.where(query, searchparam).paginate(page: params[:page], per_page: 10)
+
+    @searched = query != ''
+#    @feed_items = Micropost.paginate(page: params[:page], conditions: condarr, per_page: 10)
+  end
+
   def create
     @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save

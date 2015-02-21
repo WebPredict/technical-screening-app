@@ -13,13 +13,14 @@ Rails.application.routes.draw do
   get 'signup'  => 'users#new'
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
+  post  'submitcontact' => 'static_pages#submitcontact'
   delete 'logout'  => 'sessions#destroy'
   
   resources :microposts
 
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
-  resources :microposts,          only: [:create, :destroy]
+  resources :microposts,          only: [:create, :destroy, :index]
   resources :relationships,       only: [:create, :destroy]
   
   resources :users do

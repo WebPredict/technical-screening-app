@@ -20,4 +20,10 @@ class UserMailer < ApplicationMailer
     @user = user
     mail to: user.email, subject: "Password reset for Flitter"
   end
+  
+  def contact_admin(email, content) 
+    @email = email
+    @content = content
+    mail to: 'paraglidingjeff@gmail.com', subject: email + " gave feedback"
+  end
 end

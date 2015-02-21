@@ -12,7 +12,7 @@
       </section>
     </aside>
     <div class="col-md-8">
-      <h3>Micropost Feed</h3>
+      <h3>Flit Feed</h3>
       <%= render 'shared/feed' %>
     </div>
   </div>
@@ -25,8 +25,14 @@
   </h2>
 
   <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+  <%= link_to "Search", microposts_path, class: "btn btn-lg btn-default" %>
 </div>
 
-<%= link_to image_tag("rails.png", alt: "Rails logo"),
-            'http://rubyonrails.org/' %>
+<div class="row">
+  <div class="col-md-8">
+    <h3>Recent Activity of "Flits"</h3>
+    <%= render 'shared/feed' %>
+  </div>
+</div>
+
 <% end %>
