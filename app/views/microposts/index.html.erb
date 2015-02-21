@@ -11,9 +11,13 @@
 </div>
         
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-12">
     <% if @searched %>
-    <h3>Your Glorious Search Results</h3>
+    <% if @feed_items.any? %>
+      <h3>Your Glorious Search Results</h3>
+    <% else %>
+      <h3>No results found for that search term.</h3>
+    <% end %>
     <% else %>
     <h3>Recent Flits</h3>
     <% end %>

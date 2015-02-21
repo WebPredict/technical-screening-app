@@ -3,10 +3,11 @@
   <div class="field">
     <%= f.text_area :content, placeholder: "Compose new flit..." %>
   </div>
-  <span class="picture">Picture:
-    <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
-  </span>
   <%= f.submit "Post", class: "btn btn-primary" %>
+  <div class="fileUpload btn btn-default">
+      <span>Add Picture</span>
+          <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png', class: "upload" %>
+  </div>
 <% end %>
 
 <script type="text/javascript">
