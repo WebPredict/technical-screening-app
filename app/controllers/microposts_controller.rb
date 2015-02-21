@@ -29,7 +29,7 @@ class MicropostsController < ApplicationController
 
   def destroy
     @micropost.destroy
-    flash[:success] = "Flit deleted"
+    flash[:success] = "Flit deleted :("
     redirect_to request.referrer || root_url
   end
 
