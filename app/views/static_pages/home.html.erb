@@ -12,16 +12,16 @@
       </section>
     </aside>
     <div class="col-md-8">
-      <h3>Flit Feed</h3>
+      <h3>Feed</h3>
       <%= render 'shared/feed' %>
     </div>
   </div>
 <% else %>
 <div class="center jumbotron">
-  <h1>Welcome to Flitter</h1>
+  <h1>Welcome to Generic App</h1>
 
   <h2>
-    When 140 characters just won't do. Flitter to the rescue with 141.
+    This is the finest tagline of all time.
   </h2>
 
   <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
@@ -30,7 +30,7 @@
 
 <div class="row">
   <div class="col-md-12">
-    <h3>Recent Activity of "Flits"</h3>
+    <h3>Recent Activity</h3>
     <%= render 'shared/feed' %>
   </div>
 </div>

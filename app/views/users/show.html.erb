@@ -10,17 +10,8 @@
     <section class="stats">
       <%= render 'shared/stats' %>
     </section>
-    <section>
-      <h1>Interests</h1>
-      <% if @user.interests.nil? %>
-      NONE
-      <% else %>
-      <%= @user.interests %>
-      <% end %>
-    </section>
   </aside>
   <div class="col-md-8">
-    <%= render 'follow_form' if logged_in? %>
     <% if @user.microposts.any? %>
       <h3>Twits (<%= @user.microposts.count %>)</h3>
       <ol class="microposts">

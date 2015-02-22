@@ -11,11 +11,11 @@ class UsersController < ApplicationController
     searchparam = ""
     paramarr = []
     if params[:search] && params[:search] != ''
-        query += ' lower(name) LIKE ? OR lower(interests) LIKE ?'
+        query += ' lower(name) LIKE ?'
         searchparam = "%#{params[:search].downcase}%"
     end
 
-    @users = User.where(query, searchparam, searchparam).paginate(page: params[:page])
+    @users = User.where(query, searchparam).paginate(page: params[:page])
     @searched = query != ''
   end
   
@@ -71,20 +71,6 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
-  def following
-    @title = "Following"
-    @user  = User.find(params[:id])
-    @users = @user.following.paginate(page: params[:page])
-    render 'show_follow'
-  end
-
-  def followers
-    @title = "Followers"
-    @user  = User.find(params[:id])
-    @users = @user.followers.paginate(page: params[:page])
-    render 'show_follow'
-  end
-  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -93,7 +79,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :interests, :password,
+      params.require(:user).permit(:name, :email, :password,
                                    :password_confirmation)
     end
     
