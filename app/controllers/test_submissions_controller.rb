@@ -44,6 +44,10 @@ class TestSubmissionsController < ApplicationController
   
   def new
     @test_submission = TestSubmission.new
+    @test_submission.test = Test.find(params[:id])
+    for @test_submission.test.questions do |question|
+      aq = @test_submission.answered_questions.build(question_id: question.id)
+    end
   end
 
   # GET /test_submissions/1/edit
@@ -53,7 +57,7 @@ class TestSubmissionsController < ApplicationController
 
   def show
     @test_submission = TestSubmission.find(params[:id])
-    @test_submission_items = @test_submission.items.paginate(page: params[:page]).order(sort_column + " " + sort_direction)
+    #@test_submission_items = @test_submission.items.paginate(page: params[:page]).order(sort_column + " " + sort_direction)
   end
 
   def destroy

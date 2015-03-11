@@ -11,18 +11,89 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150220160355) do
+ActiveRecord::Schema.define(version: 20150304151505) do
 
-  create_table "microposts", force: :cascade do |t|
-    t.text     "content"
-    t.string   "picture"
+  create_table "answered_questions", force: :cascade do |t|
+    t.string   "answer"
+    t.integer  "question_id"
+    t.integer  "candidate_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "answered_questions", ["candidate_id"], name: "index_answered_questions_on_candidate_id"
+  add_index "answered_questions", ["question_id"], name: "index_answered_questions_on_question_id"
+
+  create_table "candidates", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "phone"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "microposts", ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at"
-  add_index "microposts", ["user_id"], name: "index_microposts_on_user_id"
+  add_index "candidates", ["user_id"], name: "index_candidates_on_user_id"
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "difficulties", force: :cascade do |t|
+    t.string   "level"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.string   "content"
+    t.string   "answer"
+    t.integer  "user_id"
+    t.integer  "category_id"
+    t.integer  "difficulty_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "questions", ["category_id"], name: "index_questions_on_category_id"
+  add_index "questions", ["difficulty_id"], name: "index_questions_on_difficulty_id"
+  add_index "questions", ["user_id"], name: "index_questions_on_user_id"
+
+  create_table "questions_tests", id: false, force: :cascade do |t|
+    t.integer "test_id"
+    t.integer "question_id"
+  end
+
+  add_index "questions_tests", ["question_id"], name: "index_questions_tests_on_question_id"
+  add_index "questions_tests", ["test_id"], name: "index_questions_tests_on_test_id"
+
+  create_table "test_submissions", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "score"
+    t.integer  "user_id"
+    t.integer  "candidate_id"
+    t.integer  "test_id"
+    t.integer  "answered_questions_id"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "test_submissions", ["answered_questions_id"], name: "index_test_submissions_on_answered_questions_id"
+  add_index "test_submissions", ["candidate_id"], name: "index_test_submissions_on_candidate_id"
+  add_index "test_submissions", ["test_id"], name: "index_test_submissions_on_test_id"
+  add_index "test_submissions", ["user_id"], name: "index_test_submissions_on_user_id"
+
+  create_table "tests", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "tests", ["user_id"], name: "index_tests_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

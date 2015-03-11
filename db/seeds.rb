@@ -57,9 +57,9 @@ question2 = Question.create!(content: "Explain equals and hashcode method usage,
                   difficulty_id: 2,
                   category_id: 1)
 
-test = Test.create!(name: "Basic Java Test", descrption: "This is the basic java test.", user_id: 1)
-test.questions.add(question1)
-test.questions.add(question2)
+test = Test.create!(name: "Basic Java Test", description: "This is the basic java test.", user_id: 1)
+test.questions << question1
+test.questions << question2
 test.save
 
 #users = User.order(:created_at).take(6)
