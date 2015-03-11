@@ -1,0 +1,12 @@
+<tr id="candidate-<%= candidate.id %>">
+  <td><%= candidate.name %></td>
+  <td><%= candidate.email %></td>
+  <td><%= candidate.phone %></td>
+  <td><%= candidate.test_submissions.count %></td>
+  <td>
+      <% if current_user?(candidate.user) %>
+            <%= link_to "X", candidate, method: :delete,
+                                       data: { confirm: "Delete this candidate?" } %>
+      <% end %>
+  </td>
+</tr>

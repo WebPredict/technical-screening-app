@@ -1,0 +1,15 @@
+<li id="company-<%= company.id %>">
+  <%= link_to gravatar_for(company.user, size: 50), company.user %>
+  <span class="user"><%= link_to company.user.name, company.user %></span>
+  <span class="content">
+    <%= company.name %>
+    <%= image_tag company.picture.url if company.picture? %>
+  </span>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(company.created_at) %> ago.
+    <% if current_user?(company.user) %>
+      <%= link_to "delete", company, method: :delete,
+                                       data: { confirm: "Delete this company?" } %>
+    <% end %>
+  </span>
+</li>

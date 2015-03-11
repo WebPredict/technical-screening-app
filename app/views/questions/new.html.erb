@@ -1,0 +1,26 @@
+<% provide(:title, "Create Question") %>
+<h1>Create Question</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@question) do |f| %>
+      <%= f.label :content %>
+      <%= f.text_field :content, class: 'form-control' %>
+
+      <%= f.label :answer %>
+      <%= f.text_field :answer, class: 'form-control' %>
+
+  		<%= f.label :difficulty %>
+  		<div class="field">
+    		<%= f.collection_select(:difficulty_id, Difficulty.all, :id, :level) %>
+  		</div>
+
+  		<%= f.label :category %>
+  		<div class="field">
+    		<%= f.collection_select(:category_id, Category.all, :id, :name) %>
+  		</div>
+
+      <%= f.submit "Submit", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

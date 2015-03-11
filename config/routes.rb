@@ -16,12 +16,18 @@ Rails.application.routes.draw do
   post  'submitcontact' => 'static_pages#submitcontact'
   delete 'logout'  => 'sessions#destroy'
   
-  resources :microposts
+  resources :companies
 
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
-  resources :microposts,          only: [:create, :destroy, :index]
   
+  resources :tests do 
+    resources :questions
+  end
+
+  resources :candidates
+  resources :test_submissions
+  resources :questions
   resources :users 
   
   # The priority is based upon order of creation: first created -> highest priority.

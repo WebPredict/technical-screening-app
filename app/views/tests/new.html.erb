@@ -1,0 +1,15 @@
+<% provide(:title, "Create Test") %>
+<h1>Create Test</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@test) do |f| %>
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+
+      <%= f.submit "Submit", class: "btn btn-primary" %>
+      <%= link_to "Select Questions", select_questions_path, class: "btn btn-success" %>
+    <% end %>
+  </div>
+</div>
+

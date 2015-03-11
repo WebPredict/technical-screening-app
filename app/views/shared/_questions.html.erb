@@ -1,0 +1,7 @@
+<% if @questions.any? %>
+  <table class="table table-bordered">
+    <tr><th><%= sortable "content", "Question" %></th><th><%= sortable "answer" %></th><th><%= sortable "difficulty" %></th><th><%= sortable "category" %></th><th>Actions</th></tr>
+    <%= render @questions %>
+  </table>
+  <%= will_paginate @questions %>
+<% end %>

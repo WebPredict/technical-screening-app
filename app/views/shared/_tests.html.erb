@@ -1,0 +1,7 @@
+<% if @tests.any? %>
+  <table class="table table-bordered">
+    <tr><th><%= sortable "name" %></th><th><%= sortable "num_questions" %></th><th>Actions</th></tr>
+    <%= render @tests %>
+  </table>
+  <%= will_paginate @tests %>
+<% end %>

@@ -1,0 +1,10 @@
+<tr id="test-<%= test.id %>">
+  <td><%= test.name %></td>
+  <td><%= test.questions.count %></td>
+  <td>
+      <% if current_user?(test.user) %>
+            <%= link_to "X", test, method: :delete,
+                                       data: { confirm: "Delete this test?" } %>
+      <% end %>
+  </td>
+</tr>

@@ -11,8 +11,10 @@ class User < ActiveRecord::Base
     format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
   validates :password, length: { minimum: 6 }, allow_blank: true
   
-  has_many :microposts, dependent: :destroy
-  
+  has_many :questions
+  has_many :test_takers
+  has_many :tests, dependent: :destroy
+
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
                                                   BCrypt::Engine.cost

@@ -1,0 +1,25 @@
+<% provide(:title, @candidate.name) %>
+<div class="row">
+  <div class="col-md-12">
+    <section>
+      <h1>
+        Candidate: <%= @candidate.name %>
+      </h1>
+    </section>
+    <section>
+      <% if @candidate.test_submissions.any? %>
+        <h3>This Candidate's Test Submissions (<%= @candidate.test_submissions.count %>)</h3>
+          <table class="table table-bordered">
+            <tr><th><%= sortable "name" %></th><th><%= sortable "score" %></th><th><%= sortable "priority" %></th><th><%= sortable "category" %></th><th><%= sortable "list" %></th><th>Actions</th></tr>
+            <%= render @candidate.test_submissions %>
+          </table>
+          <%= will_paginate @candidate.test_submissions %>
+      <% end %>
+    </section>
+    <section>
+        <%= link_to "Edit Candidate", edit_list_path(@list), class: "btn btn-success" %> 
+        <%= link_to "Dashboard", root_path, class: "btn btn-success" %> 
+    </section>
+  </div>
+</div>
+

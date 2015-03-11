@@ -1,0 +1,24 @@
+<% provide(:title, @answered_question.question.content) %>
+<div class="row">
+  <div class="col-md-12">
+    <section>
+      <h1> Question: <%= @answered_question.question.content %> </h1>
+    </section>
+    <section>
+      <h1> Candidate's Answer: <%= @answered_question.answer %> </h1>
+    </section>
+    <section>
+      <h1> Correct Answer: <%= @answered_question.question.answer %> </h1>
+    </section>
+		<section>
+			<h3>Difficulty: <%= @answered_question.question.difficulty %></h3>
+		</section>
+		<section>
+			<h3>Category: <%= @answered_question.question.category %></h3>
+		</section>
+    <section>
+        <%= link_to "Manage Tests", root_path, class: "btn btn-success" %> 
+    </section>
+  </div>
+</div>
+

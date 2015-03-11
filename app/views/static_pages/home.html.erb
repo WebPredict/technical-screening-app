@@ -7,31 +7,60 @@
       <section class="stats">
         <%= render 'shared/stats' %>
       </section>
-      <section class="micropost_form">
-        <%= render 'shared/micropost_form' %>
+      <section class="question_form">
+        <%= render 'shared/question_form' %>
+      </section>
+      <section class="lists">
+        <h3>Your Tests</h3>
+        <% if @user.tests.any? %>
+          <% @user.tests.each do |list| %>
+            <div class="test_link">
+              <%= link_to test.name, test %> (<%= pluralize(test.questions.count, "test") %>)
+            </div>
+          <% end %>
+        <% end %>
+        <div class="other">
+          <%= link_to "Create Test", new_test_path, :class => "btn btn-med btn-primary" %>
+        </div>
       </section>
     </aside>
     <div class="col-md-8">
-      <h3>Feed</h3>
+      <div class="item-buttons">
+        <% if @show_all %>
+          <%= link_to "Show Recent Candidates", root_path(show_all: "false"), :class => "btn btn-sm btn-default" %>
+          <%= link_to "Show Highest Scoring", root_path(show_all: "true"), :class => "btn btn-sm btn-success" %>
+        <% else %>
+          <%= link_to "Show Recent Candidates", root_path(show_all: "false"), :class => "btn btn-sm btn-success" %>
+          <%= link_to "Show Highest Scoring", root_path(show_all: "true"), :class => "btn btn-sm btn-default" %>
+        <% end %>
+      </div>
       <%= render 'shared/feed' %>
     </div>
   </div>
 <% else %>
 <div class="center jumbotron">
-  <h1>Welcome to Generic App</h1>
+  <h1>Welcome to TechReviewNow</h1>
 
   <h2>
-    This is the finest tagline of all time.
+    Screen your interview candidates with ease.
   </h2>
 
   <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
-  <%= link_to "Search", microposts_path, class: "btn btn-lg btn-default" %>
+  <%= link_to "Features", about_path, class: "btn btn-lg btn-default" %>
 </div>
 
 <div class="row">
-  <div class="col-md-12">
-    <h3>Recent Activity</h3>
-    <%= render 'shared/feed' %>
+  <div class="col-md-4">
+    <h3>Unlimited Tests</h3>
+    <p>Create as many screening tests as you'd like, with as many questions as you'd like.</p>
+  </div>
+    <div class="col-md-4">
+    <h3>Large Library of Questions</h3>
+    <p>Quickly put together screening tests for popular technologies using our existing library of questions and answers.</p>
+  </div>
+  <div class="col-md-4">
+    <h3>Manage Candidates</h3>
+    <p>Invite as many interview candidates as you'd like to take your tests, score and manage the results.</p>
   </div>
 </div>
 

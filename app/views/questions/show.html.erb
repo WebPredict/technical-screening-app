@@ -1,0 +1,23 @@
+<% provide(:title, @question.content) %>
+<div class="row">
+  <div class="col-md-12">
+    <section>
+      <h1> Question: <%= @question.content %> </h1>
+    </section>
+    <section>
+      <h1> Answer: <%= @question.answer %> </h1>
+    </section>
+		<section>
+			<h3>Difficulty: <%= @question.difficulty %></h3>
+		</section>
+		<section>
+			<h3>Category: <%= @question.category %></h3>
+		</section>
+    <section>
+        <%= link_to "Edit Question", edit_question_path(@question), class: "btn btn-success" %> 
+        <%= link_to "Clone Question", clone_question_path(@question), class: "btn btn-success" %> 
+        <%= link_to "Manage Tests", root_path, class: "btn btn-success" %> 
+    </section>
+  </div>
+</div>
+

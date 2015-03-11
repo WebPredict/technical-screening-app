@@ -1,16 +1,16 @@
 class StaticPagesController < ApplicationController
   def home
     if logged_in?
-      @micropost = current_user.microposts.build
-      @feed_items = current_user.feed.paginate(page: params[:page])
+      @question = current_user.questions.build
+      @tests = current_user.tests.paginate(page: params[:page])
     else
-      @feed_items = Micropost.paginate(page: params[:page], per_page: 5)
+      @questions = Question.paginate(page: params[:page], per_page: 5)
     end
   end
 
   def submitcontact
     UserMailer.contact_admin(params[:email], params[:comment]).deliver
-    flash[:success] = "Thanks for your feedback... we will review it soon and meditate on it."
+    flash[:success] = "Thanks for your feedback... we will review it soon."
     redirect_to root_path
   end
   

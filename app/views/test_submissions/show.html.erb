@@ -1,0 +1,29 @@
+<% provide(:title, @test_submission.candidate.name) %>
+<div class="row">
+  <div class="col-md-12">
+    <section>
+      <h1>
+        Test Result For: <%= @test_submission.candidate.name %>
+      </h1>
+    </section>
+    <section>
+      <h1>
+        Test Name: <%= @test_submission.test.name %>
+      </h1>
+    </section>
+    <section>
+      <% if @test_submission.answered_questions.any? %>
+        <h3>Answered Questions (<%= @test_submission.answered_questions.count %>)</h3>
+          <table class="table table-bordered">
+            <tr><th><%= sortable "question" %></th><th><%= sortable "answer" %></th><th>Actions</th></tr>
+            <%= render @test_submission.answered_questions %>
+          </table>
+          <%= will_paginate @test_submission.answered_questions %>
+      <% end %>
+    </section>
+    <section>
+        <%= link_to "Manage Tests", root_path, class: "btn btn-success" %> 
+    </section>
+  </div>
+</div>
+
