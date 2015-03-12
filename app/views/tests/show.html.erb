@@ -11,9 +11,9 @@
         <h3>This Test's Questions (<%= @test.questions.count %>)</h3>
         <table class="table table-bordered">
           <tr><th><%= sortable "content", "Question" %></th><th><%= sortable "answer" %></th><th><%= sortable "difficulty" %></th><th><%= sortable "category" %></th><th>Actions</th></tr>
-          <%= render @test.questions %>
+          <%= render @test_questions %>
         </table>
-        <%= will_paginate @test.questions %>
+        <%= will_paginate @test_questions %>
       <% end %>
     </section>
     <section>

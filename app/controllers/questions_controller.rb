@@ -73,5 +73,12 @@ class QuestionsController < ApplicationController
       redirect_to root_url if @question.nil?
     end
   
+    def sort_column
+      Question.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
+    end
 end
 

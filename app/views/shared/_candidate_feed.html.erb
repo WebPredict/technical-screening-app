@@ -1,0 +1,9 @@
+<% if @candidates.any? %>
+  <table class="table table-bordered">
+    <tr><th><%= sortable "name" %></th><th><%= sortable "email" %></th><th><%= sortable "phone" %></th><th># Tests</th><th>Actions</th></tr>
+    <%= render @candidates %>
+  </table>
+  <%= will_paginate @candidates %>
+<% else %>
+<h3>No candidates yet. Send out a test invite to a prospective candidate here.</h3>
+<% end %>

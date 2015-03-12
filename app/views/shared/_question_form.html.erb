@@ -1,0 +1,21 @@
+<%= form_for(@question) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <%= f.label :content %>
+  <%= f.text_field :content, class: 'form-control' %>
+
+  <%= f.label :answer %>
+  <%= f.text_field :answer, class: 'form-control' %>
+
+	<%= f.label :difficulty %>
+	<div class="field">
+  <%= f.collection_select(:difficulty_id, Difficulty.all, :id, :level) %>
+  </div>
+
+  <%= f.label :category %>
+  <div class="field">
+  <%= f.collection_select(:category_id, Category.all, :id, :name) %>
+  </div>
+
+  <%= f.submit "Create Question", class: "btn btn-primary" %>
+<% end %>

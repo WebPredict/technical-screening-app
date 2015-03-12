@@ -13,9 +13,9 @@
       <section class="lists">
         <h3>Your Tests</h3>
         <% if @user.tests.any? %>
-          <% @user.tests.each do |list| %>
+          <% @user.tests.each do |test| %>
             <div class="test_link">
-              <%= link_to test.name, test %> (<%= pluralize(test.questions.count, "test") %>)
+              <%= link_to test.name, test %> (<%= pluralize(test.questions.count, "question") %>)
             </div>
           <% end %>
         <% end %>
@@ -34,7 +34,7 @@
           <%= link_to "Show Highest Scoring", root_path(show_all: "true"), :class => "btn btn-sm btn-default" %>
         <% end %>
       </div>
-      <%= render 'shared/feed' %>
+      <%= render 'shared/candidate_feed' %>
     </div>
   </div>
 <% else %>

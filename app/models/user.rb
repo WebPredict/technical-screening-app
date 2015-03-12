@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6 }, allow_blank: true
   
   has_many :questions
-  has_many :test_takers
+  has_many :candidates
   has_many :tests, dependent: :destroy
 
   def User.digest(string)

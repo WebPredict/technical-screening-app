@@ -3,6 +3,7 @@ class StaticPagesController < ApplicationController
     if logged_in?
       @question = current_user.questions.build
       @tests = current_user.tests.paginate(page: params[:page])
+      @candidates = current_user.candidates
     else
       @questions = Question.paginate(page: params[:page], per_page: 5)
     end

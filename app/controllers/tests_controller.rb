@@ -61,7 +61,7 @@ class TestsController < ApplicationController
 
   def show
     @test = Test.find(params[:id])
-    @test_items = @test.items.paginate(page: params[:page]).order(sort_column + " " + sort_direction)
+    @test_questions = @test.questions.paginate(page: params[:page]).order(sort_column + " " + sort_direction)
   end
 
   def destroy
@@ -81,5 +81,12 @@ class TestsController < ApplicationController
       redirect_to root_url if @test.nil?
     end
   
+    def sort_column
+      Test.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
+    end
 end
 
