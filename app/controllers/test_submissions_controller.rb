@@ -13,7 +13,7 @@ class TestSubmissionsController < ApplicationController
         searchparam = "%#{params[:search].downcase}%"
     end
 
-    @feed_items = TestSubmission.where(query, searchparam).paginate(page: params[:page], per_page: 10)
+    @test_submissions = TestSubmission.where(query, searchparam).paginate(page: params[:page], per_page: 10)
 
     @searched = query != ''
   end

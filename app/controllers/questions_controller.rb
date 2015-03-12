@@ -13,7 +13,7 @@ class QuestionsController < ApplicationController
         searchparam = "%#{params[:search].downcase}%"
     end
 
-    @feed_items = Question.where(query, searchparam).paginate(page: params[:page], per_page: 10)
+    @questions = Question.where(query, searchparam).paginate(page: params[:page], per_page: 10)
     @select_mode = false
     @searched = query != ''
   end

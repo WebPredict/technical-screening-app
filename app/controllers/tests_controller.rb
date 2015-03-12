@@ -13,11 +13,28 @@ class TestsController < ApplicationController
         searchparam = "%#{params[:search].downcase}%"
     end
 
-    @feed_items = Test.where(query, searchparam).paginate(page: params[:page], per_page: 10)
+    @tests = Test.where(query, searchparam).paginate(page: params[:page], per_page: 10)
 
     @searched = query != ''
   end
 
+  def select_questions
+    @test = Test.find(params[:id])
+    @test_questions = @test.questions.paginate(page: params[:page]).order(sort_column + " " + sort_direction)
+    searchparam = ""
+    question_ids = "SELECT question_id FROM questions_tests WHERE test_id = ?"
+    query = "id NOT IN (#{question_ids})"
+
+    if params[:search] && params[:search] != ''
+        query += ' AND lower(name) LIKE ? '
+        searchparam = "%#{params[:search].downcase}%"
+    end
+
+    @questions = Question.where(query, @test.id).paginate(page: params[:page], per_page: 10)
+    @select_mode = true
+    @searched = query != ''
+  end
+  
   def create
     @test = current_user.tests.build(test_params)
     if @test.save
@@ -45,8 +62,9 @@ class TestsController < ApplicationController
   def submit_questions 
     @questions = Question.find(params[:question_ids])
   end
-  
-  def select_questions 
+
+  def update_questions 
+    @questions = Question.find(params[:question_ids])
   end
   
   def new

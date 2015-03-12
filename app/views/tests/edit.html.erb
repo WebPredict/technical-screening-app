@@ -10,7 +10,7 @@
       <%= f.text_field :name, class: 'form-control' %>
 
       <%= f.submit "Update Test", class: "btn btn-primary" %>
-      <%= link_to "Select Questions", select_questions_path, class: "btn btn-success" %>
+      <%= link_to "Select Questions", select_questions_path(id: @test.id), class: "btn btn-success" %>
       <%= link_to "Dashboard", root_path, class: "btn btn-success" %>
     <% end %>
   </div>

@@ -16,6 +16,10 @@ Rails.application.routes.draw do
   post  'submitcontact' => 'static_pages#submitcontact'
   delete 'logout'  => 'sessions#destroy'
   
+  get 'select_questions' => 'tests#select_questions'
+  post 'update_questions' => 'tests#update_questions'
+  post 'submit_questions' => 'tests#submit_questions'
+  
   resources :companies
 
   resources :account_activations, only: [:edit]

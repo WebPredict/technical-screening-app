@@ -13,7 +13,7 @@ class CandidatesController < ApplicationController
         searchparam = "%#{params[:search].downcase}%"
     end
 
-    @feed_items = Candidate.where(query, searchparam).paginate(page: params[:page], per_page: 10)
+    @candidates = Candidate.where(query, searchparam).paginate(page: params[:page], per_page: 10)
 
     @searched = query != ''
   end
