@@ -25,15 +25,6 @@
       </section>
     </aside>
     <div class="col-md-8">
-      <div class="item-buttons">
-        <% if @show_all %>
-          <%= link_to "Show Recent Candidates", root_path(show_all: "false"), :class => "btn btn-sm btn-default" %>
-          <%= link_to "Show Highest Scoring", root_path(show_all: "true"), :class => "btn btn-sm btn-success" %>
-        <% else %>
-          <%= link_to "Show Recent Candidates", root_path(show_all: "false"), :class => "btn btn-sm btn-success" %>
-          <%= link_to "Show Highest Scoring", root_path(show_all: "true"), :class => "btn btn-sm btn-default" %>
-        <% end %>
-      </div>
       <%= render 'shared/candidate_feed' %>
     </div>
   </div>

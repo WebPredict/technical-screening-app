@@ -1,5 +1,5 @@
 <tr id="test-<%= test.id %>">
-  <td><%= test.name %></td>
+  <td><%= link_to test.name, test %></td>
   <td><%= test.questions.count %></td>
   <td>
       <% if current_user?(test.user) %>

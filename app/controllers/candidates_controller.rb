@@ -24,11 +24,16 @@ class CandidatesController < ApplicationController
       flash[:success] = "Candidate created!"
       redirect_to root_url
     else
-      @feed_items = []
-      render 'static_pages/home'
+      render 'edit'
     end
   end
 
+  def send_candidate_test
+    @single_test_select = true
+    redirect_to tests_path
+    # TODO: select a test to send, then send it
+  end
+  
   def update
     @candidate = TestTaker.find(params[:id])
     respond_to do |format|
@@ -65,7 +70,7 @@ class CandidatesController < ApplicationController
   private
 
     def candidate_params
-      params.require(:candidate).permit(:name)
+      params.require(:candidate).permit(:name, :phone, :email)
     end
     
     def correct_user

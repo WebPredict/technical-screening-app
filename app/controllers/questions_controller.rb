@@ -53,9 +53,21 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.find(params[:id])
-    @question_items = @question.items.paginate(page: params[:page]).order(sort_column + " " + sort_direction)
   end
 
+  def clone_question
+    @question = Question.find(params[:id])
+    @clone_question = Question.new
+    @clone_question.content = @question.content
+    @clone_question.answer = @question.answer
+    @clone_question.difficulty_id = @question.difficulty_id
+    @clone_question.category_id = @question.category_id
+    @clone_question.user = current_user
+    @clone_question.save
+    flash[:success] = "Question cloned."
+    redirect_to @clone_question
+  end
+  
   def destroy
     @question.destroy
     flash[:success] = "Question deleted."

@@ -3,10 +3,12 @@
   <td><%= candidate.email %></td>
   <td><%= candidate.phone %></td>
   <td><%= candidate.test_submissions.count %></td>
+  <td><%= candidate.average_score %></td>
   <td>
       <% if current_user?(candidate.user) %>
             <%= link_to "X", candidate, method: :delete,
                                        data: { confirm: "Delete this candidate?" } %>
+            <%= link_to "Send Test", send_candidate_test_path(id: candidate.id), :class => "btn btn-sm btn-default" %>
       <% end %>
   </td>
 </tr>
