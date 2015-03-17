@@ -61,10 +61,24 @@ class TestsController < ApplicationController
   
   def submit_questions 
     @questions = Question.find(params[:question_ids])
+    if @questions.any?
+      @test = Test.find(params[:id])
+      @questions.each do |question|
+        @test.questions << question
+      end
+      @test.save
+    end
+    flash[:success] = "Test questions added."
+    redirect_to @test
   end
 
   def update_questions 
     @questions = Question.find(params[:question_ids])
+    @test = Test.find(params[:id])
+    @test.questions = @questions 
+    @test.save
+    flash[:success] = "Test updated."
+    redirect_to @test
   end
   
   def new
@@ -91,7 +105,7 @@ class TestsController < ApplicationController
   private
 
     def test_params
-      params.require(:test).permit(:name)
+      params.require(:test).permit(:name, :question_ids)
     end
     
     def correct_user

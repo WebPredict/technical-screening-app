@@ -57,10 +57,27 @@ question2 = Question.create!(content: "Explain equals and hashcode method usage,
                   difficulty_id: 2,
                   category_id: 1)
 
+question3 = Question.create!(content: "What is the difference between a natural key and a surrogate or synthetic key?",
+                  answer: "A natural key is one in which the attributes of the key exist in the real world.  For instance, a social security number would be a natural " + 
+                    "key, as it is information that exists outside of the realm of the database. A surrogate or synthetic key is a system-generated key that is arbitrary to the values in the table, yet uniquely identifies a row.  " + 
+                    "For example a database administrator might set up a column in a database for employee IDs and have the DBMS generate random ID numbers to uniquely identify the employee data.",
+                user_id: 1,
+                difficulty_id: 3,
+                category_id: 8)
+
+question4 = Question.create!(content: "What is a join?",
+                  answer: "It is a way of combining rows from two or more tables, typically using one or more common key values.",
+                  user_id: 1,
+                  difficulty_id: 1,
+                  category_id: 8)
+                
 test = Test.create!(name: "Basic Java Test", description: "This is the basic java test.", user_id: 1)
+test2 = Test.create!(name: "Basic SQL Test", description: "This is the basic SQL test.", user_id: 1)
 test.questions << question1
 test.questions << question2
+test2.questions << question3
 test.save
+test2.save
 
 #users = User.order(:created_at).take(6)
 #50.times do

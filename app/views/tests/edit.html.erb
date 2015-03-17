@@ -10,8 +10,13 @@
       <%= f.text_field :name, class: 'form-control' %>
 
       <%= f.submit "Update Test", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
+</br>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
       <%= link_to "Select Questions", select_questions_path(id: @test.id), class: "btn btn-success" %>
       <%= link_to "Dashboard", root_path, class: "btn btn-success" %>
-    <% end %>
   </div>
 </div>

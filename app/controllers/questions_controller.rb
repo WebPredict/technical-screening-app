@@ -9,7 +9,7 @@ class QuestionsController < ApplicationController
     searchparam = ""
     paramarr = []
     if params[:search] && params[:search] != ''
-        query += ' lower(name) LIKE ? '
+        query += ' lower(content) LIKE ? '
         searchparam = "%#{params[:search].downcase}%"
     end
 
@@ -24,7 +24,7 @@ class QuestionsController < ApplicationController
       flash[:success] = "Question created!"
       redirect_to root_url
     else
-      @feed_items = []
+      @candidates = current_user.candidates
       render 'static_pages/home'
     end
   end
@@ -65,7 +65,7 @@ class QuestionsController < ApplicationController
   private
 
     def question_params
-      params.require(:question).permit(:name)
+      params.require(:question).permit(:difficulty_id, :category_id, :content, :answer)
     end
     
     def correct_user

@@ -5,9 +5,8 @@
   <td><%= question.category.name %></td>
   <td>
       <% if @select_mode %>
-        <%= check_box_tag "question_ids[]", question.id %>
-      <% end %>
-      <% if current_user?(question.user) %>
+        <%= check_box_tag "question_ids[]", question.id, @preselect_checkboxes %>
+      <% elsif current_user?(question.user) %>
             <%= link_to "X", question, method: :delete,
                                        data: { confirm: "Delete this question?" } %>
       <% end %>

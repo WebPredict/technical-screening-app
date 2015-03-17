@@ -1,10 +1,12 @@
 <% provide(:title, 'Select/Update Test Questions') %>
 
 <% if @test_questions.any? %>
-  <h3>Current Test Questions</h3>
+  <h3>Current Test Questions for: <%= @test.name %></h3>
   <%= form_tag update_questions_path, :class => "nicesearch", :method => 'post' do %>
+  <%= hidden_field_tag :id, @test.id %>
     <table class="table table-bordered">
       <tr><th><%= sortable "content", "Question" %></th><th><%= sortable "answer" %></th><th><%= sortable "difficulty" %></th><th><%= sortable "category" %></th><th>Actions</th></tr>
+      <% @preselect_checkboxes = true %>
       <%= render @test_questions %>
     </table>
     <%= will_paginate @test_questions %>
@@ -25,8 +27,10 @@
 </div>
 <% if @questions.any? %>
   <%= form_tag submit_questions_path, :class => "nicesearch", :method => 'post' do %>
+  <%= hidden_field_tag :id, @test.id %>
     <table class="table table-bordered">
       <tr><th><%= sortable "content", "Question" %></th><th><%= sortable "answer" %></th><th><%= sortable "difficulty" %></th><th><%= sortable "category" %></th><th>Actions</th></tr>
+      <% @preselect_checkboxes = false %>
       <%= render @questions %>
     </table>
     <%= will_paginate @questions %>
