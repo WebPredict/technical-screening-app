@@ -53,7 +53,7 @@ class TestSubmissionsController < ApplicationController
   def new
     @test_submission = TestSubmission.new
     @test_submission.test = Test.find(params[:id])
-    for @test_submission.test.questions do |question|
+    @test_submission.test.questions.each do |question|
       aq = @test_submission.answered_questions.build(question_id: question.id)
     end
   end
