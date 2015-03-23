@@ -1,20 +1,28 @@
-<h1>Candidates</h1>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Candidates</h3>
+    </div>
+  <div class="panel-body">
 <% if @candidates.any? %>
       <div class="test-buttons">
         <% if @show_all %>
           <%= link_to "Show Recent Candidates", root_path(show_all: "false"), :class => "btn btn-sm btn-default" %>
-          <%= link_to "Show Highest Scoring", root_path(show_all: "true"), :class => "btn btn-sm btn-success" %>
+          <%= link_to "Show Highest Scoring", root_path(show_all: "true"), :class => "btn btn-sm btn-primary" %>
         <% else %>
-          <%= link_to "Show Recent Candidates", root_path(show_all: "false"), :class => "btn btn-sm btn-success" %>
+          <%= link_to "Show Recent Candidates", root_path(show_all: "false"), :class => "btn btn-sm btn-primary" %>
           <%= link_to "Show Highest Scoring", root_path(show_all: "true"), :class => "btn btn-sm btn-default" %>
         <% end %>
       </div>
-  <table class="table table-bordered">
-    <tr><th><%= sortable "name" %></th><th><%= sortable "email" %></th><th><%= sortable "phone" %></th><th># Tests</th><th>Average Score</th><th>Actions</th></tr>
+  <table class="table">
+    <tr><th><%= sortable "name" %></th><th><%= sortable "email" %></th><th><%= sortable "phone" %></th><th>Num Tests</th><th>Avg Score</th><th>Actions</th></tr>
+    <tbody>
     <%= render @candidates %>
+    </tbody>
   </table>
   <%= will_paginate @candidates %>
 <% else %>
 <h3>No candidates yet.</h3>
 <% end %>
-<%= link_to "New Candidate", new_candidate_path, class: "btn btn-success" %>
+<%= link_to "New Candidate", new_candidate_path, class: "btn btn-primary" %>
+</div>
+</div>

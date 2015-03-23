@@ -1,4 +1,8 @@
-<h1>Search Tests</h1>
+<% if @single_test_select %>
+<h3>Filter Tests To Send</h3>
+<% else %>
+<h3>Search Tests</h3>
+<% end %>
 <div class="row">
 <%= form_tag tests_path, :class => "nicesearch", :method => 'get' do %>
     <div class="input-group">
@@ -19,13 +23,27 @@
       <h3>No results found for that search term.</h3>
     <% end %>
     <% else %>
-    <h3>Recent Tests</h3>
+      <% if @single_test_select == false %>
+      <h3>Recent Tests</h3>
+      <% end %>
     <% end %>
-    <table class="table table-bordered">
-      <tr><th><%= sortable "name" %></th><th># Questions</th><th>Actions</th></tr>
-      <%= render @tests %>
-    </table>
-    <%= will_paginate @tests %>
+
+      <% if @single_test_select %>    
+        <%= form_tag select_test_path, :class => "nicesearch", :method => 'post' do %>
+        <%= hidden_field_tag :id, @candidate.id %>
+        <table class="table table-bordered">
+          <tr><th><%= sortable "name" %></th><th># Questions</th><th>Actions</th></tr>
+          <%= render @tests %>
+        </table>
+        <%= will_paginate @tests %>
+        <%= submit_tag "Select", :class => "btn btn-primary" %>
+        <% end %>
+      <% else %>
+        <table class="table table-bordered">
+          <tr><th><%= sortable "name" %></th><th># Questions</th><th>Actions</th></tr>
+          <%= render @tests %>
+        </table>
+        <%= will_paginate @tests %>
+      <% end %>
   </div>
 </div>
-

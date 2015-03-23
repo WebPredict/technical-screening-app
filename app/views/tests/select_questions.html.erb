@@ -17,6 +17,7 @@
 <h3>Select Additional Questions</h3>
 <div class="row">
 <%= form_tag select_questions_path, :class => "nicesearch", :method => 'get' do %>
+  <%= hidden_field_tag :id, @test.id %>
     <div class="input-group">
       <%= text_field_tag :search, params[:search], :class => "form-control" %>
         <div class="input-group-btn">
@@ -25,6 +26,7 @@
     </div>
 <% end %>
 </div>
+</br>
 <% if @questions.any? %>
   <%= form_tag submit_questions_path, :class => "nicesearch", :method => 'post' do %>
   <%= hidden_field_tag :id, @test.id %>

@@ -3,6 +3,7 @@ class CreateTestSubmissions < ActiveRecord::Migration
     create_table :test_submissions do |t|
       t.string :name
       t.integer :score
+      t.integer :duration
       t.references :user, index: true
       t.references :candidate, index: true
       t.references :test, index: true

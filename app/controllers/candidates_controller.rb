@@ -22,20 +22,21 @@ class CandidatesController < ApplicationController
     @candidate = current_user.candidates.build(candidate_params)
     if @candidate.save
       flash[:success] = "Candidate created!"
-      redirect_to root_url
+      
+      if params[:commit] = "Save And Send Test"
+        flash[:info] = "Select test to send to candidate:"
+        @single_test_select = true
+        redirect_to tests_path
+      else 
+        redirect_to root_url
+      end
     else
       render 'edit'
     end
   end
 
-  def send_candidate_test
-    @single_test_select = true
-    redirect_to tests_path
-    # TODO: select a test to send, then send it
-  end
-  
   def update
-    @candidate = TestTaker.find(params[:id])
+    @candidate = Candidate.find(params[:id])
     respond_to do |format|
       if @candidate.update_attributes(candidate_params)
         format.html { redirect_to @candidate, notice: 'Candidate was successfully updated.' }

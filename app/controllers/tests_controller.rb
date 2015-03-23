@@ -26,13 +26,37 @@ class TestsController < ApplicationController
     query = "id NOT IN (#{question_ids})"
 
     if params[:search] && params[:search] != ''
-        query += ' AND lower(name) LIKE ? '
+        query += ' AND lower(content) LIKE ? '
         searchparam = "%#{params[:search].downcase}%"
+      @questions = Question.where(query, @test.id, searchparam).paginate(page: params[:page], per_page: 10)
+    else
+      @questions = Question.where(query, @test.id).paginate(page: params[:page], per_page: 10)
     end
 
-    @questions = Question.where(query, @test.id).paginate(page: params[:page], per_page: 10)
     @select_mode = true
     @searched = query != ''
+  end
+  
+  def send_candidate_test
+    @candidate = Candidate.find(params[:id])
+    flash[:info] = "Select Test To Send To: " + @candidate.name
+    @single_test_select = true
+    @tests = Test.all.paginate(page: params[:page], per_page: 10)
+    render 'index'
+  end
+  
+  def select_test
+    @candidate = Candidate.find(params[:id])
+    @tests = Test.find(params[:test_ids])
+    
+    if @tests.any?
+      @candidate.send_test(@tests.first)
+      flash[:success] = "Test sent to candidate " + @candidate.name + "."
+      redirect_to root_url
+    else
+      flash[:info] = "Please select a test to send."
+      render 'index'
+    end
   end
   
   def create
@@ -83,6 +107,14 @@ class TestsController < ApplicationController
   def new
     @test = Test.new
     @select_mode = true
+  end
+  
+  def sent
+    # TODO
+  end
+  
+  def results
+    # TODO
   end
 
   # GET /tests/1/edit

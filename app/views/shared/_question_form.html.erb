@@ -1,4 +1,8 @@
-<h3>Create New Question</h3>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Create New Question</h3>
+    </div>
+  <div class="panel-body">
 <%= form_for(@question) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
@@ -20,3 +24,5 @@
 
   <%= f.submit "Create Question", class: "btn btn-primary" %>
 <% end %>
+</div>
+</div>

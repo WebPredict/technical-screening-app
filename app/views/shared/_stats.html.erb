@@ -1,4 +1,13 @@
 <% @user ||= current_user %>
 <div class="stats">
-Test Results: <%= @num_test_results %> Sent Tests: <%= @num_sent_tests %>
+  <a href="<%= test_results_path(@user) %>">
+    <strong class="stat"> 
+      <%= @num_test_results %>
+    </strong> Test Results
+  </a>
+  <a href="<%= sent_tests_path(@user) %>">
+    <strong class="stat">
+      <%= @num_sent_tests %> 
+    </strong> Sent Tests
+  </a>
 </div>

@@ -2,9 +2,13 @@
   <td><%= link_to test.name, test %></td>
   <td><%= test.questions.count %></td>
   <td>
-      <% if current_user?(test.user) %>
-            <%= link_to "X", test, method: :delete,
-                                       data: { confirm: "Delete this test?" } %>
+      <% if @single_test_select %>
+          <%= radio_button_tag "test_ids[]", test.id %>
+      <% else %>
+        <% if current_user?(test.user) %>
+              <%= link_to "X", test, method: :delete,
+                                         data: { confirm: "Delete this test?" } %>
+        <% end %>
       <% end %>
   </td>
 </tr>

@@ -29,6 +29,14 @@ class TestSubmissionsController < ApplicationController
     end
   end
 
+  def score_test
+    @test_submission = TestSubmission.find(params[:id])
+  end
+  
+  def submit_score_test
+    @test_submission = TestSubmission.find(params[:id])
+  end
+  
   def update
     @test_submission = TestSubmission.find(params[:id])
     respond_to do |format|

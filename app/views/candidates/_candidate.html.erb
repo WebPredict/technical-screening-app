@@ -7,8 +7,9 @@
   <td>
       <% if current_user?(candidate.user) %>
             <%= link_to "X", candidate, method: :delete,
-                                       data: { confirm: "Delete this candidate?" } %>
-            <%= link_to "Send Test", send_candidate_test_path(id: candidate.id), :class => "btn btn-sm btn-default" %>
+                                       data: { confirm: "Delete this candidate?" }, :class => "btn btn-sm btn-primary" %>
+                                       <div class="button-spacer"></div>
+            <%= link_to "Test", send_candidate_test_path(id: candidate.id), :class => "btn btn-sm btn-primary" %>
       <% end %>
   </td>
 </tr>

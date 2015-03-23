@@ -19,8 +19,15 @@ Rails.application.routes.draw do
   get 'select_questions' => 'tests#select_questions'
   post 'update_questions' => 'tests#update_questions'
   post 'submit_questions' => 'tests#submit_questions'
-  get 'send_candidate_test' => 'candidates#send_candidate_test'
+  get 'send_candidate_test' => 'tests#send_candidate_test'
   get 'clone_question' => 'questions#clone_question'
+  get 'test_results' => 'tests#results'
+  get 'sent_tests' => 'tests#sent'
+  get 'start_test' => 'test_submissions#start_test'
+  post 'select_test' => 'tests#select_test'
+  get 'score_test' => 'test_submissions#score_test'
+  post 'submit_score_test' => 'test_submissions#submit_score_test'
+  
   
   resources :companies
 
