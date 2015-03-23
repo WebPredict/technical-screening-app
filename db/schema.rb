@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20150304151505) do
 
   create_table "answered_questions", force: :cascade do |t|
     t.string   "answer"
+    t.boolean  "correct"
     t.integer  "question_id"
     t.integer  "candidate_id"
     t.datetime "created_at",   null: false
@@ -28,9 +29,10 @@ ActiveRecord::Schema.define(version: 20150304151505) do
     t.string   "name"
     t.string   "email"
     t.string   "phone"
+    t.string   "test_digest"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   add_index "candidates", ["user_id"], name: "index_candidates_on_user_id"
@@ -72,6 +74,7 @@ ActiveRecord::Schema.define(version: 20150304151505) do
   create_table "test_submissions", force: :cascade do |t|
     t.string   "name"
     t.integer  "score"
+    t.integer  "duration"
     t.integer  "user_id"
     t.integer  "candidate_id"
     t.integer  "test_id"

@@ -38,6 +38,6 @@ class Candidate < ActiveRecord::Base
   private
     def create_test_digest
       self.test_token = Candidate.new_token
-      self.test_digest = Candidate.digest(test_token)
+      update_attribute(:test_digest, Candidate.digest(self.test_token))
     end
 end
