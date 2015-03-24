@@ -54,7 +54,8 @@ class TestSubmissionsController < ApplicationController
     @test_submission = TestSubmission.new
     @test_submission.test = Test.find(params[:id])
     @test_submission.test.questions.each do |question|
-      aq = @test_submission.answered_questions.build(question_id: question.id)
+      # testing
+      @test_submission.answered_questions.build(question_id: question.id)
     end
   end
 
