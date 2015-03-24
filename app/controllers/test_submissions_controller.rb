@@ -53,10 +53,10 @@ class TestSubmissionsController < ApplicationController
   def new
     @test_submission = TestSubmission.new
     @test_submission.test = Test.find(params[:id])
-    @test_submission.test.questions.each do |question|
+    #@test_submission.test.questions.each do |question|
       # testing
-      @test_submission.answered_questions.build(question_id: question.id)
-    end
+    #  @test_submission.answered_questions.build(question_id: question.id)
+    #end
   end
 
   # GET /test_submissions/1/edit
