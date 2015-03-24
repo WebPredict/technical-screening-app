@@ -17,19 +17,20 @@ ActiveRecord::Schema.define(version: 20150304151505) do
     t.string   "answer"
     t.boolean  "correct"
     t.integer  "question_id"
-    t.integer  "candidate_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.integer  "test_submission_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
-  add_index "answered_questions", ["candidate_id"], name: "index_answered_questions_on_candidate_id"
   add_index "answered_questions", ["question_id"], name: "index_answered_questions_on_question_id"
+  add_index "answered_questions", ["test_submission_id"], name: "index_answered_questions_on_test_submission_id"
 
   create_table "candidates", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
     t.string   "phone"
     t.string   "test_digest"
+    t.string   "job_title"
     t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
@@ -78,12 +79,10 @@ ActiveRecord::Schema.define(version: 20150304151505) do
     t.integer  "user_id"
     t.integer  "candidate_id"
     t.integer  "test_id"
-    t.integer  "answered_questions_id"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
-  add_index "test_submissions", ["answered_questions_id"], name: "index_test_submissions_on_answered_questions_id"
   add_index "test_submissions", ["candidate_id"], name: "index_test_submissions_on_candidate_id"
   add_index "test_submissions", ["test_id"], name: "index_test_submissions_on_test_id"
   add_index "test_submissions", ["user_id"], name: "index_test_submissions_on_user_id"
@@ -91,9 +90,10 @@ ActiveRecord::Schema.define(version: 20150304151505) do
   create_table "tests", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
+    t.boolean  "is_public",   default: false
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   add_index "tests", ["user_id"], name: "index_tests_on_user_id"

@@ -17,6 +17,7 @@
       <% end %>
     </section>
     <section>
+        <%= link_to "Take Test", new_test_submission_path(id: @test.id), class: "btn btn-success" %> 
         <%= link_to "Edit Test", edit_test_path(@test), class: "btn btn-success" %> 
         <%= link_to "Dashboard", root_path, class: "btn btn-success" %> 
     </section>

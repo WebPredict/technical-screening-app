@@ -1,0 +1,18 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Test Results</h3>
+    </div>
+  <div class="panel-body">
+<% if @test_submissions && @test_submissions.any? %>
+  <table class="table">
+    <tr><th>Candidate Name</th><th>Test Name</th><th>Score</th><th>Actions</th></tr>
+    <tbody>
+    <%= render @test_submissions %>
+    </tbody>
+  </table>
+  <%= will_paginate @test_submissions %>
+<% else %>
+<h3>No test results yet.</h3>
+<% end %>
+</div>
+</div>

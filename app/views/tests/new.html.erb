@@ -7,14 +7,15 @@
       <%= f.label :name %>
       <%= f.text_field :name, class: 'form-control' %>
 
-      <%= f.submit "Submit", class: "btn btn-primary" %>
+      <div class="checkbox">
+        <%= f.label :is_public, class: "checkbox inline" do %>
+          <%= f.check_box :is_public %>
+          <span>Make Test Public</span>
+        <% end %>
+      </div>
+      
+      <%= f.submit "Submit And Select Questions", class: "btn btn-primary" %>
     <% end %>
-  </div>
-</div>
-</br>
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-      <%= link_to "Select Questions", select_questions_path, class: "btn btn-success" %>
   </div>
 </div>
 

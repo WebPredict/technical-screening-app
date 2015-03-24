@@ -2,8 +2,8 @@
   <td><%= candidate.name %></td>
   <td><%= candidate.email %></td>
   <td><%= candidate.phone %></td>
-  <td><%= candidate.test_submissions.count %></td>
-  <td><%= candidate.average_score %></td>
+  <td><%= candidate.created_at %></td>
+  <td><%= link_to "Results", test_submissions_path(candidate_id: candidate.id) %></td>
   <td>
       <% if current_user?(candidate.user) %>
             <%= link_to "X", candidate, method: :delete,

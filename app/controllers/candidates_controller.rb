@@ -71,7 +71,7 @@ class CandidatesController < ApplicationController
   private
 
     def candidate_params
-      params.require(:candidate).permit(:name, :phone, :email)
+      params.require(:candidate).permit(:name, :phone, :email, :job_title)
     end
     
     def correct_user

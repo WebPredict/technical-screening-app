@@ -9,6 +9,13 @@
       <%= f.label :name %>
       <%= f.text_field :name, class: 'form-control' %>
 
+      <div class="checkbox">
+        <%= f.label :is_public, class: "checkbox inline" do %>
+          <%= f.check_box :is_public %>
+          <span>Make Test Public</span>
+        <% end %>
+      </div>
+
       <%= f.submit "Update Test", class: "btn btn-primary" %>
     <% end %>
   </div>

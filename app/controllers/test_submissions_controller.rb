@@ -1,6 +1,6 @@
 class TestSubmissionsController < ApplicationController
-  before_action :logged_in_user, only: [:create, :destroy]
-  before_action :correct_user,   only: :destroy
+  #before_action :logged_in_user, only: [:create, :destroy]
+  #before_action :correct_user,   only: :destroy
   
   helper_method :sort_column, :sort_direction
   
@@ -19,13 +19,30 @@ class TestSubmissionsController < ApplicationController
   end
 
   def create
-    @test_submission = current_user.test_submissions.build(test_submission_params)
-    if @test_submission.save
-      flash[:success] = "Test submission created!"
-      redirect_to root_url
+    if params[:id] != nil
+      @candidate = Candidate.find(params[:id])
     else
-      @feed_items = []
-      render 'static_pages/home'
+      @candidate = Candidate.new 
+      @candidate.name = current_user.name + " - test taker"
+      @candidate.email = current_user.email
+      @candidate.user = current_user
+      @candidate.save
+    end
+    if @candidate
+      @test_submission = @candidate.test_submissions.build(test_submission_params)
+      @test_submission.user = current_user
+      @test_submission.test = Test.find(params[:test_id])
+      @test_submission.candidate = @candidate
+      if @test_submission.save
+        flash[:success] = "Test submission created!"
+        redirect_to root_url
+      else
+        flash[:error] = "Test submission could not be saved."
+        render 'edit'
+      end
+    else
+      flash[:error] = "Test submission could not be saved because the candidate is missing."
+      render 'edit'
     end
   end
 
@@ -53,10 +70,27 @@ class TestSubmissionsController < ApplicationController
   def new
     @test_submission = TestSubmission.new
     @test_submission.test = Test.find(params[:id])
-    #@test_submission.test.questions.each do |question|
-      # testing
-    #  @test_submission.answered_questions.build(question_id: question.id)
-    #end
+
+    @test_submission.test.questions.each do |question|
+      @test_submission.answered_questions.build(question_id: question.id)
+    end
+  end
+
+  def start_test
+    @test_submission = TestSubmission.new
+    @test_submission.candidate = Candidate.find_by(params[:email])
+    
+    if @test_submission.candidate && @test_submission.candidate.valid_token?(params[:token])
+      @test_submission.test = Test.find(params[:test_id])
+
+      @test_submission.test.questions.each do |question|
+        # testing
+        @test_submission.answered_questions.build(question_id: question.id)
+      end
+      render 'new'
+    else
+      flash[:error] = "Invalid test token."
+    end
   end
 
   # GET /test_submissions/1/edit
@@ -78,7 +112,7 @@ class TestSubmissionsController < ApplicationController
   private
 
     def test_submission_params
-      params.require(:test_submission).permit(:name)
+      params.require(:test_submission).permit(:id, :name, :test_id, answered_questions_attributes: [:id, :question_id, :answer])
     end
     
     def correct_user

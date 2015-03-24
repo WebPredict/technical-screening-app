@@ -2,21 +2,24 @@
 <h1>Test Submission</h1>
 
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
+  <div class="col-md-12">
     <%= form_for(@test_submission) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
+      <%= hidden_field_tag :test_id, @test_submission.test.id %>
 
       <%= f.label :name %>
       <%= f.text_field :name, class: 'form-control' %>
 
       <% if @test_submission.answered_questions.any? %>
         <% @test_submission.answered_questions.each do |aq| %>
-
-          <section>Question: <%= aq.question.content %></section>
-          <section>Your Answer:
-            <%= f.text_field :aq.answer, class: 'form-control' %>
-          </section>
+          <section><h3>Question: <%= aq.question.content %></h3></section>
           
+          <%= f.fields_for aq, index: aq.id do |aq_form|%>
+            <section><h3>Your Answer:</h3>
+              <%= aq_form.text_field :answer, class: 'form-control' %>
+            </section>
+          <% end %>
+    
         <% end %>
       <% end %>
 

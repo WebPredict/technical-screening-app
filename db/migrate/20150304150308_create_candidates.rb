@@ -5,6 +5,7 @@ class CreateCandidates < ActiveRecord::Migration
       t.string :email
       t.string :phone
       t.string :test_digest
+      t.string :job_title
       t.references :user, index: true
 
       t.timestamps null: false

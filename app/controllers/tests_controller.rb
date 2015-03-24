@@ -63,7 +63,7 @@ class TestsController < ApplicationController
     @test = current_user.tests.build(test_params)
     if @test.save
       flash[:success] = "Test created!"
-      redirect_to root_url
+      redirect_to select_questions_path(id: @test.id)
     else
       render 'edit'
     end
@@ -136,7 +136,7 @@ class TestsController < ApplicationController
   private
 
     def test_params
-      params.require(:test).permit(:name, :question_ids)
+      params.require(:test).permit(:name, :question_ids, :is_public)
     end
     
     def correct_user

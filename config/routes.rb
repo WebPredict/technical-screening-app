@@ -28,7 +28,6 @@ Rails.application.routes.draw do
   get 'score_test' => 'test_submissions#score_test'
   post 'submit_score_test' => 'test_submissions#submit_score_test'
   
-  
   resources :companies
 
   resources :account_activations, only: [:edit]

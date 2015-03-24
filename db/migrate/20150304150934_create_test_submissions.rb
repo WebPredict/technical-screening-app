@@ -2,12 +2,11 @@ class CreateTestSubmissions < ActiveRecord::Migration
   def change
     create_table :test_submissions do |t|
       t.string :name
-      t.integer :score
+      t.integer :score, default: 0
       t.integer :duration
       t.references :user, index: true
       t.references :candidate, index: true
       t.references :test, index: true
-      t.references :answered_questions, index: true
 
       t.timestamps null: false
     end

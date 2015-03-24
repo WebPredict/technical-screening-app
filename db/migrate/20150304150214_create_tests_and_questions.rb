@@ -3,6 +3,7 @@ class CreateTestsAndQuestions < ActiveRecord::Migration
     create_table :tests do |t|
       t.string :name
       t.string :description
+      t.boolean :is_public, default: false
       t.references :user, index: true
 
       t.timestamps null: false

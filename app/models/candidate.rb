@@ -16,6 +16,11 @@ class Candidate < ActiveRecord::Base
   def Candidate.new_token
     SecureRandom.urlsafe_base64
   end
+
+  def valid_token?(token)
+    return false if test_digest.nil?
+    BCrypt::Password.new(test_digest).is_password?(token)
+  end
   
   def average_score
     @score = 0
@@ -23,7 +28,7 @@ class Candidate < ActiveRecord::Base
     if test_submissions.any?
       @num_tests = test_submissions.size
       test_submissions.each do |submission|
-        @score += test_submissions.score
+        @score += submission.score
       end
       @score /= @num_tests
     end
