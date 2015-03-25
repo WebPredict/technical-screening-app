@@ -1,15 +1,16 @@
 <tr id="question-<%= question.id %>">
   <td><%= link_to question.content, question %></td>
-  <td><%= question.answer %></td>
+  <td><%= Nokogiri::HTML::DocumentFragment.parse(question.answer).to_html.html_safe %></td>
   <td><%= question.difficulty.level %></td>
   <td><%= question.category.name %></td>
   <td>
       <% if @select_mode %>
         <%= check_box_tag "question_ids[]", question.id, @preselect_checkboxes %>
       <% elsif current_user?(question.user) %>
-            <%= link_to "X", question, method: :delete,
+            <%= link_to "X", question, class: "btn btn-sm btn-primary", method: :delete,
                                        data: { confirm: "Delete this question?" } %>
-            <%= link_to "Edit", edit_question_path(question) %>
+                                       <div class="button-spacer"></div>
+            <%= link_to "Edit", edit_question_path(question), class: "btn btn-sm btn-primary" %>
       <% end %>
       
   </td>

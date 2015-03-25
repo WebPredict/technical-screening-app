@@ -1,5 +1,5 @@
 <tr id="answered_question-<%= answered_question.id %>">
   <td><%= answered_question.question.content %></td>
   <td><%= answered_question.answer %></td>
-  <td>--</td>
+  <td><%= Nokogiri::HTML::DocumentFragment.parse(answered_question.question.answer).to_html.html_safe %></td>
 </tr>

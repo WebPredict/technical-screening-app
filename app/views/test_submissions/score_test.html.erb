@@ -19,7 +19,7 @@
           <td><%= aq.question.content %></td>
           <td><%= aq.answer %></td>
           <td>
-              <%= check_box_tag "answered_question_ids[]", aq.id, class: "form-control" %>
+              <%= check_box_tag "answered_question_ids[]", aq.id, false, class: "form-control" %>
           </td>
           </tr>
         <% end %>

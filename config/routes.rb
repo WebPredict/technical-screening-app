@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   post 'select_test' => 'tests#select_test'
   get 'score_test' => 'test_submissions#score_test'
   post 'submit_score_test' => 'test_submissions#submit_score_test'
+  get 'candidate_submissions' => 'test_submissions#candidate_submissions'
   
   resources :companies
 

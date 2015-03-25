@@ -2,28 +2,25 @@
 <div class="row">
   <div class="col-md-12">
     <section>
-      <h3>
-        Test Result For: <%= @test_submission.candidate.name %>
-      </h3>
+      <strong>Test Result For:</strong> <%= @test_submission.candidate.name %>
     </section>
     <section>
-      <h3>
-        Test Name: <%= @test_submission.test.name %>
-      </h3>
+      <strong>Test Name:</strong> <%= @test_submission.test.name %>
     </section>
     <section>
       <% if @test_submission.answered_questions.any? %>
-        <h3>Answered Questions (<%= @test_submission.answered_questions.count %>)</h3>
+        <strong>Answered Questions (<%= @test_submission.answered_questions.count %>)</strong>
+          <br>
           <table class="table table-bordered">
-            <tr><th><%= sortable "question" %></th><th><%= sortable "answer" %></th><th>Actions</th></tr>
+            <tr><th><%= sortable "question" %></th><th><%= sortable "answer" %></th><th>Correct Answer</th></tr>
             <%= render @test_submission_answers %>
           </table>
           <%= will_paginate @test_submission_answers %>
       <% end %>
     </section>
     <section>
-        <%= link_to "Score Test", score_test_path(id: @test_submission.id), class: "btn btn-success" %> 
-        <%= link_to "Dashboard", root_path, class: "btn btn-success" %> 
+        <%= link_to "Score Test", score_test_path(id: @test_submission.id), class: "btn btn-primary" %> 
+        <%= link_to "Dashboard", root_path, class: "btn btn-primary" %> 
     </section>
   </div>
 </div>

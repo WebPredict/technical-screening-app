@@ -18,6 +18,14 @@ class TestSubmissionsController < ApplicationController
     @searched = query != ''
   end
 
+  def candidate_submissions
+    query = ' candidate_id = ? '
+
+    @test_submissions = TestSubmission.where(query, params[:candidate_id]).paginate(page: params[:page], per_page: 10)
+    @searched = query != ''
+    @candidate = Candidate.find(params[:candidate_id])
+  end
+
   def create
     if params[:id] != nil
       @candidate = Candidate.find(params[:id])
@@ -133,7 +141,7 @@ class TestSubmissionsController < ApplicationController
   private
 
     def test_submission_params
-      params.require(:test_submission).permit(:id, :name, :test_id, :answered_question_ids, 
+      params.require(:test_submission).permit(:id, :name, :test_id, :answered_question_ids, :candidate_id,
         answered_questions_attributes: [:id, :question_id, :question, :answer])
     end
     
