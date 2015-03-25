@@ -9,6 +9,9 @@
       <%= f.label :name %>
       <%= f.text_field :name, class: 'form-control' %>
 
+      <%= f.label :description %>
+      <%= f.text_area :description, class: 'form-control' %>
+
       <div class="checkbox">
         <%= f.label :is_public, class: "checkbox inline" do %>
           <%= f.check_box :is_public %>

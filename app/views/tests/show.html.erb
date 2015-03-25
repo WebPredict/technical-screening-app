@@ -7,6 +7,11 @@
       </h1>
     </section>
     <section>
+      <h3>
+        Description: <%= @test.description %>
+      </h3>
+    </section>
+    <section>
       <% if @test.questions.any? %>
         <h3>This Test's Questions (<%= @test.questions.count %>)</h3>
         <table class="table table-bordered">

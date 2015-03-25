@@ -17,13 +17,17 @@ class StaticPagesController < ApplicationController
       @question = current_user.questions.build
       @tests = current_user.tests.paginate(page: params[:page])
       
+      @num_tests = current_user.tests.count
+      
       if show_all
         @show_all = true
-        @candidates = current_user.candidates.paginate(page: params[:page]).order(sort_column + " " + sort_direction)
+        @candidates = current_user.candidates.paginate(page: params[:page]).order("avg_score desc")
       else
         @candidates = current_user.candidates.paginate(page: params[:page]).order(sort_column + " " + sort_direction)
         @show_all = false
       end
+      
+      @test_submissions = TestSubmission.where("user_id = ?", current_user.id).paginate(page: params[:page])
       
       @num_test_results = 0
       

@@ -22,8 +22,14 @@ class TestSubmission < ActiveRecord::Base
         end
       end
     end
-    @score = num_right.to_f / num_questions.to_f
-    return (@score * 100.0).to_s + "% (" + num_right.to_s + " out of " + num_questions.to_s + ")"
+    
+    if num_questions != 0
+      @score = num_right.to_f / num_questions.to_f
+    else
+      @score = 0
+    end
+    @score *= 100.0
+    return "#{@score.round(1)} % (" + num_right.to_s + " out of " + num_questions.to_s + ")"
   end
   
 end

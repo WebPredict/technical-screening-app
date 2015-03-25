@@ -13,29 +13,33 @@ User.create!(name:  "Example User",
               activated: true,
               activated_at: Time.zone.now)
 
-50.times do |n|
-  name  = Faker::Name.name
-  email = "example-#{n+1}@railstutorial.org"
-  password = "password"
-  User.create!(name:  name,
-               email: email,
-               password:              password,
-               password_confirmation: password,
-               activated: true,
-               activated_at: Time.zone.now)
-end
+#50.times do |n|
+#  name  = Faker::Name.name
+#  email = "example-#{n+1}@railstutorial.org"
+#  password = "password"
+#  User.create!(name:  name,
+#               email: email,
+#               password:              password,
+#               password_confirmation: password,
+#               activated: true,
+#               activated_at: Time.zone.now)
+#end
 
 Difficulty.create!(level: "Easy")
 Difficulty.create!(level: "Medium")
 Difficulty.create!(level: "Hard")
 
+QuestionType.create!(name: "Free Form")
+QuestionType.create!(name: "Multiple Choice")
+QuestionType.create!(name: "Short Phrase")
+
 Category.create!(name: "Algorithms")
-test = Test.create!(name: "Basic Algorithms Test", is_public: true, description: "This is the basic Algorithms test.", user_id: 1)
+test = Test.create!(name: "Basic Algorithms Test", is_public: true, description: "This is the complete public Algorithms test.", user_id: 1)
 test.save
 
 
-Category.create!(name: "Angular")
-question1 = Question.create!(content: "What is AngularJS?", answer: "<p>AngularJS is an open-source JavaScript framework, maintained by Google, that assists with running single-page applications. Its goal is to augment browser-based applications with model???view???controller capability in an effort to make both development and testing easier    </p>", user_id: 1, difficulty_id: 2, category_id: 2)
+Category.create!(name: "AngularJS")
+question1 = Question.create!(content: "What is AngularJS?", answer: "<p>AngularJS is an open-source JavaScript framework, maintained by Google, that assists with running single-page applications. Its goal is to augment browser-based applications with model-view-controller capability in an effort to make both development and testing easier    </p>", user_id: 1, difficulty_id: 2, category_id: 2)
 question2 = Question.create!(content: "Can AngularJS use the jQuery library?", answer: "<p>Angular is able to use jQuery if it exists in the application upon bootstrapping. If jQuery is not present in the script path, Angular reverts to its own implementation of the subset of jQuery known as JQLite.   </p>", user_id: 1, difficulty_id: 2, category_id: 2)
 question3 = Question.create!(content: "AngularJS performance is dependent upon what factors?", answer: "<p>Startup performance is dependent on the browser and browser version, network connection, available hardware, and cache state. </p><p>The runtime performance depends on the number and complexity of bindings on the page.  In addition, if an application needs to retrieve data from the backend, the speed of this retrieval will also affect the runtime performance. However, applications can still run efficiently even with thousands of bindings.</p>", user_id: 1, difficulty_id: 2, category_id: 2)
 question4 = Question.create!(content: "What are directives in AngularJS?", answer: "<p>Directives are markers on a DOM element (such as an attribute, element name, comment or CSS class) that tell AngularJS's HTML compiler to attach a specified behavior to that DOM element, or it may even transform the DOM element and its children.  The directive introduces new syntax.  Directives typically begin with <em>ng</em>.</p>", user_id: 1, difficulty_id: 2, category_id: 2)
@@ -44,7 +48,7 @@ question6 = Question.create!(content: "Explain the compilation process?", answer
 question7 = Question.create!(content: "What are the key features of AngularJS?", answer: "<p>Scope, M-V-C, Services, Data Binding, Directives, Filters, Built-in Validation, and Testability.</p>", user_id: 1, difficulty_id: 2, category_id: 2)
 question8 = Question.create!(content: "What is meant by scope in AngularJS?", answer: "<p>Scope is an object that refers to the application model. It is the glue between application controller and the view. Both the controllers and directives have reference to the scope, but not with each other. It is an execution context for expressions and arranged in hierarchical structure. Scopes can watch expressions and propagate events.</p>", user_id: 1, difficulty_id: 2, category_id: 2)
 question9 = Question.create!(content: "Explain the concept of scope hierarchy? How many scopes can an application have?", answer: "<p>Each Angular application has exactly one root scope, but may have several child scopes. The application can have multiple scopes, because child controllers and some directives create new child scopes. When new scopes are created, they are added as children of their parent scope. This creates a hierarchical structure similar to the DOM where they're attached.</p><p>When Angular evaluates a bound variable, such as {{firstName}}, it first looks at the scope associated with the given element for the firstName property. If no such property is found, it searches the parent scope and so on until the root scope is reached. In JavaScript this behavior is known as prototypical inheritance, and child scopes prototypically inherit from their parents. The reverse is not true. For example, the parent cannot see its children's bound properties.</p>", user_id: 1, difficulty_id: 2, category_id: 2)
-question10 = Question.create!(content: "What is MVC (Model-View-Controller)?", answer: "<p>Model???view???controller (MVC) is a software architectural pattern used to develop user interfaces. The idea is to divide a software application into three interconnected parts.  The purpose of this is to separate the way the user views and interacts with the software from the internal representation of data.</p>", user_id: 1, difficulty_id: 2, category_id: 2)
+question10 = Question.create!(content: "What is MVC (Model-View-Controller)?", answer: "<p>Model-view-controller (MVC) is a software architectural pattern used to develop user interfaces. The idea is to divide a software application into three interconnected parts.  The purpose of this is to separate the way the user views and interacts with the software from the internal representation of data.</p>", user_id: 1, difficulty_id: 2, category_id: 2)
 question11 = Question.create!(content: "Briefly explain MVC Architecture?", answer: "<ul><li>M stands for Model.  The Model is your data which may come from an internal data structure, an external JSON doc, or a database.</li><li>V stands for View.  Views are how the data (models) are displayed.  This is commonly accomplished through a template.</li><li>C stands for controllers. Controllers connect the data to the views.  Controllers are written in JavaScript.</li></ul>", user_id: 1, difficulty_id: 2, category_id: 2)
 question12 = Question.create!(content: "Explain the concept of bidirectional data binding.", answer: "<p>Data-binding in Angular apps is the automatic synchronization of data between the model and view components. The data is compiled in the browser and the compilation step produces a live view. Code does not need to be written to constantly sync the view with the model and the model with the view as in other templating systems.</p>", user_id: 1, difficulty_id: 2, category_id: 2)
 question13 = Question.create!(content: "Explain the concept of filters.", answer: "<p>A filter formats the value of an expression for display to the user. They can be used in view templates, controllers, or services.  In addition, developers can define their own filters.</p><p>Filters allow data to be organized automatically.</p>", user_id: 1, difficulty_id: 2, category_id: 2)
@@ -65,7 +69,7 @@ question27 = Question.create!(content: "What is a factory method? How are they d
 question28 = Question.create!(content: "What is Dependency Injection?", answer: "<p>Dependency Injection is a software design pattern where instead of having  objects create a dependency or asking a factory object to make one for them, the needed dependencies are given to components through their constructors, methods, or directly into fields.</p>", user_id: 1, difficulty_id: 2, category_id: 2)
 question29 = Question.create!(content: "How is dependency injection used in AngularJS?", answer: "<p>It can be used when defining components or when providing <strong>run</strong> and <strong>config</strong> blocks for a module.  For example:</p><ul><li>Components can be defined by an injectable factory method or constructor function. These components can be injected with &quot;service&quot; and &quot;value&quot; components as dependencies.</li><li>Controllers are defined by a constructor function, which can be injected with any of the &quot;service&quot; and &quot;value&quot; components as dependencies, but they can also be provided with special dependencies.</li><li>The <strong>run</strong> method accepts a function, which can be injected with &quot;service&quot;, &quot;value&quot; and &quot;constant&quot; components as dependencies.</li><li>The <strong>config</strong> method accepts a function, which can be injected with &quot;provider&quot; and &quot;constant&quot; components as dependencies. </li></ul>", user_id: 1, difficulty_id: 2, category_id: 2)
 question30 = Question.create!(content: "What are module methods in AngularJS?  Provide an example.", answer: "<p>These are functions that can be specified to run at configuration and runtime for a module by calling the <strong>config</strong> and <strong>run</strong> methods.  They are also injectable with dependencies.  For example:</p><pre><code>angular.module(&#39;myModule&#39;, []).config([&#39;depProvider&#39;, function(depProvider) {  // ...}]).run([&#39;depService&#39;, function(depService) {  // ...}]);</code></pre>", user_id: 1, difficulty_id: 2, category_id: 2)
-test = Test.create!(name: "Basic Angular Test", is_public: true, description: "This is the basic Angular test.", user_id: 1)
+test = Test.create!(name: "Basic AngularJS Test", is_public: true, description: "This is the complete public AngularJS test.", user_id: 1)
 test.questions << question1
 test.questions << question2
 test.questions << question3
@@ -100,33 +104,33 @@ test.save
 
 
 Category.create!(name: "Apache")
-test = Test.create!(name: "Basic Apache Test", is_public: true, description: "This is the basic Apache test.", user_id: 1)
+test = Test.create!(name: "Basic Apache Test", is_public: true, description: "This is the complete public Apache test.", user_id: 1)
 test.save
 
 
-Category.create!(name: "Aws")
-test = Test.create!(name: "Basic Aws Test", is_public: true, description: "This is the basic Aws test.", user_id: 1)
+Category.create!(name: "AWS")
+test = Test.create!(name: "Basic AWS Test", is_public: true, description: "This is the complete public AWS test.", user_id: 1)
 test.save
 
 
-Category.create!(name: "Backbone")
-test = Test.create!(name: "Basic Backbone Test", is_public: true, description: "This is the basic Backbone test.", user_id: 1)
+Category.create!(name: "Backbone.js")
+test = Test.create!(name: "Basic Backbone.js Test", is_public: true, description: "This is the complete public Backbone test.", user_id: 1)
 test.save
 
 
-Category.create!(name: "Bigarchitecture")
-test = Test.create!(name: "Basic Bigarchitecture Test", is_public: true, description: "This is the basic Bigarchitecture test.", user_id: 1)
+Category.create!(name: "Big Architecture")
+test = Test.create!(name: "Basic Big architecture Test", is_public: true, description: "This is the complete public Big architecture test.", user_id: 1)
 test.save
 
 
 Category.create!(name: "Bootstrap")
-test = Test.create!(name: "Basic Bootstrap Test", is_public: true, description: "This is the basic Bootstrap test.", user_id: 1)
+test = Test.create!(name: "Basic Bootstrap Test", is_public: true, description: "This is the complete public Bootstrap test.", user_id: 1)
 test.save
 
 
-Category.create!(name: "Css")
+Category.create!(name: "CSS")
 question1 = Question.create!(content: "What is the function of the CSS selector?", answer: "<p>The CSS selector allows a web author to select and alter the content they want to style.  HTML elements, such as ids classes, types attributes, values of attributes, can all be manipulated with selectors.</p>", user_id: 1, difficulty_id: 2, category_id: 8)
-question2 = Question.create!(content: "What are the parts of the CSS selector?", answer: "<p>The CSS selector has two main parts: the selector and the declaration.  In addition, the declaration has its own two parts called the property and value.  For example the following is a CSS selector and its parts:</p><pre><code>p {font-family: ???Times New Roman???, Times, serif;   font-size: 2em;}</code></pre><p>In the above code CSS, the <strong>p</strong> is the selector, everything in the curly braces is the declaration, the font-family and font-size are the properties, and the items to the right of the colon are the values.</p>", user_id: 1, difficulty_id: 2, category_id: 8)
+question2 = Question.create!(content: "What are the parts of the CSS selector?", answer: "<p>The CSS selector has two main parts: the selector and the declaration.  In addition, the declaration has its own two parts called the property and value.  For example the following is a CSS selector and its parts:</p><pre><code>p {font-family: 'Times New Roman', Times, serif;   font-size: 2em;}</code></pre><p>In the above code CSS, the <strong>p</strong> is the selector, everything in the curly braces is the declaration, the font-family and font-size are the properties, and the items to the right of the colon are the values.</p>", user_id: 1, difficulty_id: 2, category_id: 8)
 question3 = Question.create!(content: "Name the 10 main CSS selectors types.", answer: "<ul><li>id selector</li><li>class selector</li><li>universal selector</li><li>type selector</li><li>descendant selector</li><li>child selector</li><li>attribute selector</li><li>adjacent sibling selector</li><li>pseudo-element selector</li><li>pseudo-class selector</li></ul>", user_id: 1, difficulty_id: 2, category_id: 8)
 question4 = Question.create!(content: "Explain the class selector.", answer: "<p>The class selector acts on many elements at once, or on specific HTML elements.  For example:</p><pre><code>&lt;!??? We can define a class as seen below.  We can use this class value, mammals, as many times as we like, to label other elements.???&gt;&lt;p class=???mammals???&gt; content &lt;/p&gt;&lt;!???In the CSS code, we can then define how any element marked with the above class value behaves. ???&gt;.mammals {     color:red;}</code></pre><p>The above CSS will style any content labeled with a .mammals class in red. </p>", user_id: 1, difficulty_id: 2, category_id: 8)
 question5 = Question.create!(content: "What does a fall-back font refer to?", answer: "<p>When selecting a font in CSS it is common practice to give the browser interpreting the HTML/CSS multiple options for font it should use.  This is done to ensure that a close approximation to the page author???s desired typographical content can be rendered.  An example of this in CSS is as follow:</p><pre><code>p {font-family: Arial, Helvetica, Verdana, sans-serif}</code></pre><p>The browser will first try to display the Arial font, and if that is not available, then, it will try Helvetica, and so on.</p>", user_id: 1, difficulty_id: 2, category_id: 8)
@@ -138,7 +142,7 @@ question10 = Question.create!(content: "Explain the difference between borders a
 question11 = Question.create!(content: "What are sprites and why would you use them?", answer: "<p>Sprites are multiple images combined to form a single image.  They are used to allow a website to make fewer requests when asking for a resource.  This allows a faster page load.</p>", user_id: 1, difficulty_id: 2, category_id: 8)
 question12 = Question.create!(content: "What is a CSS reset?", answer: "<p>Every web page has its own internal set of stylesheets that is will use in the case of undefined styles by a web author.  The CSS reset is a set of CSS rules that resets all HTML elements??? styling to a consistent baseline.</p>", user_id: 1, difficulty_id: 2, category_id: 8)
 question13 = Question.create!(content: "What is grouping, and what is it used for?", answer: "<p>If a web page author has multiple elements with the same styling, the web author can apply grouping.  This groups the selectors into a comma separated list which is then followed by the stylings.  For example:</p><pre><code>h1, h2, h3 {    font-family: ???Times New Roman???, Times, serif;    color: blue;    font-style: italic;}</code></pre><h4 id=\"-explain-the-float-property-in-css-\"><strong><%=@ctr+=1 %>. Explain the float property in CSS.</strong></h4><p>The float property allows the property to specify that other elements are to float around it to its left or right.  For example:</p><pre><code>img {    float: left;    width: 50px;    margin: 3px;}</code></pre></body></html>", user_id: 1, difficulty_id: 2, category_id: 8)
-test = Test.create!(name: "Basic Css Test", is_public: true, description: "This is the basic Css test.", user_id: 1)
+test = Test.create!(name: "Basic CSS Test", is_public: true, description: "This is the complete public CSS test.", user_id: 1)
 test.questions << question1
 test.questions << question2
 test.questions << question3
@@ -155,43 +159,43 @@ test.questions << question13
 test.save
 
 
-Category.create!(name: "Datamodeling")
-test = Test.create!(name: "Basic Datamodeling Test", is_public: true, description: "This is the basic Datamodeling test.", user_id: 1)
+Category.create!(name: "Data Modeling")
+test = Test.create!(name: "Basic Data Modeling Test", is_public: true, description: "This is the complete public Data modeling test.", user_id: 1)
 test.save
 
 
-Category.create!(name: "Etl")
-test = Test.create!(name: "Basic Etl Test", is_public: true, description: "This is the basic Etl test.", user_id: 1)
+Category.create!(name: "ETL")
+test = Test.create!(name: "Basic ETL Test", is_public: true, description: "This is the complete public ETL test.", user_id: 1)
 test.save
 
 
-Category.create!(name: "Extjs")
-test = Test.create!(name: "Basic Extjs Test", is_public: true, description: "This is the basic Extjs test.", user_id: 1)
+Category.create!(name: "ExtJS")
+test = Test.create!(name: "Basic ExtJS Test", is_public: true, description: "This is the complete public ExtJS test.", user_id: 1)
 test.save
 
 
-Category.create!(name: "Facebook")
-test = Test.create!(name: "Basic Facebook Test", is_public: true, description: "This is the basic Facebook test.", user_id: 1)
+Category.create!(name: "Facebook API")
+test = Test.create!(name: "Basic Facebook Test", is_public: true, description: "This is the complete public Facebook test.", user_id: 1)
 test.save
 
 
 Category.create!(name: "Flex")
-test = Test.create!(name: "Basic Flex Test", is_public: true, description: "This is the basic Flex test.", user_id: 1)
+test = Test.create!(name: "Basic Flex Test", is_public: true, description: "This is the complete public Flex test.", user_id: 1)
 test.save
 
 
 Category.create!(name: "Git")
-test = Test.create!(name: "Basic Git Test", is_public: true, description: "This is the basic Git test.", user_id: 1)
+test = Test.create!(name: "Basic Git Test", is_public: true, description: "This is the complete public Git test.", user_id: 1)
 test.save
 
 
 Category.create!(name: "Groovy")
-test = Test.create!(name: "Basic Groovy Test", is_public: true, description: "This is the basic Groovy test.", user_id: 1)
+test = Test.create!(name: "Basic Groovy Test", is_public: true, description: "This is the complete public Groovy test.", user_id: 1)
 test.save
 
 
 Category.create!(name: "Hadoop")
-test = Test.create!(name: "Basic Hadoop Test", is_public: true, description: "This is the basic Hadoop test.", user_id: 1)
+test = Test.create!(name: "Basic Hadoop Test", is_public: true, description: "This is the complete public Hadoop test.", user_id: 1)
 test.save
 
 
@@ -217,7 +221,7 @@ question18 = Question.create!(content: "How could you configure a many-to-one ma
 question19 = Question.create!(content: "What's the difference between HQL and criteria based querying?", answer: "<p>Answer.</p>", user_id: 1, difficulty_id: 2, category_id: 17)
 question20 = Question.create!(content: "How does Hibernate relate to JPA?", answer: "<p>Answer.</p>", user_id: 1, difficulty_id: 2, category_id: 17)
 question21 = Question.create!(content: "What are some alternatives to Hibernate?", answer: "<p>Answer.</p>", user_id: 1, difficulty_id: 2, category_id: 17)
-test = Test.create!(name: "Basic Hibernate Test", is_public: true, description: "This is the basic Hibernate test.", user_id: 1)
+test = Test.create!(name: "Basic Hibernate Test", is_public: true, description: "This is the complete public Hibernate test.", user_id: 1)
 test.questions << question1
 test.questions << question2
 test.questions << question3
@@ -242,7 +246,7 @@ test.questions << question21
 test.save
 
 
-Category.create!(name: "Html")
+Category.create!(name: "HTML")
 question1 = Question.create!(content: "Briefly describe the purpose of HTML, CSS, and JavaScript.", answer: "<ul><li>HTML gives a web page structure.</li><li>CSS controls how a web page looks???it???s design.</li><li>JavaScript controls how a web page behaves and gives a page interactivity.</li></ul>", user_id: 1, difficulty_id: 2, category_id: 18)
 question2 = Question.create!(content: "What does HTML stand for, and why is named this?", answer: "<p>HTML stands for Hypertext Markup Language.  <strong>Hypertext</strong> in HTML means the text provides references, called hyperlinks, to other text.  These references can link to other parts of the same page or any other accessible page the web page author chooses.  <strong>Markup Language</strong> refers to HTML being a language used to markup text documents in order to format them for use on the web.  These pages are <em>marked up</em> using tags inserted into the text document.</p>", user_id: 1, difficulty_id: 2, category_id: 18)
 question3 = Question.create!(content: "What is the difference between HTML tags and elements?", answer: "<p>HTML tags are labels used to mark up page elements denoted by angle brackets.  There are three types of tags:</p><ul><li>Opening tag, such as <code>&lt;p&gt;</code>, which denotes the start of a paragraph.</li><li>Closing tag, such as <code>&lt;/p&gt;</code>, which denotes the end of a paragraph.</li><li>Self closing tags that do not wrap content, such as the line break tag, <code>&lt;br&gt;</code>.</li></ul><p>Elements are the tags and the information denoted by the tags together.</p>", user_id: 1, difficulty_id: 2, category_id: 18)
@@ -281,7 +285,7 @@ question35 = Question.create!(content: "Explain the difference between relative 
 question36 = Question.create!(content: "Explain fragment Identifiers", answer: "<p>Fragment identifiers are used to link to a section of the same page or a section of another page.  The <strong>id</strong> attribute is used to target an element.  Then a hyperlink is created on the same or another page using the page address  containing the element to link to (or no address if it is on the same page), a hash mark, and the id name.  For example:</p><pre><code>&lt;!--We want to link to the following section on the same page as our hyperlink, so we add an id attribute.--&gt;&lt;h1 id=&quot;heading1&quot;&gt;My Heading&lt;/h1&gt;&lt;!-- We can now link to this by  writing the following: --&gt;&lt;a href=&quot;#heading1&quot;&gt;Heading One&lt;/a&gt;</code></pre><h4 id=\"-how-would-you-force-the-download-of-an-external-resource-\"><strong><%=@ctr+=1 %>. How would you force the download of an external resource?</strong></h4><p>In order to force a download of a resource to make sure it downloads and does not open in the browser the <strong>download</strong> attribute would be added. For example:</p><pre><code>&lt;a href=&quot;http://www.examplepage.com/resource.pdf&quot; download&gt;My Resource&lt;/a&gt;</code></pre><h4 id=\"-explain-the-id-attribute-\"><strong><%=@ctr+=1 %>. Explain the id attribute.</strong></h4><p>The id attribute gives an element a unique identifier which then can be recognized by style sheets and scripts.  The style sheets use this to define the layout of the identified element, and scripts use this to act on the element.</p>", user_id: 1, difficulty_id: 2, category_id: 18)
 question37 = Question.create!(content: "What are conditional comments?", answer: "<p>Conditional Comments are a proprietary extension to Internet Explorer starting with IE5 used to specifically target IE browsers.  This is often used to apply modifications to a website to allow greater cross compatibility among the various versions of IE.  It takes the form of:</p><pre><code>&lt;!--[if IE ]&gt;    some statement&lt;![endif]--&gt;</code></pre><h4 id=\"-what-is-aria-\"><strong><%=@ctr+=1 %>. What is ARIA?</strong></h4><p>ARIA stands for Accessible Rich Internet Application, and it is a W3C recommendation encouraging greater accessibility of web sites to people with disabilities.  This recommendation puts forward the idea that web sites should include semantic information about widgets, structures, and behaviors in order to aid assistive technology better convey web site information to people with various impairments.</p>", user_id: 1, difficulty_id: 2, category_id: 18)
 question38 = Question.create!(content: "What is the significance of the role attribute?", answer: "<p>The <strong>role</strong> attribute uses semantic metadata to communicate the purpose of an element.  This is an attribute that is part of the ARIA recommendation used for greater accessibility and can allow assistive technology to better serve its user.</p>", user_id: 1, difficulty_id: 2, category_id: 18)
-test = Test.create!(name: "Basic Html Test", is_public: true, description: "This is the basic Html test.", user_id: 1)
+test = Test.create!(name: "Basic HTML Test", is_public: true, description: "This is the complete public HTML test.", user_id: 1)
 test.questions << question1
 test.questions << question2
 test.questions << question3
@@ -323,8 +327,8 @@ test.questions << question38
 test.save
 
 
-Category.create!(name: "J2ee")
-test = Test.create!(name: "Basic J2ee Test", is_public: true, description: "This is the basic J2ee test.", user_id: 1)
+Category.create!(name: "JEE/J2EE")
+test = Test.create!(name: "Basic JEE/J2EE Test", is_public: true, description: "This is the complete public J2ee test.", user_id: 1)
 test.save
 
 
@@ -406,7 +410,7 @@ question74 = Question.create!(content: "What is a deadlock?", answer: "<p>This o
 question75 = Question.create!(content: "Name the states available to a thread.", answer: "<ul><li>Runnable: A thread is ready to run, but is not necessarily running.</li><li>Running: The thread code is actively being executed by the processor.</li><li>Waiting: A thread is waiting for some process to finish.</li><li>Sleeping:  The thread is forced to sleep.</li><li>Blocked on I/O: The thread is waiting for an I/O operation of finish.</li><li>Blocked on Synchronization: A thread is waiting to acquire a lock.</li><li>Dead: The thread has finished execution.</li></ul>", user_id: 1, difficulty_id: 2, category_id: 20)
 question76 = Question.create!(content: "What are the basic interfaces of the Java Collections Framework?", answer: "<ul><li>Collection: Represents a group of objects known as its elements.</li><li>Set: A collection containing no duplicate elements.</li><li>List: An ordered collection that can contain duplicate elements.</li><li>Map: An object that maps keys to values and containing no duplicate keys.</li></ul>", user_id: 1, difficulty_id: 2, category_id: 20)
 question77 = Question.create!(content: "What are the different ways by which a thread is created?", answer: "<ul><li>A class may extend the <em>Thread</em> class.</li><li>A class may implement the <em>Runnable</em> interface.</li><li>An application can create a thread pool by using the <em>Executer</em> framework.</li></ul>", user_id: 1, difficulty_id: 2, category_id: 20)
-test = Test.create!(name: "Basic Java Test", is_public: true, description: "This is the basic Java test.", user_id: 1)
+test = Test.create!(name: "Basic Java Test", is_public: true, description: "This is the complete public Java test.", user_id: 1)
 test.questions << question1
 test.questions << question2
 test.questions << question3
@@ -487,7 +491,7 @@ test.questions << question77
 test.save
 
 
-Category.create!(name: "Javascript")
+Category.create!(name: "JavaScript")
 question1 = Question.create!(content: "What is JavaScript?", answer: "<p>JavaScript is an interpreted, (originally) client-side scripting language that is platform-independent and event-driven.  It is most widely used today in web browsers, but is also used in other environments (for example, Adobe Acrobat-generated forms). Increasingly, it is also used on the server side as well (for example, with Node.js).  </p><p>When implemented in web browsers, JavaScript can transform static HTML pages, through the use of the client-side scripts, to allow interaction with the user.</p>", user_id: 1, difficulty_id: 2, category_id: 21)
 question2 = Question.create!(content: "Why would a user disable JavaScript?", answer: "<p>If some JavaScript was poorly written or written with malicious intent, these could be reasons to do so.  When poorly written, it can cause speed and bandwidth issues by bogging down a network or system CPU.  It may also cause nuisance-functionality, such as disabling a browser's back button. </p><p>There also exists the possibility of unsavory coders using JavaScript to gain access to user information, scan a network map, or insert pop-ups.</p>", user_id: 1, difficulty_id: 2, category_id: 21)
 question3 = Question.create!(content: "What is the relationship between JavaScript and ECMAScript?", answer: "<p>JavaScript was initially developed by Brendan Eich at Netscape.  At the time of development it was called LiveScript, but, through a licensing deal with Sun Microsystems to capitalize on their popular Java language, it was changed to JavaScript.</p><p>Microsoft developed its own version of JavaScript and called it JScript to avoid licensing issues.  However, in order to standardize the language, versions of the two languages were sent to the standardization organization, ECMA.  There a standardized form of the language was created called ECMAScript.  This is the official name of the language with JavaScript considered a dialect of it. </p>", user_id: 1, difficulty_id: 2, category_id: 21)
@@ -516,7 +520,7 @@ question25 = Question.create!(content: "Explain the &quot;modulus&quot; operator
 question26 = Question.create!(content: "What is the escape character in JavaScript?  Provide and example of its use.", answer: "<p>The escape character is the <strong>backslash</strong>. It is used to make certain special characters, such as single and double quotes, apostrophes, and ampersands, display.  For example:</p><pre><code>console.log(&quot;Michael Jackson was the \&quot;King of Pop\&quot;.&quot;)/* The above prints, &quot;Michael Jackson was the &quot;King of Pop&quot;&quot;.  The outerquotations in the previous sentence were only for the internal sentence structure and would not be printed.*/console.log(&quot;Michael Jackson was the &quot;King of Pop&quot;&quot;)// The above produces a syntax error.</code></pre><h4 id=\"-what-are-the-types-of-pop-up-boxes-in-javascript-explain-\"><strong><%=@ctr+=1 %>. What are the types of pop-up boxes in JavaScript? Explain.</strong></h4><p>There are three:</p><ul><li><strong>Alert</strong>: ensures the user knows a piece of information.</li><li><strong>Confirm</strong>: have the user verify or accept something.</li><li><strong>Prompt</strong>: force user to input a value before entering a page.</li></ul>", user_id: 1, difficulty_id: 2, category_id: 21)
 question27 = Question.create!(content: "How can a value be appended to an array?", answer: "<p>This can be accomplished by the following:</p><pre><code>arr[arr.length] = value;</code></pre><h4 id=\"-what-is-the-result-of-3-2-4-explain-the-answer-\"><strong><%=@ctr+=1 %>. What is the result of 3 + 2 + &quot;4&quot;?  Explain the answer.</strong></h4><p><strong>3</strong> and <strong>2</strong> are integers; they would be added to total <strong>5</strong>.  The <strong>4</strong>, however, is a string; this would be concatenated.  The final result of the operation would be <strong>54</strong>.</p>", user_id: 1, difficulty_id: 2, category_id: 21)
 question28 = Question.create!(content: "Explain the order of precedence in JavaScript.", answer: "<p>The order of precedence is the order in which operations occur.  Certain operators have higher precedence and will act first. For example:</p><pre><code>a = 3 + 4 * 5console.log(a)</code></pre><p>The above code will print the value of <strong>a</strong> which is 23 not 60.  The multiplication operator has a higher precedence than the addition operator, and, therefore, the 4 is multiplied by 5, then that result is added to 3.</p>", user_id: 1, difficulty_id: 2, category_id: 21)
-test = Test.create!(name: "Basic Javascript Test", is_public: true, description: "This is the basic Javascript test.", user_id: 1)
+test = Test.create!(name: "Basic JavaScript Test", is_public: true, description: "This is the complete public JavaScript test.", user_id: 1)
 test.questions << question1
 test.questions << question2
 test.questions << question3
@@ -548,83 +552,83 @@ test.questions << question28
 test.save
 
 
-Category.create!(name: "Jboss")
-test = Test.create!(name: "Basic Jboss Test", is_public: true, description: "This is the basic Jboss test.", user_id: 1)
+Category.create!(name: "JBoss")
+test = Test.create!(name: "Basic JBoss Test", is_public: true, description: "This is the complete public Jboss test.", user_id: 1)
 test.save
 
 
-Category.create!(name: "Jdbc")
-test = Test.create!(name: "Basic Jdbc Test", is_public: true, description: "This is the basic Jdbc test.", user_id: 1)
+Category.create!(name: "JDBC")
+test = Test.create!(name: "Basic JDBC Test", is_public: true, description: "This is the complete public Jdbc test.", user_id: 1)
 test.save
 
 
-Category.create!(name: "Jms")
-test = Test.create!(name: "Basic Jms Test", is_public: true, description: "This is the basic Jms test.", user_id: 1)
+Category.create!(name: "JMS")
+test = Test.create!(name: "Basic JMS Test", is_public: true, description: "This is the complete public Jms test.", user_id: 1)
 test.save
 
 
-Category.create!(name: "Jpa")
-test = Test.create!(name: "Basic Jpa Test", is_public: true, description: "This is the basic Jpa test.", user_id: 1)
+Category.create!(name: "JPA")
+test = Test.create!(name: "Basic JPA Test", is_public: true, description: "This is the complete public Jpa test.", user_id: 1)
 test.save
 
 
-Category.create!(name: "Jquery")
-test = Test.create!(name: "Basic Jquery Test", is_public: true, description: "This is the basic Jquery test.", user_id: 1)
+Category.create!(name: "jQuery")
+test = Test.create!(name: "Basic jQuery Test", is_public: true, description: "This is the complete public Jquery test.", user_id: 1)
 test.save
 
 
-Category.create!(name: "Jsf")
-test = Test.create!(name: "Basic Jsf Test", is_public: true, description: "This is the basic Jsf test.", user_id: 1)
+Category.create!(name: "JSF")
+test = Test.create!(name: "Basic JSF Test", is_public: true, description: "This is the complete public Jsf test.", user_id: 1)
 test.save
 
 
-Category.create!(name: "Jsp")
-test = Test.create!(name: "Basic Jsp Test", is_public: true, description: "This is the basic Jsp test.", user_id: 1)
+Category.create!(name: "JSP")
+test = Test.create!(name: "Basic JSP Test", is_public: true, description: "This is the complete public Jsp test.", user_id: 1)
 test.save
 
 
-Category.create!(name: "Jstl")
-test = Test.create!(name: "Basic Jstl Test", is_public: true, description: "This is the basic Jstl test.", user_id: 1)
+Category.create!(name: "JSTL")
+test = Test.create!(name: "Basic JSTL Test", is_public: true, description: "This is the complete public Jstl test.", user_id: 1)
 test.save
 
 
 Category.create!(name: "Maven")
-test = Test.create!(name: "Basic Maven Test", is_public: true, description: "This is the basic Maven test.", user_id: 1)
+test = Test.create!(name: "Basic Maven Test", is_public: true, description: "This is the complete public Maven test.", user_id: 1)
 test.save
 
 
-Category.create!(name: "Mongodb")
-test = Test.create!(name: "Basic Mongodb Test", is_public: true, description: "This is the basic Mongodb test.", user_id: 1)
+Category.create!(name: "MongoDB")
+test = Test.create!(name: "Basic MongoDB Test", is_public: true, description: "This is the complete public Mongodb test.", user_id: 1)
 test.save
 
 
-Category.create!(name: "Mysql")
-test = Test.create!(name: "Basic Mysql Test", is_public: true, description: "This is the basic Mysql test.", user_id: 1)
+Category.create!(name: "MySQL")
+test = Test.create!(name: "Basic MySQL Test", is_public: true, description: "This is the complete public Mysql test.", user_id: 1)
 test.save
 
 
 Category.create!(name: "Nginx")
-test = Test.create!(name: "Basic Nginx Test", is_public: true, description: "This is the basic Nginx test.", user_id: 1)
+test = Test.create!(name: "Basic Nginx Test", is_public: true, description: "This is the complete public Nginx test.", user_id: 1)
 test.save
 
 
-Category.create!(name: "Nodejs")
-test = Test.create!(name: "Basic Nodejs Test", is_public: true, description: "This is the basic Nodejs test.", user_id: 1)
+Category.create!(name: "Node.js")
+test = Test.create!(name: "Basic Node.js Test", is_public: true, description: "This is the complete public Nodejs test.", user_id: 1)
 test.save
 
 
 Category.create!(name: "Oracle")
-test = Test.create!(name: "Basic Oracle Test", is_public: true, description: "This is the basic Oracle test.", user_id: 1)
+test = Test.create!(name: "Basic Oracle Test", is_public: true, description: "This is the complete public Oracle test.", user_id: 1)
 test.save
 
 
 Category.create!(name: "Performance")
-test = Test.create!(name: "Basic Performance Test", is_public: true, description: "This is the basic Performance test.", user_id: 1)
+test = Test.create!(name: "Basic Performance Test", is_public: true, description: "This is the complete public Performance test.", user_id: 1)
 test.save
 
 
-Category.create!(name: "Plsql")
-test = Test.create!(name: "Basic Plsql Test", is_public: true, description: "This is the basic Plsql test.", user_id: 1)
+Category.create!(name: "PL/SQL")
+test = Test.create!(name: "Basic PL/SQL Test", is_public: true, description: "This is the complete public Plsql test.", user_id: 1)
 test.save
 
 
@@ -639,7 +643,7 @@ question7 = Question.create!(content: " What is a higher order function in Pytho
 question8 = Question.create!(content: "What is a method in Python?", answer: "<p>A method in Python is a function that is a member of a class.  They are organized, reusable blocks of code that perform a single action.  For example:</p><pre><code>class SomeClass:    def some_method(self):        print \"This is a method.???c = SomeClass()c.some_method()  # Prints \"This is a method???</code></pre><h4 id=\"-how-would-you-convert-a-string-to-a-number-\"><strong><%=@ctr+=1 %>. How would you convert a string to a number?</strong></h4><p>A conversion can be done using int() or float() or combination of the two.  For example:</p><pre><code>a = '1234.54'float(a) # This converts the string to a float.int(a) # This then converts the float to an integer.</code></pre><h4 id=\"-what-is-an-array-in-python-how-is-an-array-created-in-python-\"><strong><%=@ctr+=1 %>. What is an array in Python? How is an array created in Python?</strong></h4><p>Depending on the language implementation arrays are often defined to be an ordered collection of items of a single type.  However, in Python they can be of any type and are actually called lists.  List is the appropriate term.  They are created as follows:</p><pre><code>list = [a, b, dog, 123, ...]</code></pre><h4 id=\"-what-is-a-negative-index-in-python-\"><strong><%=@ctr+=1 %>. What is a negative index in Python?</strong></h4><p>Python lists have the ability to be accessed using negative numbers.  The negative index accesses items from the end of a list counting backwards.  For example:</p><pre><code>array = [1, 2, 3]a[-1] # This will access 3.a[-2] # This will access 2.a[-3] # This will access 1.</code></pre><h4 id=\"-how-are-exceptions-handled-in-python-\"><strong><%=@ctr+=1 %>. How are exceptions handled in Python?</strong></h4><p>During the execution of a program if an error is detected it is called an exception.  These exceptions can be handled using a try/except statement.  The regular statements are put into the <strong>try</strong> block, and the exceptions are put into the <strong>except</strong> block.  For example:</p><pre><code>try:         a = int(raw_input(\"Enter a number: \"))         breakexcept ValueError:         print \"Your input is invalid.  Try again.\"</code></pre><h4 id=\"-how-would-you-generate-random-numbers-in-python-\"><strong><%=@ctr+=1 %>. How would you generate random numbers in Python?</strong></h4><p>The <strong>random</strong> module can be used as a random number generator.  For example:</p><pre><code>import randomprint random.random()</code></pre><p>This prints a random float in the range of [0,1] which can include 0.0 but not 1.0.</p><p>There are other specialized generators in this module for various random generation tasks such as:</p><ul><li>randrange(a, b) chooses an integer in the specified range.</li><li>uniform(a, b) chooses a float in the specified range.</li></ul>", user_id: 1, difficulty_id: 2, category_id: 38)
 question9 = Question.create!(content: "What is the List comprehension feature of Python?", answer: "<p>List comprehensions are concise ways to create lists.  This is often accomplished by operating on each member of another sequence or iterable which produces each element of the new list. For example</p><pre><code>squares = []for x in range(10):     squares.append(x**2)squares[0, 1, 4, 9, 16, 25, 36, 49, 64, 81] # This result is a list of elements created from the operation.</code></pre><h4 id=\"-what-will-be-the-output-of-the-code-below-explain-your-answer-\"><strong><%=@ctr+=1 %>. What will be the output of the code below?  Explain your answer.</strong></h4><pre><code>list = ['apple', 'banana', 'cherry', 'date', 'elderberry', 'fig']print list[15:]</code></pre><p>The above code outputs [].  It does <strong>not</strong> result in an IndexError.</p><p>If an attempt is made to access an element of a list that is outside the bounds of the list, then an IndexError will occur.  However, if an attempt is made to access a slice of a list using a starting index that exceeds the number of elements in the list, an empty list will be returned, <strong>not</strong> an IndexError.  This is an important point to note as it can be the source of bugs in a program that may not be caught at runtime.</p>", user_id: 1, difficulty_id: 2, category_id: 38)
 question10 = Question.create!(content: "What is the statement that can be used in python if a statement is required syntactically but the program requires no action?", answer: "<p><strong>Pass</strong> can be used. It acts as a placeholder when syntax requires a statement and will allow the program to run.  For example:</p><pre><code>while True: pass</code></pre><p>This creates an infinite loop that does nothing for infinity.</p>", user_id: 1, difficulty_id: 2, category_id: 38)
-test = Test.create!(name: "Basic Python Test", is_public: true, description: "This is the basic Python test.", user_id: 1)
+test = Test.create!(name: "Basic Python Test", is_public: true, description: "This is the complete public Python test.", user_id: 1)
 test.questions << question1
 test.questions << question2
 test.questions << question3
@@ -665,7 +669,7 @@ question8 = Question.create!(content: "What is a method reference? Provide an ex
 question9 = Question.create!(content: "What associations can we define between models?", answer: "<ul><li>one-to-one: Exists when one item can be associated with exactly one other item. A person has one name.</li><li>one-to-many: Exists when one item can be associated with multiple other items.  A person has two cars.  However, the cars still have the one owner.</li><li>many-to-many: Exists when many items can be associated with many other items.  Two people own two cars jointly.  Each person owns two cars, and each car is owned by two people.</li></ul>", user_id: 1, difficulty_id: 2, category_id: 39)
 question10 = Question.create!(content: "What are gems in Ruby?", answer: "<p>A gem is a package or library that adds functionality to the Ruby language.  They are installed to fulfill a specific need such as:</p><ul><li>Provide an interface to Amazon S3.</li><li>Convert Markdown to HTML.</li><li>Set up a testing framework.</li></ul><p>An example of a gem being used on the command line follows:</p><pre><code>gem install my_gem</code></pre><h4 id=\"-what-is-a-class-give-an-example-\"><strong><%=@ctr+=1 %>. What is a class? Give an example.</strong></h4><p>A class is the model by which individual objects are made.  They contain both attributes, such as \"hair color\", and actions, such as \"cut hair\". For example:</p><pre><code>class Head{    @hair_color = red // Instance variable to define an attribute.    def cut_hair // Method to define an action.    end}</code></pre><h4 id=\"-what-is-an-object-provide-and-example-\"><strong><%=@ctr+=1 %>. What is an object? Provide and example.</strong></h4><p>An object is a single instance of a class.  For example:</p><pre><code># First we declare a class.class Head{    @hair_color = red // Instance variable to define and attribute.    def cut_hair // Method to define an action.    end}# Then we can create an object based on that class.tomsHead1 = Head.new</code></pre><h4 id=\"-explain-the-importance-of-a-module-\"><strong><%=@ctr+=1 %>. Explain the importance of a module.</strong></h4><p>Modules group  methods, classes, and constants together.  They provide a namespace to prevent name clashes, and they implement the \"mixin\" facility.</p><p>The \"mixin??? facility refers to the ability of Ruby classes to add in modules whose methods then become a part of the class as if it has been written in the class itself.</p>", user_id: 1, difficulty_id: 2, category_id: 39)
 question11 = Question.create!(content: "What is the difference between \"Date.current\" and \"Date.today\"?", answer: "<p>Both will return dates. However, <strong>Date.current</strong> will take timezones into account when returning a date.  <strong>Date.today</strong> returns a system date, but <strong>Date.current</strong> returns the system date with Rails' timezone applied.</p><p>=========================================================================</p>", user_id: 1, difficulty_id: 2, category_id: 39)
-test = Test.create!(name: "Basic Rails Test", is_public: true, description: "This is the basic Rails test.", user_id: 1)
+test = Test.create!(name: "Basic Rails Test", is_public: true, description: "This is the complete public Rails test.", user_id: 1)
 test.questions << question1
 test.questions << question2
 test.questions << question3
@@ -680,37 +684,37 @@ test.questions << question11
 test.save
 
 
-Category.create!(name: "Rest")
-test = Test.create!(name: "Basic Rest Test", is_public: true, description: "This is the basic Rest test.", user_id: 1)
+Category.create!(name: "RESTful Services")
+test = Test.create!(name: "Basic RESTful Services Test", is_public: true, description: "This is the complete public Rest test.", user_id: 1)
 test.save
 
 
 Category.create!(name: "Ruby")
-test = Test.create!(name: "Basic Ruby Test", is_public: true, description: "This is the basic Ruby test.", user_id: 1)
+test = Test.create!(name: "Basic Ruby Test", is_public: true, description: "This is the complete public Ruby test.", user_id: 1)
 test.save
 
 
-Category.create!(name: "Sass")
-test = Test.create!(name: "Basic Sass Test", is_public: true, description: "This is the basic Sass test.", user_id: 1)
+Category.create!(name: "SASS")
+test = Test.create!(name: "Basic SASS Test", is_public: true, description: "This is the complete public Sass test.", user_id: 1)
 test.save
 
 
-Category.create!(name: "Soa")
-test = Test.create!(name: "Basic Soa Test", is_public: true, description: "This is the basic Soa test.", user_id: 1)
+Category.create!(name: "SOA")
+test = Test.create!(name: "Basic SOA Test", is_public: true, description: "This is the complete public Soa test.", user_id: 1)
 test.save
 
 
-Category.create!(name: "Soap")
-test = Test.create!(name: "Basic Soap Test", is_public: true, description: "This is the basic Soap test.", user_id: 1)
+Category.create!(name: "SOAP")
+test = Test.create!(name: "Basic SOAP Test", is_public: true, description: "This is the complete public Soap test.", user_id: 1)
 test.save
 
 
 Category.create!(name: "Spring")
-test = Test.create!(name: "Basic Spring Test", is_public: true, description: "This is the basic Spring test.", user_id: 1)
+test = Test.create!(name: "Basic Spring Test", is_public: true, description: "This is the complete public Spring test.", user_id: 1)
 test.save
 
 
-Category.create!(name: "Sql")
+Category.create!(name: "SQL")
 question1 = Question.create!(content: "What is the difference between a database, a DBMS, and SQL?", answer: "<p>A DBMS is the program that creates and manages one or more databases.  Examples of a DBMS are Oracle, DB2, and SQL Server.</p><p>The database is the data and the rules about the data.  </p><p>SQL is the query language used to search and manipulate information organized by the DBMS</p>", user_id: 1, difficulty_id: 2, category_id: 46)
 question2 = Question.create!(content: "What is the significance of a unique value?  Give an example.", answer: "<p>A unique value is a value that cannot be duplicated within the column of a table.  It guarantees that the value in a column is associated with one and only one row.  </p><p>An example of this would be the data in a column containing employee social security numbers.  The value in this column could only be associated with one employee. Therefore, it must uniquely identify one row. See below:</p><p><table border=\"1\">    <tr>        <th>Employee</th>        <th>Department</th>        <th>SS #</th>    </tr>    <tr>        <td>Jimmy John</td>        <td>Accounting</td>        <td>123-45-6789    </tr>        <tr>        <td>Jimmy John</td>        <td>Accounting</td>        <td>987-65-4321</td>    </tr></table></p><p>The employee name and department might be the same, but in this example the employee SS# must be unique to the employee. </p>", user_id: 1, difficulty_id: 2, category_id: 46)
 question3 = Question.create!(content: "What is the difference between a natural key and a surrogate or synthetic key?", answer: "<p>A natural key is one in which the attributes of the key exist in the real world.  For instance, a social security number would be a natural key, as it is information that exists outside of the realm of the database.  </p><p>A surrogate or synthetic key is a system-generated key that is arbitrary to the values in the table, yet uniquely identifies a row.  For example a database administrator might set up a column in a database for employee IDs and have the DBMS generate random ID numbers to uniquely identify the employee data.  </p>", user_id: 1, difficulty_id: 2, category_id: 46)
@@ -726,7 +730,7 @@ question12 = Question.create!(content: "What is SQL?", answer: "<p>SQL or Struct
 question13 = Question.create!(content: "What is a database schema?", answer: "<p>A database schema is the structure of the database and the rules and constraints placed on the database. In a relational database, the schema defines the tables, the rows and columns in each table and the interaction and relationship between the rows, columns, and tables.  It is the blueprint for the organization of data.</p>", user_id: 1, difficulty_id: 2, category_id: 46)
 question14 = Question.create!(content: "What is the difference between an entity and an attribute?", answer: "<p>An entity is a single concept about which data can be stored.  For instance a person or a car is an entity that will have identifying data, its details.</p><p>An attribute is the characteristic property of an existing entity.  Whereas, an entity might be a person, but an attribute would be the person's hair color.  </p><p>In addition an attribute has two parts: the attribute instance and the attribute type.  The attribute type is the column or field name that will describe the attribute of the entity.  The attribute instance is the actual value of the attribute.  For instance hair color is one of the attribute types we may want to use to describe a person entity, however, red would be an actual value or attribute instance.</p>", user_id: 1, difficulty_id: 2, category_id: 46)
 question15 = Question.create!(content: "In SQL what are data types, and what are their significance?", answer: "<p>A data type in SQL defines what kind of attribute instance can be contained in an attribute type.  It determines the type of value that can be placed within each column.  Each column within a table must have a name and a data type.</p><p>Data types must be chosen carefully by the SQL developer, as the data type is a guideline for SQL to accurately place the right kind of data in each column.  Data types direct how SQL will interact with the data.</p>", user_id: 1, difficulty_id: 2, category_id: 46)
-test = Test.create!(name: "Basic Sql Test", is_public: true, description: "This is the basic Sql test.", user_id: 1)
+test = Test.create!(name: "Basic SQL Test", is_public: true, description: "This is the complete public Sql test.", user_id: 1)
 test.questions << question1
 test.questions << question2
 test.questions << question3
@@ -745,31 +749,34 @@ test.questions << question15
 test.save
 
 
-Category.create!(name: "Sqlserver")
-test = Test.create!(name: "Basic Sqlserver Test", is_public: true, description: "This is the basic Sqlserver test.", user_id: 1)
+Category.create!(name: "SQL Server")
+test = Test.create!(name: "Basic Sql Server Test", is_public: true, description: "This is the complete public Sql Server test.", user_id: 1)
 test.save
 
 
 Category.create!(name: "Struts")
-test = Test.create!(name: "Basic Struts Test", is_public: true, description: "This is the basic Struts test.", user_id: 1)
+test = Test.create!(name: "Basic Struts Test", is_public: true, description: "This is the complete public Struts test.", user_id: 1)
 test.save
 
 
 Category.create!(name: "Tomcat")
-test = Test.create!(name: "Basic Tomcat Test", is_public: true, description: "This is the basic Tomcat test.", user_id: 1)
+test = Test.create!(name: "Basic Tomcat Test", is_public: true, description: "This is the complete public Tomcat test.", user_id: 1)
 test.save
 
 
 Category.create!(name: "Weblogic")
-test = Test.create!(name: "Basic Weblogic Test", is_public: true, description: "This is the basic Weblogic test.", user_id: 1)
+test = Test.create!(name: "Basic Weblogic Test", is_public: true, description: "This is the complete public Weblogic test.", user_id: 1)
 test.save
 
 
-Category.create!(name: "Xml")
-test = Test.create!(name: "Basic Xml Test", is_public: true, description: "This is the basic Xml test.", user_id: 1)
+Category.create!(name: "XML")
+test = Test.create!(name: "Basic XML Test", is_public: true, description: "This is the complete public XML test.", user_id: 1)
 test.save
 
-
+Question.all.each do |question|
+  question.question_type_id = 1
+  question.save
+end
 
 #users = User.order(:created_at).take(6)
 #50.times do

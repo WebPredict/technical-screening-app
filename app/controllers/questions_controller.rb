@@ -13,7 +13,21 @@ class QuestionsController < ApplicationController
         searchparam = "%#{params[:search].downcase}%"
     end
 
-    @questions = Question.where(query, searchparam).paginate(page: params[:page], per_page: 10)
+    if params[:category_id] && params[:category_id] != ''
+      if query != ''
+        query += ' AND '
+      end
+      query += ' category_id = ? '
+      #@category_id = params[:category_id] 
+      if searchparam == ""
+        @questions = Question.where(query, params[:category_id]).paginate(page: params[:page], per_page: 10)
+      else
+        @questions = Question.where(query, searchparam, params[:category_id]).paginate(page: params[:page], per_page: 10)
+      end  
+    else
+      @questions = Question.where(query, searchparam).paginate(page: params[:page], per_page: 10)
+    end
+
     @select_mode = false
     @searched = query != ''
   end

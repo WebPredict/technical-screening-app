@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150304151505) do
+ActiveRecord::Schema.define(version: 20150325215058) do
 
   create_table "answered_questions", force: :cascade do |t|
     t.string   "answer"
@@ -32,8 +32,9 @@ ActiveRecord::Schema.define(version: 20150304151505) do
     t.string   "test_digest"
     t.string   "job_title"
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.float    "avg_score",   default: 0.0
   end
 
   add_index "candidates", ["user_id"], name: "index_candidates_on_user_id"
@@ -44,10 +45,20 @@ ActiveRecord::Schema.define(version: 20150304151505) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "companies", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "website"
+  end
+
   create_table "difficulties", force: :cascade do |t|
     t.string   "level"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "question_types", force: :cascade do |t|
+    t.string "name"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -56,12 +67,14 @@ ActiveRecord::Schema.define(version: 20150304151505) do
     t.integer  "user_id"
     t.integer  "category_id"
     t.integer  "difficulty_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "question_type_id"
   end
 
   add_index "questions", ["category_id"], name: "index_questions_on_category_id"
   add_index "questions", ["difficulty_id"], name: "index_questions_on_difficulty_id"
+  add_index "questions", ["question_type_id"], name: "index_questions_on_question_type_id"
   add_index "questions", ["user_id"], name: "index_questions_on_user_id"
 
   create_table "questions_tests", id: false, force: :cascade do |t|
@@ -74,13 +87,13 @@ ActiveRecord::Schema.define(version: 20150304151505) do
 
   create_table "test_submissions", force: :cascade do |t|
     t.string   "name"
-    t.integer  "score"
+    t.integer  "score",        default: 0
     t.integer  "duration"
     t.integer  "user_id"
     t.integer  "candidate_id"
     t.integer  "test_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   add_index "test_submissions", ["candidate_id"], name: "index_test_submissions_on_candidate_id"
@@ -111,8 +124,10 @@ ActiveRecord::Schema.define(version: 20150304151505) do
     t.datetime "reset_sent_at"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.integer  "company_id"
   end
 
+  add_index "users", ["company_id"], name: "index_users_on_company_id"
   add_index "users", ["email"], name: "index_users_on_email", unique: true
 
 end
