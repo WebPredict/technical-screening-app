@@ -5,15 +5,16 @@ class TestsController < ApplicationController
   helper_method :sort_column, :sort_direction
   
   def index
-    query = ''
+    query = ' (is_public = ? OR user_id = ? ) '
     searchparam = ""
     paramarr = []
     if params[:search] && params[:search] != ''
-        query += ' lower(name) LIKE ? '
+        query += ' AND lower(name) LIKE ? '
         searchparam = "%#{params[:search].downcase}%"
+      @tests = Test.where(query, true, current_user, searchparam).paginate(page: params[:page], per_page: 10)
+    else
+      @tests = Test.where(query, true, current_user).paginate(page: params[:page], per_page: 10)
     end
-
-    @tests = Test.where(query, searchparam).paginate(page: params[:page], per_page: 10)
 
     @searched = query != ''
   end

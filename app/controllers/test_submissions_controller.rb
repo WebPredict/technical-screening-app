@@ -33,10 +33,21 @@ class TestSubmissionsController < ApplicationController
       @test_submission.user = current_user
       @test_submission.test = Test.find(params[:test_id])
       @test_submission.candidate = @candidate
+
+      # load collection
+      @test_submission.test.questions.each_with_index do |question, index|
+        @test_submission.answered_questions[index].question = question
+        @test_submission.answered_questions[index].test_submission = @test_submission
+      end
+      
       if @test_submission.save
         flash[:success] = "Test submission created!"
         redirect_to root_url
       else
+        @test_submission.test.questions.each do |question|
+          @test_submission.answered_questions.build(question_id: question.id)
+        end
+
         flash[:error] = "Test submission could not be saved."
         render 'edit'
       end
@@ -50,11 +61,21 @@ class TestSubmissionsController < ApplicationController
     @test_submission = TestSubmission.find(params[:id])
   end
   
-  def submit_score_test
+  def update
     @test_submission = TestSubmission.find(params[:id])
+    correct_question_ids = params[:answered_question_ids]
+    @test_submission.answered_questions.each do |aq|
+      #if correct_question_ids.include? aq.id
+      if true
+        aq.correct = true
+        aq.save
+      end
+    end
+    flash[:success] = "Test scored!"
+    redirect_to root_url
   end
   
-  def update
+  def update_old
     @test_submission = TestSubmission.find(params[:id])
     respond_to do |format|
       if @test_submission.update_attributes(test_submission_params)
@@ -78,7 +99,7 @@ class TestSubmissionsController < ApplicationController
 
   def start_test
     @test_submission = TestSubmission.new
-    @test_submission.candidate = Candidate.find_by(params[:email])
+    @test_submission.candidate = Candidate.find_by(email: params[:email])
     
     if @test_submission.candidate && @test_submission.candidate.valid_token?(params[:token])
       @test_submission.test = Test.find(params[:test_id])
@@ -100,7 +121,7 @@ class TestSubmissionsController < ApplicationController
 
   def show
     @test_submission = TestSubmission.find(params[:id])
-    #@test_submission_items = @test_submission.items.paginate(page: params[:page]).order(sort_column + " " + sort_direction)
+    @test_submission_answers = @test_submission.answered_questions.paginate(page: params[:page]).order(sort_column + " " + sort_direction)
   end
 
   def destroy
@@ -112,7 +133,8 @@ class TestSubmissionsController < ApplicationController
   private
 
     def test_submission_params
-      params.require(:test_submission).permit(:id, :name, :test_id, answered_questions_attributes: [:id, :question_id, :answer])
+      params.require(:test_submission).permit(:id, :name, :test_id, :answered_question_ids, 
+        answered_questions_attributes: [:id, :question_id, :question, :answer])
     end
     
     def correct_user
@@ -120,5 +142,12 @@ class TestSubmissionsController < ApplicationController
       redirect_to root_url if @test_submission.nil?
     end
   
+    def sort_column
+      TestSubmission.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
+    end
 end
 

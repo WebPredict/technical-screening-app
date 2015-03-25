@@ -1,11 +1,13 @@
 <tr id="test-submission-<%= test_submission.id %>">
   <td><%= test_submission.candidate.name %></td>
   <td><%= test_submission.test.name %></td>
+  <td><%= test_submission.name %></td>
   <td><%= test_submission.score %></td>
   <td>
       <% if current_user?(test_submission.user) %>
-            <%= link_to "X", test, method: :delete,
+            <%= link_to "X", test_submission, method: :delete,
                                        data: { confirm: "Delete this test submission?" } %>
+            <%= link_to "Details", test_submission, class: "btn btn-primary" %>
       <% end %>
   </td>
 </tr>

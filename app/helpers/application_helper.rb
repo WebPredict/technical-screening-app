@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def full_title(page_title = '')
-    base_title = "Tech Review Now App"
+    base_title = "TechScreen.net Interview Screening Application"
     if page_title.empty?
       base_title
     else

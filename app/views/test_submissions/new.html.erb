@@ -6,23 +6,17 @@
     <%= form_for(@test_submission) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
-      <%= f.label :name %>
+      <%= f.label :name, "Test Name" %>
       <%= f.text_field :name, class: 'form-control' %>
       <%= hidden_field_tag :test_id, @test_submission.test.id %>
 
-      <% if @test_submission.answered_questions.any? %>
-        <% @test_submission.answered_questions.each do |aq| %>
-          <section><h3>Question: <%= aq.question.content %></h3></section>
-          
-          <%= f.fields_for aq, index: aq.id do |aq_form|%>
+          <%= f.fields_for :answered_questions do |aq_form|%>
+          <section><h3>Question: <%= @test_submission.answered_questions[aq_form.index].question.content %></h3></section>
             <section><h3>Your Answer:</h3>
               <%= aq_form.text_field :answer, class: 'form-control' %>
             </section>
           <% end %>
     
-        <% end %>
-      <% end %>
-
       <%= f.submit "Submit Test", class: "btn btn-primary" %>
     <% end %>
   </div>

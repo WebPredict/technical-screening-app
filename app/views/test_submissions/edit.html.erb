@@ -7,21 +7,9 @@
       <%= render 'shared/error_messages', object: f.object %>
       <%= hidden_field_tag :test_id, @test_submission.test.id %>
 
-      <%= f.label :name %>
+      <%= f.label :name, "Test Name" %>
       <%= f.text_field :name, class: 'form-control' %>
-
-      <% if @test_submission.answered_questions.any? %>
-        <% @test_submission.answered_questions.each do |aq| %>
-          <section><h3>Question: <%= aq.question.content %></h3></section>
-          
-          <%= f.fields_for aq, index: aq.id do |aq_form|%>
-            <section><h3>Your Answer:</h3>
-              <%= aq_form.text_field :answer, class: 'form-control' %>
-            </section>
-          <% end %>
-    
-        <% end %>
-      <% end %>
+      <%= hidden_field_tag :test_id, @test_submission.test.id %>
 
       <%= f.submit "Submit Test", class: "btn btn-primary" %>
     <% end %>
