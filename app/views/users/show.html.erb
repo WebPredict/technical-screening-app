@@ -1,23 +1,19 @@
 <% provide(:title, @user.name) %>
 <div class="row">
-  <aside class="col-md-4">
+  <div class="col-md-12">
     <section>
-      <h1>
+      <h3>
         <%= gravatar_for @user %>
         <%= @user.name %>
-      </h1>
+      </h3>
     </section>
-    <section class="stats">
-      <%= render 'shared/stats' %>
+    <section>
+      <strong>Email: </strong><%= @user.email %></strong>
     </section>
-  </aside>
-  <div class="col-md-8">
-    <% if @user.tests.any? %>
-      <h3>Tests (<%= @user.tests.count %>)</h3>
-      <ol class="tests">
-        <%= render @tests %>
-      </ol>
-      <%= will_paginate @tests %>
-    <% end %>
+    <br>
+    <section>
+      <%= link_to "Edit Profile", edit_user_path(@user), class: "btn btn-success" %> 
+      <%= link_to "Dashboard", root_path, class: "btn btn-success" %> 
+    </section>
   </div>
 </div>

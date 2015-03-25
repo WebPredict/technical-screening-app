@@ -59,7 +59,7 @@ class CandidatesController < ApplicationController
 
   def show
     @candidate = Candidate.find(params[:id])
-    @candidate_items = @candidate.items.paginate(page: params[:page]).order(sort_column + " " + sort_direction)
+    @candidate_test_submissions = @candidate.test_submissions.paginate(page: params[:page]).order(sort_column + " " + sort_direction)
   end
 
   def destroy

@@ -5,10 +5,12 @@
       <% if @single_test_select %>
           <%= radio_button_tag "test_ids[]", test.id %>
       <% else %>
-        <% if current_user?(test.user) %>
-              <%= link_to "X", test, method: :delete,
+        <% if false && current_user?(test.user) %>
+              <%= link_to "X", test, class: "btn btn-sm btn-primary", method: :delete,
                                          data: { confirm: "Delete this test?" } %>
+                                         <div class="button-spacer"></div>
         <% end %>
+        <%= link_to "Details", test, class: "btn btn-sm btn-primary" %>
       <% end %>
   </td>
 </tr>

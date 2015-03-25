@@ -25,8 +25,20 @@ class StaticPagesController < ApplicationController
         @show_all = false
       end
       
-      @num_test_results = 0 #current_user.candidates.test_submissions.count
-      @num_sent_tests = 0
+      @num_test_results = 0
+      
+      if current_user.candidates.any?
+        current_user.candidates.each do |candidate|
+          if candidate.test_submissions.any?
+            @num_test_results += candidate.test_submissions.count
+          end
+        end
+        
+      end
+      
+      if current_user.candidates.any?
+        @num_candidates = current_user.candidates.count
+      end
     else
       @questions = Question.paginate(page: params[:page], per_page: 5)
     end

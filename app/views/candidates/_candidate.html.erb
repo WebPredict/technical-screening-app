@@ -1,5 +1,5 @@
 <tr id="candidate-<%= candidate.id %>">
-  <td><%= candidate.name %></td>
+  <td><%= link_to candidate.name, candidate %></td>
   <td><%= candidate.email %></td>
   <td><%= candidate.phone %></td>
   <td><%= candidate.created_at %></td>
