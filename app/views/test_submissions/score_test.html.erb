@@ -1,8 +1,9 @@
 <% provide(:title, 'Score Test') %>
-<h3>Scoring Test '<%= @test_submission.test.name %>' From '<%= @test_submission.candidate.name %>'</h3>
+<h3>Scoring Test <%= link_to @test_submission.test.name, @test_submission.test %> From 
+  <%= link_to @test_submission.candidate.name, @test_submission.candidate %></h3>
 <div class="row">
   <div class="col-md-12">
-    <section><strong>Test Submission Name: <%= @test_submission.name %></strong></section>
+    <section><strong>Test Submission Name:</strong> <%= @test_submission.name %></section>
   </div>
 </div>
 </br>

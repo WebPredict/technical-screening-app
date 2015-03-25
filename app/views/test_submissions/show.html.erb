@@ -12,7 +12,7 @@
         <strong>Answered Questions (<%= @test_submission.answered_questions.count %>)</strong>
           <br>
           <table class="table table-bordered">
-            <tr><th><%= sortable "question" %></th><th><%= sortable "answer" %></th><th>Correct Answer</th></tr>
+            <tr><th><%= sortable "question" %></th><th><%= sortable "answer" %></th><th>Correct Answer</th><th>Marked As Correct?</th></tr>
             <%= render @test_submission_answers %>
           </table>
           <%= will_paginate @test_submission_answers %>

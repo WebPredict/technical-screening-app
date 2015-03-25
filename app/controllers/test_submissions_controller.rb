@@ -73,11 +73,12 @@ class TestSubmissionsController < ApplicationController
     @test_submission = TestSubmission.find(params[:id])
     correct_question_ids = params[:answered_question_ids]
     @test_submission.answered_questions.each do |aq|
-      #if correct_question_ids.include? aq.id
-      if true
+      if correct_question_ids.include? aq.id.to_s
         aq.correct = true
-        aq.save
+      else
+        aq.correct = false
       end
+      aq.save
     end
     flash[:success] = "Test scored!"
     redirect_to root_url

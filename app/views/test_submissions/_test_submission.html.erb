@@ -2,7 +2,7 @@
   <td><%= test_submission.candidate.name %></td>
   <td><%= test_submission.test.name %></td>
   <td><%= test_submission.name %></td>
-  <td><%= test_submission.score %></td>
+  <td><%= test_submission.formatted_score %></td>
   <td>
       <% if current_user?(test_submission.user) %>
             <%= link_to "X", test_submission, class: "btn btn-sm btn-primary", method: :delete,
