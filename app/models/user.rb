@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   has_many :questions
   has_many :candidates
   has_many :tests, dependent: :destroy
+  belongs_to :company
 
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :

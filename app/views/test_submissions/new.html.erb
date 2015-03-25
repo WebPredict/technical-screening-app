@@ -1,19 +1,18 @@
 <% provide(:title, 'Create Submission') %>
-<h1>Test Submission</h1>
-
+<h1>Your Test Submission</h1>
 <div class="row">
   <div class="col-md-12">
     <%= form_for(@test_submission) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
-      <%= f.label :name, "Test Name" %>
+      <%= f.label :name, "Name Your Test Submission (optional):" %>
       <%= f.text_field :name, class: 'form-control' %>
       <%= hidden_field_tag :test_id, @test_submission.test.id %>
-
+        <br>
           <%= f.fields_for :answered_questions do |aq_form|%>
-          <section><h3>Question: <%= @test_submission.answered_questions[aq_form.index].question.content %></h3></section>
-            <section><h3>Your Answer:</h3>
-              <%= aq_form.text_field :answer, class: 'form-control' %>
+          <section><strong>Question:</strong> <%= @test_submission.answered_questions[aq_form.index].question.content %></section>
+            <section><strong>Your Answer:</strong>
+              <%= aq_form.text_area :answer, class: 'form-control' %>
             </section>
           <% end %>
     

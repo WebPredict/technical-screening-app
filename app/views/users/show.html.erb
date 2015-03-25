@@ -15,7 +15,10 @@
       <strong>Email: </strong><%= @user.email %></strong>
     </section>
     <section>
-      <strong>Company: </strong><%= @user.company.name if @user.company? %></strong>
+      <strong>Company: </strong><%= 
+      if @user.company != nil
+        @user.company.name
+      end %></strong>
     </section>
     <section>
       <strong>Member Since: </strong><%= @user.created_at.strftime("%m/%d/%Y") if @user.created_at? %></strong>
