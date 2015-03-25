@@ -5,7 +5,7 @@
   <td><%= test_submission.formatted_score %></td>
   <td>
       <% if current_user?(test_submission.user) %>
-            <%= link_to "X", test_submission, class: "btn btn-sm btn-primary", method: :delete,
+            <%= link_to "X", test_submission, class: "btn btn-sm btn-danger", method: :delete,
                                        data: { confirm: "Delete this test submission?" } %>
                                        <div class="button-spacer"></div>
             <%= link_to "Details", test_submission, class: "btn btn-sm btn-primary" %>

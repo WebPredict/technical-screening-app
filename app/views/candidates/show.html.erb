@@ -26,8 +26,10 @@
       <% end %>
     </section>
     <section>
-        <%= link_to "Edit Candidate", edit_candidate_path(@candidate), class: "btn btn-success" %> 
-        <%= link_to "Dashboard", root_path, class: "btn btn-success" %> 
+        <%= link_to "Edit Candidate", edit_candidate_path(@candidate), class: "btn btn-primary" %> 
+        <%= link_to "Remove", @candidate, method: :delete,
+                           data: { confirm: "Delete this candidate?" }, :class => "btn btn-sm btn-danger" %>
+        <%= link_to "Dashboard", root_path, class: "btn btn-primary" %> 
     </section>
   </div>
 </div>

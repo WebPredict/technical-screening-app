@@ -7,10 +7,10 @@
       <% if @select_mode %>
         <%= check_box_tag "question_ids[]", question.id, @preselect_checkboxes %>
       <% elsif current_user?(question.user) %>
-            <%= link_to "X", question, class: "btn btn-sm btn-primary", method: :delete,
+            <%= link_to "X", question, class: "btn btn-xs btn-primary", method: :delete,
                                        data: { confirm: "Delete this question?" } %>
                                        <div class="button-spacer"></div>
-            <%= link_to "Edit", edit_question_path(question), class: "btn btn-sm btn-primary" %>
+            <%= link_to "Edit", edit_question_path(question), class: "btn btn-xs btn-primary" %>
       <% end %>
       
   </td>
