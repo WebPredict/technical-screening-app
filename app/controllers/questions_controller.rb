@@ -91,7 +91,7 @@ class QuestionsController < ApplicationController
   private
 
     def question_params
-      params.require(:question).permit(:difficulty_id, :category_id, :content, :answer)
+      params.require(:question).permit(:difficulty_id, :category_id, :question_type_id, :content, :answer)
     end
     
     def correct_user

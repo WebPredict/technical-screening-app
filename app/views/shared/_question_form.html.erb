@@ -22,6 +22,11 @@
   <%= f.collection_select(:category_id, Category.all, :id, :name) %>
   </div>
 
+  <%= f.label :question_type %>
+  <div class="field">
+  <%= f.collection_select(:question_type_id, QuestionType.all, :id, :name) %>
+  </div>
+
   <%= f.submit "Create Question", class: "btn btn-primary" %>
 <% end %>
 </div>

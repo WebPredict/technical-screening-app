@@ -31,7 +31,7 @@ class CandidatesController < ApplicationController
         redirect_to root_url
       end
     else
-      render 'edit'
+      render 'new'
     end
   end
 

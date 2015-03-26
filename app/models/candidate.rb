@@ -5,6 +5,8 @@ class Candidate < ActiveRecord::Base
 
   has_many :test_submissions  
   validates :user_id, presence: true
+  validates :name, presence: true
+  validates :email, presence: true
   
   def Candidate.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :

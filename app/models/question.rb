@@ -8,5 +8,6 @@ class Question < ActiveRecord::Base
   validates :user_id, presence: true
   validates :difficulty_id, presence: true
   validates :category_id, presence: true
+  validates :question_type_id, presence: true
   validates :content, presence: true
 end

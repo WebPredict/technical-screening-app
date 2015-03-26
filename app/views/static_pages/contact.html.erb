@@ -1,8 +1,10 @@
 <% provide(:title, 'Contact') %>
-<h1>Contact Us</h1>
+<div class="page-header">
+<h3>Contact Us</h3>
+</div>
 
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
+  <div class="col-md-12">
         <form action="/submitcontact" method="post">
 
             <%= hidden_field_tag :authenticity_token, form_authenticity_token %>

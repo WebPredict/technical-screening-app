@@ -2,6 +2,7 @@
   <td><%= link_to question.content, question %></td>
   <td><%= Nokogiri::HTML::DocumentFragment.parse(question.answer).to_html.html_safe %></td>
   <td><%= question.difficulty.level %></td>
+  <td><%= question.question_type.name %></td>
   <td><%= question.category.name %></td>
   <td>
       <% if @select_mode %>
