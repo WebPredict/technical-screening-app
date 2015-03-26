@@ -74,7 +74,10 @@ class TestsController < ApplicationController
     @test = Test.find(params[:id])
     respond_to do |format|
       if @test.update_attributes(test_params)
-        format.html { redirect_to @test, notice: 'Test was successfully updated.' }
+        format.html { 
+          flash[:success] = "Test was successfully updated."
+          redirect_to @test 
+        }
         format.json { render :show, status: :ok, location: @test }
       else
         format.html { render :edit }
@@ -137,7 +140,7 @@ class TestsController < ApplicationController
   private
 
     def test_params
-      params.require(:test).permit(:name, :question_ids, :is_public)
+      params.require(:test).permit(:name, :description, :question_ids, :is_public)
     end
     
     def correct_user
