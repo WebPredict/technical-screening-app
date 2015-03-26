@@ -5,10 +5,14 @@
   <td><%= test_submission.formatted_score %></td>
   <td>
       <% if current_user?(test_submission.user) %>
-            <%= link_to "X", test_submission, class: "btn btn-sm btn-danger", method: :delete,
+            <% if false %>
+            <%= link_to "X", test_submission, class: "btn btn-xs btn-danger", method: :delete,
                                        data: { confirm: "Delete this test submission?" } %>
                                        <div class="button-spacer"></div>
-            <%= link_to "Details", test_submission, class: "btn btn-sm btn-primary" %>
+            <% end %>
+            <%= link_to "Details", test_submission, class: "btn btn-xs btn-primary" %>
+                                       <div class="button-spacer"></div>
+            <%= link_to "Forward", forward_submission_path(id: test_submission.id), class: "btn btn-xs btn-primary" %>
       <% end %>
   </td>
 </tr>

@@ -65,6 +65,17 @@ class TestSubmissionsController < ApplicationController
     end
   end
 
+  def forward_submission
+    @test_submission = TestSubmission.find(params[:id])
+  end
+  
+  def submit_forward_submission
+    @test_submission = TestSubmission.find(params[:test_submission_id])
+    @test_submission.candidate.send_results(@test_submission, params[:email])
+    flash[:success] = "Test results sent!"
+    redirect_to root_path
+  end
+  
   def score_test
     @test_submission = TestSubmission.find(params[:id])
   end
@@ -142,7 +153,7 @@ class TestSubmissionsController < ApplicationController
   private
 
     def test_submission_params
-      params.require(:test_submission).permit(:id, :name, :test_id, :answered_question_ids, :candidate_id,
+      params.require(:test_submission).permit(:id, :name, :test_id, :email, :answered_question_ids, :candidate_id,
         answered_questions_attributes: [:id, :question_id, :question, :answer])
     end
     

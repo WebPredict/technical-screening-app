@@ -1,11 +1,11 @@
 <% @user ||= current_user %>
 <div class="stats">
-  <a href="<%= test_results_path(@user) %>">
+  <a href="<%= test_submissions_path %>">
     <strong class="stat"> 
       <%= @num_test_results %>
     </strong> Test Results
   </a>
-  <a href="<%= sent_tests_path(@user) %>">
+  <a href="<%= candidates_path %>">
     <strong class="stat">
       <%= @num_candidates %> 
     </strong> Candidates

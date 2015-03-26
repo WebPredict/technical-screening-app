@@ -1,0 +1,19 @@
+<% provide(:title, 'Forward Test Results') %>
+<div class="page-header">
+<h3>Forward Test Results For Candidate: <%= @test_submission.candidate.name %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+        <form action="/submit_forward_submission" method="post">
+
+            <%= hidden_field_tag :test_submission_id, @test_submission.id %>
+            <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+          
+            <label for="email">Forward To Email:</label>
+            <input id="email" name="email" size="30" class="form-control" type="text" />
+
+            <input class="btn btn-lg btn-primary" name="commit" type="submit" value="Send Results" />
+        </form>
+    </div>
+</div>

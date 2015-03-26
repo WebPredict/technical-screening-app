@@ -1,0 +1,13 @@
+<h1>TechScreen.net</h1>
+
+<p>Test Result For Candidate: <%= @candidate.name %></p>
+
+<p>
+Here are the candidate's results from TechScreen.net for test "<%= @test_submission.test.name %>:"
+</p>
+<br>
+
+<% @test_submission.answered_questions.each do |aq| %>
+  <p><strong><%= aq.question.content %></strong></p>
+  <p><strong>Answer:</strong><%= aq.answer %></p>
+<% end %>

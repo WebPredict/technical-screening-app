@@ -1,6 +1,13 @@
 <% provide(:title, @test_submission.candidate.name) %>
 <div class="page-header">
   <h3>Test Submission Details</h3>
+    <% if @test_submission.answered_questions.any? %>
+      <section>
+        <%= link_to "Candidate Details", @test_submission.candidate, class: "btn btn-primary" %> 
+        <%= link_to "Score Test", score_test_path(id: @test_submission.id), class: "btn btn-primary" %> 
+        <%= link_to "Dashboard", root_path, class: "btn btn-primary" %> 
+      </section>
+    <% end %>
 </div>
 
 <div class="row">

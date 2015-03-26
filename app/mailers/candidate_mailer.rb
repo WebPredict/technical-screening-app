@@ -11,4 +11,9 @@ class CandidateMailer < ApplicationMailer
     mail to: candidate.email, subject: "Test from TechScreen.net"
   end
   
+  def send_results(candidate, test_submission, destination)
+    @candidate = candidate
+    @test_submission = test_submission
+    mail to: destination, subject: "Test Results From TechScreen.net"
+  end
 end

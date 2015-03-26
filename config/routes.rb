@@ -28,6 +28,8 @@ Rails.application.routes.draw do
   get 'score_test' => 'test_submissions#score_test'
   post 'submit_score_test' => 'test_submissions#submit_score_test'
   get 'candidate_submissions' => 'test_submissions#candidate_submissions'
+  post 'submit_forward_submission' => 'test_submissions#submit_forward_submission'
+  get 'forward_submission' => 'test_submissions#forward_submission'
   
   resources :companies
 

@@ -42,6 +42,10 @@ class Candidate < ActiveRecord::Base
     CandidateMailer.send_test(self, test).deliver_now
   end
   
+  def send_results(test_submission, destination)
+    CandidateMailer.send_results(self, test_submission, destination).deliver_now
+  end
+  
   private
     def create_test_digest
       self.test_token = Candidate.new_token

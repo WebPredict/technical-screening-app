@@ -25,7 +25,8 @@
     <h3>Recent Candidates</h3>
     <% end %>
       <table class="table table-bordered">
-        <tr><th><%= sortable "name" %></th><th><%= sortable "email" %></th><th><%= sortable "phone" %></th><th># Submissions</th></th><th>Actions</th></tr>
+        <tr><th><%= sortable "name" %></th><th><%= sortable "email" %></th><th><%= sortable "phone" %></th>
+        <th>Created At</th></th><th>Submissions</th></th><th>Actions</th></tr>
         <%= render @candidates %>
       </table>
       <%= will_paginate @candidates %>

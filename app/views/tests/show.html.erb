@@ -5,6 +5,15 @@
 
 <div class="row">
   <div class="col-md-12">
+      <% if @test.questions.any? %>
+        <section>
+        <%= link_to "Search Tests", tests_path, class: "btn btn-primary" %> 
+        <%= link_to "Take Test", new_test_submission_path(id: @test.id), class: "btn btn-primary" %> 
+        <%= link_to "Edit Test", edit_test_path(@test), class: "btn btn-primary" %> 
+        <%= link_to "Create New Test", new_test_path, class: "btn btn-primary" %> 
+        <%= link_to "Dashboard", root_path, class: "btn btn-primary" %> 
+    </section>
+      <% end %>
     <section>
       <strong>
         Name: </strong><%= @test.name %>
