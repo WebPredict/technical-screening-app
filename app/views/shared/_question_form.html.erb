@@ -29,8 +29,7 @@
 
   <%= f.label :category %>
   <div class="field">
-  <%= f.collection_select(:category_id, Category.all, :id, :name, 
-    {:onchange => "categoryChanged('this.value')"}) %>
+  <%= f.collection_select(:category_id, Category.all, :id, :name, :onChange => "categoryChanged('this.value');") %>
   </div>
 
   <%= f.label :question_type %>

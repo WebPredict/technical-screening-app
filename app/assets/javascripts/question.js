@@ -1,4 +1,5 @@
 function categoryChanged(category) {
+  alert ("hello");
   if (category == "Free Form") {
     $('#short-phrase').hide();
     $('#multiple-choice').hide();

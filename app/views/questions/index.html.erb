@@ -3,12 +3,14 @@
 </div>
 
 <div class="row">
+  <div class="col-md-12">
 <%= form_tag questions_path, :class => "nicesearch", :method => 'get' do %>
   <label>Category</label>
   <div class="field">
         <%= select_tag(:category_id, options_from_collection_for_select(Category.all, "id", "name"), prompt: "<Filter By Technology Category>", include_blank: true, :selected => params[:category_id]) %>
   </div>
 
+  <label>Search Terms</label>
   <div class="field">
     <div class="input-group">
       <%= text_field_tag :search, params[:search], :class => "form-control" %>
@@ -19,7 +21,8 @@
     </div>
 <% end %>
 </div>
-        
+</div>
+
 <div class="row">
   <div class="col-md-12">
     <% if @searched %>

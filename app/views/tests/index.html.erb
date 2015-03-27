@@ -2,10 +2,12 @@
 <% if @single_test_select %>
 <h3>Filter Tests To Send</h3>
 <% else %>
-<h3>Search Tests</h3>
+<h3>Search Existing Tests</h3>
 <% end %>
 </div>
 <div class="row">
+  <div class="col-md-12">
+
 <%= form_tag tests_path, :class => "nicesearch", :method => 'get' do %>
     <div class="input-group">
       <%= text_field_tag :search, params[:search], :class => "form-control" %>
@@ -14,6 +16,7 @@
         </div>
     </div>
 <% end %>
+</div>
 </div>
         
 <div class="row">
@@ -54,9 +57,10 @@
 <br><br>
 <div class="row">
   <div class="col-md-12">
-    <section>
+     <section>
       <%= link_to "Dashboard", root_path, class: "btn btn-primary" %> 
       <%= link_to "Create New Test", new_test_path, class: "btn btn-primary" %> 
+      <%= link_to "Search Questions", questions_path, class: "btn btn-primary" %> 
     </section>
-  </div>
+    </div>
 </div>
