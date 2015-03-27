@@ -1,10 +1,6 @@
 <% provide(:title, @test.name) %>
 <div class="page-header">
   <h3>Test Details</h3>
-</div>
-
-<div class="row">
-  <div class="col-md-12">
       <% if @test.questions.any? %>
         <section>
         <%= link_to "Search Tests", tests_path, class: "btn btn-primary" %> 
@@ -14,6 +10,10 @@
         <%= link_to "Dashboard", root_path, class: "btn btn-primary" %> 
     </section>
       <% end %>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
     <section>
       <strong>
         Name: </strong><%= @test.name %>

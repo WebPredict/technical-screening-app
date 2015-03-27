@@ -19,19 +19,23 @@ class CandidatesController < ApplicationController
   end
 
   def create
-    @candidate = current_user.candidates.build(candidate_params)
-    if @candidate.save
-      flash[:success] = "Candidate created!"
-      
-      if params[:commit] == "Save And Send Test"
-        flash[:info] = "Select test to send to candidate:"
-        @single_test_select = true
-        redirect_to tests_path
-      else 
-        redirect_to root_url
+    if params[:commit] == "Cancel"
+      redirect_to root_url
+    else 
+      @candidate = current_user.candidates.build(candidate_params)
+      if @candidate.save
+        flash[:success] = "Candidate created!"
+        
+        if params[:commit] == "Save And Send Test"
+          flash[:info] = "Select test to send to candidate:"
+          @single_test_select = true
+          redirect_to tests_path
+        else 
+          redirect_to root_url
+        end
+      else
+        render 'new'
       end
-    else
-      render 'new'
     end
   end
 

@@ -9,9 +9,19 @@
   <%= f.label :content %>
   <%= f.text_area :content, class: 'form-control' %>
 
+  <div id="free-form">
   <%= f.label :answer %>
   <%= f.text_area :answer, rows: "10", class: 'form-control' %>
-
+  </div>
+  <div class="hidden" id="short-phrase">
+  <%= f.label :answer %>
+  <%= f.text_field :answer, class: 'form-control' %>
+  </div>
+  <div class="hidden" id="multiple-choice">
+  <%= f.label :answer %>
+  <%= f.text_field :answer, class: 'form-control' %>
+  </div>
+  
 	<%= f.label :difficulty %>
 	<div class="field">
   <%= f.collection_select(:difficulty_id, Difficulty.all, :id, :level) %>
@@ -19,7 +29,8 @@
 
   <%= f.label :category %>
   <div class="field">
-  <%= f.collection_select(:category_id, Category.all, :id, :name) %>
+  <%= f.collection_select(:category_id, Category.all, :id, :name, 
+    {:onchange => "categoryChanged('this.value')"}) %>
   </div>
 
   <%= f.label :question_type %>

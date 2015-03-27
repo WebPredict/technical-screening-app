@@ -4,7 +4,7 @@
 </div>
 
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
+  <div class="col-md-12">
     <%= form_for(@test) do |f| %>
       <%= f.label :name %>
       <%= f.text_field :name, class: 'form-control' %>
@@ -20,6 +20,9 @@
       </div>
       
       <%= f.submit "Submit And Select Questions", class: "btn btn-primary" %>
+      <div class="button-spacer"></div>
+      <%= f.submit "Cancel", class: "btn btn-primary" %>
+
     <% end %>
   </div>
 </div>

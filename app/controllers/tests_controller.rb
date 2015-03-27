@@ -61,27 +61,35 @@ class TestsController < ApplicationController
   end
   
   def create
-    @test = current_user.tests.build(test_params)
-    if @test.save
-      flash[:success] = "Test created!"
-      redirect_to select_questions_path(id: @test.id)
+    if params[:commit] == "Cancel"
+      redirect_to root_url
     else
-      render 'edit'
+      @test = current_user.tests.build(test_params)
+      if @test.save
+        flash[:success] = "Test created!"
+        redirect_to select_questions_path(id: @test.id)
+      else
+        render 'edit'
+      end
     end
   end
 
   def update
-    @test = Test.find(params[:id])
-    respond_to do |format|
-      if @test.update_attributes(test_params)
-        format.html { 
-          flash[:success] = "Test was successfully updated."
-          redirect_to @test 
-        }
-        format.json { render :show, status: :ok, location: @test }
-      else
-        format.html { render :edit }
-        format.json { render json: @test.errors, status: :unprocessable_entity }
+    if params[:commit] == "Cancel"
+      redirect_to root_url
+    else
+      @test = Test.find(params[:id])
+      respond_to do |format|
+        if @test.update_attributes(test_params)
+          format.html { 
+            flash[:success] = "Test was successfully updated."
+            redirect_to @test 
+          }
+          format.json { render :show, status: :ok, location: @test }
+        else
+          format.html { render :edit }
+          format.json { render json: @test.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
