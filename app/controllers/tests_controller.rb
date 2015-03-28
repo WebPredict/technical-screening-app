@@ -11,9 +11,9 @@ class TestsController < ApplicationController
     if params[:search] && params[:search] != ''
         query += ' AND lower(name) LIKE ? '
         searchparam = "%#{params[:search].downcase}%"
-      @tests = Test.where(query, true, current_user, searchparam).paginate(page: params[:page], per_page: 10)
+      @tests = Test.where(query, true, current_user, searchparam).paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
     else
-      @tests = Test.where(query, true, current_user).paginate(page: params[:page], per_page: 10)
+      @tests = Test.where(query, true, current_user).paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
     end
 
     @searched = query != ''

@@ -1,10 +1,15 @@
 <tr id="question-<%= question.id %>">
-  <td><%= link_to question.content, question %></td>
-  
+  <td>
+      <% if question.question_type_id != 2 %>
+      <%= link_to question.content, question %> 
+      <% else %>
+      <%= link_to question.formatted_content, question %> 
+      <% end %>
+
       <% if logged_in? && current_user.premium? %>
         <td><%= Nokogiri::HTML::DocumentFragment.parse(question.answer).to_html.html_safe %></td>
       <% else %>
-        <td><%= link_to "Premium Members Get Answers!", plans_path, class: "btn btn-success" %></td>
+        <td><%= link_to "Employer / Recruiter Membership Required", plans_path, class: "btn btn-sm btn-info" %></td>
       <% end %>
 
   <td><%= question.difficulty.level %></td>

@@ -11,4 +11,24 @@ class Question < ActiveRecord::Base
   validates :category_id, presence: true
   validates :question_type_id, presence: true
   validates :content, presence: true
+  
+  def formatted_content
+    answers = content.split("||")
+    
+    formatted = answers [0]
+    if answers.size > 1
+      formatted += " A) " + answers [1]
+    end 
+    if answers.size > 2
+      formatted += " B) " + answers [2]
+    end 
+    if answers.size > 3
+      formatted += " C) " + answers [3]
+    end 
+    if answers.size > 4
+      formatted += " D) " + answers [4]
+    end 
+    
+  end 
+  
 end

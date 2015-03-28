@@ -36,7 +36,8 @@
     <% end %>
       <table class="table table-bordered">
         <tr><th><%= sortable "content", "Question" %></th><th><%= sortable "answer" %></th>
-        <th><%= sortable "difficulty" %></th><th><%= sortable "question_type" %></th><th><%= sortable "category" %></th><th>Actions</th></tr>
+        <th><%= sortable "difficulty_id", "Difficulty" %></th><th><%= sortable "question_type_id", "Question Type" %></th>
+        <th><%= sortable "category_id", "Category" %></th><th>Actions</th></tr>
         <%= render @questions %>
       </table>
       <%= will_paginate @questions %>

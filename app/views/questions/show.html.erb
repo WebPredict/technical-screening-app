@@ -30,7 +30,7 @@
       <%= 
       Nokogiri::HTML::DocumentFragment.parse(@question.answer).to_html.html_safe %> 
       <% else %>
-        <%= link_to "Premium Members Get Answers!", plans_path, class: "btn btn-success" %> 
+        <%= link_to "Employer / Recruiter Membership Required", plans_path, class: "btn btn-info" %> 
       <% end %>
     </section>
 		<section>

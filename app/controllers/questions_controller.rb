@@ -20,12 +20,12 @@ class QuestionsController < ApplicationController
       query += ' category_id = ? '
       #@category_id = params[:category_id] 
       if searchparam == ""
-        @questions = Question.where(query, params[:category_id]).paginate(page: params[:page], per_page: 10)
+        @questions = Question.where(query, params[:category_id]).paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
       else
-        @questions = Question.where(query, searchparam, params[:category_id]).paginate(page: params[:page], per_page: 10)
+        @questions = Question.where(query, searchparam, params[:category_id]).paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
       end  
     else
-      @questions = Question.where(query, searchparam).paginate(page: params[:page], per_page: 10)
+      @questions = Question.where(query, searchparam).paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
     end
 
     @select_mode = false
