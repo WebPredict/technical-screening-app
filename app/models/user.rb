@@ -15,7 +15,8 @@ class User < ActiveRecord::Base
   has_many :candidates
   has_many :tests, dependent: :destroy
   belongs_to :company
-
+  belongs_to :membership_level
+  
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
                                                   BCrypt::Engine.cost
@@ -25,6 +26,10 @@ class User < ActiveRecord::Base
   # Returns a random token.
   def User.new_token
     SecureRandom.urlsafe_base64
+  end
+  
+  def premium?
+    return membership_level != nil && membership_level.name != 'Free'
   end
   
   def feed

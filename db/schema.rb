@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150325215058) do
+ActiveRecord::Schema.define(version: 20150328162010) do
 
   create_table "answered_questions", force: :cascade do |t|
     t.string   "answer"
@@ -55,6 +55,10 @@ ActiveRecord::Schema.define(version: 20150325215058) do
     t.string   "level"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "membership_levels", force: :cascade do |t|
+    t.string "name"
   end
 
   create_table "question_types", force: :cascade do |t|
@@ -122,12 +126,14 @@ ActiveRecord::Schema.define(version: 20150325215058) do
     t.datetime "activated_at"
     t.string   "reset_digest"
     t.datetime "reset_sent_at"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.integer  "company_id"
+    t.integer  "membership_level_id"
   end
 
   add_index "users", ["company_id"], name: "index_users_on_company_id"
   add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["membership_level_id"], name: "index_users_on_membership_level_id"
 
 end

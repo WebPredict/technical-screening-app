@@ -9,8 +9,13 @@
       <h4> Question: </h4> <%= @question.content %> 
     </section>
     <section>
-      <h4> Answer: </h4> <%= 
+      <h4> Answer: </h4> 
+      <% if logged_in? && current_user.premium? %>
+      <%= 
       Nokogiri::HTML::DocumentFragment.parse(@question.answer).to_html.html_safe %> 
+      <% else %>
+        <%= link_to "Premium Members Get Answers!", plans_path, class: "btn btn-success" %> 
+      <% end %>
     </section>
 		<section>
 			<h4>Difficulty: </h4> <%= @question.difficulty.level %>

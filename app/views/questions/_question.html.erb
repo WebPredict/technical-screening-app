@@ -1,6 +1,12 @@
 <tr id="question-<%= question.id %>">
   <td><%= link_to question.content, question %></td>
-  <td><%= Nokogiri::HTML::DocumentFragment.parse(question.answer).to_html.html_safe %></td>
+  
+      <% if logged_in? && current_user.premium? %>
+        <td><%= Nokogiri::HTML::DocumentFragment.parse(question.answer).to_html.html_safe %></td>
+      <% else %>
+        <td><%= link_to "Premium Members Get Answers!", plans_path, class: "btn btn-success" %></td>
+      <% end %>
+
   <td><%= question.difficulty.level %></td>
   <td><%= question.question_type.name %></td>
   <td><%= question.category.name %></td>

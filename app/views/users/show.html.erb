@@ -15,6 +15,14 @@
       <strong>Email: </strong><%= @user.email %></strong>
     </section>
     <section>
+      <strong>Membership Level: </strong><%= 
+      if @user.membership_level != nil
+        @user.membership_level.name
+      else
+        "Free"
+      end %></strong>
+    </section>
+    <section>
       <strong>Company: </strong><%= 
       if @user.company != nil
         @user.company.name

@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
-  before_action :logged_in_user, only: [:create, :destroy]
-  before_action :correct_user,   only: :destroy
+  before_action :logged_in_user, only: [:create, :edit, :update, :destroy]
+  before_action :correct_user,   only: [:destroy, :edit, :update]
   
   helper_method :sort_column, :sort_direction
   
