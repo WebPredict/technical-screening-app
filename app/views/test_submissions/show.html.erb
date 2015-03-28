@@ -16,7 +16,7 @@
       <strong>Test Result For:</strong> <%= @test_submission.candidate.name %>
     </section>
     <section>
-      <strong>Test Name:</strong> <%= @test_submission.test.name %>
+      <strong>Test Name:</strong> <%= link_to @test_submission.test.name, @test_submission.test %>
     </section>
     <br>
     <section>

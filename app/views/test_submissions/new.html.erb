@@ -12,9 +12,27 @@
       <%= hidden_field_tag :test_id, @test_submission.test.id %>
         <br>
           <%= f.fields_for :answered_questions do |aq_form|%>
-          <section><strong>Question:</strong> <%= @test_submission.answered_questions[aq_form.index].question.content %></section>
+          <section><strong>Question:</strong> 
+          
+          <% if @test_submission.answered_questions[aq_form.index].question.question_type_id == 2 %>
+            <%= @test_submission.answered_questions[aq_form.index].question.formatted_content %>
+          <% else %>
+            <%= @test_submission.answered_questions[aq_form.index].question.content %>
+          <% end %>
+          </section>
             <section><strong>Your Answer:</strong>
+              <% if @test_submission.answered_questions[aq_form.index].question.question_type_id == 2 %>
+              
+              <%= aq_form.select(:answer, class: 'form-control') do %>
+                <% [['A)', 'A'], ['B)', 'B'], ['C)', 'C'], ['D)', 'D']].each do |c| -%>
+                  <%= content_tag(:option, c.first, value: c.last) %>
+                <% end %>
+              <% end %>
+              <% elsif @test_submission.answered_questions[aq_form.index].question.question_type_id == 3 %>
+              <%= aq_form.text_field :answer, class: 'form-control' %>
+              <% else %>
               <%= aq_form.text_area :answer, class: 'form-control' %>
+              <% end %>
             </section>
           <% end %>
     

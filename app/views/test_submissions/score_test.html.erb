@@ -19,7 +19,12 @@
           <tr><th>Question</th><th>Given Answer</th><th>Correct?</th></tr>
         <% @test_submission.answered_questions.each do |aq| %>
           <tr>
-          <td><%= aq.question.content %></td>
+          <td>
+                <% if aq.question.question_type_id != 2 %>
+                <%= aq.question.content %> 
+                <% else %>
+                <%= aq.question.formatted_content %>
+                <% end %>
           <td><%= aq.answer %></td>
           <td>
               <%= check_box_tag "answered_question_ids[]", aq.id, false, class: "checkbox" %>
