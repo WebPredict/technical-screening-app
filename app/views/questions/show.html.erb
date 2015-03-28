@@ -6,7 +6,23 @@
 <div class="row">
   <div class="col-md-12">
     <section>
-      <h4> Question: </h4> <%= @question.content %> 
+      <h4> Question: </h4> 
+      <% if @question.question_type_id != 2 %>
+      <%= @question.content %> 
+      <% else %>
+      <%= @question_part_content %> 
+      <ul>
+        <li>A) <%= @question.answer2 %></li>
+        <li>B) <%= @question.answer3 %></li>
+        
+        <% if @question.answer4 != nil %>
+        <li>C) <%= @question.answer4 %></li>
+        <% end %>
+        <% if @question.answer5 != nil %>
+        <li>D) <%= @question.answer5 %></li>
+        <% end %>
+      </ul>
+      <% end %>
     </section>
     <section>
       <h4> Answer: </h4> 
@@ -29,9 +45,14 @@
 		<br>
     <section>
         <%= link_to "Search Questions", questions_path, class: "btn btn-primary" %> 
+        
+        <% if logged_in? %>
         <%= link_to "Edit Question", edit_question_path(@question), class: "btn btn-primary" %> 
         <%= link_to "Clone Question", clone_question_path(id: @question), class: "btn btn-primary" %> 
         <%= link_to "Manage Tests", root_path, class: "btn btn-primary" %> 
+        <% else %>
+        <%= link_to "Sign Up", signup_path, class: "btn btn-primary" %> 
+        <% end %>        
     </section>
   </div>
 </div>

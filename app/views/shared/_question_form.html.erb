@@ -13,13 +13,19 @@
   <%= f.label :answer %>
   <%= f.text_area :answer, rows: "10", class: 'form-control' %>
   </div>
-  <div class="hidden" id="short-phrase">
-  <%= f.label :answer %>
+  <div id="short-phrase" style="display:none">
+  <%= f.label :answer, "Short Phrase Answer" %>
   <%= f.text_field :answer, class: 'form-control' %>
   </div>
-  <div class="hidden" id="multiple-choice">
-  <%= f.label :answer %>
-  <%= f.text_field :answer, class: 'form-control' %>
+  <div id="multiple-choice" style="display:none">
+  <%= f.label :answer2, "Answer Choice A" %>
+  <%= f.text_field :answer2, class: 'form-control' %>
+  <%= f.label :answer3, "Answer Choice B" %>
+  <%= f.text_field :answer3, class: 'form-control' %>
+  <%= f.label :answer4, "Answer Choice C" %>
+  <%= f.text_field :answer4, class: 'form-control' %>
+  <%= f.label :answer5, "Answer Choice D" %>
+  <%= f.text_field :answer5, class: 'form-control' %>
   </div>
   
 	<%= f.label :difficulty %>
@@ -29,7 +35,7 @@
 
   <%= f.label :category %>
   <div class="field">
-  <%= f.collection_select(:category_id, Category.all, :id, :name, :onChange => "categoryChanged('this.value');") %>
+  <%= f.collection_select(:category_id, Category.all, :id, :name) %>
   </div>
 
   <%= f.label :question_type %>
@@ -41,3 +47,11 @@
 <% end %>
 </div>
 </div>
+
+<script>
+  function categoryChanged () {
+    adjustQuestionForm(this.value);
+  }    
+
+  $('#question_question_type_id').on('change', categoryChanged)
+</script>

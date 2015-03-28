@@ -33,25 +33,48 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = current_user.questions.build(question_params)
-    if @question.save
-      flash[:success] = "Question created!"
+    if params[:commit] == "Cancel"
       redirect_to root_url
     else
-      @candidates = current_user.candidates
-      render 'static_pages/home'
+      @question = current_user.questions.build(question_params)
+      
+      if @question.question_type_id == 2
+        full_question = @question.content + "||" + params[:question][:answer2] + "||" + params[:question][:answer3] + "||" + 
+          params[:question][:answer4] + "||" + params[:question][:answer5]
+        @question.content = full_question
+      end 
+    
+      if @question.save
+        flash[:success] = "Question created!"
+        redirect_to root_url
+      else
+        @candidates = current_user.candidates
+        render 'static_pages/home'
+      end
     end
   end
 
   def update
-    @question = Question.find(params[:id])
-    respond_to do |format|
-      if @question.update_attributes(question_params)
-        format.html { redirect_to @question, notice: 'Question was successfully updated.' }
-        format.json { render :show, status: :ok, location: @question }
-      else
-        format.html { render :edit }
-        format.json { render json: @question.errors, status: :unprocessable_entity }
+    if params[:commit] == "Cancel"
+      redirect_to root_url
+    else
+      @question = Question.find(params[:id])
+      respond_to do |format|
+        if @question.update_attributes(question_params)
+          
+          if @question.question_type_id == 2
+            full_question = @question.content + "||" + params[:question][:answer2] + "||" + params[:question][:answer3] + "||" + 
+              params[:question][:answer4] + "||" + params[:question][:answer5]
+            @question.content = full_question
+            @question.save
+          end 
+
+          format.html { redirect_to @question, notice: 'Question was successfully updated.' }
+          format.json { render :show, status: :ok, location: @question }
+        else
+          format.html { render :edit }
+          format.json { render json: @question.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -63,10 +86,41 @@ class QuestionsController < ApplicationController
   # GET /questions/1/edit
   def edit
     @question = Question.find(params[:id])
+    
+    split_answers = @question.content.split("||")
+      @question.content = split_answers [0]
+      if split_answers.size > 1
+        @question.answer2 = split_answers [1]
+      end 
+      if split_answers.size > 2
+        @question.answer3 = split_answers [2]
+      end 
+      if split_answers.size > 3
+        @question.answer4 = split_answers [3]
+      end 
+      if split_answers.size > 4
+        @question.answer5 = split_answers [4]
+      end 
   end
 
   def show
     @question = Question.find(params[:id])
+    if @question.question_type_id == 2
+      split_answers = @question.content.split("||")
+      @question_part_content = split_answers [0]
+      if split_answers.size > 1
+        @question.answer2 = split_answers [1]
+      end 
+      if split_answers.size > 2
+        @question.answer3 = split_answers [2]
+      end 
+      if split_answers.size > 3
+        @question.answer4 = split_answers [3]
+      end 
+      if split_answers.size > 4
+        @question.answer5 = split_answers [4]
+      end 
+    end 
   end
 
   def clone_question
@@ -91,7 +145,8 @@ class QuestionsController < ApplicationController
   private
 
     def question_params
-      params.require(:question).permit(:difficulty_id, :category_id, :question_type_id, :content, :answer)
+      params.require(:question).permit(:difficulty_id, :category_id, :question_type_id, :content, 
+      :answer, :answer2, :answer3, :answer4, :answer5)
     end
     
     def correct_user

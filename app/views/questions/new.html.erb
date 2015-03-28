@@ -12,8 +12,24 @@
     <%= f.label :content %>
     <%= f.text_area :content, class: 'form-control' %>
   
+    <div id="free-form">
     <%= f.label :answer %>
     <%= f.text_area :answer, rows: "10", class: 'form-control' %>
+    </div>
+    <div id="short-phrase" style="display:none">
+    <%= f.label :answer, "Short Phrase Answer" %>
+    <%= f.text_field :answer, class: 'form-control' %>
+    </div>
+    <div id="multiple-choice" style="display:none">
+      <%= f.label :answer2, "Answer Choice A" %>
+    <%= f.text_field :answer2, class: 'form-control' %>
+    <%= f.label :answer3, "Answer Choice B" %>
+    <%= f.text_field :answer3, class: 'form-control' %>
+    <%= f.label :answer4, "Answer Choice C" %>
+    <%= f.text_field :answer4, class: 'form-control' %>
+    <%= f.label :answer5, "Answer Choice D" %>
+    <%= f.text_field :answer5, class: 'form-control' %>
+    </div>
   
   	<%= f.label :difficulty %>
   	<div class="field">
@@ -31,7 +47,17 @@
     </div>
   
     <%= f.submit "Create Question", class: "btn btn-primary" %>
+    <div class="button-spacer"></div>
+      <%= f.submit "Cancel", class: "btn btn-primary" %>
   <% end %>
 
   </div>
 </div>
+
+<script>
+  function categoryChanged () {
+    adjustQuestionForm(this.value);
+  }    
+
+  $('#question_question_type_id').on('change', categoryChanged)
+</script>
