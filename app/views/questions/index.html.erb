@@ -44,6 +44,7 @@
   </div>
 </div>
 
+<% if logged_in? %>
 <div class="row">
   <div class="col-md-12">
     <section>
@@ -52,3 +53,13 @@
     </section>
   </div>
 </div>
+<% else %>
+<div class="row">
+  <div class="col-md-12">
+    <section>
+      <%= link_to "Home", root_path, class: "btn btn-primary" %> 
+      <%= link_to "Sign Up", signup_path, class: "btn btn-primary" %> 
+    </section>
+  </div>
+</div>
+<% end %>
