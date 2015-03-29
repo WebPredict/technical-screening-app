@@ -16,6 +16,7 @@ gem 'jbuilder',             '2.2.3'
 gem 'will_paginate',           '3.0.7'
 gem 'bootstrap-will_paginate', '0.0.10'
 gem 'sdoc',                 '0.4.0', group: :doc
+gem 'chargify_api_ares',  '1.3.3'
 
 group :development, :test do
   gem 'sqlite3',     '1.3.9'
