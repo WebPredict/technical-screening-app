@@ -1,3 +1,19 @@
+category = Category.find_by(name: "Algorithms")
+if category == nil
+  category = Category.create!(name: "Algorithms")
+end
+question2 = Question.create!(content: "What is the time complexity of quicksort? ", answer: "O(NlogN).", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question3 = Question.create!(content: "What's the time and space complexity of mergesort? ", answer: "O(N^2).", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question4 = Question.create!(content: "What is the best time complexity for a comparison sort? ", answer: "O(NlogN).", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question5 = Question.create!(content: "What is radix sort?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question6 = Question.create!(content: "How would you traverse a tree level by level?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question7 = Question.create!(content: "What is the height of a balanced binary tree, as a function of the number of nodes in the tree?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question8 = Question.create!(content: "How would you go about multiplying two matrices, and what would be the time complexity?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question9 = Question.create!(content: "How would you determine if a linked list has a loop?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question10 = Question.create!(content: "What is the difference between a recursive and iterative version of a function?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question11 = Question.create!(content: "What does it mean for a computing problem to be NP complete?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question12 = Question.create!(content: "What is an example of an exponential time algorithm?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question13 = Question.create!(content: "What is an example of a linear time algorithm?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
 category = Category.find_by(name: "Groovy / Grails")
 if category == nil
   category = Category.create!(name: "Groovy / Grails")
