@@ -49,13 +49,13 @@ class UsersController < ApplicationController
         redirect_to root_url
       elsif params[:user][:membership_level_id] == "2"
         redirect_to generate_url("https://techscreen-net.chargify.com/subscribe/g7zjvxxj/bronze", 
-          {customer_reference: "4RKzhs3YJMNAAV2v7Zo" + @user.id})
+          {customer_reference: "4RKzhs3YJMNAAV2v7Zo" + @user.id.to_s})
       elsif params[:user][:membership_level_id] == "3"
         redirect_to generate_url("https://techscreen-net.chargify.com/subscribe/vryykwj4/gold", 
-          {customer_reference: "4RKzhs3YJMNAAV2v7Zo" + @user.id})
+          {customer_reference: "4RKzhs3YJMNAAV2v7Zo" + @user.id.to_s})
       elsif params[:user][:membership_level_id] == "4"
         redirect_to generate_url("https://techscreen-net.chargify.com/subscribe/zhksdhbm/platinum", 
-          {customer_reference: "4RKzhs3YJMNAAV2v7Zo" + @user.id})
+          {customer_reference: "4RKzhs3YJMNAAV2v7Zo" + @user.id.to_s})
       end
       
     else
