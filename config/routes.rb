@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get 'gold' => 'memberships#gold'
   get 'platinum' => 'memberships#platinum'
   get 'subscribe' => 'memberships#subscribe'
-  
+
   get 'news' => 'static_pages#news'
   get 'signup'  => 'users#new'
   get    'login'   => 'sessions#new'

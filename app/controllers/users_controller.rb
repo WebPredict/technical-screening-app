@@ -44,20 +44,26 @@ class UsersController < ApplicationController
     if @user.save
       @user.send_activation_email
       
-      if params[:membership_level_id] == 1
+      if params[:user][:membership_level_id] == "1"
         flash[:info] = "Please check your email to activate your account."
         redirect_to root_url
-      elsif params[:membership_level_id] == 2
-        redirect_to "https://techscreen-net.chargify.com/subscribe/g7zjvxxj/bronze"
-      elsif params[:membership_level_id] == 3
-        redirect_to "https://techscreen-net.chargify.com/subscribe/vryykwj4/gold"
-      elsif params[:membership_level_id] == 4
-        redirect_to "https://techscreen-net.chargify.com/subscribe/zhksdhbm/platinum"
+      elsif params[:user][:membership_level_id] == "2"
+        redirect_to generate_url("https://techscreen-net.chargify.com/subscribe/g7zjvxxj/bronze")
+      elsif params[:user][:membership_level_id] == "3"
+        redirect_to generate_url("https://techscreen-net.chargify.com/subscribe/vryykwj4/gold")
+      elsif params[:user][:membership_level_id] == "4"
+        redirect_to generate_url("https://techscreen-net.chargify.com/subscribe/zhksdhbm/platinum")
       end
       
     else
       render 'new'
     end
+  end
+
+  def generate_url(url, params = {})
+    uri = URI(url)
+    uri.query = params.to_query
+    uri.to_s
   end
 
   # PATCH/PUT /users/1

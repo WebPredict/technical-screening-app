@@ -42,6 +42,8 @@ class StaticPagesController < ApplicationController
       
       if current_user.candidates.any?
         @num_candidates = current_user.candidates.count
+      else
+        @num_candidates = 0
       end
     else
       @questions = Question.paginate(page: params[:page], per_page: 5)
