@@ -29,6 +29,7 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
+    @user.membership_level_id = params[:membership_level_id]
   end
 
   # GET /users/1/edit
@@ -42,8 +43,18 @@ class UsersController < ApplicationController
     @user = User.new(user_params)    # Not the final implementation!
     if @user.save
       @user.send_activation_email
-      flash[:info] = "Please check your email to activate your account."
-      redirect_to root_url
+      
+      if params[:membership_level_id] == 1
+        flash[:info] = "Please check your email to activate your account."
+        redirect_to root_url
+      elsif params[:membership_level_id] == 2
+        redirect_to "https://techscreen-net.chargify.com/subscribe/g7zjvxxj/bronze"
+      elsif params[:membership_level_id] == 3
+        redirect_to "https://techscreen-net.chargify.com/subscribe/vryykwj4/gold"
+      elsif params[:membership_level_id] == 4
+        redirect_to "https://techscreen-net.chargify.com/subscribe/zhksdhbm/platinum"
+      end
+      
     else
       render 'new'
     end
@@ -86,7 +97,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :password,
+      params.require(:user).permit(:name, :email, :password, :membership_level_id,
                                    :password_confirmation)
     end
     

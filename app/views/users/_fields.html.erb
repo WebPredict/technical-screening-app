@@ -11,3 +11,9 @@
 
 <%= f.label :password_confirmation, "Confirmation" %>
 <%= f.password_field :password_confirmation, class: 'form-control' %>
+
+<%= f.label :membership_level, "Desired Membership Level" %>
+<div class="field">
+<%= f.collection_select(:membership_level_id, MembershipLevel.all, :id, :name) %>
+</div>
+

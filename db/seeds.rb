@@ -1,791 +1,819 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-
-User.create!(name:  "Example User",
-             email: "example@example.org",
-             password:              "foobar",
-             password_confirmation: "foobar",
-              activated: true,
-              activated_at: Time.zone.now)
-
-#50.times do |n|
-#  name  = Faker::Name.name
-#  email = "example-#{n+1}@railstutorial.org"
-#  password = "password"
-#  User.create!(name:  name,
-#               email: email,
-#               password:              password,
-#               password_confirmation: password,
-#               activated: true,
-#               activated_at: Time.zone.now)
-#end
-
-Difficulty.create!(level: "Easy")
-Difficulty.create!(level: "Medium")
-Difficulty.create!(level: "Hard")
-
-MembershipLevel.create!(name: "Free")
-MembershipLevel.create!(name: "Bronze")
-MembershipLevel.create!(name: "Gold")
-MembershipLevel.create!(name: "Platinum")
-
-QuestionType.create!(name: "Free Form")
-QuestionType.create!(name: "Multiple Choice")
-QuestionType.create!(name: "Short Phrase")
-
-Category.create!(name: "Algorithms")
-test = Test.create!(name: "Basic Algorithms Test", is_public: true, description: "This is the complete public Algorithms test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "AngularJS")
-question1 = Question.create!(content: "What is AngularJS?", answer: "<p>AngularJS is an open-source JavaScript framework, maintained by Google, that assists with running single-page applications. Its goal is to augment browser-based applications with model-view-controller capability in an effort to make both development and testing easier    </p>", user_id: 1, difficulty_id: 2, category_id: 2)
-question2 = Question.create!(content: "Can AngularJS use the jQuery library?", answer: "<p>Angular is able to use jQuery if it exists in the application upon bootstrapping. If jQuery is not present in the script path, Angular reverts to its own implementation of the subset of jQuery known as JQLite.   </p>", user_id: 1, difficulty_id: 2, category_id: 2)
-question3 = Question.create!(content: "AngularJS performance is dependent upon what factors?", answer: "<p>Startup performance is dependent on the browser and browser version, network connection, available hardware, and cache state. </p><p>The runtime performance depends on the number and complexity of bindings on the page.  In addition, if an application needs to retrieve data from the backend, the speed of this retrieval will also affect the runtime performance. However, applications can still run efficiently even with thousands of bindings.</p>", user_id: 1, difficulty_id: 2, category_id: 2)
-question4 = Question.create!(content: "What are directives in AngularJS?", answer: "<p>Directives are markers on a DOM element (such as an attribute, element name, comment or CSS class) that tell AngularJS's HTML compiler to attach a specified behavior to that DOM element, or it may even transform the DOM element and its children.  The directive introduces new syntax.  Directives typically begin with <em>ng</em>.</p>", user_id: 1, difficulty_id: 2, category_id: 2)
-question5 = Question.create!(content: "What does it mean to \"compile\" an HTML template for AngularJS?", answer: "<p>Compilation means attaching event listeners to the HTML to make it interactive. The reason that the term \"compile\" is used is that the recursive process of attaching directives mirrors the process of compiling source code in compiled programming languages. </p>", user_id: 1, difficulty_id: 2, category_id: 2)
-question6 = Question.create!(content: "Explain the compilation process?", answer: "<p>The two phases of the compilation process:</p><ol><li><strong>Compile</strong>: collect all of the directives by traversing the DOM.  A linking function is created from this process.</li><li><strong>Link</strong>: the directives are then combined with a scope to produce a live view. Changes in the scope model are reflected in the view; user interactions with the view are reflected in the scope model.  </li></ol>", user_id: 1, difficulty_id: 2, category_id: 2)
-question7 = Question.create!(content: "What are the key features of AngularJS?", answer: "<p>Scope, M-V-C, Services, Data Binding, Directives, Filters, Built-in Validation, and Testability.</p>", user_id: 1, difficulty_id: 2, category_id: 2)
-question8 = Question.create!(content: "What is meant by scope in AngularJS?", answer: "<p>Scope is an object that refers to the application model. It is the glue between application controller and the view. Both the controllers and directives have reference to the scope, but not with each other. It is an execution context for expressions and arranged in hierarchical structure. Scopes can watch expressions and propagate events.</p>", user_id: 1, difficulty_id: 2, category_id: 2)
-question9 = Question.create!(content: "Explain the concept of scope hierarchy? How many scopes can an application have?", answer: "<p>Each Angular application has exactly one root scope, but may have several child scopes. The application can have multiple scopes, because child controllers and some directives create new child scopes. When new scopes are created, they are added as children of their parent scope. This creates a hierarchical structure similar to the DOM where they're attached.</p><p>When Angular evaluates a bound variable, such as {{firstName}}, it first looks at the scope associated with the given element for the firstName property. If no such property is found, it searches the parent scope and so on until the root scope is reached. In JavaScript this behavior is known as prototypical inheritance, and child scopes prototypically inherit from their parents. The reverse is not true. For example, the parent cannot see its children's bound properties.</p>", user_id: 1, difficulty_id: 2, category_id: 2)
-question10 = Question.create!(content: "What is MVC (Model-View-Controller)?", answer: "<p>Model-view-controller (MVC) is a software architectural pattern used to develop user interfaces. The idea is to divide a software application into three interconnected parts.  The purpose of this is to separate the way the user views and interacts with the software from the internal representation of data.</p>", user_id: 1, difficulty_id: 2, category_id: 2)
-question11 = Question.create!(content: "Briefly explain MVC Architecture?", answer: "<ul><li>M stands for Model.  The Model is your data which may come from an internal data structure, an external JSON doc, or a database.</li><li>V stands for View.  Views are how the data (models) are displayed.  This is commonly accomplished through a template.</li><li>C stands for controllers. Controllers connect the data to the views.  Controllers are written in JavaScript.</li></ul>", user_id: 1, difficulty_id: 2, category_id: 2)
-question12 = Question.create!(content: "Explain the concept of bidirectional data binding.", answer: "<p>Data-binding in Angular apps is the automatic synchronization of data between the model and view components. The data is compiled in the browser and the compilation step produces a live view. Code does not need to be written to constantly sync the view with the model and the model with the view as in other templating systems.</p>", user_id: 1, difficulty_id: 2, category_id: 2)
-question13 = Question.create!(content: "Explain the concept of filters.", answer: "<p>A filter formats the value of an expression for display to the user. They can be used in view templates, controllers, or services.  In addition, developers can define their own filters.</p><p>Filters allow data to be organized automatically.</p>", user_id: 1, difficulty_id: 2, category_id: 2)
-question14 = Question.create!(content: "How large is the angular.js file that needs to be included in a project?", answer: "<p>When compressed and minified, the file will be less than 36kb.</p>", user_id: 1, difficulty_id: 2, category_id: 2)
-question15 = Question.create!(content: "Which browsers will AngularJS work with?", answer: "<p>Safari, Chrome, Firefox, Opera 15, IE9, Android, Chrome Mobile, iOS Safari.</p>", user_id: 1, difficulty_id: 2, category_id: 2)
-question16 = Question.create!(content: "What is a library?", answer: "<p>It is a collection of functions useful when writing web applications.  The programmer&#39;s code calls the function from the library when it needs it. </p>", user_id: 1, difficulty_id: 2, category_id: 2)
-question17 = Question.create!(content: "What are frameworks?", answer: "<p>Frameworks are a particular implementation of a web application; the programmer&#39;s code then fills in the details.  In this case, the framework is in charge and calls the programmer&#39;s code when it requires it.</p>", user_id: 1, difficulty_id: 2, category_id: 2)
-question18 = Question.create!(content: "What are forms in AngularJS?", answer: "<p>Controls are a way for users to input data. Forms are collections of input controls.  They provide validation services to notify the user of invalid input.  This allows for immediate feedback to the user to allow them to correct a mistake.</p>", user_id: 1, difficulty_id: 2, category_id: 2)
-question19 = Question.create!(content: "What is meant by Markup?", answer: "<p>Markup is the double curly brace notation <strong>{{}}</strong> to bind expressions to elements.  For example:</p><pre><code>  &lt;button ng-click=&quot;changeFoo()&quot;&gt;{{buttonText}}&lt;/button&gt;</code></pre>", user_id: 1, difficulty_id: 2, category_id: 2)
-question20 = Question.create!(content: "What are singletons?", answer: "<p>In object-oriented programming, specifically, singletons are classes that are instantiated once.  They have only one instance or object created from the class.  An example of a singleton would be an &quot;Application&quot; class, as only one object can be created of an Application class.</p>", user_id: 1, difficulty_id: 2, category_id: 2)
-question21 = Question.create!(content: "What are the issues that may be present when using singletons?", answer: "<p>Singletons introduce global state into a program, allowing them to be accessed by anyone at anytime.  They are often used, unnecessarily, by unskilled or thoughtless programers.  This can create programs that are hard to test and that hide their dependencies.</p>", user_id: 1, difficulty_id: 2, category_id: 2)
-question22 = Question.create!(content: "What are services in AngularJS?", answer: "<p>Services in AngularJS are essentially singletons, passed around, to ensure that the programmer is dealing with the same object each time.  It allows various controllers or directives to affect its values, and it is how the programmer shares date between different chunks of code in the application. The following is an example of a service:</p><pre><code>module.service( &#39;Car&#39;, [ &#39;$rootScope&#39;, function( $rootScope ) {   var service = {     cars: [       { model: &quot;Civic&quot;, manufacturer: &quot;Honda&quot; },       { model: &quot;Focus&quot;, manufacturer: &quot;Ford&quot; }     ],     addCar: function ( car ) {       service.cars.push( car );       $rootScope.$broadcast( &#39;cars.update&#39; );     }   }   return service; }]);</code></pre>", user_id: 1, difficulty_id: 2, category_id: 2)
-question23 = Question.create!(content: "What is a controller? Provide an example.", answer: "<p>Controllers in AngularJS are &quot;classes&quot; or &quot;constructor functions&quot; that control the data of an AngularJS application. They are regular JavaScript objects that provide the application behavior that supports the declarative markup in the template.  For example:</p><pre><code>someModule.controller(&#39;MyController&#39;, [&#39;$scope&#39;, &#39;dep1&#39;, &#39;dep2&#39;, function($scope, dep1, dep2) {...$scope.aMethod = function() {  ...}...}]);</code></pre>", user_id: 1, difficulty_id: 2, category_id: 2)
-question24 = Question.create!(content: "How should controllers be used?", answer: "<p>Controllers should be used to:</p><ul><li>Set up the initial state of the $scope object.</li><li>Add behavior to the $scope object.</li></ul><p>Controllers should not be used to:</p><ul><li>Manipulate the DOM.  Controllers should contain only business logic not presentation logic.</li><li>Format input.</li><li>Filter output.</li><li>Share code or state across controllers.</li><li>Manage the life-cycle of other components.</li></ul>", user_id: 1, difficulty_id: 2, category_id: 2)
-question25 = Question.create!(content: "Explain what business logic is and where it goes in Angular.", answer: "<p>In software engineering, business logic or domain logic does the actual work of the program.  It determines how data is created, displayed, stored, and modified. The controller and services would contain the business logic, typically. </p>", user_id: 1, difficulty_id: 2, category_id: 2)
-question26 = Question.create!(content: "What is the $inject property?  Explain its function.", answer: "<p>The <strong>$inject</strong> property is an array of service names to inject. It annotates a function to allow minifiers to rename the function parameters and still inject the proper services.    For example:</p><pre><code>var MyController = function($scope, greeter) {// ...}MyController.$inject = [&#39;$scope&#39;, &#39;greeter&#39;];someModule.controller(&#39;MyController&#39;, MyController);</code></pre>", user_id: 1, difficulty_id: 2, category_id: 2)
-question27 = Question.create!(content: "What is a factory method? How are they declared?", answer: "<p>Factory methods define directives, services, and filters and are registered with modules.  It is recommended that they be declared as follows:</p><pre><code>angular.module(&#39;myModule&#39;, []).factory(&#39;serviceId&#39;, [&#39;depService&#39;, function(depService) {  // ...}]).directive(&#39;directiveName&#39;, [&#39;depService&#39;, function(depService) {  // ...}]).filter(&#39;filterName&#39;, [&#39;depService&#39;, function(depService) {  // ...}]);</code></pre>", user_id: 1, difficulty_id: 2, category_id: 2)
-question28 = Question.create!(content: "What is Dependency Injection?", answer: "<p>Dependency Injection is a software design pattern where instead of having  objects create a dependency or asking a factory object to make one for them, the needed dependencies are given to components through their constructors, methods, or directly into fields.</p>", user_id: 1, difficulty_id: 2, category_id: 2)
-question29 = Question.create!(content: "How is dependency injection used in AngularJS?", answer: "<p>It can be used when defining components or when providing <strong>run</strong> and <strong>config</strong> blocks for a module.  For example:</p><ul><li>Components can be defined by an injectable factory method or constructor function. These components can be injected with &quot;service&quot; and &quot;value&quot; components as dependencies.</li><li>Controllers are defined by a constructor function, which can be injected with any of the &quot;service&quot; and &quot;value&quot; components as dependencies, but they can also be provided with special dependencies.</li><li>The <strong>run</strong> method accepts a function, which can be injected with &quot;service&quot;, &quot;value&quot; and &quot;constant&quot; components as dependencies.</li><li>The <strong>config</strong> method accepts a function, which can be injected with &quot;provider&quot; and &quot;constant&quot; components as dependencies. </li></ul>", user_id: 1, difficulty_id: 2, category_id: 2)
-question30 = Question.create!(content: "What are module methods in AngularJS?  Provide an example.", answer: "<p>These are functions that can be specified to run at configuration and runtime for a module by calling the <strong>config</strong> and <strong>run</strong> methods.  They are also injectable with dependencies.  For example:</p><pre><code>angular.module(&#39;myModule&#39;, []).config([&#39;depProvider&#39;, function(depProvider) {  // ...}]).run([&#39;depService&#39;, function(depService) {  // ...}]);</code></pre>", user_id: 1, difficulty_id: 2, category_id: 2)
-test = Test.create!(name: "Basic AngularJS Test", is_public: true, description: "This is the complete public AngularJS test.", user_id: 1)
-test.questions << question1
-test.questions << question2
-test.questions << question3
-test.questions << question4
-test.questions << question5
-test.questions << question6
-test.questions << question7
-test.questions << question8
-test.questions << question9
-test.questions << question10
-test.questions << question11
-test.questions << question12
-test.questions << question13
-test.questions << question14
-test.questions << question15
-test.questions << question16
-test.questions << question17
-test.questions << question18
-test.questions << question19
-test.questions << question20
-test.questions << question21
-test.questions << question22
-test.questions << question23
-test.questions << question24
-test.questions << question25
-test.questions << question26
-test.questions << question27
-test.questions << question28
-test.questions << question29
-test.questions << question30
-test.save
-
-
-Category.create!(name: "Apache")
-test = Test.create!(name: "Basic Apache Test", is_public: true, description: "This is the complete public Apache test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "AWS")
-test = Test.create!(name: "Basic AWS Test", is_public: true, description: "This is the complete public AWS test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "Backbone.js")
-test = Test.create!(name: "Basic Backbone.js Test", is_public: true, description: "This is the complete public Backbone test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "Big Architecture")
-test = Test.create!(name: "Basic Big architecture Test", is_public: true, description: "This is the complete public Big architecture test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "Bootstrap")
-test = Test.create!(name: "Basic Bootstrap Test", is_public: true, description: "This is the complete public Bootstrap test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "CSS")
-question1 = Question.create!(content: "What is the function of the CSS selector?", answer: "<p>The CSS selector allows a web author to select and alter the content they want to style.  HTML elements, such as ids classes, types attributes, values of attributes, can all be manipulated with selectors.</p>", user_id: 1, difficulty_id: 2, category_id: 8)
-question2 = Question.create!(content: "What are the parts of the CSS selector?", answer: "<p>The CSS selector has two main parts: the selector and the declaration.  In addition, the declaration has its own two parts called the property and value.  For example the following is a CSS selector and its parts:</p><pre><code>p {font-family: 'Times New Roman', Times, serif;   font-size: 2em;}</code></pre><p>In the above code CSS, the <strong>p</strong> is the selector, everything in the curly braces is the declaration, the font-family and font-size are the properties, and the items to the right of the colon are the values.</p>", user_id: 1, difficulty_id: 2, category_id: 8)
-question3 = Question.create!(content: "Name the 10 main CSS selectors types.", answer: "<ul><li>id selector</li><li>class selector</li><li>universal selector</li><li>type selector</li><li>descendant selector</li><li>child selector</li><li>attribute selector</li><li>adjacent sibling selector</li><li>pseudo-element selector</li><li>pseudo-class selector</li></ul>", user_id: 1, difficulty_id: 2, category_id: 8)
-question4 = Question.create!(content: "Explain the class selector.", answer: "<p>The class selector acts on many elements at once, or on specific HTML elements.  For example:</p><pre><code>&lt;!??? We can define a class as seen below.  We can use this class value, mammals, as many times as we like, to label other elements.???&gt;&lt;p class=???mammals???&gt; content &lt;/p&gt;&lt;!???In the CSS code, we can then define how any element marked with the above class value behaves. ???&gt;.mammals {     color:red;}</code></pre><p>The above CSS will style any content labeled with a .mammals class in red. </p>", user_id: 1, difficulty_id: 2, category_id: 8)
-question5 = Question.create!(content: "What does a fall-back font refer to?", answer: "<p>When selecting a font in CSS it is common practice to give the browser interpreting the HTML/CSS multiple options for font it should use.  This is done to ensure that a close approximation to the page author???s desired typographical content can be rendered.  An example of this in CSS is as follow:</p><pre><code>p {font-family: Arial, Helvetica, Verdana, sans-serif}</code></pre><p>The browser will first try to display the Arial font, and if that is not available, then, it will try Helvetica, and so on.</p>", user_id: 1, difficulty_id: 2, category_id: 8)
-question6 = Question.create!(content: "What are Web Fonts?", answer: "<p>Web Fonts is the technique of downloading and installing remote fonts by requesting them in a page???s style sheets. This is accomplished using the @font-face syntax. For example:</p><pre><code>@font-face {  font-family: &#39;Graublau Web&#39;;  src: url(&#39;GraublauWeb.eot?&#39;) format(&#39;eot&#39;), url(&#39;GraublauWeb.woff&#39;) format(&#39;woff&#39;), url(&#39;GraublauWeb.ttf&#39;) format(&#39;truetype&#39;);}</code></pre><h4 id=\"-what-is-the-box-model-in-css-\"><strong><%=@ctr+=1 %>. What is the Box Model in CSS?</strong></h4><p>Each element in CSS is consider to be in its own rectangular box, and the Box Model refers to the physical properties of this box.  These properties are an elements margin, border, padding, and width.</p>", user_id: 1, difficulty_id: 2, category_id: 8)
-question7 = Question.create!(content: "How would you calculate the total width of an element?", answer: "<p>left border + left padding + content width + right padding + right border = total width</p><p>An elements margin is not included in its total width.</p>", user_id: 1, difficulty_id: 2, category_id: 8)
-question8 = Question.create!(content: "Explain vertical margin collapse.", answer: "<p>If there are two vertically adjacent elements, the larger of the two elements??? margins will be honored.  This means if there is one element with a margin of 16px and a second element with a margin of 8px, the resulting margin between them  would then be 16px.  This is done to avoid excessive space between elements. </p>", user_id: 1, difficulty_id: 2, category_id: 8)
-question9 = Question.create!(content: "Name the 10 border styles.", answer: "<ul><li>none</li><li>hidden</li><li>solid</li><li>dotted</li><li>dashed</li><li>double</li><li>groove</li><li>ridge </li><li>inset</li><li>outset</li></ul>", user_id: 1, difficulty_id: 2, category_id: 8)
-question10 = Question.create!(content: "Explain the difference between borders and outlines.", answer: "<ul><li>Borders can have individual sides set for the element, however, outlines can only be set for the entire element</li><li>Outlines do not add to the total width of an element.</li><li>Outlines has less overall browser support.</li></ul>", user_id: 1, difficulty_id: 2, category_id: 8)
-question11 = Question.create!(content: "What are sprites and why would you use them?", answer: "<p>Sprites are multiple images combined to form a single image.  They are used to allow a website to make fewer requests when asking for a resource.  This allows a faster page load.</p>", user_id: 1, difficulty_id: 2, category_id: 8)
-question12 = Question.create!(content: "What is a CSS reset?", answer: "<p>Every web page has its own internal set of stylesheets that is will use in the case of undefined styles by a web author.  The CSS reset is a set of CSS rules that resets all HTML elements??? styling to a consistent baseline.</p>", user_id: 1, difficulty_id: 2, category_id: 8)
-question13 = Question.create!(content: "What is grouping, and what is it used for?", answer: "<p>If a web page author has multiple elements with the same styling, the web author can apply grouping.  This groups the selectors into a comma separated list which is then followed by the stylings.  For example:</p><pre><code>h1, h2, h3 {    font-family: ???Times New Roman???, Times, serif;    color: blue;    font-style: italic;}</code></pre><h4 id=\"-explain-the-float-property-in-css-\"><strong><%=@ctr+=1 %>. Explain the float property in CSS.</strong></h4><p>The float property allows the property to specify that other elements are to float around it to its left or right.  For example:</p><pre><code>img {    float: left;    width: 50px;    margin: 3px;}</code></pre></body></html>", user_id: 1, difficulty_id: 2, category_id: 8)
-test = Test.create!(name: "Basic CSS Test", is_public: true, description: "This is the complete public CSS test.", user_id: 1)
-test.questions << question1
-test.questions << question2
-test.questions << question3
-test.questions << question4
-test.questions << question5
-test.questions << question6
-test.questions << question7
-test.questions << question8
-test.questions << question9
-test.questions << question10
-test.questions << question11
-test.questions << question12
-test.questions << question13
-test.save
-
-
-Category.create!(name: "Data Modeling")
-test = Test.create!(name: "Basic Data Modeling Test", is_public: true, description: "This is the complete public Data modeling test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "ETL")
-test = Test.create!(name: "Basic ETL Test", is_public: true, description: "This is the complete public ETL test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "ExtJS")
-test = Test.create!(name: "Basic ExtJS Test", is_public: true, description: "This is the complete public ExtJS test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "Facebook API")
-test = Test.create!(name: "Basic Facebook Test", is_public: true, description: "This is the complete public Facebook test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "Flex")
-test = Test.create!(name: "Basic Flex Test", is_public: true, description: "This is the complete public Flex test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "Git")
-test = Test.create!(name: "Basic Git Test", is_public: true, description: "This is the complete public Git test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "Groovy")
-test = Test.create!(name: "Basic Groovy Test", is_public: true, description: "This is the complete public Groovy test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "Hadoop")
-test = Test.create!(name: "Basic Hadoop Test", is_public: true, description: "This is the complete public Hadoop test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "Hibernate")
-question1 = Question.create!(content: "What does object relational (O/R) mapping mean?", answer: "<p>It refers to specifications and/or technologies that enable the mapping of objects to relational databases. Hibernate is one such technology, and implements the JPA (Java Persistence API) specification for object relational mapping. </p>", user_id: 1, difficulty_id: 2, category_id: 17)
-question2 = Question.create!(content: "What is the difference between a bag, set and a list in Hibernate?", answer: "<p>These are different collection types, with different behavior in terms of duplicate elements, ordering, and access to elements. A bag can contain duplicates, and is unordered. A set cannot contain duplicates, and is also unordered. A list has an insertion order, and can contain duplicates. </p>", user_id: 1, difficulty_id: 2, category_id: 17)
-question3 = Question.create!(content: "What is lazy loading? Eager fetching?", answer: "<p>Lazy loading is an approach to avoid loading unncessary data from the database into an object graph, by deferring the loading until an unloaded part of an object graph is referenced. Eager loading is the opposite: immediately load an entire object graph from the database. </p>", user_id: 1, difficulty_id: 2, category_id: 17)
-question4 = Question.create!(content: "What are the different kinds of inheritance mapping Hibernate supports?", answer: "<p>Single Table, Table per Class, Table for Instance? TODO</p>", user_id: 1, difficulty_id: 2, category_id: 17)
-question5 = Question.create!(content: "What is a discriminator in a Hibernate mapping?", answer: "<p>It is a value which is used to determine which class in a class hierarchy a row in a table should be mapped to.</p>", user_id: 1, difficulty_id: 2, category_id: 17)
-question6 = Question.create!(content: "How would you configure a many-to-many relationship in Hibernate?", answer: "<p>Answer.</p>", user_id: 1, difficulty_id: 2, category_id: 17)
-question7 = Question.create!(content: "How would you configure an embedded class in Hibernate?", answer: "<p>Answer.</p>", user_id: 1, difficulty_id: 2, category_id: 17)
-question8 = Question.create!(content: "Explain the N+1 problem in O/R mappings.", answer: "<p>Answer.</p>", user_id: 1, difficulty_id: 2, category_id: 17)
-question9 = Question.create!(content: "What does the HQL look like for selection of properties from a set of objects from a parent object?", answer: "<p>Answer.</p>", user_id: 1, difficulty_id: 2, category_id: 17)
-question10 = Question.create!(content: "What is version/timestamp used for typically in Hibernate?", answer: "<p>Answer.</p>", user_id: 1, difficulty_id: 2, category_id: 17)
-question11 = Question.create!(content: "What is optimistic locking?", answer: "<p>Answer.</p>", user_id: 1, difficulty_id: 2, category_id: 17)
-question12 = Question.create!(content: "What is the EHCache?", answer: "<p>Answer.</p>", user_id: 1, difficulty_id: 2, category_id: 17)
-question13 = Question.create!(content: "What are two ways to configure a Hibernate mapping?", answer: "<p>Answer.</p>", user_id: 1, difficulty_id: 2, category_id: 17)
-question14 = Question.create!(content: "What is a Hibernate session?", answer: "<p>Answer.</p>", user_id: 1, difficulty_id: 2, category_id: 17)
-question15 = Question.create!(content: "What are the different states an object can be in with respect to a Hibernate session?", answer: "<p>Answer.</p>", user_id: 1, difficulty_id: 2, category_id: 17)
-question16 = Question.create!(content: "What is a StaleObjectException?", answer: "<p>Answer.</p>", user_id: 1, difficulty_id: 2, category_id: 17)
-question17 = Question.create!(content: "What is the open-session-in-view pattern and why is it useful?", answer: "<p>Answer.</p>", user_id: 1, difficulty_id: 2, category_id: 17)
-question18 = Question.create!(content: "How could you configure a many-to-one mapping?", answer: "<p>Answer.</p>", user_id: 1, difficulty_id: 2, category_id: 17)
-question19 = Question.create!(content: "What's the difference between HQL and criteria based querying?", answer: "<p>Answer.</p>", user_id: 1, difficulty_id: 2, category_id: 17)
-question20 = Question.create!(content: "How does Hibernate relate to JPA?", answer: "<p>Answer.</p>", user_id: 1, difficulty_id: 2, category_id: 17)
-question21 = Question.create!(content: "What are some alternatives to Hibernate?", answer: "<p>Answer.</p>", user_id: 1, difficulty_id: 2, category_id: 17)
-test = Test.create!(name: "Basic Hibernate Test", is_public: true, description: "This is the complete public Hibernate test.", user_id: 1)
-test.questions << question1
-test.questions << question2
-test.questions << question3
-test.questions << question4
-test.questions << question5
-test.questions << question6
-test.questions << question7
-test.questions << question8
-test.questions << question9
-test.questions << question10
-test.questions << question11
-test.questions << question12
-test.questions << question13
-test.questions << question14
-test.questions << question15
-test.questions << question16
-test.questions << question17
-test.questions << question18
-test.questions << question19
-test.questions << question20
-test.questions << question21
-test.save
-
-
-Category.create!(name: "HTML")
-question1 = Question.create!(content: "Briefly describe the purpose of HTML, CSS, and JavaScript.", answer: "<ul><li>HTML gives a web page structure.</li><li>CSS controls how a web page looks???it???s design.</li><li>JavaScript controls how a web page behaves and gives a page interactivity.</li></ul>", user_id: 1, difficulty_id: 2, category_id: 18)
-question2 = Question.create!(content: "What does HTML stand for, and why is named this?", answer: "<p>HTML stands for Hypertext Markup Language.  <strong>Hypertext</strong> in HTML means the text provides references, called hyperlinks, to other text.  These references can link to other parts of the same page or any other accessible page the web page author chooses.  <strong>Markup Language</strong> refers to HTML being a language used to markup text documents in order to format them for use on the web.  These pages are <em>marked up</em> using tags inserted into the text document.</p>", user_id: 1, difficulty_id: 2, category_id: 18)
-question3 = Question.create!(content: "What is the difference between HTML tags and elements?", answer: "<p>HTML tags are labels used to mark up page elements denoted by angle brackets.  There are three types of tags:</p><ul><li>Opening tag, such as <code>&lt;p&gt;</code>, which denotes the start of a paragraph.</li><li>Closing tag, such as <code>&lt;/p&gt;</code>, which denotes the end of a paragraph.</li><li>Self closing tags that do not wrap content, such as the line break tag, <code>&lt;br&gt;</code>.</li></ul><p>Elements are the tags and the information denoted by the tags together.</p>", user_id: 1, difficulty_id: 2, category_id: 18)
-question4 = Question.create!(content: "Explain HTML attributes.", answer: "<p>HTML attributes supply further information about HTML elements and are specified in the opening tag.  Attributes are written as name/value pairs, such as, <em>lang=???eng???</em>. </p>", user_id: 1, difficulty_id: 2, category_id: 18)
-question5 = Question.create!(content: "What is the difference between standards mode and quirks mode?", answer: "<p>In the earlier days of the web, pages were written in two versions to accommodate both Netscape Navigator and Internet Explorer.  When web standards started to be codified by the W3C, there needed to be a way for pages using the new standards and pages not yet up to standard to both function.  This led to browsers implementing two modes: </p><ul><li>Quirks mode: This allowed legacy pages to function.</li><li>Standard mode:  This worked with the new standards compliant pages. </li></ul>", user_id: 1, difficulty_id: 2, category_id: 18)
-question6 = Question.create!(content: "What is ???Semantic HTML????", answer: "<p>Semantic HTML is a coding style that emphasizes the use of tags that demonstrate meaning and structure, as well as, formatting.  For instance, to indicate that text should be bold, instead of using the tags, &lt;b&gt;&lt;/b&gt;, which are valid, Semantic HTML uses the tags, &lt;strong&gt;&lt;/strong&gt;.  This conveys the goal accomplished by the tags (to give the text strong emphasis).</p>", user_id: 1, difficulty_id: 2, category_id: 18)
-question7 = Question.create!(content: "What is the purpose of ???DOCTYPE????", answer: "<p><em>DOCTYPE</em> tells the browser which version of HTML to use on a webpage.  Browsers then use this to render the page.  Without this pages may load in quirks mode.</p>", user_id: 1, difficulty_id: 2, category_id: 18)
-question8 = Question.create!(content: "How do you comment HTML code?  Why would you comment HTML code?", answer: "<p>HTML code should be commented to explain and clarify the code.  This is of the utmost importance when authoring web pages, and to not comment clearly and concisely is to not code professionally.</p><p>Comments can be made by enclosing text with the following: </p><p>Single line comment: </p><pre><code>&lt;!??? This is a single line comment ???&gt;</code></pre><p>Multiline comment: </p><pre><code>&lt;!??? This is amultiline comment ???&gt;</code></pre><h4 id=\"-what-is-the-difference-between-div-and-span-\"><strong><%=@ctr+=1 %>. What is the difference between ???div??? and ???span????</strong></h4><p><strong>div</strong> is a block element, and <strong>span</strong> is an inline element.  This means that <strong>div</strong> wraps blocks of a document, but <strong>span</strong> wraps smaller portions of text, images, etc.  In addition, <strong>div</strong> creates a line break, but <strong>span</strong> does not.</p>", user_id: 1, difficulty_id: 2, category_id: 18)
-question9 = Question.create!(content: "What is the simplest HTML page possible?", answer: "<pre><code>&lt;!DOCTYPE html&gt;&lt;html&gt;    &lt;head&gt;    &lt;title&gt;A Simple Title&lt;/title&gt;    &lt;/head&gt;    &lt;body&gt;    This is some simple text.    &lt;/body&gt;&lt;/html&gt;</code></pre><h4 id=\"-is-it-possible-to-nest-tables-within-tables-if-so-how-would-this-be-accomplished-\"><strong><%=@ctr+=1 %>. Is it possible to nest tables within tables? If so how would this be accomplished?</strong></h4><p>It is possible to nest tables within tables and can be done by embedding a table within the cell of another table.  For example:</p><pre><code>&lt;!DOCTYPE html&gt;&lt;html&gt;    &lt;head&gt;    &lt;title&gt;    Nested Tables    &lt;/title&gt;    &lt;/head&gt;    &lt;body&gt;    &lt;table&gt;        &lt;tr&gt;        &lt;td&gt;First cell in first table.&lt;/td&gt;        &lt;td&gt;        &lt;table&gt;        &lt;tr&gt;&lt;td&gt;Nested table&lt;/td&gt;&lt;/tr&gt;        &lt;tr&gt;&lt;td&gt;in second cell.&lt;/td&gt;&lt;/tr&gt;        &lt;/table&gt;        &lt;/td&gt;        &lt;/tr&gt;    &lt;/table&gt;    &lt;/body&gt;&lt;/html&gt;</code></pre><h4 id=\"-what-are-some-of-the-important-new-features-of-html5-\"><strong><%=@ctr+=1 %>. What are some of the important new features of HTML5?</strong></h4><ul><li>Improved support for embedding audio, video, and graphics content</li><li>Extensions to the JavaScript API</li><li>Introduction of <em>web-workers</em></li><li>New semantic tags to augment web applications&#39; structural logic</li><li>New form controls</li></ul>", user_id: 1, difficulty_id: 2, category_id: 18)
-question10 = Question.create!(content: "Can a ", answer: "<p>Yes, they can both contain each other.  For instance, a blog could contain a <code>&lt;section&gt;</code> for local news articles, which could contain <code>&lt;article&gt;</code> elements for articles.  These could contain a &#39;&lt;section&gt;` element for reader comments on the articles.</p>", user_id: 1, difficulty_id: 2, category_id: 18)
-question11 = Question.create!(content: "Name and describe the three list types in HTML.", answer: "<ul><li>Unordered lists: group related items in no particular order</li><li>Ordered lists: group related items in a specific order</li><li>Description or Definition lists: display name/value pairs such as terms and their definitions</li></ul>", user_id: 1, difficulty_id: 2, category_id: 18)
-question12 = Question.create!(content: "What occurs when tags are overlapped?", answer: "<p>When tags are overlapped only the first tag is recognized.  This can lead to unexpected behavior, such as text that is displayed improperly on a page.</p><p>================================================================================================</p>", user_id: 1, difficulty_id: 2, category_id: 18)
-question13 = Question.create!(content: "What information is included in the head section of an HTML page?", answer: "<p>This must contain the <code>&lt;title&gt;&lt;/title&gt;</code> tag which provides a label at the top of a web page.  Typically, it often includes scripts, styles, and metadata about the page.</p>", user_id: 1, difficulty_id: 2, category_id: 18)
-question14 = Question.create!(content: "Explain the ", answer: "<p>This is the tag that provides metadata or ???data about data??? of an HTML page. This information often includes the name of the page author, a description of page content, how often the page is update, etc.  </p><p>Information in the <code>&lt;meta&gt;</code> tag was often used by search engines to provide search results for queries.  However, this is less the case now as it was abused by certain websites. </p>", user_id: 1, difficulty_id: 2, category_id: 18)
-question15 = Question.create!(content: "Explain the purpose of the body of an HTML document.", answer: "<p>The body contains all of the actual, visible content of an HTML document. This includes text, hyperlinks, images, tables, lists, etc.</p>", user_id: 1, difficulty_id: 2, category_id: 18)
-question16 = Question.create!(content: "Explain the concept of the content model in HTML.", answer: "<p>Content models define the type of content expected inside an element, and control syntax rules such as element nesting.  An element must have content that matches the requirements of the element???s content model.</p>", user_id: 1, difficulty_id: 2, category_id: 18)
-question17 = Question.create!(content: "What are the seven main content models and what are their purposes?", answer: "<ul><li>Metadata content: sets up the presentation or behavior of the rest of the content. It can also set up the relationship of the document with other documents.  The metadata content tags are base, command, link, meta, no script, script, style, and title.</li><li>Flow content: elements used in the body of the document, such as, article, aside, h1, form, footer, etc.</li><li>Sectioning content: content that defines the scope of headings and footers.  This includes the tags article, aside, nag, and section.</li><li>Heading content: content that defines section headers, whether they be explicitly defined with header tags, or implicitly defined by the heading content itself.</li><li>Phrasing content: content that includes the text of the document, as well as, elements that mark up the text within the paragraph itself.  Phrasing content includes the tags abbr, b, strong, span, etc.</li><li>Embedded content: content that imports other resources into the document, or content from another vocabulary inserted into the document.  Embedded content tags include audio, canvas, embed, video, etc.</li><li>Interactive content: content that is meant to interact with a user. Interactive content tags include button, label, keygen, select, etc.</li></ul>", user_id: 1, difficulty_id: 2, category_id: 18)
-question18 = Question.create!(content: "Could we leave the ", answer: "<p>It is technically possible to leave this tag empty.  However, this is considered extremely bad practice and unprofessional.  This can also hinder readability in search engine results, as the title is the search engine listing name for their results.</p>", user_id: 1, difficulty_id: 2, category_id: 18)
-question19 = Question.create!(content: "Explain the purpose of the ", answer: "<p>The <code>&lt;pre&gt;</code> tag allows the web page author to display pre-formatted text.  In other words, it will respect line breaks, whitespace, etc. which can be very useful for displaying content, such as, code or poems.  </p>", user_id: 1, difficulty_id: 2, category_id: 18)
-question20 = Question.create!(content: "What are applets?", answer: "<p>Applets are small programs that can be embedded within web pages to add functionality, such as, computations, animations, or other information processing.  These are written in the Java language.</p>", user_id: 1, difficulty_id: 2, category_id: 18)
-question21 = Question.create!(content: "What occurs if text is not placed between tags?", answer: "<p>If there is no text between opening and closing tags, then no text appears as there is none to format.  However, some tags do not require a closing tag, so forgetting to omit text could have unexpected results on other parts of the page.:queries</p>", user_id: 1, difficulty_id: 2, category_id: 18)
-question22 = Question.create!(content: "Is it possible to specify specific table border colors?", answer: "<p>The way to accomplish this is to use style sheets.  Otherwise, the borders will be the same color as the text.</p>", user_id: 1, difficulty_id: 2, category_id: 18)
-question23 = Question.create!(content: "Could a single hyperlink point to two different web pages?", answer: "<p>No, the <code>&lt;a&gt;</code> tag can only accept a single href attribute, which in turn, can only be assigned a single web page as its value.</p>", user_id: 1, difficulty_id: 2, category_id: 18)
-question24 = Question.create!(content: "What is a marquee? Give an example.", answer: "<p>A marquee is text that scrolls horizontally across the page.  This can be created as follows:</p><pre><code>&lt;marquee&gt;This text will scroll.&lt;/marquee&gt;</code></pre><h4 id=\"-what-is-the-difference-between-menu-and-directory-lists-and-the-unordered-list-\"><strong><%=@ctr+=1 %>. What is the difference between menu and directory lists and the unordered list?</strong></h4><p>Menu and directory lists are essentially unordered lists.  However, menu lists are displayed using the tags, <code>&lt;menu&gt;&lt;/menu&gt;</code>, and directory lists are displayed using the tags, <code>&lt;dir&gt;&lt;/dir&gt;</code>.</p>", user_id: 1, difficulty_id: 2, category_id: 18)
-question25 = Question.create!(content: "How do you change the number type in the middle of a list?", answer: "<p>The <code>&lt;li&gt;</code> tag has two attributes, value and type.  In order to change the number type for a list item,  the value of the type attribute is modified.  The changing the value of the value attribute will change the number index.</p>", user_id: 1, difficulty_id: 2, category_id: 18)
-question26 = Question.create!(content: "What bullet types are available in HTML?", answer: "<p>With ordered lists, several different bullet types are available, including alphabetic and Roman numeral characters.  With unordered lists, the bullet types are square, circle, and disc.</p><p>================================================================================================</p>", user_id: 1, difficulty_id: 2, category_id: 18)
-question27 = Question.create!(content: "What is XML?  how does it relate to HTML?", answer: "<p>XML stands for <strong>Extensible Markup Language</strong>, and, as its name states, is a markup language, such as HTML.  However, XML is a complement to HTML not a competitor, as it describes data; HTML displays data.  XML focuses on what data is, whereas, HTML focuses on how data looks.  In addition, HTML has predefined tags, however, it is the responsibility of the author to define all tags in XML.</p>", user_id: 1, difficulty_id: 2, category_id: 18)
-question28 = Question.create!(content: "What are style sheets?**", answer: "<p>Style sheets allow web authors to better control the presentation of a web site on screen; they define a documents appearance.  Style sheets control margins, color, font, many other presentation details of entire documents or single elements in an efficient, device-independent manner.  This is all accomplished without the creation of new HTML tags.</p>", user_id: 1, difficulty_id: 2, category_id: 18)
-question29 = Question.create!(content: "What is a named character entities?", answer: "<p>These are special codes that browsers recognize and replace with the desired special characters.  The special characters would be items like the ampersand or copyright symbol.  This substitution is completed by using &lt;b&gt;&amp;amp;&lt;/b&gt; syntax where the ampersand and semicolon surround a particular text that changes depending on the code to use.  Another example would be the trademark symbol, &trade;, which would be written as &lt;b&gt;&amp;trade;&lt;/b&gt;.</p>", user_id: 1, difficulty_id: 2, category_id: 18)
-question30 = Question.create!(content: "What is the non-breaking space?  What is its proper use?", answer: "<p>A non-breaking space is a character entity that forces a browser to use the space character in a document.  The non-breaking space is represented by the character, <code>&amp;nbsp;</code>.  Normally, any space character written directly after another space character will be truncated.  The non-breaking space allows the space character to be displayed. </p><p>However, this causes some authors to use the non-breaking space character to format many parts of text using this.  Much of this formatting should actually be completed in CSS.  The recommended use of the non-breaking space is to disallow the separation of text when the text wraps at the end of a line.  Essentially, it keeps essential text together. </p>", user_id: 1, difficulty_id: 2, category_id: 18)
-question31 = Question.create!(content: "What are the differences between the GET and POST methods in HTML?", answer: "<p>The GET method:</p><ul><li>Requests data from a specified resource.</li><li>Sends query strings in the URL of its requests.</li><li>Can be cached.</li><li>Linger in the browser history.</li><li>Can be bookmarked.</li><li>Should never by used when secure transfer of data is a concern.</li><li>Has length restrictions.</li><li>Should be used only to retrieve data.</li></ul><p>The POST method:</p><ul><li>Sends data to be processed by a specified resource.</li><li>Sends query strings in the HTTP message body of its requests.</li><li>Is never cached.</li><li>Does not remain in the browser history.</li><li>Cannot be bookmarked.</li><li>Has no data length restrictions.</li></ul>", user_id: 1, difficulty_id: 2, category_id: 18)
-question32 = Question.create!(content: "Explain the HTML5 outlining algorithm.", answer: "<p>All web pages have outlines. The outlining algorithm produces outline summaries based on the mark-up of the page. </p><p>In the case of explicit sectioning, these outlines are generated from the document???s sectioning elements and the sections named using the heading elements.  However, with implicit sectioning the heading elements create new implicit sections when they aren???t the first heading of their parent. </p>", user_id: 1, difficulty_id: 2, category_id: 18)
-question33 = Question.create!(content: "What is the purpose of the main element?**", answer: "<p>The main element defines the content of the body that is intrinsic to the document or application.  ???&lt;main&gt;` cannot be a descendent of the following elements:</p><ul><li><code>&lt;article&gt;</code></li><li><code>&lt;aside&gt;</code></li><li><code>&lt;nav&gt;</code></li><li><code>&lt;header&gt;</code></li><li><code>&lt;footer&gt;</code></li></ul><p>Additionally, there cannot be more than one <code>&lt;main&gt;</code> element per document.</p>", user_id: 1, difficulty_id: 2, category_id: 18)
-question34 = Question.create!(content: "How is a hyperlink created?", answer: "<p>Hyperlinks are created by using the opening and closing anchor tag pair, <code>&lt;a&gt;&lt;/a&gt;</code>.  Within the opening anchor tag, an attribute called, href (Hypertext reference), is assigned a value of the hyperlink.  Then, the Hyperlink can be give a name or nickname placed between the opening and closing anchor tags.  For example:</p><pre><code>&lt;a href=???http://www.google.com???&gt;Google&lt;/a&gt;</code></pre><h4 id=\"-what-are-common-attributes-of-anchor-tags-\"><strong><%=@ctr+=1 %>. What are common attributes of anchor tags?</strong></h4><p>target: Used to open a page in a new window or tab or to control where a page opens within a frame set.<br>rel:  Describes the relationship of the current document to the linked document.type: Specifies the media type of the linked document.</p>", user_id: 1, difficulty_id: 2, category_id: 18)
-question35 = Question.create!(content: "Explain the difference between relative and absolute links.", answer: "<p>Absolute links are links that use the fully qualified domain name of a site.  These can be on the same site as the originating page, or they can be anywhere else on the web that is accessible.  For example:</p><pre><code>&lt;a href=???http://www.google.com???&gt;Google&lt;/a&gt;</code></pre><p>Relative links are links that point to an address that is relative to the current page where the links appears.  In order to display the linked page, the browser must look for the page in the same folder, as the current page.  For example:</p><pre><code>&lt;a href=???mylink.html???&gt;Click it&lt;/a&gt;</code></pre><h4 id=\"-explain-different-ways-to-link-to-pages-internal-to-a-site-\"><strong><%=@ctr+=1 %>. Explain different ways to link to pages internal to a site.</strong></h4><p>If a desired resource is located in the same folder as the page to which it will link, then the following syntax is used:</p><pre><code>&lt;a href=&quot;myResource.img&quot;&gt;My Picture&lt;/a&gt;</code></pre><p>If a desired resource is located in the directory above the directory of the linking page, then the following syntax is used:</p><pre><code>&lt;a href=&quot;../myResource.img&quot;&gt;My Picture&lt;/a&gt;</code></pre><p>If a desired resource is located in a directory below the directory of the linking page the following syntax is used:</p><pre><code>&lt;a href=&quot;/oneFolderDown/myResource.img&quot;&gt;My Picture&lt;/a&gt;</code></pre><p>If a desired resource is located in a directory above the linking page and then down one directory the following syntax would be used:</p><pre><code>&lt;a href=&quot;../anotherDirectory/oneDirectoryDown/myResource.img&gt;My Picture&lt;/a&gt;</code></pre><p>This system of linking to internal directories can be repeated up, down, and across as many times as needed to reach the required file.</p>", user_id: 1, difficulty_id: 2, category_id: 18)
-question36 = Question.create!(content: "Explain fragment Identifiers", answer: "<p>Fragment identifiers are used to link to a section of the same page or a section of another page.  The <strong>id</strong> attribute is used to target an element.  Then a hyperlink is created on the same or another page using the page address  containing the element to link to (or no address if it is on the same page), a hash mark, and the id name.  For example:</p><pre><code>&lt;!--We want to link to the following section on the same page as our hyperlink, so we add an id attribute.--&gt;&lt;h1 id=&quot;heading1&quot;&gt;My Heading&lt;/h1&gt;&lt;!-- We can now link to this by  writing the following: --&gt;&lt;a href=&quot;#heading1&quot;&gt;Heading One&lt;/a&gt;</code></pre><h4 id=\"-how-would-you-force-the-download-of-an-external-resource-\"><strong><%=@ctr+=1 %>. How would you force the download of an external resource?</strong></h4><p>In order to force a download of a resource to make sure it downloads and does not open in the browser the <strong>download</strong> attribute would be added. For example:</p><pre><code>&lt;a href=&quot;http://www.examplepage.com/resource.pdf&quot; download&gt;My Resource&lt;/a&gt;</code></pre><h4 id=\"-explain-the-id-attribute-\"><strong><%=@ctr+=1 %>. Explain the id attribute.</strong></h4><p>The id attribute gives an element a unique identifier which then can be recognized by style sheets and scripts.  The style sheets use this to define the layout of the identified element, and scripts use this to act on the element.</p>", user_id: 1, difficulty_id: 2, category_id: 18)
-question37 = Question.create!(content: "What are conditional comments?", answer: "<p>Conditional Comments are a proprietary extension to Internet Explorer starting with IE5 used to specifically target IE browsers.  This is often used to apply modifications to a website to allow greater cross compatibility among the various versions of IE.  It takes the form of:</p><pre><code>&lt;!--[if IE ]&gt;    some statement&lt;![endif]--&gt;</code></pre><h4 id=\"-what-is-aria-\"><strong><%=@ctr+=1 %>. What is ARIA?</strong></h4><p>ARIA stands for Accessible Rich Internet Application, and it is a W3C recommendation encouraging greater accessibility of web sites to people with disabilities.  This recommendation puts forward the idea that web sites should include semantic information about widgets, structures, and behaviors in order to aid assistive technology better convey web site information to people with various impairments.</p>", user_id: 1, difficulty_id: 2, category_id: 18)
-question38 = Question.create!(content: "What is the significance of the role attribute?", answer: "<p>The <strong>role</strong> attribute uses semantic metadata to communicate the purpose of an element.  This is an attribute that is part of the ARIA recommendation used for greater accessibility and can allow assistive technology to better serve its user.</p>", user_id: 1, difficulty_id: 2, category_id: 18)
-test = Test.create!(name: "Basic HTML Test", is_public: true, description: "This is the complete public HTML test.", user_id: 1)
-test.questions << question1
-test.questions << question2
-test.questions << question3
-test.questions << question4
-test.questions << question5
-test.questions << question6
-test.questions << question7
-test.questions << question8
-test.questions << question9
-test.questions << question10
-test.questions << question11
-test.questions << question12
-test.questions << question13
-test.questions << question14
-test.questions << question15
-test.questions << question16
-test.questions << question17
-test.questions << question18
-test.questions << question19
-test.questions << question20
-test.questions << question21
-test.questions << question22
-test.questions << question23
-test.questions << question24
-test.questions << question25
-test.questions << question26
-test.questions << question27
-test.questions << question28
-test.questions << question29
-test.questions << question30
-test.questions << question31
-test.questions << question32
-test.questions << question33
-test.questions << question34
-test.questions << question35
-test.questions << question36
-test.questions << question37
-test.questions << question38
-test.save
-
-
-Category.create!(name: "JEE/J2EE")
-test = Test.create!(name: "Basic JEE/J2EE Test", is_public: true, description: "This is the complete public J2ee test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "Java")
-question1 = Question.create!(content: "What types of inheritance does Java support?", answer: "<p>Java supports multiple interface inheritance, but not multiple implementation (class) inheritance. This means a class in Java can have only one base class, but has no limit on implemented interfaces (i.e. promises to provide certain functionality).</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question2 = Question.create!(content: "Explain equals and hashcode method usage, and how they relate to each other.", answer: "<p>They must be logically in sync to ensure consistent, expected behavior when objects are used in collections and comparisons. More specifically, when two objects are considered equal, their hash codes should be the same. When they differ, their hashcodes should be different, in a consistent way.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question3 = Question.create!(content: "How would you increase the heap size on startup?", answer: "<p>Pass the desired maximum heap size to the Java VM property like so:</p><pre>java -Xmx1024m ...</pre><p>The -Xmx parameter here specifies max heap size (in this example in megabytes).</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question4 = Question.create!(content: "What are generics?", answer: "<p>Generics are classes that are parameterized by a specific type. They enable code reuse and strong typing (type safety at compile time), and are often seen when using collection data structures in Java. For example:</p><pre>HashMap&lt;String, Integer&gt; nameToAgeMap = new HashMap&lt;String, Integer&gt;();nameToAgeMap.put(\"John Smith\", 55); // OK, checked at compile timenameToAgeMap.put(\"John Smith\", \"55\");  // Will not compile as the types do not match, since \"55\" is a String, not an Integer</pre>", user_id: 1, difficulty_id: 2, category_id: 20)
-question5 = Question.create!(content: "What's a TreeMap used for? When would you use it instead of a HashMap?", answer: "<p>A map with a deterministic sorted set of keys. For example:</p><pre>	TreeMap&lt;String,String&gt; sortedMap = new TreeMap&lt;String,String&gt;();	sortedMap.put(\"FirstKey\", \"value1\");	sortedMap.put(\"AnotherKey\", \"value2\");	sortedMap.put(\"Third\", \"value3\");	for (String key : sortedMap.keySet()) {		System.out.println(\"key is: \" + key);	}	// Will print:	// AnotherKey	// FirstKey	// Third	// every time.</pre>", user_id: 1, difficulty_id: 2, category_id: 20)
-question6 = Question.create!(content: "What's the difference between unchecked and checked exceptions?", answer: "<p>Checked exceptions must be explicitly handled if they are declared to be thrown from a particular method. Unchecked do not.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question7 = Question.create!(content: "What does autoboxing/unboxing refer to?", answer: "<p>It refers to the process of automatically converting primitive types to/from their object equivalents. For example:</p><pre>int primitive = 5;Integer objectInt = primitive; // autoboxing happened</pre>", user_id: 1, difficulty_id: 2, category_id: 20)
-question8 = Question.create!(content: "What is the PermGen space used for?", answer: "<p>Storage space for loaded classes needed for the java application to run. It can be configured (typically to be of a higher amount than the default) via the following JVM parameter: -XX:MaxPermSize. So for example, running java -XX:MaxPermSize=512m would increase it to 512 MB.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question9 = Question.create!(content: "Is the PermGen space ever garbage collected?", answer: "<p>Yes, the PermGen space, which contains classes and metadata about the classes and class loaders, is garbage collected.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question10 = Question.create!(content: "How can you get a thread dump for a running java program?", answer: "<p>There are several methods of doing this. In Java 6, you can use jconsole.exe in conjunction with the Thread Dump Analyzer Utility.</p><p>Via the command line, you can also do CTRL+BREAK on Windows, or CTRL+C on Unix.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question11 = Question.create!(content: "What's the difference between Comparable and Comparator?", answer: "<p>A class that implements Comparable implements the compareTo method, which defines how two objects can be compared. A Comparator is similar, but is used in Java more like a function that can be passed to collection sorting utilities, like Collections.sort(...). The difference is mostly a 'point of view' one, i.e., from the point of view of the class to be compared (Comparable), vs. acting on Comparable classes (Comparator).</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question12 = Question.create!(content: "What's the difference between StringBuilder and StringBuffer?", answer: "<p>Thread safety. StringBuilder is not thread safe, whereas StringBuffer is. Typically if threading is not a concern, StringBuilder is used.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question13 = Question.create!(content: "What does the SwingWorker class do?", answer: "<p>It's a helper class enabling longer running processes to be run in the background in a Swing application, with callbacks for retrieving the eventual results on the event dispatching thread.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question14 = Question.create!(content: "What's the difference between lightweight and heavyweight Swing components?", answer: "<p>Lightweight Swing components do not have a native UI component backing them (they are written purely in Java) whereas heavyweight ones do. For example, some heavyweight components are: JDialog, JWindow, and JApplet.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question15 = Question.create!(content: "How do annotations work in java?", answer: "<p>Annotations provide additional information about a program, but are not technically a part of the program itself. This information is typically used by tools and frameworks to generate additional code or perform some additional runtime actions.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question16 = Question.create!(content: "What is the difference between function overloading and overriding?", answer: "<p>Function overloading refers to having multiple functions with the same name in a class, but with different numbers (and potentially types) of parameters. Overriding refers to a child class providing a child-specific implementation of a function defined in a parent class (i.e., the function signature is the same in both the parent and child, and via polymorphism, the correct function is called based on the runtime type of the object.)</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question17 = Question.create!(content: "How would one free up resources at the time an object is being collected by the garbage collector?", answer: "<p>Set references to variables pointing to the resources to null in a finalize method (i.e. a destructor, in C++ terminology).</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question18 = Question.create!(content: "What kind of access modifiers does Java provide?", answer: "<p>public, protected, private. TODO: package access</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question19 = Question.create!(content: "When would you need to implement Serializable?", answer: "<p>When an object will be transformed to/from some series of bytes over some channel.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question20 = Question.create!(content: "How can you remove items from a collection while iterating over it?", answer: "<p>Iterator.remove() is safe to call during iteration over a collection.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question21 = Question.create!(content: "Explain how polymorphism works in Java.", answer: "<p>Polymorphism works by selecting the correct method to call in a class hierarchy based on the runtime type of the object.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question22 = Question.create!(content: "What are the various states a Java thread can be in?", answer: "<p>A Java thread can be in the following states, from the java.lang.Thread.State enumeration:</p><ul><li>NEW</li><li>RUNNABLE</li><li>BLOCKED</li><li>WAITING</li><li>TIMED_WAITING</li><li>TERMINATED</li></ul>", user_id: 1, difficulty_id: 2, category_id: 20)
-question23 = Question.create!(content: "How would you go about making a singleton object?", answer: "<p>You would create a static method that returns a private instance of the object (and create it if it doesn't already exist, once), and make the constructor private.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question24 = Question.create!(content: "Explain how synchronization works with respect to Java threads.", answer: "<p>Blocks of code can be synchronized to enable only one thread at a time (others will block) to execute some block of code, or entire methods can be synchronized. Also, ...</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question25 = Question.create!(content: "What are some of the differences between an ArrayList and a LinkedList? When would you use one over the other?", answer: "<p>ArrayList would be a good choice if access by index is important to be fast, and is called often. LinkedList could be a better choice if removal / addition of new elements of the list must be fast, and retrival by index is not a requirement.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question26 = Question.create!(content: "Is there a way to force garbage collection at a particular point in time in Java?", answer: "<p>Garbage collection can be strongly suggested via System.gc(), but it cannot be guaranteed to happen at any particular time, i.e. it cannot be programmatically forced to happen.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question27 = Question.create!(content: "When would you use final, finally, and finalize keywords?", answer: "<p>final is used to indicate a class or variable should not change (i.e., a class cannot be extended, or a variable cannot be assigned to something new). finally indicates the block of code to run after running a try { } block. finalize() is a method called at the end of life of an object in Java, before it is garbage collected. It can be used to free up resources.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question28 = Question.create!(content: "What is RMI?", answer: "<p>It stands for Remote Method Invocation, and enables Java code from one virtual machine to make method calls in code running on a different virtual machine, perhaps on a different physical machine as well.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question29 = Question.create!(content: "What is JDBC?", answer: "<p>It stands for Java DataBase Connectivity, and specifies a database-independent API for Java code.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question30 = Question.create!(content: "What is a JavaBean?", answer: "<p>A Java class with standard getters and setters and an empty public constructor.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question31 = Question.create!(content: "What are some ways garbage collection can be tuned?", answer: "<p>You can change the collector, and can change what fraction of the heap can be filled before garbage collection kicks in, among other things. Details: </p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question32 = Question.create!(content: "Name a few readily available methods of profiling a running Java application.", answer: "<p>jvisualvm is available in Java 7, and YourKit and JProfiler are also fairly intuitive, good choices. Details:</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question33 = Question.create!(content: "What is bytecode?", answer: "<p>The assembly language that the Java Virtual Machine runs. The Java compiler turns source code into bytecode, and then it can be run on the JVM.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question34 = Question.create!(content: "Explain the difference between pass by value and pass by reference, and how that relates to Java.", answer: "<p>Pass by value and pass by reference refer to how variables are passed and bound to function parameters. Pass by value means the value is copied, whereas pass by reference means it is not (and hence, modifications to the object value inside the function will modify its value for any variables that referenced it prior to the function call). For example:</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question35 = Question.create!(content: "What is JIT?", answer: "<p>Just In Time compilation. A performance feature of some JVMs which compiles some portions of the running code into machine language, based on runtime analysis of the code.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question36 = Question.create!(content: "What are some new features in Java 7?", answer: "<ul><li>Better support for RESTful web services.</li><li>Strings in switch statements</li><li>The diamond operator when working with generics (i.e., when declaring the generic object instance).</li></ul>", user_id: 1, difficulty_id: 2, category_id: 20)
-question37 = Question.create!(content: " What are some new features in Java 8?", answer: "<ul><li>Lambdas, aka closures (allow passing of functions as arguments in a more intuitive way, treating \"code as data.\"</li><li>A new Stream API java.util.stream to support functional operations on streams, and is integrated into the collections API, thus enabling map/reduce style parallel processing.</li><li>Improvements in JavaFX.</li></ul>", user_id: 1, difficulty_id: 2, category_id: 20)
-question38 = Question.create!(content: "What is JavaFX?", answer: "<p>It's a platform for RAI (Rich Internet Applications) intended to replace Swing.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question39 = Question.create!(content: "When would you use a Set as opposed to a List?", answer: "<p>A set would make sense to use when you are working with a collection of items where the order does not matter, and you do not care about keeping track of duplicates. A list is used when insertion order does matter, and duplicates are a concern (i.e. a list can store duplicates).</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question40 = Question.create!(content: "What is the difference between HashMap and Hashtable?", answer: "<p>A few differences are thread safety (Hashtable is thread safe whereas HashMap isn't), and the ability to use null as a key (HashMap allows this, whereas Hashtable does not).</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question41 = Question.create!(content: "What are the basics when writing a unit test?", answer: "<p>For a JUnit test, you can use annotations like @Test, @Before, @After. Example:</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question42 = Question.create!(content: "How do applets work?", answer: "<p>Applets are browser-based java applications that run in a sandbox (to protect user's local data like files on their file system), but have often intense or complex visual display requirements (and thus can leverage Java's graphical API).</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question43 = Question.create!(content: "What is JAX-RS/WS?", answer: "<p>Java specifications for RESTful web services.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question44 = Question.create!(content: "What is encapsulation in object-oriented programming, and what elements of Java support it?", answer: "<p>Encapsulation is a fundamental object oriented programming concept, consisting of exposing object data through public methods, as opposed to direct access to the underlying data.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question45 = Question.create!(content: "What are some of the new language features introduced in Java 5?", answer: "<p>Generics, enhanced for loop, static imports, autoboxing / unboxing, metadata aka annotations.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question46 = Question.create!(content: "What is the difference between a class and an object?", answer: "<p>A class can be thought of as an object template; it describes the object's functionality and data members. An object is an instance of a class at runtime, with its own data that may change independently of other object instances.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question47 = Question.create!(content: "What is the difference between a member variable and a local variable?", answer: "<p>A local variable refers to one whose declaration and scope is inside a function definition; a member variable is a piece of data owned by an object.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question48 = Question.create!(content: "What is the method signature for the entry method for every Java program?", answer: "<pre>public static void main (String [] args) {...}</pre>", user_id: 1, difficulty_id: 2, category_id: 20)
-question49 = Question.create!(content: " What does reified mean?", answer: "<p>An abstract concept is made real... in Java it comes up around generics - they exist at compile time but all the information is not available about them at runtime.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question50 = Question.create!(content: "How is a Java program run from the command line on Linux or Mac?", answer: "<p>The code must first be compiled using the java compiler, represented on the command line with the command javac.  The compiled code is then run using the Java Virtual Machine repented on the command line with the command, java.  For example, to compile source files located in source folder of Project:</p><p>~/Documents/workspace/HelloWorld/src: javac HelloWorld.java   //This command will created a class file in the same folder.~This new file which will be HelloWorld.class will then be run using the following:</p><p>java HelloWorld  // The .java is unnecessary, as when you run you are working with the class not the source files.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question51 = Question.create!(content: "What is the String[] args parameter in Java?", answer: "<p>The purpose of this parameter is to read command line arguments, read as an array of string objects.  If the command line read ???java HelloWorld args1 args 2??? then args would contain [???args1??? and ???args2???].  To display the contents of args one could write the following:</p><pre><code>public class HelloWorld {    public static void main(String[] args) {        for(int i = 0; i &lt; args.length; i++) {            System.out.println(args[i]);        }    }}</code></pre>", user_id: 1, difficulty_id: 2, category_id: 20)
-question52 = Question.create!(content: "Briefly explain garbage collection in Java?", answer: "<p>Garbage Collector is part of the JVM and manages memory for the programmer.  Java variables that reference objects are created in heap memory.  As long as these variables continue to reference an object, they are retained in memory. When all of the references to the object expire (when the object is no longer accessed through the code), the object is eligible for garbage collection. The garbage collector, which runs in its own thread, finds dereferenced objects and decides whether or not to destroy them. This is accomplished by reclaiming the memory segment where the object was located.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question53 = Question.create!(content: "When do references expire?", answer: "<p>When a variables is local to a function or code block, it will expire when the function has completed.  However, the programmer can also force expiration of persistent objects by setting them to null.  These are then eligible for garbage collection.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question54 = Question.create!(content: "What is the difference between System.gc() and Runtime.gc()?", answer: "<p>They both suggest garbage collection.  However, one, Runtime.gc, is an instance method, and the other, System.gc, is a static class method that implicitly calls Runtime.getRuntime().gc().  The second is slightly less time consuming and easier to type, and it tends to be the recommended method with which to call garbage collection.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question55 = Question.create!(content: "Explain the OutOfMemoryError.", answer: "<p>This is an object that is used by the virtual machine to notify that the JVM cannot allocate an object due to the unavailability of sufficient memory.</p><p>No memory is available for a newly requested object.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question56 = Question.create!(content: "What are some ways garbage collection can be tuned?", answer: "<p>Garbage collection can be tuned by minimizing the number of objects created, as well as, using the following methods to learn how much memory is available:</p><ul><li>Runtime.maxMemory()</li><li>runtime.totalMemory()</li><li>Runtime.freeMemory()</li></ul><p>Then, the amount of available heap memory can be managed using the following command line options:</p><ul><li>java -Xms256s Program // Used to manage initial heap size.</li><li>Java -Xmx256m Program // Used to managed Maximum heap size</li><li>java -Xmn256n Program // Used to manage Heap size for young generation objects</li></ul>", user_id: 1, difficulty_id: 2, category_id: 20)
-question57 = Question.create!(content: "What are the the types of variables of Java?", answer: "<p>Java has two major types of variables:</p><ol><li>Primitives<ul><li>Numbers</li><li>Single Characters</li><li>Boolean (true, false) values&lt;br&gt;&lt;/br&gt;</li></ul></li><li>Complex Objects<ul><li>Everything else such as strings, dates, etc.  </li></ul></li></ol><p>It is important to note that most everything in Java is an object.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question58 = Question.create!(content: "How do you declare a variable in Java?", answer: "<p>Primitives components:</p><pre><code>* Data type (required)* Variable name (required)* Initial value (optional)</code></pre><pre><code>int moneyInPocket = 1.10;</code></pre><p>Complex Variable Components:</p><pre><code>* Data type (required) This references a class.* Variable name (required)* Initial value (optional) This is assigned using the *new* keyword and a class constructor.</code></pre><pre><code>Date myDate = new Date();</code></pre><h4 id=\"-what-is-a-field-in-java-\"><strong><%=@ctr+=1 %>. What is a field in Java?</strong></h4><p>A field is the official Java name for a class variable.  That is to say, it is a variable that exists within the scope of an entire class outside of any one particular function of the class.  This means it can be referenced by any function within the class.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question59 = Question.create!(content: "What are the rules and conventions for naming variables in Java?", answer: "<p>Rules:</p><ul><li>Case sensitive</li><li>Unlimited length of Unicode letters, digits, dollar signs, and underscores</li><li>Must start with a letter, underscore or dollar sign</li><li>Must not be a keyword or reserved word</li></ul><p>Conventions:</p><ul><li>Should begin with a letter</li><li>Should be full, descriptive words not abbreviations</li><li>If one word then use only lowercase letters</li><li>If multiple words then the first word should be lowercase and subsequent words should be capitalized</li><li>If the variable is a constant all words in it should be uppercase and separated by underscores.</li></ul>", user_id: 1, difficulty_id: 2, category_id: 20)
-question60 = Question.create!(content: "What are primitive numeric data types and their value ranges?", answer: "<table border=\"1\"> <tr> <th>Data Type</th> <th>Bits</th> <th>Minimum</th> <th>Maximum</th> </tr> <tr> <td>byte</td> <td>8</td> <td>-128</td> <td>127</td> </tr> <tr> <td>short</td> <td>16</td> <td>-32,768</td> <td>32,767</td> </tr> <tr> <td>int</td> <td>32</td> <td>-2,147,483,648</td> <td>2,147,483,647</td> </tr> <tr> <td>long/td> <td>64</td> <td>-9.22337E+18</td> <td>9.22337E+18</td> </tr> <tr> <td>float</td> <td>32</td> <td>System Dependent</td> <td>System Dependent</td> </tr> <tr> <td>double</td> <td>64</td> <td>System Dependent</td> <td>System Dependent</td> </tr> </table></p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question61 = Question.create!(content: "How would you convert primitive numeric values to complex objects?", answer: "<p>Conversion can be done through the use of helper classes for the primitive variables.  For example, to convert an integer to a string we could use:</p><pre><code>int x = 123;  // Integer is declared and initialized.Integer myInteger = new Integer(x); // Wraps the int into an objectString s = Integer.toString(myInteger);  // Uses toString method to make the final conversion of int to string</code></pre><h4 id=\"-what-is-the-bigdecimal-class-and-why-is-it-used-\"><strong><%=@ctr+=1 %>. What is the BigDecimal class, and why is it used?</strong></h4><p>BigDecimal is a way to <em>represent</em> numerical values when precision is of the utmost importance.  Primitive values are stored in memory in such a way as to be unable to guarantee the retention of numeric precision.  Thus, BigDecimal is used as it gives the user complete control over number rounding behavior, not leaving it to the whims of an operating system.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question62 = Question.create!(content: "What is the difference between system.out.print and system.out.println?", answer: "<p>They both print to the display.  However, system.out.println adds a line feed at the end of the arguments.  For example:</p><pre><code>for(int i = 0; i &lt; 5; i++)    System.out.print(??? ??? + i);// The above result is 0 1 2 3 4for(int i = 0; i &lt; 5; i++)    System.out.println(??? ??? + i);/*The above result is01234</code></pre><h4 id=\"-explain-upward-numeric-conversion-\"><strong><%=@ctr+=1 %>. Explain Upward Numeric Conversion.</strong></h4><p>When one converts a numeric type with less memory usage, precision, and range, such as a byte, to a type with more, such as an int or a long, this is called upward numeric conversion and is implicit .  This can be done as the lesser data type can easily fit into the larger one.  For example:</p><pre><code>byte myByte = 12;double myOtherValue = myByte;</code></pre><h4 id=\"-explain-type-casting-in-java-\"><strong><%=@ctr+=1 %>. Explain type-casting in Java.</strong></h4><p>When we try to convert numbers from a larger data type, such as a float, to a smaller data type, such as an int, we risk losing data.  The compiler will see this and throw an error.  In order to tell the compiler to complete the task, the programmer must tell it explicitly to do the conversion through type-casting.  For example:</p><pre><code>float myFloat = 123.456;int myInt = myFloat; // The above will throw a compile-time error.float myFloat = 123.456;int myInt = (int)myfloat; // The above is allowed as the programmer is specifically casting the data type to int.  Though, this will truncate any value to the right of the decimal.</code></pre><h4 id=\"-explain-wrapping-around-\"><strong><%=@ctr+=1 %>. Explain ???wrapping around???.</strong></h4><p>???Wrapping around??? occurs in an instance such as when a programmer tries to convert a larger data type to a smaller date type where the larger data type is outside the range of the smaller.  For instance, if we try to convert an int with a value outside the range of a byte, this will wrap around and slip into the negative range of the byte.  For example,</p><pre><code>int myInteger = 128;byte myByte = (byte)myInteger;//The range of the byte is from 127 to -128.  This will provoke a wrapping around causing myByte to have a value of -128.</code></pre><h4 id=\"-explain-the-operator-\"><strong><%=@ctr+=1 %>. Explain the ????????? operator.</strong></h4><p>This is the <strong>var args specifier</strong>.  This allows a programmer to pass in 0 or more arguments to a function.  For example:</p><pre><code>public void myMethod(String???myStrings){}myMethod(???String1???);myMethod(???String2???, ???String3???);myMethod(???String4???, ???String5???, ???String6???);// With the use of the var args, the programmer is not limited to passing a specific number of parameters.</code></pre><h4 id=\"-explain-postfix-and-prefix-incrementing-and-decrementing-\"><strong><%=@ctr+=1 %>. Explain postfix and prefix incrementing and decrementing.</strong></h4><p>When a value is incremented or decremented using postfix, the value is evaluated and then incremented or decremented.  However, using prefix, the incrementing or decrementing occurs before the value is evaluated.  For example:</p><pre><code>// Postfixint myInteger = 5;System.out.println(myInteger ++); // This will print the number 5 and then increment the value to 6.// PrefixSystem.out.println(++ myInteger); // This will increment the value to 6 and then print 6;</code></pre><h4 id=\"-in-java-what-are-the-different-types-of-operators-and-what-are-their-purpose-\"><strong><%=@ctr+=1 %>. In Java what are the different types of operators, and what are their purpose?</strong></h4><ul><li>Assignment: Sets a value.</li><li>Relational: Compares values to each other.</li><li>Mathematical: Executes common mathematical operations.</li><li>Conditional: Evaluates a condition by applying it to one or more Boolean expressions. </li></ul>", user_id: 1, difficulty_id: 2, category_id: 20)
-question63 = Question.create!(content: "What is ???instanceof????", answer: "<p>In Java, <strong>instanceof</strong> is a comparison operator that determines if a variable is an instance of a certain class.  For example:</p><pre><code>String myVariable = ???This is a string.???;if (myString instanceof java.lang.String) {    System.out.println(???Variable myVariable is a String.???);}</code></pre><h4 id=\"-determine-the-output-of-the-following-code-and-explain-the-outcome-\"><strong><%=@ctr+=1 %>. Determine the output of the following code and explain the outcome.</strong></h4><pre><code>String myString1 = ???This is my string.???;String myString2 = ???This is my string.???;if (myString1 == myString2) {    System.out.println(???We have a match.???);} else {    System.out.println(???There is no match.???);}</code></pre><p>The code would output, ???There is no match.???. This occurs because strings in Java are complex objects.  The above code does not compare the value of the two strings for equality, but rather compares them in order to discover if they are the same object, which they are not.  In other words, it compares them to see if they have the same address in memory.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question64 = Question.create!(content: "What is the difference between an argument and a parameter?", answer: "<p>In any given procedure, the parameter is the unbound variable that is expected and potentially used by the procedure.  The argument is the actual value given to the variable.  For example:</p><pre><code>int myInteger = 5;public void someMethod(int myInteger) {  }// myInteger, listed in the parentheses in the above method, is the parameter.  The number 5 assigned to myInteger is the argument.</code></pre><h4 id=\"-in-java-what-is-a-final-class-\"><strong><%=@ctr+=1 %>. In Java, what is a final class?</strong></h4><p>A final class is one that cannot be subclassed.  This provides certain security benefits by making the class immutable, thus restricting the class from being over-ridden.  This is accomplished through the application of the <strong>final</strong> keyword placed before the class definition.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question65 = Question.create!(content: "In Java, what is a static field?", answer: "<p>A static field is a variable that belongs to a class and not to an instance of the class???an object.  This field will remain the same across all objects in the class that may use it. It uses the <strong>static</strong> keyword for its declaration:</p><pre><code>private static int myNumber = 1;</code></pre><h4 id=\"-what-is-the-difference-between-a-static-field-and-a-static-constant-\"><strong><%=@ctr+=1 %>. What is the difference between a static field and a static constant?</strong></h4><p>Both a static field and static constant belong to the class and not the instantiated object.  However, the static field can be updated, but the static constant remains the same throughout its usage.  The two are declared and initialized by:</p><pre><code>public static int id = 1;   // Static field that is able to be updated using the initial value of 1 in each object.public static final int maxItemNameLength = 20; // Static constant that is unable to be changed and remains the same throughout its use in the class.</code></pre><h4 id=\"-explain-the-concept-of-a-stream-in-java-\"><strong><%=@ctr+=1 %>. Explain the concept of a stream in Java?</strong></h4><p>A stream is a model presented to programs to represent a sequence of data.  An output stream is used to write data to a destination, one item at a time.  An input stream reads data from a source, one item at a time.  Data can be read from or written to anything that holds, generates, or uses data.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question66 = Question.create!(content: "What is the purpose of the PrintStream class?", answer: "<p>The PrintStream class prints primitives and objects to a stream as text in Java. In addition, its methods do not throw IOExceptions.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question67 = Question.create!(content: "Explain System.out.println().", answer: "<p><em>System</em> is a final class built in to the java.lang package containing pre-defined methods and fields.  The next portion, <em>out</em>, is of type <em>PrintSream</em> and is a static member field of the System class.  <em>println</em> is a method of the PrintStream class.  </p><p>Its purpose is to print the arguments passed to it. For example:</p><pre><code>System.out.println(???Hello World!???);  // Prints ???Hello World??? to the console.</code></pre><h4 id=\"-what-is-the-most-concise-way-to-reverse-a-boolean-value-in-java-\"><strong><%=@ctr+=1 %>. What is the most concise way to reverse a Boolean value in Java?</strong></h4><p>To reverse a Boolean value is to invert it by adding an exclamation mark (or bang) in front of a Boolean variable.  For example:</p><pre><code>boolean b1 = true;boolean b2 = false;boolean b3 = !b1;  // The value of b3 is now false.  However, the value of b1 remains as true.</code></pre><h4 id=\"-how-would-you-translate-a-numeric-value-to-a-boolean-value-in-java-\"><strong><%=@ctr+=1 %>. How would you translate a numeric value to a Boolean value in Java?</strong></h4><p>Boolean values in Java are either the literal value <em>true</em> or <em>false</em>.  If one wanted to evaluate numbers, such as 1 or 0, as booleans then the programmer must write the code to accomplish this.  This can be done through the following code:</p><pre><code>int i = 1;boolean b1 = (i != 0);System.out.println(???The value of b1 is now ??? + b1);  // This prints, ???The value of b1 is now true.&quot;</code></pre><h4 id=\"-explain-the-boolean-parseboolean-method-\"><strong><%=@ctr+=1 %>. Explain the Boolean.parseBoolean() method.</strong></h4><p>The logic of the parseBoolean method is simply that any string argument that is passed to it must be false if it is not the non-case sensitive string, ???true???.  For example:</p><pre><code>String myString = ???true???;String myString2 = ???false???;String myString3 = ???123???;boolean b1 = Boolean.parseBoolean(myString);boolean b2 = Boolean.parseBoolean(myString2);boolean b3 = Boolean.parseBoolean(myString3);System.out.println(???The value of b1 is ??? + b1);  // Prints trueSystem.out.println(???The value of b2 is ??? + b2); // Prints falseSystem.out.println(???The value of b3 is ??? + b3); // Also prints false as the string ???123??? is not true so it must be false.</code></pre><h4 id=\"-how-would-you-test-to-see-if-a-file-or-directory-exists-in-java-\"><strong><%=@ctr+=1 %>. How would you test to see if a file or directory exists in Java?</strong></h4><p>This can be accomplished by using the <em>java.io.File.exists()</em> method.  For example:</p><pre><code>File temp;  // Create a variable, ???temp???, of type ???File???.try {    temp = File.createTempFile(&quot;tempfile&quot;, &quot;.txt&quot;); // Assign temp variable a newly created file.    boolean exists = temp.exists();  // Use exists() method to return a boolean value to test for existence of file.    System.out.println(&quot;Temp file exists : &quot; + exists);  // File exists so exists returns value of true.} catch (IOException e) {    // TODO Auto-generated catch block    e.printStackTrace();}</code></pre><h4 id=\"-what-is-the-inputstreamreader-class-\"><strong><%=@ctr+=1 %>. What is the InputStreamReader class?</strong></h4><p>InputStreamReader methods read bytes and convert them to characters.  This character conversion is accomplished by using a specified <em>charset</em> which can be specified by name, given explicitly, or accepting the system???s default charset.  The invocation of each method call may cause one or more bytes to be read from the underlying byte-input stream.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question68 = Question.create!(content: "Explain BufferedReader and why it would be used.", answer: "<p><strong>BufferedReader</strong> is a class used to read text from a character-input stream.  It buffers the characters to provide the efficient reading of characters, arrays, and lines. The default or user-specified buffer size may be used.  </p><p><strong>BufferedReader</strong> can be advantageous to use, as each read request made to the <em>Reader</em> class causes a corresponding read request to the underlying character or byte stream.  This has the potential to be very inefficient by causing each byte to be read from the file, converted into characters, and then returned..  <strong>BufferedReader</strong> can mitigate this inefficiency by reading large chunks of data in one go, and then making several larger requests instead of many little ones. </p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question69 = Question.create!(content: "What is the difference between InputStreamReader and BufferedReader?", answer: "<p>InputStreamReader reads individual bytes from the input stream and converts them to characters, one-at-time.  The BufferedReader stores the bytes in its buffer until it reaches a certain limit at which point it will then convert the bytes to characters.    BufferedReader can be used as a wrapper for InputStreamReader for more efficient conversion.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question70 = Question.create!(content: "What is the purpose of the import declaration in Java?", answer: "<p>Import declarations allow the abbreviation of references to the elements of a Java package.  For instance if we wanted to use a class in the <em>util</em> package, such as <em>ArrayList</em>, we could do this by writing out the full package name or we could use <strong>import</strong> as a shorthand to access the element of the package.  For example:</p><pre><code>java.util.ArrayList myArrayList = new java.util.ArrayList();  //  No import statementimport java.util.*;  // This gives us access to all of the elements of *util* including the ArrayList class.// Now we can write:ArrayList myArrayList = new ArrayList();</code></pre><h4 id=\"what-is-a-java-package-\"><strong><%=@ctr+=1 %>. What is a Java package?</strong></h4><p>The Java package is a way to organize classes into namespaces and to group similar classes based on category or functionality.  Classes in the same package can access each other???s package-access members. These packages can then be imported into the source code to add functionality to a program.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question71 = Question.create!(content: "What is the difference between JDK and JRE?", answer: "<p>The Java Runtime Environment (JRE) is the Java Virtual Machine which executes a Java program.  It also includes browser plug-ins to execute applets.  </p><p>The Java Development Kit (JDK) is where Java programs are built. </p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question72 = Question.create!(content: "Does Java support multiple inheritance?", answer: "<p>Java does not support multiple inheritance.  Each class or object can have only one parent class or object.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question73 = Question.create!(content: "What is the difference between a process and a thread?", answer: "<p>A process is a self-contained execution of a program with its own memory space.  A thread is a single execution sequence within a process that shares the process??? resources.  A process can contain multiple threads. </p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question74 = Question.create!(content: "What is a deadlock?", answer: "<p>This occurs when two processes are waiting for each other to complete before they each proceed.  This causes both process to wait indefinitely.</p>", user_id: 1, difficulty_id: 2, category_id: 20)
-question75 = Question.create!(content: "Name the states available to a thread.", answer: "<ul><li>Runnable: A thread is ready to run, but is not necessarily running.</li><li>Running: The thread code is actively being executed by the processor.</li><li>Waiting: A thread is waiting for some process to finish.</li><li>Sleeping:  The thread is forced to sleep.</li><li>Blocked on I/O: The thread is waiting for an I/O operation of finish.</li><li>Blocked on Synchronization: A thread is waiting to acquire a lock.</li><li>Dead: The thread has finished execution.</li></ul>", user_id: 1, difficulty_id: 2, category_id: 20)
-question76 = Question.create!(content: "What are the basic interfaces of the Java Collections Framework?", answer: "<ul><li>Collection: Represents a group of objects known as its elements.</li><li>Set: A collection containing no duplicate elements.</li><li>List: An ordered collection that can contain duplicate elements.</li><li>Map: An object that maps keys to values and containing no duplicate keys.</li></ul>", user_id: 1, difficulty_id: 2, category_id: 20)
-question77 = Question.create!(content: "What are the different ways by which a thread is created?", answer: "<ul><li>A class may extend the <em>Thread</em> class.</li><li>A class may implement the <em>Runnable</em> interface.</li><li>An application can create a thread pool by using the <em>Executer</em> framework.</li></ul>", user_id: 1, difficulty_id: 2, category_id: 20)
-test = Test.create!(name: "Basic Java Test", is_public: true, description: "This is the complete public Java test.", user_id: 1)
-test.questions << question1
-test.questions << question2
-test.questions << question3
-test.questions << question4
-test.questions << question5
-test.questions << question6
-test.questions << question7
-test.questions << question8
-test.questions << question9
-test.questions << question10
-test.questions << question11
-test.questions << question12
-test.questions << question13
-test.questions << question14
-test.questions << question15
-test.questions << question16
-test.questions << question17
-test.questions << question18
-test.questions << question19
-test.questions << question20
-test.questions << question21
-test.questions << question22
-test.questions << question23
-test.questions << question24
-test.questions << question25
-test.questions << question26
-test.questions << question27
-test.questions << question28
-test.questions << question29
-test.questions << question30
-test.questions << question31
-test.questions << question32
-test.questions << question33
-test.questions << question34
-test.questions << question35
-test.questions << question36
-test.questions << question37
-test.questions << question38
-test.questions << question39
-test.questions << question40
-test.questions << question41
-test.questions << question42
-test.questions << question43
-test.questions << question44
-test.questions << question45
-test.questions << question46
-test.questions << question47
-test.questions << question48
-test.questions << question49
-test.questions << question50
-test.questions << question51
-test.questions << question52
-test.questions << question53
-test.questions << question54
-test.questions << question55
-test.questions << question56
-test.questions << question57
-test.questions << question58
-test.questions << question59
-test.questions << question60
-test.questions << question61
-test.questions << question62
-test.questions << question63
-test.questions << question64
-test.questions << question65
-test.questions << question66
-test.questions << question67
-test.questions << question68
-test.questions << question69
-test.questions << question70
-test.questions << question71
-test.questions << question72
-test.questions << question73
-test.questions << question74
-test.questions << question75
-test.questions << question76
-test.questions << question77
-test.save
-
-
-Category.create!(name: "JavaScript")
-question1 = Question.create!(content: "What is JavaScript?", answer: "<p>JavaScript is an interpreted, (originally) client-side scripting language that is platform-independent and event-driven.  It is most widely used today in web browsers, but is also used in other environments (for example, Adobe Acrobat-generated forms). Increasingly, it is also used on the server side as well (for example, with Node.js).  </p><p>When implemented in web browsers, JavaScript can transform static HTML pages, through the use of the client-side scripts, to allow interaction with the user.</p>", user_id: 1, difficulty_id: 2, category_id: 21)
-question2 = Question.create!(content: "Why would a user disable JavaScript?", answer: "<p>If some JavaScript was poorly written or written with malicious intent, these could be reasons to do so.  When poorly written, it can cause speed and bandwidth issues by bogging down a network or system CPU.  It may also cause nuisance-functionality, such as disabling a browser's back button. </p><p>There also exists the possibility of unsavory coders using JavaScript to gain access to user information, scan a network map, or insert pop-ups.</p>", user_id: 1, difficulty_id: 2, category_id: 21)
-question3 = Question.create!(content: "What is the relationship between JavaScript and ECMAScript?", answer: "<p>JavaScript was initially developed by Brendan Eich at Netscape.  At the time of development it was called LiveScript, but, through a licensing deal with Sun Microsystems to capitalize on their popular Java language, it was changed to JavaScript.</p><p>Microsoft developed its own version of JavaScript and called it JScript to avoid licensing issues.  However, in order to standardize the language, versions of the two languages were sent to the standardization organization, ECMA.  There a standardized form of the language was created called ECMAScript.  This is the official name of the language with JavaScript considered a dialect of it. </p>", user_id: 1, difficulty_id: 2, category_id: 21)
-question4 = Question.create!(content: "Why is JavaScript considered a loosely-typed language?", answer: "<p>JavaScript is considered a loosely-typed language as it does not require the user to explicitly declare the data type of a variable. For example:</p><pre><code>var a = 2;</code></pre><p>This is not explicitly defined as a number, but JavaScript will understand the implied data type.</p>", user_id: 1, difficulty_id: 2, category_id: 21)
-question5 = Question.create!(content: "What is a JavaScript engine?", answer: "<p>It is a virtual machine which interprets and executes JavaScript.  It is most commonly used in web browsers.  However, a JavaScript engine is typically an engine independent of the web browser's graphical engine.  </p><p>There exist various engines for various browsers and various implementations of JavaScript.  For example Safari uses the Nitro engine, Chrome uses the V8 engine, and SpiderMonkey (the original JavaScript engine) is now used in Firefox. </p>", user_id: 1, difficulty_id: 2, category_id: 21)
-question6 = Question.create!(content: "How is JavaScript related to Java?", answer: "<p>JavaScript and Java are two different languages.  JavaScript was given its name to capitalize on the popularity of Java, but they have different uses and implementations.  </p><p>JavaScript is not part of the Java platform.  Where Java can be used to create applets or stand-alone applications, JavaScript is most often used to provide interactivity inside of a web page.  </p>", user_id: 1, difficulty_id: 2, category_id: 21)
-question7 = Question.create!(content: "What is a Boolean operator?", answer: "<p>A Boolean operator is one that uses only two values, true or false.  For example:</p><p>I am going to the store today, <em>or</em> I am not.</p><p>In the above sentence <em>or</em> is the Boolean operator, as it operates on the two statements to define the possibility of two logical outcomes. </p>", user_id: 1, difficulty_id: 2, category_id: 21)
-question8 = Question.create!(content: "Which Boolean operators does JavaScript support?", answer: "<p><table border=\"1\" cellspacing=\"3\" cellpadding=\"3\">    <tr>         <th>Operator</th>        <th>Description</th>        <th>Example</th>    </tr>    <tr>        <td>&&</td>        <td>and</td>        <td>If both compared items are true then the statement is true.</td>    </tr>    <tr>        <td>||</td>        <td>or</td>        <td>If one of the compared items is true then the statement is true.</td>    </tr>    <tr>        <td>!</td>        <td>not</td>        <td>If the compared items are not true then the statement is true.</td>    </tr></table></p>", user_id: 1, difficulty_id: 2, category_id: 21)
-question9 = Question.create!(content: "What is the official JavaScript website?", answer: "<p>There is no official JavaScript website.  However, there is an official website for the ECMSScript language standard at <a><a href=\"http://www.ecmascript.org\">http://www.ecmascript.org</a></a>.  In addition, Mozilla, maintains a website for JavaScript developers at <a><a href=\"https://developer.mozilla.org/en-US/docs/Web/JavaScript\">https://developer.mozilla.org/en-US/docs/Web/JavaScript</a></a></p>", user_id: 1, difficulty_id: 2, category_id: 21)
-question10 = Question.create!(content: "What are the data types in JavaScript?", answer: "<p><table border=1 cellspacing=\"3\" cellpadding=\"3\">    <tr>         <th>Category</th>        <th>Data Type</th>    </tr>    <tr>        <td>Primary or Primitive</td>        <td>String</td>    </tr>    <tr>        <td></td>        <td>Number</td>    </tr>    <tr>        <td></td>        <td>Boolean</td>    </tr>    <tr>        <td>Composite</td>        <td></td>    </tr>    <tr>        <td></td>        <td>Object</td>    </tr>    <tr>        <td></td>        <td>Array</td>    </tr>    <tr>        <td>Special</td>        <td></td>    </tr>    <tr>        <td></td>        <td>Null</td>    </tr>    <tr>        <td></td>        <td>Undefined</td>    </tr></table></p>", user_id: 1, difficulty_id: 2, category_id: 21)
-question11 = Question.create!(content: "What is the difference between == and ===?", answer: "<p>Both test for equality, however, <em>===</em> requires that the data types of two compared items must be the same.  For example:</p><pre><code>0 == false; //true0 === false; //false</code></pre><p>The second comparison is false.  Even though their meanings are equivalent, the two items are of different data types.</p>", user_id: 1, difficulty_id: 2, category_id: 21)
-question12 = Question.create!(content: "Differentiate between \"var a = 2\" and \"a = 2\".", answer: "<p>This is a question of scope.  The first variable has a local scope and is confined to the function that contains it.  However, the second variable is interpreted to have a global scope beyond the borders of any function in which it may be contained.</p>", user_id: 1, difficulty_id: 2, category_id: 21)
-question13 = Question.create!(content: "What is JavaScript namespace?", answer: "<p>A container which allows developers to bundle all functionality under a unique, application-specific name.</p>", user_id: 1, difficulty_id: 2, category_id: 21)
-question14 = Question.create!(content: "Provide and example of a JavaScript namespace?", answer: "<pre><code>var myNamespace = {    example1: function() {    },    example2: function() {    }};myNamespace.example1();</code></pre><h4 id=\"-how-is-a-new-object-created-in-javascript-\"><strong><%=@ctr+=1 %>. How is a new object created in JavaScript?</strong></h4><p>New objects can be created in the following ways:</p><ul><li>Define and create a single object using an object literal.</li><li>Define and create a single object with the keyword new.</li><li>Define an object constructor, and then create objects of the constructed type.</li></ul>", user_id: 1, difficulty_id: 2, category_id: 21)
-question15 = Question.create!(content: "What is \"this\" keyword?", answer: "<p>The <strong>this</strong> keyword is a special keyword that is used in methods to refer to the object on which a method is being invoked.  The value of <strong>this</strong> depends on its scope.</p>", user_id: 1, difficulty_id: 2, category_id: 21)
-question16 = Question.create!(content: "Explain strict mode.", answer: "<p>Strict mode is a way for a JavaScript developer to better debug and evaluate their code.  Essentially, it tells JavaScript to be less forgiving of the code, and it will throw a larger number of errors to warn developers of problem code that should be examined.  For example, strict mode eliminates the <em>with</em> statement, prevents accidental global variables, eliminates <em>this</em> coercion, etc.</p>", user_id: 1, difficulty_id: 2, category_id: 21)
-question17 = Question.create!(content: "Are JavaScript and jQuery the same?", answer: "<p>jQuery is a JavaScript library that allows JavaScript to be more efficient.  All jQuery is JavaScript, but it allows better event handling, HTML document traversal, and animating.  Instead of writing scripts in JavaScript, one can use jQuery to speed up development by using scripts in its pre-existing libraries.</p>", user_id: 1, difficulty_id: 2, category_id: 21)
-question18 = Question.create!(content: "What is an object in JavaScript?", answer: "<p>In JavaScript an object is an unordered collection of variables which are called <strong>named values</strong>.  The object is the container for these <strong>named values</strong>.  For example:</p><pre><code>var person = {hairColor:\"Blue\", weight:123, eyeColor:\"Brown\"};</code></pre><p>In the above statement, <strong>person</strong> is an object containing various items that are given names and values.</p>", user_id: 1, difficulty_id: 2, category_id: 21)
-question19 = Question.create!(content: "What is &quot;whitespace&quot;? How is whitespace handled in JavaScript?", answer: "<p>Whitespace are the characters that do not have visual representation on screen.  These are space characters, tabs, and line breaks  and are generally ignored by JavaScript, except in the case of their occurrence within quotations marks.  For example:</p><pre><code>a = 10b =                 13uuc =a +bconsole.log(c) // Result is 23.console.log(&quot;The value    of  c   is        23&quot;)</code></pre><p>While assigning the above variables, we see that the whitespaces had no effect on the outcome of the statements.  However, when we used the whitespaces inside quotation marks they were included in the statement.</p>", user_id: 1, difficulty_id: 2, category_id: 21)
-question20 = Question.create!(content: "Explain the method and placements of comments in JavaScript.", answer: "<p>Comments in JavaScript can be added using two back slashes, <strong>//</strong>, for single line comments, and two back slashes on either side of two asterisks, <strong>/\</strong>/**, for multiple line comments.  </p><p>Single line comments can be placed on their own line, or at the end of a line.  Multiple line comments are usually separated into their own block of lines.  For example:</p><pre><code>// This is a single line comment on its own line.var a = 100 // This is a single line comment at the end of a line./*    a = &quot;This is a multi line comment that comments out a block of code for debugging.&quot;    console.log(a)*/</code></pre><h4 id=\"-explain-the-use-of-the-isnan-function-\"><strong><%=@ctr+=1 %>. Explain the use of the isNaN function.</strong></h4><p>The isNaN function returns a true value if the argument is not a number, otherwise it returns a false value.  For example:</p><pre><code>var a = isNaN(123);var b = isNaN(&quot;123&quot;);var c = isNaN(&quot;three&quot;);console.log(a);  // returns falseconsole.log(b);  // returns falseconsole.log(c);  // returns true</code></pre><h4 id=\"-what-is-negative-infinity-in-javascript-\"><strong><%=@ctr+=1 %>. What is negative infinity in JavaScript?</strong></h4><p>In JavaScript, negative infinity is a number derived by dividing a negative number by 0.  For example:</p><pre><code>var a = -3;var b = 0;var c = a / b;console.log(c);  // returns -Infinity</code></pre><h4 id=\"-explain-the-type-attribute-\"><strong><%=@ctr+=1 %>. Explain the type attribute.</strong></h4><p>The type attribute is added to HTML to specify that the script used is of a certain language.  For example:</p><pre><code>&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;script type=&quot;text/javascript&quot;&gt;&lt;/script&gt;&lt;/head&gt;&lt;body&gt;&lt;/body&gt;&lt;/html&gt;</code></pre><p>However, in HTML 5 this can be omitted as it is assumed that the script used is JavaScript, and, therefore, the default is &quot;text/javascript&quot;.</p>", user_id: 1, difficulty_id: 2, category_id: 21)
-question21 = Question.create!(content: "What are the rules and common naming conventions for variables in JavaScript?", answer: "<p>Rules:</p><ul><li>are case sensitive.</li><li>can contain letters, digits, underscores, and dollar signs.</li><li>cannot begin with a digit.</li><li>cannot have the same name as JavaScript keywords.</li></ul><p>Common naming conventions:</p><ul><li>be written in <strong>camelCase</strong>.</li><li>start with a letter.</li><li>be written in <strong>UPPERCASE</strong> if they are global variables or constants.</li><li>be defined before use.</li></ul>", user_id: 1, difficulty_id: 2, category_id: 21)
-question22 = Question.create!(content: "What are the conditional statements in JavaScript? Provide examples.", answer: "<p>JavaScript has essentially four conditional statements (if, else, else if, and switch):</p><ul><li>The <strong>if</strong> statement executes a block of code if a specified condition is true.</li><li>The <strong>else</strong> statement executes a block of code if the condition in an <strong>if</strong> statement is false.</li><li>The <strong>else if</strong> statement tests a new condition if the first condition tested is false.</li><li>The <strong>switch</strong> statement specifies several blocks of code to be tested and executed.</li></ul><pre><code>// Example of the if statement below.if (condition)    Execute this code if above condition is true;// Example of if/else statement below.  if (condition) {    Execute this code if condition is true.} else {    Execute this code if first condition is not true.}// Example of else if statement.if (condition) {    Execute this code if condition is true.} else if (condition2) {    Execute this code if condition2 is true.}// Example of switch statement below.  switch (expression) {     case condition1: statement(s)    break;    case condition2: statement(s)    break;    case condition3: statement(s)    break;}</code></pre><h4 id=\"-explain-the-ternary-operator-\"><strong><%=@ctr+=1 %>. Explain the ternary operator.</strong></h4><p>The ternary operator, <strong>?:</strong>, is the operator that takes three arguments and acts as a conditional statement.  </p><pre><code>/* Below is an example of the ternary operator.  The operator has a condition, and if it is true then the first statement is executed.  If it is false the second statement is executed.*/a = (condition) ? statement1 : statement2</code></pre><h4 id=\"-what-is-the-difference-between-break-and-continue-\"><strong><%=@ctr+=1 %>. What is the difference between &quot;break&quot; and &quot;continue&quot;?</strong></h4><p>The <strong>break</strong> keyword stops the execution of more code and &quot;jumps&quot; out of a switch statement or loop.  The interpreter then continues to the next line of code after the switch statement or loop.</p><p>The <strong>continue</strong> keyword stops the execution of the rest of code in a loop, but then continues to the next iteration of the loop.</p>", user_id: 1, difficulty_id: 2, category_id: 21)
-question23 = Question.create!(content: "What are the different types of errors in JavaScript?", answer: "<ul><li>Loadtime errors: These errors are generated dynamically and occur during the loading of a web page.  Improper syntax error is a load time error.</li><li>Runtime errors:  Errors that occur during execution. A program where syntax is correct, but a non-existent function is called, is a runtime error.</li><li>Logical errors:  Can be a more difficult error to track down, depending on the details.  These occur when the code author(s) make a mistake in the logic of how the program should be written and executed.  </li></ul>", user_id: 1, difficulty_id: 2, category_id: 21)
-question24 = Question.create!(content: "What is the purpose of the &quot;delete&quot; operator?", answer: "<p>The <strong>delete</strong> operator removes a property from an object.  For example:</p><pre><code>delete object.property</code></pre><p>This does not directly free memory.  It breaks the association of the property from the object.</p>", user_id: 1, difficulty_id: 2, category_id: 21)
-question25 = Question.create!(content: "Explain the &quot;modulus&quot; operator.", answer: "<p>The <strong>modulus</strong> operator, <strong>%</strong>,  divides a number by another number and returns the remainder.  For example:</p><pre><code>a = 10 % 7; // This will return the remainder of 3.</code></pre><h4 id=\"-what-is-the-difference-between-the-alert-box-and-the-confirmation-box-\"><strong><%=@ctr+=1 %>. What is the difference between an alert box and a confirmation box?</strong></h4><ul><li>An <strong>alert</strong> box displays one button, the <strong>OK</strong> button.</li><li>A <strong>confirmation</strong> box displays two buttons, the <strong>OK</strong> button and the <strong>Cancel</strong> button.</li></ul>", user_id: 1, difficulty_id: 2, category_id: 21)
-question26 = Question.create!(content: "What is the escape character in JavaScript?  Provide and example of its use.", answer: "<p>The escape character is the <strong>backslash</strong>. It is used to make certain special characters, such as single and double quotes, apostrophes, and ampersands, display.  For example:</p><pre><code>console.log(&quot;Michael Jackson was the \&quot;King of Pop\&quot;.&quot;)/* The above prints, &quot;Michael Jackson was the &quot;King of Pop&quot;&quot;.  The outerquotations in the previous sentence were only for the internal sentence structure and would not be printed.*/console.log(&quot;Michael Jackson was the &quot;King of Pop&quot;&quot;)// The above produces a syntax error.</code></pre><h4 id=\"-what-are-the-types-of-pop-up-boxes-in-javascript-explain-\"><strong><%=@ctr+=1 %>. What are the types of pop-up boxes in JavaScript? Explain.</strong></h4><p>There are three:</p><ul><li><strong>Alert</strong>: ensures the user knows a piece of information.</li><li><strong>Confirm</strong>: have the user verify or accept something.</li><li><strong>Prompt</strong>: force user to input a value before entering a page.</li></ul>", user_id: 1, difficulty_id: 2, category_id: 21)
-question27 = Question.create!(content: "How can a value be appended to an array?", answer: "<p>This can be accomplished by the following:</p><pre><code>arr[arr.length] = value;</code></pre><h4 id=\"-what-is-the-result-of-3-2-4-explain-the-answer-\"><strong><%=@ctr+=1 %>. What is the result of 3 + 2 + &quot;4&quot;?  Explain the answer.</strong></h4><p><strong>3</strong> and <strong>2</strong> are integers; they would be added to total <strong>5</strong>.  The <strong>4</strong>, however, is a string; this would be concatenated.  The final result of the operation would be <strong>54</strong>.</p>", user_id: 1, difficulty_id: 2, category_id: 21)
-question28 = Question.create!(content: "Explain the order of precedence in JavaScript.", answer: "<p>The order of precedence is the order in which operations occur.  Certain operators have higher precedence and will act first. For example:</p><pre><code>a = 3 + 4 * 5console.log(a)</code></pre><p>The above code will print the value of <strong>a</strong> which is 23 not 60.  The multiplication operator has a higher precedence than the addition operator, and, therefore, the 4 is multiplied by 5, then that result is added to 3.</p>", user_id: 1, difficulty_id: 2, category_id: 21)
-test = Test.create!(name: "Basic JavaScript Test", is_public: true, description: "This is the complete public JavaScript test.", user_id: 1)
-test.questions << question1
-test.questions << question2
-test.questions << question3
-test.questions << question4
-test.questions << question5
-test.questions << question6
-test.questions << question7
-test.questions << question8
-test.questions << question9
-test.questions << question10
-test.questions << question11
-test.questions << question12
-test.questions << question13
-test.questions << question14
-test.questions << question15
-test.questions << question16
-test.questions << question17
-test.questions << question18
-test.questions << question19
-test.questions << question20
-test.questions << question21
-test.questions << question22
-test.questions << question23
-test.questions << question24
-test.questions << question25
-test.questions << question26
-test.questions << question27
-test.questions << question28
-test.save
-
-
-Category.create!(name: "JBoss")
-test = Test.create!(name: "Basic JBoss Test", is_public: true, description: "This is the complete public Jboss test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "JDBC")
-test = Test.create!(name: "Basic JDBC Test", is_public: true, description: "This is the complete public Jdbc test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "JMS")
-test = Test.create!(name: "Basic JMS Test", is_public: true, description: "This is the complete public Jms test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "JPA")
-test = Test.create!(name: "Basic JPA Test", is_public: true, description: "This is the complete public Jpa test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "jQuery")
-test = Test.create!(name: "Basic jQuery Test", is_public: true, description: "This is the complete public Jquery test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "JSF")
-test = Test.create!(name: "Basic JSF Test", is_public: true, description: "This is the complete public Jsf test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "JSP")
-test = Test.create!(name: "Basic JSP Test", is_public: true, description: "This is the complete public Jsp test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "JSTL")
-test = Test.create!(name: "Basic JSTL Test", is_public: true, description: "This is the complete public Jstl test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "Maven")
-test = Test.create!(name: "Basic Maven Test", is_public: true, description: "This is the complete public Maven test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "MongoDB")
-test = Test.create!(name: "Basic MongoDB Test", is_public: true, description: "This is the complete public Mongodb test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "MySQL")
-test = Test.create!(name: "Basic MySQL Test", is_public: true, description: "This is the complete public Mysql test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "Nginx")
-test = Test.create!(name: "Basic Nginx Test", is_public: true, description: "This is the complete public Nginx test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "Node.js")
-test = Test.create!(name: "Basic Node.js Test", is_public: true, description: "This is the complete public Nodejs test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "Oracle")
-test = Test.create!(name: "Basic Oracle Test", is_public: true, description: "This is the complete public Oracle test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "Performance")
-test = Test.create!(name: "Basic Performance Test", is_public: true, description: "This is the complete public Performance test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "PL/SQL")
-test = Test.create!(name: "Basic PL/SQL Test", is_public: true, description: "This is the complete public Plsql test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "Python")
-question1 = Question.create!(content: "Describe Python and some of its features.", answer: "<p>Introduced in 1991 and written by Guido van Rossum, Python is a general-purpose, high-level programming language with the mission of greater code readability.  Python is a multi-paradigm language that supports OOP, imperative, functional, and procedural programming styles.</p><p>Some of the features of Python include being open source, portable, extensible, and embeddable.  In addition Python has a powerful standard library, and it contain many invaluable data structures.</p>", user_id: 1, difficulty_id: 2, category_id: 38)
-question2 = Question.create!(content: "What are the rules for global and local variables in Python?", answer: "<p>In Python, variables that are only referenced inside a function are implicitly global. If a variable is assigned a new value anywhere within the function???s body, it???s assumed to be a local. If a variable is ever assigned a new value inside the function, the variable is implicitly local, and you need to explicitly declare it as ???global???.</p>", user_id: 1, difficulty_id: 2, category_id: 38)
-question3 = Question.create!(content: "Explain Python dictionaries.", answer: "<p>Like a common dictionary, a dictionary in Python matches words with definitions.  However, in Python, dictionaries can be created to have arbitrary definitions for strings using the dictionary type, <em>dict</em>.  For example:</p><pre><code>#Name to nickname dictionary.nicknames = dict()nicknames[ 'Thomas' ] = 'Tom'nicknames[ 'Jonathan' ] = 'Jon'nicknames[ 'James' ] = 'Jim'</code></pre><h4 id=\"-how-are-global-variables-shared-across-modules-in-python-\"><strong><%=@ctr+=1 %>. How are global variables shared across modules in Python?</strong></h4><p>The recommended and accepted way is to create a special module (often called config or cfg).  This config or cfg module is then imported into all the modules of the application, where it becomes available as a global name.  However, since there is only one instance of each module, any changes to the config module object are changed wherever it was implemented.</p>", user_id: 1, difficulty_id: 2, category_id: 38)
-question4 = Question.create!(content: "What is a Lambda function?", answer: "<p>Using a construct called lambda, Python allows the programmer to create anonymous functions (no-name functions) at runtime.  Lambda functions do not have a return statement, but always return a value.  Lambda functions can be used wherever regular functions are expected, and they do not <em>need</em> to be assigned to a variable.  However, they are syntactically restricted to a single expression. See below:</p><pre><code># Below is an example of a regular function.def my_function (b): return b**2 # Below is an example of a lambda function.x = lambda (b): b**2</code></pre><h4 id=\"-explain-the-assert-statement-\"><strong><%=@ctr+=1 %>. Explain the assert statement.</strong></h4><p>The <strong>assert</strong> statement is used to tell the program to test the condition and throw an error if the condition is false.  It is written as:</p><pre><code>assert Expression[, Arguments]</code></pre><p>This is often placed at the beginning of a function to check for valid input and at the end of a function to check for valid output.</p>", user_id: 1, difficulty_id: 2, category_id: 38)
-question5 = Question.create!(content: "Explain the role of the repr function.", answer: "<p>The <strong>repr</strong> function is a built-in function that returns a printable representation of an object.  It converts any value to a string returning a machine-readable representation of values which can be used with an exec command.</p>", user_id: 1, difficulty_id: 2, category_id: 38)
-question6 = Question.create!(content: "How is memory managed in Python?", answer: "<p>The Python memory manager internally manages a private heap that contains all Python object and data structures. The management of the heap is performed on demand by the interpreter and the user has no control over it.</p>", user_id: 1, difficulty_id: 2, category_id: 38)
-question7 = Question.create!(content: " What is a higher order function in Python?  How are they treated?", answer: "<p>Higher order functions are functions that act on or return other functions. Because functions and methods are first class objects in Python, they can be treated as any other object.</p>", user_id: 1, difficulty_id: 2, category_id: 38)
-question8 = Question.create!(content: "What is a method in Python?", answer: "<p>A method in Python is a function that is a member of a class.  They are organized, reusable blocks of code that perform a single action.  For example:</p><pre><code>class SomeClass:    def some_method(self):        print \"This is a method.???c = SomeClass()c.some_method()  # Prints \"This is a method???</code></pre><h4 id=\"-how-would-you-convert-a-string-to-a-number-\"><strong><%=@ctr+=1 %>. How would you convert a string to a number?</strong></h4><p>A conversion can be done using int() or float() or combination of the two.  For example:</p><pre><code>a = '1234.54'float(a) # This converts the string to a float.int(a) # This then converts the float to an integer.</code></pre><h4 id=\"-what-is-an-array-in-python-how-is-an-array-created-in-python-\"><strong><%=@ctr+=1 %>. What is an array in Python? How is an array created in Python?</strong></h4><p>Depending on the language implementation arrays are often defined to be an ordered collection of items of a single type.  However, in Python they can be of any type and are actually called lists.  List is the appropriate term.  They are created as follows:</p><pre><code>list = [a, b, dog, 123, ...]</code></pre><h4 id=\"-what-is-a-negative-index-in-python-\"><strong><%=@ctr+=1 %>. What is a negative index in Python?</strong></h4><p>Python lists have the ability to be accessed using negative numbers.  The negative index accesses items from the end of a list counting backwards.  For example:</p><pre><code>array = [1, 2, 3]a[-1] # This will access 3.a[-2] # This will access 2.a[-3] # This will access 1.</code></pre><h4 id=\"-how-are-exceptions-handled-in-python-\"><strong><%=@ctr+=1 %>. How are exceptions handled in Python?</strong></h4><p>During the execution of a program if an error is detected it is called an exception.  These exceptions can be handled using a try/except statement.  The regular statements are put into the <strong>try</strong> block, and the exceptions are put into the <strong>except</strong> block.  For example:</p><pre><code>try:         a = int(raw_input(\"Enter a number: \"))         breakexcept ValueError:         print \"Your input is invalid.  Try again.\"</code></pre><h4 id=\"-how-would-you-generate-random-numbers-in-python-\"><strong><%=@ctr+=1 %>. How would you generate random numbers in Python?</strong></h4><p>The <strong>random</strong> module can be used as a random number generator.  For example:</p><pre><code>import randomprint random.random()</code></pre><p>This prints a random float in the range of [0,1] which can include 0.0 but not 1.0.</p><p>There are other specialized generators in this module for various random generation tasks such as:</p><ul><li>randrange(a, b) chooses an integer in the specified range.</li><li>uniform(a, b) chooses a float in the specified range.</li></ul>", user_id: 1, difficulty_id: 2, category_id: 38)
-question9 = Question.create!(content: "What is the List comprehension feature of Python?", answer: "<p>List comprehensions are concise ways to create lists.  This is often accomplished by operating on each member of another sequence or iterable which produces each element of the new list. For example</p><pre><code>squares = []for x in range(10):     squares.append(x**2)squares[0, 1, 4, 9, 16, 25, 36, 49, 64, 81] # This result is a list of elements created from the operation.</code></pre><h4 id=\"-what-will-be-the-output-of-the-code-below-explain-your-answer-\"><strong><%=@ctr+=1 %>. What will be the output of the code below?  Explain your answer.</strong></h4><pre><code>list = ['apple', 'banana', 'cherry', 'date', 'elderberry', 'fig']print list[15:]</code></pre><p>The above code outputs [].  It does <strong>not</strong> result in an IndexError.</p><p>If an attempt is made to access an element of a list that is outside the bounds of the list, then an IndexError will occur.  However, if an attempt is made to access a slice of a list using a starting index that exceeds the number of elements in the list, an empty list will be returned, <strong>not</strong> an IndexError.  This is an important point to note as it can be the source of bugs in a program that may not be caught at runtime.</p>", user_id: 1, difficulty_id: 2, category_id: 38)
-question10 = Question.create!(content: "What is the statement that can be used in python if a statement is required syntactically but the program requires no action?", answer: "<p><strong>Pass</strong> can be used. It acts as a placeholder when syntax requires a statement and will allow the program to run.  For example:</p><pre><code>while True: pass</code></pre><p>This creates an infinite loop that does nothing for infinity.</p>", user_id: 1, difficulty_id: 2, category_id: 38)
-test = Test.create!(name: "Basic Python Test", is_public: true, description: "This is the complete public Python test.", user_id: 1)
-test.questions << question1
-test.questions << question2
-test.questions << question3
-test.questions << question4
-test.questions << question5
-test.questions << question6
-test.questions << question7
-test.questions << question8
-test.questions << question9
-test.questions << question10
-test.save
-
-
-Category.create!(name: "Rails")
-question1 = Question.create!(content: "What is Ruby On Rails?", answer: "<p>Ruby on Rails, often shortened to Rails, is a web application framework written in the Ruby language as an addition to the Ruby language.  It is a software library that extends the Ruby language.  Though it is a general purpose programming language, it is most widely used in programming for the web.  Rails is installed via a command-line interface, as it is technically a package library.</p>", user_id: 1, difficulty_id: 2, category_id: 39)
-question2 = Question.create!(content: "What is a web application framework?", answer: "<p>Simply, a web application framework is a framework that aids developers in producing applications for the web, dynamic web sites, and web services and resources.  It can save a developer a significant amount of time when building a web application through the provision of core functionalities, such as, data persistence, cacheing, templating, etc.</p>", user_id: 1, difficulty_id: 2, category_id: 39)
-question3 = Question.create!(content: "What is the difference between symbols and strings?", answer: "<p>Strings are mutable; they can be changed after assignment. Symbols are immutable strings; they cannot be changed after assignment.  This immutability allows for faster testing of values for equality.  See below for an example of both:</p><pre><code>:\"This is a symbol\" << :\"now try to change it\"NoMethodError: undefined method `<<' for :\"This is a symbol\":Symbol    from (irb):6    from /Users/anonymous/.rvm/rubies/ruby-2.1.1/bin/irb:11:in '<main>'\"This is a string\" << \" we changed\" => \"This is a string we changed\"</code></pre><p>The first example was a symbol.  An error was thrown when an attempt was made to change it.  The second example is a string which was able to be changed.</p>", user_id: 1, difficulty_id: 2, category_id: 39)
-question4 = Question.create!(content: "What are sessions and cookies?", answer: "<p>Sessions and cookies are both ways to store user data when the user requests web page information.  However, if a cookie is used for user data the user is able to see the value of the cookie.  A cookie is used when information is not bound to a particular session, such as language preferences, and it is stored on the client side. If a session is used, then the information is encrypted, used for the current session, and stored on the server side.</p>", user_id: 1, difficulty_id: 2, category_id: 39)
-question5 = Question.create!(content: "Explain request.xhr?", answer: "<p>This is used in Rails to check if the controller has received an Ajax request.  It returns true or false.  For example:</p><pre><code>if request.xhr?  # respond to Ajax requestelse  # respond to normal requestend</code></pre><h4 id=\"-what-is-orm-as-it-applies-to-rails-\"><strong><%=@ctr+=1 %>. What is ORM as it applies to Rails?</strong></h4><p>ORM stands for Object Relational Mapper. It connects objects in an application to the tables of a database.  This mapping allows for the easy storage and retrieval of objects to and from a database without writing SQL statements. Thus, this can reduce the amount of code that needs to be written.</p><p>A class wraps a database table.  Then, each instance of the class corresponds to a single record in the table.</p>", user_id: 1, difficulty_id: 2, category_id: 39)
-question6 = Question.create!(content: "What is Active Record?", answer: "<p>Active Record is the out-of-the-box ORM for Rails and the M in the Model-View-Controller architecture.  It presents a layer of abstraction from the database through the use of objects.  The objects carry both data and behaviors that act on the data.    </p>", user_id: 1, difficulty_id: 2, category_id: 39)
-question7 = Question.create!(content: "What is a callback?  What are the types of callbacks available in Rails?", answer: "<p>A callback allows a piece of code to be run automatically when another piece of code is run.  The four types of call backs are listed below:</p><ul><li>Method references (symbol)</li><li>Callback objects</li><li>Inline methods (using a proc)</li><li>Inline eval methods (deprecated)</li></ul>", user_id: 1, difficulty_id: 2, category_id: 39)
-question8 = Question.create!(content: "What is a method reference? Provide an example.", answer: "<p>The method reference callback specifies a protected or private method available in the object.  For example:</p><pre><code> class Topic < ActiveRecord::Base    before_destroy :delete_parents    private      def delete_parents        self.class.delete_all \"parent_id = \#{id}\"      end  end</code></pre><h4 id=\"-what-are-the-naming-conventions-for-methods-that-return-boolean-results-\"><strong><%=@ctr+=1 %>. What are the naming conventions for methods that return Boolean results?</strong></h4><p>Methods that return a Boolean value are named with a question mark at the end. For example:</p><pre><code>def boolean_method?    return trueend</code></pre><h4 id=\"-explain-\"><strong><%=@ctr+=1 %>. Explain $?</strong></h4><p><strong>$</strong> is the symbol that is used to declare a global variable.  Global variables can be declared and used throughout the program, though they should be used with caution or not at all.  See below:</p><pre><code>def example1    $foo = 'bar'end</code></pre><p>Above, the global variable <strong>foo</strong> has been declared and assigned a value.  Even though this was declared inside of a function it can be written to and from anywhere in the program.</p>", user_id: 1, difficulty_id: 2, category_id: 39)
-question9 = Question.create!(content: "What associations can we define between models?", answer: "<ul><li>one-to-one: Exists when one item can be associated with exactly one other item. A person has one name.</li><li>one-to-many: Exists when one item can be associated with multiple other items.  A person has two cars.  However, the cars still have the one owner.</li><li>many-to-many: Exists when many items can be associated with many other items.  Two people own two cars jointly.  Each person owns two cars, and each car is owned by two people.</li></ul>", user_id: 1, difficulty_id: 2, category_id: 39)
-question10 = Question.create!(content: "What are gems in Ruby?", answer: "<p>A gem is a package or library that adds functionality to the Ruby language.  They are installed to fulfill a specific need such as:</p><ul><li>Provide an interface to Amazon S3.</li><li>Convert Markdown to HTML.</li><li>Set up a testing framework.</li></ul><p>An example of a gem being used on the command line follows:</p><pre><code>gem install my_gem</code></pre><h4 id=\"-what-is-a-class-give-an-example-\"><strong><%=@ctr+=1 %>. What is a class? Give an example.</strong></h4><p>A class is the model by which individual objects are made.  They contain both attributes, such as \"hair color\", and actions, such as \"cut hair\". For example:</p><pre><code>class Head{    @hair_color = red // Instance variable to define an attribute.    def cut_hair // Method to define an action.    end}</code></pre><h4 id=\"-what-is-an-object-provide-and-example-\"><strong><%=@ctr+=1 %>. What is an object? Provide and example.</strong></h4><p>An object is a single instance of a class.  For example:</p><pre><code># First we declare a class.class Head{    @hair_color = red // Instance variable to define and attribute.    def cut_hair // Method to define an action.    end}# Then we can create an object based on that class.tomsHead1 = Head.new</code></pre><h4 id=\"-explain-the-importance-of-a-module-\"><strong><%=@ctr+=1 %>. Explain the importance of a module.</strong></h4><p>Modules group  methods, classes, and constants together.  They provide a namespace to prevent name clashes, and they implement the \"mixin\" facility.</p><p>The \"mixin??? facility refers to the ability of Ruby classes to add in modules whose methods then become a part of the class as if it has been written in the class itself.</p>", user_id: 1, difficulty_id: 2, category_id: 39)
-question11 = Question.create!(content: "What is the difference between \"Date.current\" and \"Date.today\"?", answer: "<p>Both will return dates. However, <strong>Date.current</strong> will take timezones into account when returning a date.  <strong>Date.today</strong> returns a system date, but <strong>Date.current</strong> returns the system date with Rails' timezone applied.</p><p>=========================================================================</p>", user_id: 1, difficulty_id: 2, category_id: 39)
-test = Test.create!(name: "Basic Rails Test", is_public: true, description: "This is the complete public Rails test.", user_id: 1)
-test.questions << question1
-test.questions << question2
-test.questions << question3
-test.questions << question4
-test.questions << question5
-test.questions << question6
-test.questions << question7
-test.questions << question8
-test.questions << question9
-test.questions << question10
-test.questions << question11
-test.save
-
-
-Category.create!(name: "RESTful Services")
-test = Test.create!(name: "Basic RESTful Services Test", is_public: true, description: "This is the complete public Rest test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "Ruby")
-test = Test.create!(name: "Basic Ruby Test", is_public: true, description: "This is the complete public Ruby test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "SASS")
-test = Test.create!(name: "Basic SASS Test", is_public: true, description: "This is the complete public Sass test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "SOA")
-test = Test.create!(name: "Basic SOA Test", is_public: true, description: "This is the complete public Soa test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "SOAP")
-test = Test.create!(name: "Basic SOAP Test", is_public: true, description: "This is the complete public Soap test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "Spring")
-test = Test.create!(name: "Basic Spring Test", is_public: true, description: "This is the complete public Spring test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "SQL")
-question1 = Question.create!(content: "What is the difference between a database, a DBMS, and SQL?", answer: "<p>A DBMS is the program that creates and manages one or more databases.  Examples of a DBMS are Oracle, DB2, and SQL Server.</p><p>The database is the data and the rules about the data.  </p><p>SQL is the query language used to search and manipulate information organized by the DBMS</p>", user_id: 1, difficulty_id: 2, category_id: 46)
-question2 = Question.create!(content: "What is the significance of a unique value?  Give an example.", answer: "<p>A unique value is a value that cannot be duplicated within the column of a table.  It guarantees that the value in a column is associated with one and only one row.  </p><p>An example of this would be the data in a column containing employee social security numbers.  The value in this column could only be associated with one employee. Therefore, it must uniquely identify one row. See below:</p><p><table border=\"1\">    <tr>        <th>Employee</th>        <th>Department</th>        <th>SS #</th>    </tr>    <tr>        <td>Jimmy John</td>        <td>Accounting</td>        <td>123-45-6789    </tr>        <tr>        <td>Jimmy John</td>        <td>Accounting</td>        <td>987-65-4321</td>    </tr></table></p><p>The employee name and department might be the same, but in this example the employee SS# must be unique to the employee. </p>", user_id: 1, difficulty_id: 2, category_id: 46)
-question3 = Question.create!(content: "What is the difference between a natural key and a surrogate or synthetic key?", answer: "<p>A natural key is one in which the attributes of the key exist in the real world.  For instance, a social security number would be a natural key, as it is information that exists outside of the realm of the database.  </p><p>A surrogate or synthetic key is a system-generated key that is arbitrary to the values in the table, yet uniquely identifies a row.  For example a database administrator might set up a column in a database for employee IDs and have the DBMS generate random ID numbers to uniquely identify the employee data.  </p>", user_id: 1, difficulty_id: 2, category_id: 46)
-question4 = Question.create!(content: "What is a primary key?", answer: "<p>A primary key is a value that uniquely identifies each row in a table.  This unique value can either be a natural or a surrogate key, but often a surrogate key is used to allow the secure viewing and transfer of data.  For example:</p><p><table border=\"1\">    <tr>        <th>ID</th>        <th>Employee</th>        <th>Department</th>        <th>SS #</th>    </tr>    <tr>        <td>178</td>        <td>Jimmy John</td>        <td>Accounting</td>        <td>123-45-6789    </tr>        <tr>        <td>439</td>        <td>Jimmy John</td>        <td>Accounting</td>        <td>987-65-4321</td>    </tr></table></p><p>In the above example both the ID and the SS # are unique values.  However, using the surrogate values of the ID column, we can create a system-generated primary key that is random and does not divulge unnecessary information.  This is unlike the natural values of the SS # column.  </p>", user_id: 1, difficulty_id: 2, category_id: 46)
-question5 = Question.create!(content: "What is a constraint?  How are they created?  Provide an example.", answer: "<p>A constraint dictates what data values are valid in the database.  For example a constraint might disallow the use of null values in a table, or insist that the values in a column be unique.  Constraints are specified within the CREATE TABLE statement or inside the ALTER TABLE statement if the table already exists.  See Below:</p><pre><code>CREATE TABLE Employees(ID int(9) NOT NULL PRIMARY KEY);</code></pre><p>The above code specifies <strong>NOT NULL</strong> and <strong>PRIMARY KEY</strong> as constraints.</p>", user_id: 1, difficulty_id: 2, category_id: 46)
-question6 = Question.create!(content: "What is the difference between a primary key and a foreign key?", answer: "<p>The primary key is the unique value of a table that identifies each individual record (row).  However, a foreign key is the primary key imported from another table.  For example:</p><p><table border=\"1\">    <strong>Table 1</strong>    <tr>        <th>ID</th>        <th>Employee</th>        <th>Department</th>        <th>SS #</th>    </tr>    <tr>        <td>178</td>        <td>Jimmy John</td>        <td>Accounting</td>        <td>123-45-6789</td>    </tr>        <tr>        <td>439</td>        <td>Jimmy John</td>        <td>Accounting</td>        <td>987-65-4321</td>    </tr></table></p><p><table border=\"1\">    <strong>Table 2</strong>    <tr>        <th>EventName</th>        <th>CoordinatorID</th>    </tr>    <tr>        <td>Christmas</td>        <td>178</td>    </tr>        <tr>        <td>Halloween</td>        <td>439</td>    </tr></table></p><p>EventName is the primary key in table two, and the CoordinatorID is the foreign key that associates the information from table 1 to the records in table two.</p><p>In addition, this foreign key does not have to be unique, unlike the primary key of the table. The Employee with ID 178 could have been entered under the CoordinatorID for both events.</p>", user_id: 1, difficulty_id: 2, category_id: 46)
-question7 = Question.create!(content: "Describe a one-to-many relationship.  Give an example.", answer: "<p>A one-to-many relationship occurs when each record in Table 1 can potentially reference several records in Table 2. The records in the first table do not require there to be a relationship with the records in Table 2.  However, the records in Table 2 must have a relationship with only one corresponding record in table 1.  For Example: </p><p><table border=\"1\">    <strong>Table 1</strong>    <tr>        <th>ID</th>        <th>Employee</th>        <th>Department</th>        <th>SS #</th>    </tr>    <tr>        <td>178</td>        <td>Jimmy John</td>        <td>Accounting</td>        <td>123-45-6789</td>    </tr>        <tr>        <td>439</td>        <td>Jimmy John</td>        <td>Accounting</td>        <td>987-65-4321</td>    </tr>        </tr>        <tr>        <td>278</td>        <td>Daryl Joseph</td>        <td>Accounting</td>        <td>432-22-1265</td>    </tr></table></p><p><table border=\"1\">    <strong>Table 2</strong>    <tr>        <th>EventName</th>        <th>CoordinatorID</th>    </tr>    <tr>        <td>Christmas</td>        <td>178</td>    </tr>        <tr>        <td>Halloween</td>        <td>439</td>    </tr>        </tr>        <tr>        <td>New Year's Eve</td>        <td>439</td>    </tr>        </tr>        <tr>        <td>Labor Day</td>        <td>178</td>    </tr></table></p><p>The records of Table 1 can be linked to none, one, or more than one record in Table 2.  Each record of Table 2 is associated with only one record from Table 1.</p><p>Additionally this relationship is not an explicitly defined database structure but a principle created and forced by the relationships between the tables.</p>", user_id: 1, difficulty_id: 2, category_id: 46)
-question8 = Question.create!(content: "What is a junction table?", answer: "<p>In a relational database, the junction table contains common references to two or more tables in the same database.  For instance, if we have a list of authors each with a unique ID number as the primary key and a separate table with a list of books each with a unique ISDN number as their primary key, we can use a junction table to associate multiple books with multiple authors.  This table is used in a many-to-many relationship.</p>", user_id: 1, difficulty_id: 2, category_id: 46)
-question9 = Question.create!(content: "Describe a many-to-many relationship. Give an example.", answer: "<p>A many-to-many relationship occurs when tables can have more than one association to each other's records.  For example:</p><p><table border=\"1\">    <strong>Table 1</strong>    <tr>        <th>ID</th>        <th>Employee</th>        <th>Department</th>        <th>SS #</th>    </tr>    <tr>        <td>178</td>        <td>Jimmy John</td>        <td>Accounting</td>        <td>123-45-6789</td>    </tr>        <tr>        <td>439</td>        <td>Jimmy John</td>        <td>Accounting</td>        <td>987-65-4321</td>    </tr>        </tr>        <tr>        <td>278</td>        <td>Daryl Joseph</td>        <td>Accounting</td>        <td>432-22-1265</td>    </tr></table></p><p><table border=\"1\">    <strong>Table 2</strong>    <tr>        <th>EventName</th>    </tr>    <tr>        <td>Christmas</td>    </tr>        <tr>        <td>Halloween</td>    </tr>        </tr>        <tr>        <td>New Year's Eve</td>    </tr>        </tr>        <tr>        <td>Labor Day</td>    </tr></table></p><p><table border=\"1\">    <strong>Table 3</strong>    <tr>        <th>EventName</th>        <th>CoordinatorID</th>    </tr>    <tr>        <td>Christmas</td>        <td>178</td>    </tr>        <tr>        <td>Christmas</td>        <td>439</td>    </tr>        <tr>        <td>Halloween</td>        <td>439</td>    </tr>        </tr>        <tr>        <td>New Year's Eve</td>        <td>439</td>    </tr>        </tr>        <tr>        <td>Labor Day</td>        <td>178</td>    </tr>       </tr>        </tr>        <tr>        <td>Labor Day</td>        <td>278</td>    </tr></table></p><p>The three tables above describe a many-to-many relationship where the records of table 1 and table 2 are associated via a third <em>junction table</em> to allow multiple association between the primary keys of the first two tables.  Using this technique, we can have multiple coordinators for each event, and assign multiple events to each coordinator.</p>", user_id: 1, difficulty_id: 2, category_id: 46)
-question10 = Question.create!(content: "What is a database transaction? Give an example.", answer: "<p>A database transaction is multiple operations that must occur as a whole, or not at all.  Either all the operations succeed, or they all fail.  </p><p>For example, if we are depositing money to our bank account from another account, the money from the source account must be withdrawn first before it can be deposited in the destination account.  If one of the operations fails then they both do.  The money cannot be deposited unless it is withdrawn.  The money cannot be withdrawn if it cannot be deposited.</p>", user_id: 1, difficulty_id: 2, category_id: 46)
-question11 = Question.create!(content: "What are the four common properties of a transaction? Explain each property.", answer: "<p>The four common properties of a transaction are known as ACID:</p><ul><li><strong>Atomic</strong> (The change always occurs in full.  There can be no partial change.)</li><li><strong>Consistent</strong> (The state of the system must always be valid. If the change will cause the system state to become invalid then the change must fail.)</li><li><strong>Isolated</strong> (The transaction must remain separate from other operations until completed.)</li><li><strong>Durability</strong> (Once a transaction occurs, it will remain completed, even in the event of a power loss, crash, etc.)</li></ul>", user_id: 1, difficulty_id: 2, category_id: 46)
-question12 = Question.create!(content: "What is SQL?", answer: "<p>SQL or Structured Query Language is a standardized language for requesting information from or adding information to databases, including distributed databases.  SQL is the ANSI standard language for relational database management systems; though various RDBMS have their own additional proprietary extensions.</p><p>Additionally, SQL is a declarative query language as opposed to a procedural or imperative language.  The user describes a result and gets an answer without needing to describe the steps to achieve the answer.</p>", user_id: 1, difficulty_id: 2, category_id: 46)
-question13 = Question.create!(content: "What is a database schema?", answer: "<p>A database schema is the structure of the database and the rules and constraints placed on the database. In a relational database, the schema defines the tables, the rows and columns in each table and the interaction and relationship between the rows, columns, and tables.  It is the blueprint for the organization of data.</p>", user_id: 1, difficulty_id: 2, category_id: 46)
-question14 = Question.create!(content: "What is the difference between an entity and an attribute?", answer: "<p>An entity is a single concept about which data can be stored.  For instance a person or a car is an entity that will have identifying data, its details.</p><p>An attribute is the characteristic property of an existing entity.  Whereas, an entity might be a person, but an attribute would be the person's hair color.  </p><p>In addition an attribute has two parts: the attribute instance and the attribute type.  The attribute type is the column or field name that will describe the attribute of the entity.  The attribute instance is the actual value of the attribute.  For instance hair color is one of the attribute types we may want to use to describe a person entity, however, red would be an actual value or attribute instance.</p>", user_id: 1, difficulty_id: 2, category_id: 46)
-question15 = Question.create!(content: "In SQL what are data types, and what are their significance?", answer: "<p>A data type in SQL defines what kind of attribute instance can be contained in an attribute type.  It determines the type of value that can be placed within each column.  Each column within a table must have a name and a data type.</p><p>Data types must be chosen carefully by the SQL developer, as the data type is a guideline for SQL to accurately place the right kind of data in each column.  Data types direct how SQL will interact with the data.</p>", user_id: 1, difficulty_id: 2, category_id: 46)
-test = Test.create!(name: "Basic SQL Test", is_public: true, description: "This is the complete public Sql test.", user_id: 1)
-test.questions << question1
-test.questions << question2
-test.questions << question3
-test.questions << question4
-test.questions << question5
-test.questions << question6
-test.questions << question7
-test.questions << question8
-test.questions << question9
-test.questions << question10
-test.questions << question11
-test.questions << question12
-test.questions << question13
-test.questions << question14
-test.questions << question15
-test.save
-
-
-Category.create!(name: "SQL Server")
-test = Test.create!(name: "Basic Sql Server Test", is_public: true, description: "This is the complete public Sql Server test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "Struts")
-test = Test.create!(name: "Basic Struts Test", is_public: true, description: "This is the complete public Struts test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "Tomcat")
-test = Test.create!(name: "Basic Tomcat Test", is_public: true, description: "This is the complete public Tomcat test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "Weblogic")
-test = Test.create!(name: "Basic Weblogic Test", is_public: true, description: "This is the complete public Weblogic test.", user_id: 1)
-test.save
-
-
-Category.create!(name: "XML")
-test = Test.create!(name: "Basic XML Test", is_public: true, description: "This is the complete public XML test.", user_id: 1)
-test.save
-
-Question.all.each do |question|
-  question.question_type_id = 1
-  question.save
+category = Category.find_by(name: "Groovy / Grails")
+if category == nil
+  category = Category.create!(name: "Groovy / Grails")
 end
-
-#users = User.order(:created_at).take(6)
-#50.times do
-  #content = Faker::Lorem.sentence(5)
-  #users.each { |user| user.microposts.create!(content: content) }
-#end
-
+question14 = Question.create!(content: "What are some benefits of Groovy over Java?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question15 = Question.create!(content: "How would you create a hash in Groovy? How would you use it?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question16 = Question.create!(content: "How would you write a simple groovy script to load a file, change any line that matches a certain pattern, and save the file?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question17 = Question.create!(content: "What kind of support does Groovy have for JSON?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question18 = Question.create!(content: "What kind of support does Groovy have for XML?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "C#")
+if category == nil
+  category = Category.create!(name: "C#")
+end
+question19 = Question.create!(content: "How would you write a simple for loop on a collection in C#?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question20 = Question.create!(content: "What are some basic data types in C#?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question21 = Question.create!(content: "What are some differences with C# and Java?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question22 = Question.create!(content: "How would you declare an array in C#?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question23 = Question.create!(content: "What are some common C# libraries?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question24 = Question.create!(content: "What would you use the virtual keyword for in C#?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question25 = Question.create!(content: "What is the latest version of C# and the .Net Framework?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question26 = Question.create!(content: "How would you characterize the typing of C#?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question27 = Question.create!(content: "Do you need to write explicit getter/setter methods in C# for property access?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question28 = Question.create!(content: "What does the delegate keyword enable?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question29 = Question.create!(content: "Does C# support checked exceptions?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question30 = Question.create!(content: "What is the purpose of having an unsafe code block in C#?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "Ruby / Rails")
+if category == nil
+  category = Category.create!(name: "Ruby / Rails")
+end
+question31 = Question.create!(content: "What are the origins of Ruby / Rails? ", answer: "Ruby created 20 years ago.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question32 = Question.create!(content: "How would you characterize the typing in Ruby? ", answer: "Dynamic / duck typing.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question33 = Question.create!(content: "How would you characterize the Ruby language? ", answer: "Object-oriented with inheritence, mixins and metaclasses.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question34 = Question.create!(content: "Everything is an expression and is executed imperatively", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question35 = Question.create!(content: "How does Ruby syntax compare with that of other languages? ", answer: "Succinct, flexible, minimalist syntax.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question36 = Question.create!(content: "How would you create an array in Ruby?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question37 = Question.create!(content: "How would you create a hash in Ruby? ", answer: "hash = Hash.new or {} hash = { :foo => 'bar', :another => 'something' } puts hash[:another].", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question38 = Question.create!(content: "What is a symbol in Ruby?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question39 = Question.create!(content: "How would you create a regular expression in Ruby?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question40 = Question.create!(content: "How would you specify default function arguments in Ruby?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question41 = Question.create!(content: "How does garbage collection work in Ruby?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question42 = Question.create!(content: "What site is the centralized package management for Ruby done? ", answer: "RubyGems.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question43 = Question.create!(content: "What is the Interactive Ruby Shell (REPL)?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question44 = Question.create!(content: "Does Ruby support operator overloading? Give an example.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question45 = Question.create!(content: "built-in support for rational and complex numbers", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question46 = Question.create!(content: "How does Ruby support exception handling?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question47 = Question.create!(content: "every value is an object including null", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question48 = Question.create!(content: "How do you enable access to an instance variable in Ruby? ", answer: "instance variables are private and accessed with attr_writer/reader unlike using getter/setter methods in other languages.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question49 = Question.create!(content: "What are classes and modules in Ruby?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question50 = Question.create!(content: "What are $ and @ in Ruby? ", answer: "$ and @ are scope resolution operators.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question51 = Question.create!(content: "What is the interactive command line interpreter (IRB)?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question52 = Question.create!(content: "How would you write a \"Hello World\" program in Ruby? ", answer: "puts \"Hello World\".", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question53 = Question.create!(content: "What would the following do to a Ruby array: a.flatten.uniq?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question54 = Question.create!(content: "What is the purpose of Proc.new? ", answer: "for anonymous functions.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question55 = Question.create!(content: "Does Ruby support metaprogramming, and if so, what is that? ", answer: "Yes, it's modifying at runtime class + method definitions.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question56 = Question.create!(content: "What are JRuby and Rubinius? ", answer: "JRuby is the java implementation, Rubinius is the C++ implementation.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question57 = Question.create!(content: "What is a gem? A ruby package is called a gem, and there are 70K+ on RubyGems.org", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question58 = Question.create!(content: "What is ActiveRecord?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question59 = Question.create!(content: "What is the Gemfile for?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question60 = Question.create!(content: "How would you generate a rails migration script?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question61 = Question.create!(content: "What is rake used for?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question62 = Question.create!(content: "What is Heroku?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "PL/SQL")
+if category == nil
+  category = Category.create!(name: "PL/SQL")
+end
+question63 = Question.create!(content: "How does a PL/SQL function declaration look like?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question64 = Question.create!(content: "How would you write a loop in PL/SQL using a cursor?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "DB Performance")
+if category == nil
+  category = Category.create!(name: "DB Performance")
+end
+question65 = Question.create!(content: "What are some basic things to check for when analyzing database performance? ", answer: "Indexes, query plans, memory usage, # of connections.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question66 = Question.create!(content: "Why would you use an index in a DB and what are some different types?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question67 = Question.create!(content: "What is sharding?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question68 = Question.create!(content: "What is DB partitioning?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question69 = Question.create!(content: "How would you go about examining a query plan and decide what to do with the plan details?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question70 = Question.create!(content: "Why would you specify a hint to query execution, and how would you go about that?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question71 = Question.create!(content: "What are some different types of transactions and their implications?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question72 = Question.create!(content: "How might choice of column data type affect performance?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "Web Application Performance")
+if category == nil
+  category = Category.create!(name: "Web Application Performance")
+end
+question73 = Question.create!(content: "What are some of the first things you'd look into for a poorly performing 3 tier web application?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question74 = Question.create!(content: "What are some issues requiring consideration when implementing a caching strategy in a web application?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "OOP")
+if category == nil
+  category = Category.create!(name: "OOP")
+end
+question75 = Question.create!(content: "What is encapsulation?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question76 = Question.create!(content: "What is polymorphism?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question77 = Question.create!(content: "What is information hiding?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question78 = Question.create!(content: "What is inheritance useful?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question79 = Question.create!(content: "Why would you use / create an interface, as opposed to a class?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "Design patterns")
+if category == nil
+  category = Category.create!(name: "Design patterns")
+end
+question80 = Question.create!(content: "What is UML?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question81 = Question.create!(content: "Name some design patterns.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question82 = Question.create!(content: "Describe a scenario where you'd use a singleton.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question83 = Question.create!(content: "Describe a scenario where you'd use a factory.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "Agile/Scrum, Waterfall, Kanban")
+if category == nil
+  category = Category.create!(name: "Agile/Scrum, Waterfall, Kanban")
+end
+question84 = Question.create!(content: "What is a sprint?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question85 = Question.create!(content: "What's the difference between Agile and Scrum?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question86 = Question.create!(content: "What is iterative development?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question87 = Question.create!(content: "What are the actors involved in Agile? Stake holders, developers", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question88 = Question.create!(content: "What is the Waterfall development approach?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question89 = Question.create!(content: "What are the differences between Kanban and Agile?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question90 = Question.create!(content: "Backbone.js", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question91 = Question.create!(content: "What design paradigm is Backbone.js based on? ", answer: "MVP (Model-view-presenter).", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question92 = Question.create!(content: "What dependency does Backbone.js have? ", answer: "Underscore.js.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question93 = Question.create!(content: "What is a SPA, and how does it relate to Backbone.js?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "AngularJS")
+if category == nil
+  category = Category.create!(name: "AngularJS")
+end
+question94 = Question.create!(content: "AngularJS is a JavaScript library. It is made to be more responsive to user actions with the benefit of being extended from HTLM DOM additional attributes. It is an open source, free and used vastly across the globe. It is licensed under Apache version 2.0.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question95 = Question.create!(content: "	The latest release of AngularJS was introduced on 17th Mar 2015 which is release 1.3.15 it is the current stable version", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question96 = Question.create!(content: "	AngularJS implements MVC pattern to separate presentation, data, and logic components.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question97 = Question.create!(content: "	From a developer's perspective AngularJS allows directives to be used which brings out additional functionality on top of HTML", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question98 = Question.create!(content: "	Reducing the JavaScript for having filters not just on the page but also for custom HTML table.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question99 = Question.create!(content: "	Avoid writing MVC pipeline, views are defined using HTML and directives take care of the data binding so essentially AngularJS reduces coding for a developer", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question100 = Question.create!(content: "	AngularJS is a google product along with a handful of community developers", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question101 = Question.create!(content: "	AngularJS is not in favor of DOM manipulation so that a project improves the goal of testing and performance", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question102 = Question.create!(content: "	Dependency injection feature of AngularJS brings out the coordination between server side and client side web applications very efficiently.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question103 = Question.create!(content: "	The most important feature of AngularJS is considered to be data binding.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question104 = Question.create!(content: "	In July 2012, AngularJS team built a plugin for google chrome browser that improves the debugging of web applications.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question105 = Question.create!(content: "	AngularJS Enables Massively Parallel Development", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question106 = Question.create!(content: "	AngularJS uses controller function prepared in JavaScript which is used as argument the Angular scope. Controllers are attached to the DOM through the directives", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question107 = Question.create!(content: "	Scopes in AngularJS is referring to the application model. Expressions are executed in scope. Scopes are used for watching expressions and evaluate events", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question108 = Question.create!(content: "	AngularJS as a framework is far more efficient and reliable than JQuery as it supports REST functionality, server side scripting, data modeling and etc.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question109 = Question.create!(content: "	Sometimes going through release changes could be painful in AngularJS as the base architecture gets changed and it impacts the code.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question110 = Question.create!(content: "	The functionality of no editing the templates as string and templates being just an HTML doc makes AngularJS a most used framework", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question111 = Question.create!(content: "	The MVC model is one other reason AngularJS being famous and known around the world", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question112 = Question.create!(content: "	AngularJS comes with a strong testing in-built which reduces a lot of unit/UAT for the project to deliver", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question113 = Question.create!(content: "	AngularJS is very easy to learn language from a developer perspective if you are known to web technologies like JavaScript, CSS, HTML and etc.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "Ember")
+if category == nil
+  category = Category.create!(name: "Ember")
+end
+question114 = Question.create!(content: "What is Ember Data?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question115 = Question.create!(content: "What is the Ember Inspector?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question116 = Question.create!(content: "What kind of data binding does Ember support?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question117 = Question.create!(content: "What is Handlebars.js and how does Ember use it?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "ExtJS")
+if category == nil
+  category = Category.create!(name: "ExtJS")
+end
+question118 = Question.create!(content: "What is Sencha?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "OrientDB")
+if category == nil
+  category = Category.create!(name: "OrientDB")
+end
+question119 = Question.create!(content: "OrientDB is an open source NoSQL (not only SQL) DBMS written in Java and designed to be exceptionally fast: it can store up to 220,000 records per second on common hardware. It is a document-based database, but the relationships are managed as in graph databases with direct connections between records. It supports schema-less, schema-full and schema-mixed modes and it has a strong security profiling system based on users and roles. It has a strong security profiling system based on users and roles and supports SQL as a query language. OrientDB uses a new indexing algorithm called MVRB-Tree, derived from the red'black tree and from the B+ tree; this reportedly has benefits of having both fast insertions and fast lookups.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question120 = Question.create!(content: "OrientDB is free for any use including commercial with its Apache 2 Open Source License.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question121 = Question.create!(content: "OrientDB is the first Multi-Model Open Source NoSQL DBMS that brings together the power of graphs and the flexibility of documents into one scalable, high-performance operational database.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question122 = Question.create!(content: "OrientDB query language is straightforward and easy to use, especially for those skilled in the relational DBMS world.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question123 = Question.create!(content: "OrientDB can it embed documents like any other Document database, but it manages relationships like Graph Databases with direct connections among records. You can traverse parts of or entire trees and graphs of records in a few milliseconds.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question124 = Question.create!(content: "OrientDB supports natively HTTP, RESTful protocol and JSON without use 3rd party libraries and components.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question125 = Question.create!(content: "Orient Technologies, the company behind OrientDB, offers optional Professional Services such as Developer and Production Support, Training and Consultancy with", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question126 = Question.create!(content: "transparent and competitive pricing. These options are available to ensure you're maximizing OrientDB's capabilities for your particular needs and use case.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question127 = Question.create!(content: "OrientDB is available in Community Edition (this edition is released as an open source project under the Apache 2 license)and Enterprise Edition (this edition is commercial software built on top of the Community Edition).", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "MongoDB")
+if category == nil
+  category = Category.create!(name: "MongoDB")
+end
+question128 = Question.create!(content: "Most popular NoSQL database", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question129 = Question.create!(content: "document DB, no column definition required", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question130 = Question.create!(content: "supports search by field, range queries, regular expression searches", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question131 = Question.create!(content: "Built-in sharding, for horizontal scaling", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question132 = Question.create!(content: "Queries are JavaScript expressions", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question133 = Question.create!(content: "Limited to 2.5 gig on 32 bit systems", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question134 = Question.create!(content: "Geospatial indexing", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question135 = Question.create!(content: "Data center aware", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question136 = Question.create!(content: "Master/slave replication", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question137 = Question.create!(content: "Uses memory mapped files for storage", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question138 = Question.create!(content: "Useful for: dynamic queries on big DB, with frequently changing data", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question139 = Question.create!(content: "Supports capped collections (behave like a circular queue once cap has been reached)", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question140 = Question.create!(content: "mongo is the shell, mongostat for statistics on DB", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question141 = Question.create!(content: "DB port: 28017, web interface is 29017", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question142 = Question.create!(content: "MongoDB is a document-oriented database that was released under the Apache License in 2009. The database is open-source and free. It is used as a backend software by Craigslist, eBay, Foursquare, and the New York Times. MongoDB is the most popular NoAQL database system.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question143 = Question.create!(content: " MongoDB is a document-oriented database; instead of breaking a structure up into multiple relational structures, it stores in the minimal number of documents.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question144 = Question.create!(content: " Which fields in MongoDB are indexable? ", answer: "all of them.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question145 = Question.create!(content: " What are some ways data in MongoDB is searchable? By field, range query, or regular expression.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question146 = Question.create!(content: " MongoDB is highly scalable; it can be deployed to the cloud and accessed from anywhere.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question147 = Question.create!(content: " MongoDB supports native compression, allowing users to reduce their physical storage by 80%.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question148 = Question.create!(content: " What is the Ops Manager? ", answer: "MongoDB Ops Manager can deploy, monitor, back up, and scale the database.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question149 = Question.create!(content: " How can a query plan be reviewed in MongoDB? ", answer: "Query plans can be calculated and reviewed without first running the query using the explain ( ) method.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question150 = Question.create!(content: " Mongo offers geospatial support; an airplane can run queries to see all planes that have crossed multiple hemispheres in a given time frame.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question151 = Question.create!(content: " MongoDB is based on an interactive shell called mongo, which lets developers update, view, insert and remove data.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question152 = Question.create!(content: " Mongotop is a command-line tool that allows the user to track how fast a MongoDB instance reads and writes data.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question153 = Question.create!(content: " Content can be imported and exported through the mongoimport and mongoexport commands.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question154 = Question.create!(content: " MongoDB is the fourth most popular type of database management system.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question155 = Question.create!(content: " MongoDB operates through official drivers in a variety of programming languages, and, because it is open-source, offers several unofficial drivers for other languages.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question156 = Question.create!(content: " MongoDB has received criticism for not supporting collation-based sorting.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question157 = Question.create!(content: " MongoDB can use Javascript server-side in queries, aggregation functions, and exportation.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question158 = Question.create!(content: " MongoDB can be run over multiple servers, duplicating data to keep the system running in case of hardware failure and balancing the load.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question159 = Question.create!(content: " Examples of query documents include db.collection.find(), which retrieves documents from a collection, and db.collection.find({}), which selects all documents in the collection.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question160 = Question.create!(content: " MongoDB supports compound indexes, where a single index structure references multiple fields within documents.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "Cassandra")
+if category == nil
+  category = Category.create!(name: "Cassandra")
+end
+question161 = Question.create!(content: "What is the main point of Cassandra? ", answer: "Huge datasets use a language similar to SQL.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question162 = Question.create!(content: "What are some limitations in the Cassandra query language? ", answer: "No joins or aggregate functions.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question163 = Question.create!(content: "What are some features of Cassandra? ", answer: "Supports java triggers; can have expiration on data; supports map/reduce with Hadoop; very reliable cross-datacenter replication.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question164 = Question.create!(content: "All nodes similar", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question165 = Question.create!(content: "Distributed counter datatype", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question166 = Question.create!(content: "Apache Cassandra is a NoSQL database designed to handle big data applications. Cassandra is used for mission-critical data. It is extremely decentralized, making it perfect for users and companies who cannot afford to lose access to data, even when a whole data center goes down.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question167 = Question.create!(content: "What are some companies using Cassandra? ", answer: "Cassandra is used at Constant Contact, eBay, Hulu, Instagram, Netflix, Reddit and more.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question168 = Question.create!(content: " Data is fault-tolerant because it is replicated across multiple nodes.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question169 = Question.create!(content: " Every node in a cluster is identical, so applications are decentralized.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question170 = Question.create!(content: " Cassandra is scalable linearly.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question171 = Question.create!(content: " Cassandra is based in log-structured updates but also offers the convenience of column indexes.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question172 = Question.create!(content: " Cassandra offers symmetric, P2P architecture.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question173 = Question.create!(content: " Cassandra also offers integration with Apache Hadoop and other 3rd-party applications.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question174 = Question.create!(content: " In Cassandra, rows are organized into tables with a required primary key.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question175 = Question.create!(content: "All data for a single partition must fit on a single machine in the cluster.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question176 = Question.create!(content: " A single column value may not be larger than 2 gb.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question177 = Question.create!(content: " Cassandra values availability and partitioning tolerance.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question178 = Question.create!(content: " Cassandra can write in quorum write, where it blocks until quorum is reached, or async write, where it sends requests to any node that pushes the data to the appropriate node.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question179 = Question.create!(content: " Once a writer has written, all readers will see that write.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question180 = Question.create!(content: "Cassandra writes first to the CommitLog, and then to a structure called Memtable, or write0back cache of data rows that can be looked up by key.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question181 = Question.create!(content: " Tables may be created, dropped and altered at runtime without interfering with updates or queries.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question182 = Question.create!(content: " Except for batch analysis via Apache Hadoop, Cassandra does not support subqueries.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question183 = Question.create!(content: " Writes and reads offer a tunable level of consistency.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question184 = Question.create!(content: " Cassandra writes and reads in CQL, Cassandra Query Language, an alternative to the RPC interface.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question185 = Question.create!(content: " Cassandra Language drivers are also available for Java, Python, Node.Js, and C++.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question186 = Question.create!(content: " Apple uses over 75,000 Cassandra nodes.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "HBase")
+if category == nil
+  category = Category.create!(name: "HBase")
+end
+category = Category.find_by(name: "Accumulo")
+if category == nil
+  category = Category.create!(name: "Accumulo")
+end
+question187 = Question.create!(content: "What is Accumulo? ", answer: "Apache Accumolo was first developed in 2008 and joined Apache in 2011. The software project offers sorted and distributed key/value storage. Improving upon Google BigTable Design, Apache Accumo enables cell-based access control and server-side programming mechanism.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question188 = Question.create!(content: " It is heavily influence by Google BigTable Design.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question189 = Question.create!(content: " Among the most popular noSQL (Structured Query Language), it is number three.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question190 = Question.create!(content: " It was first developed in 2008.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question191 = Question.create!(content: " It joined Apache in 2011.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question192 = Question.create!(content: " It was created by the National Security Agency.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question193 = Question.create!(content: " It was an incubator project at Apache in September 2011.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question194 = Question.create!(content: " It became a top-level project at Apache in March 21, 2012.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question195 = Question.create!(content: " It enables cell-level security and column visibility, allowing viewers to see the keys and the values they are authorized.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question196 = Question.create!(content: " It enables server-side programming, via iterators", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question197 = Question.create!(content: " It is a computer software project.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question198 = Question.create!(content: " It was built on a foundation of Apache Hadoop, Apache ZooKeeper, and Apache Thrift.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question199 = Question.create!(content: " It is written in Java.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question200 = Question.create!(content: " A reference of Accumulo was made in the Draft 2012 Department of Defense (DoD) Authorization Bill by the U.S. Senate Armed Services Committee (SASC).", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question201 = Question.create!(content: " Apache Software Foundation is a non-profit corporation in the United States.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question202 = Question.create!(content: " It enables high performance data storage and retrieval.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question203 = Question.create!(content: " Google BigTable was published in 2006.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question204 = Question.create!(content: " It features sharding.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question205 = Question.create!(content: " It features constraints that are configurable.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question206 = Question.create!(content: " It features large rows.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question207 = Question.create!(content: " It is an open source project.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "PhoneGap")
+if category == nil
+  category = Category.create!(name: "PhoneGap")
+end
+question208 = Question.create!(content: "What is PhoneGap? ", answer: "PhoneGap is a program that allows programmers to make applications for mobile devices such as phones and tablets. It uses various languages which are present on both mobile platforms and traditional computers, meaning that the applications can be viewed on either platform. It currently is supported by every major operating system, including Apple iOS, Android, and much more.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question209 = Question.create!(content: " PhoneGap was originally created by the company Nitobi.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question210 = Question.create!(content: " Nitobi, along with PhoneGap, was purchased by Adobe Systems in 2011.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question211 = Question.create!(content: " PhoneGap uses JavaScript, HTML5, and CSS3 languages for the bulk of its programming.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question212 = Question.create!(content: " The applications PhoneGap creates are designated as hybrids, since they are not truly mobile apps or computer apps, but can be used on either.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question213 = Question.create!(content: " The underlying software of PhoneGap is Apache Cordova, an open-source software.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question214 = Question.create!(content: " The stable release of the newest version of PhoneGap, 4.2.0 was on January 10th, 2015.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question215 = Question.create!(content: " PhoneGap developer's app is available on any platform and can be created cross-platform.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question216 = Question.create!(content: " Using PhoneGap, a developer can package mobile apps in the could.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question217 = Question.create!(content: " Some popular apps created with PhoneGap are HealthTap, BrowserQuest, and Untappd.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question218 = Question.create!(content: " PhoneGap is completely free.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question219 = Question.create!(content: " Apps made by PhoneGap are fully compatible with the Apple app store, even though they typically do not accept third party tools.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question220 = Question.create!(content: " Adobe gave PhoneGap to the Apache Foundation in order to keep it free and open sourced.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question221 = Question.create!(content: " PhoneGap has a plugin based architecture, meaning all features are available as plugins.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question222 = Question.create!(content: " PhoneGap does not force a developer to choose one CSS library.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question223 = Question.create!(content: " In order to use and install PhoneGap, it requires NodeJS.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question224 = Question.create!(content: " PhoneGap is advantageous because there is no need to learn native mobile application development languages for each platform because it is multi-platform.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question225 = Question.create!(content: " PhoneGap has it's own homepage, phonegap.com, where a developer can download and install it, and explore apps created with PhoneGap.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question226 = Question.create!(content: " PhoneGap creates it's own directory of developers to allow open communication and inspiration.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "Redis")
+if category == nil
+  category = Category.create!(name: "Redis")
+end
+question227 = Question.create!(content: "Redis, which is shorthand for Remote DIctionary Server, is a Pivotal Software sponsered data structure server. Most computer languages are binded to Redis, including Java and C++, among others. It is currently the most popular open-source, key value cache and store.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question228 = Question.create!(content: "There are at least 36 computer languages binded to it", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question229 = Question.create!(content: "It is a reliable Publish and Subscribe messaging system", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question230 = Question.create!(content: "Grouping commands together as a single transaction is possible", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question231 = Question.create!(content: "The keys are binary safe", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question232 = Question.create!(content: "Extremely long keys do not work well with Redis", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question233 = Question.create!(content: "String type is the simplest type of value with a key", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question234 = Question.create!(content: "The whole dataset is held in memory", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question235 = Question.create!(content: "It supports master-slave replication", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question236 = Question.create!(content: "It is currently in the beta stage of cluster specification", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question237 = Question.create!(content: "Redis is open source software", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question238 = Question.create!(content: "Amazon Web Services commonly uses Redis", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question239 = Question.create!(content: "Replication is non-blocking on the master side", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question240 = Question.create!(content: "More closely related to fundamental data structures than other key value databases", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question241 = Question.create!(content: "Redis is single-threaded", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question242 = Question.create!(content: "Has been tested to handle at least 250 million keys per instance", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question243 = Question.create!(content: "Originally started to scale LLOOGG", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question244 = Question.create!(content: "Started over 6 years ago", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question245 = Question.create!(content: "It can automatically evict old data when used as a cache", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question246 = Question.create!(content: "Maximum key size allowed is 512KB", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question247 = Question.create!(content: "very fast Disk-backed in-memory database", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question248 = Question.create!(content: "master-slave replication, automatic failover", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question249 = Question.create!(content: "Supports various data structures: sets, lists, hashes, sorted sets, or just simple values", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question250 = Question.create!(content: "Best for: rapidly changing data whose foreseeable database size should mostly fit in memory", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "Neo4J:")
+if category == nil
+  category = Category.create!(name: "Neo4J:")
+end
+question251 = Question.create!(content: "What is Neo4J? ", answer: "A graph database for connected data, like social networks or road networks.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question252 = Question.create!(content: "Does Neo4J support ACID conformity?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question253 = Question.create!(content: "Useful for: searching routes in social graphs, public transportation, road maps, networks, etc.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question254 = Question.create!(content: "What language is it oriented towards? ", answer: "Java based, supports groovy.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question255 = Question.create!(content: "Cypher pattern-matching based query language can be used", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question256 = Question.create!(content: "What is Gremlin? The graph search language for Neo4J.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "Node.js / Express.js")
+if category == nil
+  category = Category.create!(name: "Node.js / Express.js")
+end
+question257 = Question.create!(content: "Node.js is an open source runtime environment. Node.js can be used for server-side and networking applications. Some current uses include designing and implementing frameworks such as Meteor and Yahoo! Mojito. It is also used by PayPal, GoDaddy, and Groupon.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question258 = Question.create!(content: "Node.js was first published for Linux use but now operates on OS X, Linux, Solaris, FreeBSD, OpenBSD and Microsoft.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question259 = Question.create!(content: "Node is written in C, C++ and Javascript.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question260 = Question.create!(content: "Node.js uses event-driven architecture.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question261 = Question.create!(content: "Node's built-in library allows applications to act as servers without external software.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question262 = Question.create!(content: "Frameworks such as Express.js and Connect can be used to accelerate the development of applications.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question263 = Question.create!(content: "Node is similar to PHP or Python, but is a non-blocking rather than a blocking language.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question264 = Question.create!(content: "Node is built on the Google v8 Javascript engine.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question265 = Question.create!(content: "Node is open-source and has a developer community that meets annually at NodeConf.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question266 = Question.create!(content: "Node is the first platform that allows web applications with real-time, two-way connections.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question267 = Question.create!(content: "Node is best used to build fast, scalable network applications.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question268 = Question.create!(content: "Node.js operates on a single thread. That way, it supports thousands of concurrent connections.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question269 = Question.create!(content: "Node.js can handle scalability levels of over 1,000,000 concurrent connections.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question270 = Question.create!(content: "NPM Tool is a default tool for package management support.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question271 = Question.create!(content: "Node.js can be used to process files while they're being uploaded, for applications such as real-time video and audio encoding.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question272 = Question.create!(content: "Node is used by Hummingbird to track website visitors and visualize interactions in real time.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question273 = Question.create!(content: "Node should not be used for heavy sever-side computation.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question274 = Question.create!(content: "Express.js is a Node.js web app framework for building SPAs (single page applications).", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question275 = Question.create!(content: "high throughput server-side platform for (typically) web applications", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question276 = Question.create!(content: "non-blocking I/O for high throughput", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question277 = Question.create!(content: "Uses Google V8 JavaScript engine", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question278 = Question.create!(content: "Built-in library for serving web content, without the need for HTTP servers like Apache or IIS", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question279 = Question.create!(content: "Event-driven architecture", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question280 = Question.create!(content: "npm = node package manager", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question281 = Question.create!(content: "single-threaded event loop", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question282 = Question.create!(content: "Common use is for real-time web applications", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question283 = Question.create!(content: "run an application like: \"node <app name>.js\"", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question284 = Question.create!(content: "registers itself with OS to be notified when a connection is made", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question285 = Question.create!(content: "Does NOT spawn processes or threads for each connection, just the event loop", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question286 = Question.create!(content: " Because Google V8 compiles JavaScript into native machine code, Node.js is incredibly fast.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question287 = Question.create!(content: " Node is sponsored by Joyent, so it has company backing of the project's future.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question288 = Question.create!(content: " The Node community is very active, worth over 91,000 modules on npm.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "Hibernate / JPA")
+if category == nil
+  category = Category.create!(name: "Hibernate / JPA")
+end
+question289 = Question.create!(content: "What represents the application session with the DB? ", answer: "EntityManager.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question290 = Question.create!(content: "Also represents the transaction context. New EntityManager is created with each transaction in stateless model", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question291 = Question.create!(content: "EntityManager persistence operations: persist (INSERT), merge (UPDATE), remove (DELETE), find (SELECT)", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question292 = Question.create!(content: "Two main states of an object from JPA's perspective: managed, detached", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question293 = Question.create!(content: "On a rollback, all managed objects are detached", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question294 = Question.create!(content: "Persistence context tracks changes to managed objects and maintain object identity", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question295 = Question.create!(content: "Detached objects are not managed in current persistence context", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question296 = Question.create!(content: "Managed objects should only reference other managed objects; same for detached.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question297 = Question.create!(content: "Objects are inserted when persistence context is flushed or transaction is committed", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question298 = Question.create!(content: "Persist will assign id to an object with a generated id", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question299 = Question.create!(content: "IDENTITY sequencing - DB assigns ID on commit or flush", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question300 = Question.create!(content: "Persist should only be called on new objects", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question301 = Question.create!(content: "Persist can only be called on Entity objects, not embedded (done automatically) or collections", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question302 = Question.create!(content: "Cascading persist can happen depending on relationships marked as such", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question303 = Question.create!(content: "Normally merge is not required: just update fields with set methods, then commit transaction", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question304 = Question.create!(content: "EntityManager figures out what has been changed and updates DB", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question305 = Question.create!(content: "Merge is useful when using a detached object persisted by another EntityManager", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question306 = Question.create!(content: "Can only be called within a transaction (merge)", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question307 = Question.create!(content: "JPA 2.0: criteria query API, support for collections of embedded objects, ordered lists", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question308 = Question.create!(content: "JPA 2.1: (2011): converters allowing custom conversion between DB and object types,", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question309 = Question.create!(content: "allow bulk update/deletes, stored procedure calling, schema generation, entity graph partial fetching, JPQL enhancements - generic database functions, join ON, arithmetic sub-queries", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question310 = Question.create!(content: "EntityManager.remove can only be called on Entity objects", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question311 = Question.create!(content: "EntityManager.getReference may return a proxy to an object as oppposed to loading its", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question312 = Question.create!(content: "EntityManager.refresh refreshes an object from the DB, with cascades too if applicable", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question313 = Question.create!(content: "EntityManager.flush writes all changes to the DB before transaction is committed.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question314 = Question.create!(content: "EntityManager.clear clears persistence context. Any object read is now detached from that manager.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question315 = Question.create!(content: "Hibernate: can manage one-to-many, many-to-many, and reflexive associations (one-to-many with its own type)", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question316 = Question.create!(content: "Supports mapping of custom value types (can override default SQL type when mapping to a column)", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question317 = Question.create!(content: "HQL - object-oriented criteria queries", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question318 = Question.create!(content: "Works on POJOs", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question319 = Question.create!(content: "Can be configured to lazy load collections", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question320 = Question.create!(content: "Can be configured to cascade operations", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question321 = Question.create!(content: "Has a dirty checking feature to avoid unncessary writes", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question322 = Question.create!(content: "Entity vs. subordinate components (kind of like Embeddable)", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question323 = Question.create!(content: "Hibernate 3.0 was in 2005, used annotations, user defined filters", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question324 = Question.create!(content: "org.hibernate.SessionFactory, Session - represents a hibernate session", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question325 = Question.create!(content: "sessions are not expected to be thread safe nor used by multiple clients", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question326 = Question.create!(content: "Hibernate OGM (Object/Grid Mapper) - extension to store data in a NoSQL store", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question327 = Question.create!(content: "supports Shards - horizontal partitioning for multiple RDBMS", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question328 = Question.create!(content: "Hibernate Search - integrates Lucene", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question329 = Question.create!(content: "NHibernate - the .NET framework version", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "Spring Core / MVC")
+if category == nil
+  category = Category.create!(name: "Spring Core / MVC")
+end
+question330 = Question.create!(content: "What is Dependency Injection?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question331 = Question.create!(content: "What is Inversion of Control?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question332 = Question.create!(content: "What are some common XML Configuration files in Spring?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question333 = Question.create!(content: "What are some of the available Spring libraries?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question334 = Question.create!(content: "What is the open session in view pattern?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question335 = Question.create!(content: "How would you use Spring for transaction management?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question336 = Question.create!(content: "What is Aspect Oriented Programming?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question337 = Question.create!(content: "What are some annotations relevant to Spring?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question338 = Question.create!(content: "How would you set up a controller in Spring MVC?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question339 = Question.create!(content: "How would you set up a view?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "ElasticSearch")
+if category == nil
+  category = Category.create!(name: "ElasticSearch")
+end
+question340 = Question.create!(content: "What is the main point of ElasticSearch? ", answer: "Supporting advanced search on flexible complex fields.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question341 = Question.create!(content: "JSON over HTTP", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question342 = Question.create!(content: "Sorting by score", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question343 = Question.create!(content: "Sorting by geo-distance", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question344 = Question.create!(content: "Fuzzy searches", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question345 = Question.create!(content: "Async replication", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question346 = Question.create!(content: "parent + child documents", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question347 = Question.create!(content: "Very sophisticated querying", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "Zend Framework")
+if category == nil
+  category = Category.create!(name: "Zend Framework")
+end
+category = Category.find_by(name: "jQuery")
+if category == nil
+  category = Category.create!(name: "jQuery")
+end
+question348 = Question.create!(content: "What is the $ function?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question349 = Question.create!(content: "How to hide / show an element with jQuery?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question350 = Question.create!(content: "What are some jQuery effects?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question351 = Question.create!(content: "How would you get a form field value in jQuery?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "Objective C")
+if category == nil
+  category = Category.create!(name: "Objective C")
+end
+category = Category.find_by(name: "XML and related topics (XSLT)")
+if category == nil
+  category = Category.create!(name: "XML and related topics (XSLT)")
+end
+question352 = Question.create!(content: "What is XSLT?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question353 = Question.create!(content: "How might you map an array to XML?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question354 = Question.create!(content: "How might you map a hash to XML?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question355 = Question.create!(content: "What are the disadvantages to XML over other data formats such as JSON?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "Web services (RESTful vs. SOAP)")
+if category == nil
+  category = Category.create!(name: "Web services (RESTful vs. SOAP)")
+end
+question356 = Question.create!(content: "RESTful web services are any systems based on REST, which stands for Representational State Transfer. REST is an architectural style for networked hypermedia applications. RESTful services are generally lightweight, maintainable and scalable. RESTful systems communicate in HTTP, in order to capture the characteristics of the web that make it successful.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question357 = Question.create!(content: " REST relies on a stateless cacheable communications protocol, usually HTTP.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question358 = Question.create!(content: " REST eliminates the need to learn CORBA, RPC or SOAP, or other complicated languages, to communicate between machines.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question359 = Question.create!(content: " RESTful services are platform-independent, meaning they can communicate on or across any machine.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question360 = Question.create!(content: " RESTful services use no cookies; RESTful operations are self-contained and carry all information that the server needs in order to complete an operation.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question361 = Question.create!(content: " RESTful design uses nouns rather than verbs to denote resources, such as 'userdirectory' in a URL vs 'getuserdirectory.'", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question362 = Question.create!(content: " REST has no built-in security but can be carried over secure sockets.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question363 = Question.create!(content: " REST can handle simple requests or requests with more than one parameter.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question364 = Question.create!(content: " REST is now the default for web and mobile apps.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question365 = Question.create!(content: " REST provides access to resources, such as pictures, video files, business information, etc. through HTTP language. A RESTful service provides a window through which users can access these resources.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question366 = Question.create!(content: " RESTful services rely on representations of resources which are capable of linking to related resources.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question367 = Question.create!(content: " In RESTful services, client and server communicate via messages. The client sends a request to the server, and the server answers.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question368 = Question.create!(content: " Messages include a request and a resource.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question369 = Question.create!(content: " To use REST, each resource must have at least one URI, which identifies a resource or collection of resource.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question370 = Question.create!(content: " A request in a RESTful service is independent; it cannot rely on a past request.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question371 = Question.create!(content: " To rely on past requests, users can use caching, in a server, client or a proxy server.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question372 = Question.create!(content: " RESTful services can be implemented through Python, .NET, or Java.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question373 = Question.create!(content: " The entire World Wide Web is an implementation of a system built on the REST architectural style.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question374 = Question.create!(content: " Each message sent through a RESTful service contains enough information to describe how to process the message.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question375 = Question.create!(content: " Layered components are characteristic of RESTful services; proxy servers, gateways, etc. can support performance and security.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question376 = Question.create!(content: " RESTful web services use a fixed set of four operations: PUT, GET, POST, and DELETE.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "Facebook Graph API")
+if category == nil
+  category = Category.create!(name: "Facebook Graph API")
+end
+category = Category.find_by(name: "Apache / Tomcat")
+if category == nil
+  category = Category.create!(name: "Apache / Tomcat")
+end
+question377 = Question.create!(content: "Where would you look for server logs in Tomcat?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question378 = Question.create!(content: "How are web applications deployed in Tomcat?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question379 = Question.create!(content: "What is a .war file?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question380 = Question.create!(content: "How can Apache and Tomcat interact?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question381 = Question.create!(content: "What is a servlet container?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "Hadoop")
+if category == nil
+  category = Category.create!(name: "Hadoop")
+end
+question382 = Question.create!(content: "Hadoop is a project by Apache that develops open-source software for scalable, distributed computing. The Hadoop software library is a framework that allows the processing of large data sets to be distributed among simple programming models. Facebook currently runs the largest Hadoop cluster, which grows by half a PB per day. Yahoo also uses Hadoop for its Search Webmap. Hadoop accomplishes massive data storage with quick processing.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question383 = Question.create!(content: " Hadoop is open-source and free, meaning that anyone can manipulate the program to suit their needs.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question384 = Question.create!(content: " Hadoop does not require the user to preprocess data before storing it.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question385 = Question.create!(content: " If a node goes down, jobs are redirected to other nodes to make sure the distributed computing cannot fail.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question386 = Question.create!(content: " Hadoop employs Java-based HDFS distributed file system to store data.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question387 = Question.create!(content: " Flume, another component, continuously loads data from logs into Hadoop.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question388 = Question.create!(content: " The original goal of Hadoop was to search millions or billions of webpages and return relevant results.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question389 = Question.create!(content: " Hadoop is also used to store large amounts of data without the constraints of the SQL-based world.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question390 = Question.create!(content: " Hadoop is an expanding ecosystem, not a single product.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question391 = Question.create!(content: " Users can layer Hadoop over HDFS with an SQL-based product for database functionality.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question392 = Question.create!(content: " Hadoop enables more than just web analytics; data from sensory devices or risk analysis can be managed by Hadoop.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question393 = Question.create!(content: " Hadoop can handle any type of data regardless of native format.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question394 = Question.create!(content: " Through Hadoop, all data can be stored and online for real-time interactive querying.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question395 = Question.create!(content: " Hadoop's flexible structure allows data from multiple sources to be aggregated, allowing deeper analysis than any one program.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question396 = Question.create!(content: " New servers and resources can be added without having to move, reformat or changer the dependent analytic applications or workflows.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question397 = Question.create!(content: " Hadoop is composed of four core components: Hadoop Common, MapReduce, Hadoop Distributed File System (HDFS), and YARN.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question398 = Question.create!(content: " Yarn (Yet Another Resource Negotiator) assigns CPU, memory and storage to applications running on a Hadoop cluster.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question399 = Question.create!(content: " HDFS links together file systems on local nodes to create a single file system.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question400 = Question.create!(content: " Hadoop common is the module that contains utilities to support other Hadoop components, including user-created components.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question401 = Question.create!(content: " Hadoop was born out of MapReduce, a new style of data processing created by Google to handle an enormous influx of Big Data.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question402 = Question.create!(content: " Hadoop is incredibly cost-effective, storing data for hundreds of dollars per terabyte rather than thousands to tens of thousands.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "Maven")
+if category == nil
+  category = Category.create!(name: "Maven")
+end
+question403 = Question.create!(content: "How would you compare Maven to Ant?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question404 = Question.create!(content: "What is the maven central repository?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question405 = Question.create!(content: "How would you characterize the maven approach?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "Big Data")
+if category == nil
+  category = Category.create!(name: "Big Data")
+end
+question406 = Question.create!(content: "It's as much about bad data as it is about big data - unstructured, dirty, as opposed to what goes into relational database", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question407 = Question.create!(content: "How much data qualifies as big data? ", answer: "Often it's considered to be 10 TB+ as the start of real 'big data' in terms of size, going up into the PBs.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question408 = Question.create!(content: "\"Big Data\" refers to massive quantities of data, both structured and unstructured, that companies can't effectively process using standard methods. Usually this kind of data changes frequently and consists of millions of figures, making up huge quantities, such as Petabytes or Exabytes. It can also refer to the methods used for collecting this kind of information, or the technology itself.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question409 = Question.create!(content: "Big Data can refer both to the actual data set, based on it's size, or the process and technology of managing the data.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question410 = Question.create!(content: "When there is too much data to be processed using traditional methods, it is generally considered \"Big Data\".", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question411 = Question.create!(content: "The definition of \"big\" is always changing- over the years, Big Data will continue to increase in size.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question412 = Question.create!(content: "When trying to decide if a data set qualifies as Big Data, one must consider the size of the data set, the speed at which it is generated, and the variety of data.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question413 = Question.create!(content: "Big Data has a multitude of uses for companies, and can be a handy tool for improving operations.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question414 = Question.create!(content: "There are six important factors to consider when categorizing Big Data- Volume, Variety, Velocity, Variability, Veracity, and Complexity.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question415 = Question.create!(content: "Volume refers to the actual amount of data that has to be collected and managed. Large volume includes things like a customer database with details on millions of people.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question416 = Question.create!(content: "Variety is the kind of data being collected. Some examples include names, such as a census, or numbers, such as sales figures.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question417 = Question.create!(content: "Velocity refers to how quickly the information changes, or how quickly it's generated and can be processed. High velocity figures would include the number of customers served at a chain restaurant, or information about births and deaths in the world.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question418 = Question.create!(content: "Variability is how consistent the data tends to be. Inconsistencies can make processing the data more complicated.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question419 = Question.create!(content: "Veracity refers to how reliable the data tends to be. For example, data that is gathered from secondary or tertiary sources may be less reliable than data collected from a company itself.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question420 = Question.create!(content: "Complexity refers to how many different areas a data set covers. More complex data is more difficult to manage effectively.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question421 = Question.create!(content: "Data sets that qualify as Big Data can be difficult for companies to manage effectively.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question422 = Question.create!(content: "Specialized methods are typically needed for companies to gather, analyze, and manage big data.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question423 = Question.create!(content: "Some methods of managing Big Data include outsourcing to other companies, or even Crowd Sourcing to thousands of individual workers.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question424 = Question.create!(content: "Recently, people have began to develop computer programs to handle Big Data. This process is called Machine Learning.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question425 = Question.create!(content: "Big Data has been a focus of the Obama administration, including Big Data Research and Development Initiative, which explores the usefulness of Big Data in the government.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "Software Architecture")
+if category == nil
+  category = Category.create!(name: "Software Architecture")
+end
+question426 = Question.create!(content: "Vertical scaling (adding resources to a machine, splitting up by services)", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question427 = Question.create!(content: "Horizontal scaling (nodes are the same, duplicated, load balanced)", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question428 = Question.create!(content: "Caching", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question429 = Question.create!(content: "Downtime / fault-tolerance", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question430 = Question.create!(content: "Security", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question431 = Question.create!(content: "What would be your approach when upgrading a consumer facing web application that can't be down for any significant period of time ever?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "Adobe Flex")
+if category == nil
+  category = Category.create!(name: "Adobe Flex")
+end
+question432 = Question.create!(content: "What is a repeater, and are there any problems using this functionality in Flex?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question433 = Question.create!(content: "What is 2-way data binding?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question434 = Question.create!(content: "How would you configure events in Flex?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question435 = Question.create!(content: "How would you characterize the typing system in Flex?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question436 = Question.create!(content: "Basic declarations / syntax", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "JEE / J2EE")
+if category == nil
+  category = Category.create!(name: "JEE / J2EE")
+end
+question437 = Question.create!(content: "What are the main components of JEE / J2EE?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question438 = Question.create!(content: "What's the latest version and what are some new features of it?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "AWS")
+if category == nil
+  category = Category.create!(name: "AWS")
+end
+question439 = Question.create!(content: "What are some of the services under the AWS umbrella?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question440 = Question.create!(content: "What is EC2?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question441 = Question.create!(content: "What is S3?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question442 = Question.create!(content: "What is Route 53?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question443 = Question.create!(content: "What is Elastic Beanstalk?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question444 = Question.create!(content: "What are some limitations of S3?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question445 = Question.create!(content: "How does the pricing model work for some AWS services like EC2 or S3?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question446 = Question.create!(content: "What is Amazon CloudFront?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question447 = Question.create!(content: "What are some alternative cloud platforms to AWS?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "Bootstrap")
+if category == nil
+  category = Category.create!(name: "Bootstrap")
+end
+question448 = Question.create!(content: "Responsive design is?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question449 = Question.create!(content: "How do the columns work?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question450 = Question.create!(content: "Color configuration?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question451 = Question.create!(content: "What are some changes in version 3?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question452 = Question.create!(content: "What are some key Bootstrap features?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question453 = Question.create!(content: "What are some additional Boostrap related tools / resources? ", answer: "Bootply, Wrapbootstrap.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "NoSQL")
+if category == nil
+  category = Category.create!(name: "NoSQL")
+end
+question454 = Question.create!(content: "What are some key differences between NoSQL and relational databases?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question455 = Question.create!(content: "What are some prominent NoSQL products?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question456 = Question.create!(content: "What are some limitations of NoSQL DBs?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question457 = Question.create!(content: "What are the main categories of NoSQL DBs?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question458 = Question.create!(content: "How would you decide to use a NoSQL DB vs a traditional relational database?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "Less / SCSS")
+if category == nil
+  category = Category.create!(name: "Less / SCSS")
+end
+question459 = Question.create!(content: "What's the difference between LESS and SCSS?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question460 = Question.create!(content: "What are some advantages of SCSS over CSS?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "Data Structures")
+if category == nil
+  category = Category.create!(name: "Data Structures")
+end
+question461 = Question.create!(content: "When would you use a map vs array?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question462 = Question.create!(content: "How is a hash map implemented?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question463 = Question.create!(content: "When would you use a set vs. a list?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question464 = Question.create!(content: "What is an expandable array, and how do you suppose it is implemented?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question465 = Question.create!(content: "What are some tree data structure types?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question466 = Question.create!(content: "When would you use a trie?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question467 = Question.create!(content: "What is a linked list useful for?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question468 = Question.create!(content: "What is a red-black tree useful for?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question469 = Question.create!(content: "What might a Merkle tree / hash tree be useful for?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "Nginx")
+if category == nil
+  category = Category.create!(name: "Nginx")
+end
+question470 = Question.create!(content: "What is Nginx? ", answer: "Reverse proxy server for various web protocols (HTTP, HTTPS, SMTP, etc.).", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question471 = Question.create!(content: "What is the main point of Nginx? ", answer: "Focus on high concurrency, low memory usage.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question472 = Question.create!(content: "Can handle 10K simultaneous connections with low memory footprint", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question473 = Question.create!(content: "Explain how Nginx load balancing works.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question474 = Question.create!(content: "What kind of fault tolerance support does Nginx give you?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question475 = Question.create!(content: "What are some common web server features of Nginx? ", answer: "SPDY protocol support, WebSockets support, gzip compression, URL rewriting, SSI (server side includes).", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question476 = Question.create!(content: "How does Nginx support XSLT?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question477 = Question.create!(content: "What is IP based geolocation, and how does Nginx support it?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question478 = Question.create!(content: "What is bandwidth throttling and how does Nginx support it?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "Shell Scripting")
+if category == nil
+  category = Category.create!(name: "Shell Scripting")
+end
+question479 = Question.create!(content: "What are some different Unix shell types?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question480 = Question.create!(content: "How would you set an environment variable in bash?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question481 = Question.create!(content: "How can you show all environment variable settings in bash?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question482 = Question.create!(content: "How would you write a loop in bash?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question483 = Question.create!(content: "How would you manipulate a file path variable in bash (e.g. remove extension, remove all but file name)?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question484 = Question.create!(content: "How would you access script arguments?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question485 = Question.create!(content: "Input/Output/Error streams", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question486 = Question.create!(content: "What is awk?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "Unix")
+if category == nil
+  category = Category.create!(name: "Unix")
+end
+category = Category.find_by(name: "Windows")
+if category == nil
+  category = Category.create!(name: "Windows")
+end
+question487 = Question.create!(content: "Windows 7 vs Windows 8 differences", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question488 = Question.create!(content: "New features in Windows 7", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question489 = Question.create!(content: "Administration", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question490 = Question.create!(content: "Security", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question491 = Question.create!(content: "Performance tuning", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question492 = Question.create!(content: "Networking", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question493 = Question.create!(content: "Navigating the file system", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question494 = Question.create!(content: "Searching for things", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question495 = Question.create!(content: "How can you configure a service in Windows?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question496 = Question.create!(content: "How would you set an environment variable in Windows?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question497 = Question.create!(content: "What are some common utility programs in Windows?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question498 = Question.create!(content: "What are some recent Windows versions and what's different about them?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "OS X")
+if category == nil
+  category = Category.create!(name: "OS X")
+end
+question499 = Question.create!(content: "What are recent versions of OS X and what's different about them?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question500 = Question.create!(content: "What are some new features in OS X?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question501 = Question.create!(content: "How would you create a screenshot in OS X?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question502 = Question.create!(content: "What are some basic utilities in OS X?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "Mobile Development: iOS")
+if category == nil
+  category = Category.create!(name: "Mobile Development: iOS")
+end
+category = Category.find_by(name: "Android")
+if category == nil
+  category = Category.create!(name: "Android")
+end
+category = Category.find_by(name: "Struts 2")
+if category == nil
+  category = Category.create!(name: "Struts 2")
+end
+question503 = Question.create!(content: "How does Struts 2 differ from Struts?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "Browser Differences / Quirks")
+if category == nil
+  category = Category.create!(name: "Browser Differences / Quirks")
+end
+question504 = Question.create!(content: "What are some differences between recent versions of IE and Chrome?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "Development tools and VCS")
+if category == nil
+  category = Category.create!(name: "Development tools and VCS")
+end
+question505 = Question.create!(content: "Eclipse", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question506 = Question.create!(content: "IntelliJ", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question507 = Question.create!(content: "NetBeans", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question508 = Question.create!(content: "maven", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question509 = Question.create!(content: "SVN", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "Oracle")
+if category == nil
+  category = Category.create!(name: "Oracle")
+end
+question510 = Question.create!(content: "What is the default sample schema?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question511 = Question.create!(content: "What are some other default schemas?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question512 = Question.create!(content: "What is the SGA?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question513 = Question.create!(content: "What are MNON and PMON?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question514 = Question.create!(content: "What's a common utility from Oracle to load data into the DB?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "SQL Server")
+if category == nil
+  category = Category.create!(name: "SQL Server")
+end
+question515 = Question.create!(content: "What kind of concurrency control is supported by SQL Server? ", answer: "Pessimistic and optimistic.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "MySQL")
+if category == nil
+  category = Category.create!(name: "MySQL")
+end
+category = Category.find_by(name: "C++")
+if category == nil
+  category = Category.create!(name: "C++")
+end
+question516 = Question.create!(content: "Difference between references and pointers are?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question517 = Question.create!(content: "Reference to a pointer means?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question518 = Question.create!(content: "What is the STL?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question519 = Question.create!(content: "How does memory management work in C++?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question520 = Question.create!(content: "C++ has a virtual destructor. Why no virtual constructor?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question521 = Question.create!(content: "What's a virtual function?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "PHP")
+if category == nil
+  category = Category.create!(name: "PHP")
+end
+question522 = Question.create!(content: "What does a PHP 'Hello World' look like?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "C")
+if category == nil
+  category = Category.create!(name: "C")
+end
+question523 = Question.create!(content: "How do you manage memory in C?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question524 = Question.create!(content: "What the entry point to a C program?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question525 = Question.create!(content: "How are strings represented in C?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "Scala")
+if category == nil
+  category = Category.create!(name: "Scala")
+end
+category = Category.find_by(name: "Mahout")
+if category == nil
+  category = Category.create!(name: "Mahout")
+end
+question526 = Question.create!(content: "What is Mahout? ", answer: "Apache Mahout is a scalable machine learning library. Mahout has several goals. One such goal is recommendation mining, taking users' behavior and finding items that users might like. Mahout also seeks to cluster, or take text groups and sort them into groups of related documents. Mahout also classifies, or learns from existing documents what the characteristics of the group are, and then assign unlabeled documents to the correct category.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question527 = Question.create!(content: " Mahout produces free implementations of the clustering, classification and recommendation mining software.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question528 = Question.create!(content: " Mahout uses the existing Apache Hadoop platform.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question529 = Question.create!(content: " Mahout is scalable; that is, it can handle a growing amount of work by enlarging itself.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question530 = Question.create!(content: " Mahout uses machine learning algorithms also used by Netflix and Amazon to recommend similar products.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question531 = Question.create!(content: " Mahout uses both supervised and unsupervised learning.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question532 = Question.create!(content: " Supervised learning is learning a function from data labeled by the user; for example, through supervised learning of a user marking an email as spam, Mahout can learn to identify spam.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question533 = Question.create!(content: " Unsupervised learning makes sense of data without any input as to what is correct. It is used to cluster similar inputs into groups.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question534 = Question.create!(content: " Mahout is a community that was started by people involved in the Apache Lucene community, an open source search.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question535 = Question.create!(content: " An existing feature of Mahout is Taste CF, started by Sean Owen on SourceForge.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question536 = Question.create!(content: " A Mahout is a person who drives an elephant; the name comes from the yellow elephant logo of Apache Hadoop.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question537 = Question.create!(content: " Clustering with Mahout supports several clustering algorithms, including Canopy, k-means and fuzzy k-means, mean-shift, and dirichlet.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question538 = Question.create!(content: " To cluster data with Mahout, the user converts text into a numeric representation, runs the clustering algorithm using one of Mahout's driver programs, evaluates the results, and iterates if necessary.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question539 = Question.create!(content: " For categorizing, Mahout supports both a simple Map-Reduce-enabled Naive Bayes classifier and a second approach called Complementary Naive Bayes.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question540 = Question.create!(content: " The Mahout project next seeks to create Map-Reduce implementations of random decision forests for classification and more categorization options.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question541 = Question.create!(content: " Mahout provides sparse and dense implementations of matrix and vector tools.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question542 = Question.create!(content: " According to cofounder Ingersoll, Mahout is a natural fit for the cloud.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question543 = Question.create!(content: " The code is open source, so the next step is uncertain.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question544 = Question.create!(content: " Mahout uses a Parallel Matrix Factorization algorithm to predict which items a user might prefer from items she has not yet seen.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question545 = Question.create!(content: " Mahout uses Minhash Clustering algorithms to estimate similarity between data sets.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "JBoss")
+if category == nil
+  category = Category.create!(name: "JBoss")
+end
+question546 = Question.create!(content: "What is JBoss? ", answer: "JBoss now called WildFly is a Java Application Server which is open sourced. Started in 1999, JBoss was origonally authored by JBoss but is now open and developed by RedHat. This software can be used for many different things within the Java Enterprise Edition framework and also runs on many different types of Java Virtual Machine (JVM). This is an alternative software to multiple Java Application Server platforms developed by Oracle who hold the Java patents.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question547 = Question.create!(content: " This software can be used for clustering which is connecting more than one computer over a network to communicate or perform tasks.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question548 = Question.create!(content: " WildFly can perform cache distrubution which will allow for faster requests once a cache is stored for later access.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question549 = Question.create!(content: " The program allows for JavaBeans which is a system for creating GUI's for Java programs.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question550 = Question.create!(content: " WildFly can be used for switching processes to another computer in the situation of a system failure or other ordinance.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question551 = Question.create!(content: " Java Hibernate functions can be used to map from Java Classes to data sets and vice versa.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question552 = Question.create!(content: " WildFly can perform Java Authentication which is sometimes referred to as Jazz.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question553 = Question.create!(content: " WildFly can be run on multiple operating systems.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question554 = Question.create!(content: " JBoss can be used to deploy only the classes that you need for very fast deployment.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question555 = Question.create!(content: " Newer versions of JBoss get rid of .Jar dependencies so it is cleaner and easier to use.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question556 = Question.create!(content: " JBoss is very lightweight taking minimum memory usage.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question557 = Question.create!(content: " Application portability is a big deal with JBoss.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question558 = Question.create!(content: " JBoss has the ability to edit static resources without redeployment.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question559 = Question.create!(content: " There is modular design for breaking down problems and faster turn-around of broken code.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question560 = Question.create!(content: " JBoss has Arquillian tests for being able to make perfect applications by using extensive testing.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question561 = Question.create!(content: " JBoss supports Java Mail.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question562 = Question.create!(content: " JBoss has support for Load Balancing for being able to distribute workloads.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question563 = Question.create!(content: " The latest version of JBoss was certified for Java EE full profile.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question564 = Question.create!(content: " JBoss allows for deployment of apis.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question565 = Question.create!(content: " Licensing is available for 16 and 64 cores.", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "Testing Tools & Methodologies")
+if category == nil
+  category = Category.create!(name: "Testing Tools & Methodologies")
+end
+question566 = Question.create!(content: "What is TDD? ", answer: "Test Driven Development.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question567 = Question.create!(content: "What's the difference between Unit Tests and Integration Tests?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question568 = Question.create!(content: "What are regression tests?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question569 = Question.create!(content: "What are Sanity / Smoke Tests?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question570 = Question.create!(content: "What are Mockito, JUnit?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+category = Category.find_by(name: "Security Issues")
+if category == nil
+  category = Category.create!(name: "Security Issues")
+end
+question571 = Question.create!(content: "What are brute force attacks?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question572 = Question.create!(content: "What is Cross site scripting (XSS)?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question573 = Question.create!(content: "What is SQL Injection?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question574 = Question.create!(content: "What is the point of salting passwords?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question575 = Question.create!(content: "What is 2 Factor authentication?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question576 = Question.create!(content: "Plaintext password files", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question577 = Question.create!(content: "What is a secure hash?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question578 = Question.create!(content: "What is RSA?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question579 = Question.create!(content: "What is public key encryption?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
+question580 = Question.create!(content: "What is Phishing?", answer: "TODO.", user_id: 1, difficulty_id: 2, question_type_id: 1, category_id: category.id)
