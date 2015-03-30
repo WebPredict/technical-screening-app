@@ -17,14 +17,21 @@ class MembershipsController < ApplicationController
   end 
   
   def bronze
-    #@user = User.find(params[:id])
-    level = MembershipLevel.find_by(name: "Bronze")
-    security_token = params[:security_token]
-    # TODO we need some sort of security token check here to make sure they've signed up properly
-    current_user.membership_level = level
-    current_user.save
-    flash[:success] = "You are now a Bronze Membership level TechScreen member!"
-    redirect_to root_url
+    full_key = params[:customer_reference]
+    if full_key.start_with?("4RKzhs3YJMNAAV2v7Zo")
+      user_id = full_key["4RKzhs3YJMNAAV2v7Zo".length..full_key.length]
+      @user = User.find(user_id)
+      level = MembershipLevel.find_by(name: "Bronze")
+      @user.membership_level = level
+      @user.activate
+      @user.save
+      log_in @user
+      flash[:success] = "You are now a Bronze Membership level TechScreen member!"
+      redirect_to root_url
+    else
+      flash[:error] = "Problem with sign up information..."
+      redirect_to root_url
+    end 
   end 
 
   def gold

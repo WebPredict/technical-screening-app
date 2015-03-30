@@ -126,10 +126,11 @@ class QuestionsController < ApplicationController
   def clone_question
     @question = Question.find(params[:id])
     @clone_question = Question.new
-    @clone_question.content = @question.content
+    @clone_question.content = "CLONE - " + @question.content
     @clone_question.answer = @question.answer
     @clone_question.difficulty_id = @question.difficulty_id
     @clone_question.category_id = @question.category_id
+    @clone_question.question_type_id = @question.question_type_id
     @clone_question.user = current_user
     @clone_question.save
     flash[:success] = "Question cloned."

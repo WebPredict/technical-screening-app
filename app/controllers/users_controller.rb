@@ -48,11 +48,14 @@ class UsersController < ApplicationController
         flash[:info] = "Please check your email to activate your account."
         redirect_to root_url
       elsif params[:user][:membership_level_id] == "2"
-        redirect_to generate_url("https://techscreen-net.chargify.com/subscribe/g7zjvxxj/bronze")
+        redirect_to generate_url("https://techscreen-net.chargify.com/subscribe/g7zjvxxj/bronze", 
+          {customer_reference: "4RKzhs3YJMNAAV2v7Zo" + @user.id})
       elsif params[:user][:membership_level_id] == "3"
-        redirect_to generate_url("https://techscreen-net.chargify.com/subscribe/vryykwj4/gold")
+        redirect_to generate_url("https://techscreen-net.chargify.com/subscribe/vryykwj4/gold", 
+          {customer_reference: "4RKzhs3YJMNAAV2v7Zo" + @user.id})
       elsif params[:user][:membership_level_id] == "4"
-        redirect_to generate_url("https://techscreen-net.chargify.com/subscribe/zhksdhbm/platinum")
+        redirect_to generate_url("https://techscreen-net.chargify.com/subscribe/zhksdhbm/platinum", 
+          {customer_reference: "4RKzhs3YJMNAAV2v7Zo" + @user.id})
       end
       
     else

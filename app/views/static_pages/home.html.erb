@@ -11,7 +11,7 @@
         <%= render 'shared/question_form' %>
       </section>
       <section class="lists">
-        <h3>Available Tests</h3>
+        <h3>Your Custom Tests</h3>
         <% if @user.tests.any? %>
           <% @user.tests.each do |test| %>
             <div class="test_link">
