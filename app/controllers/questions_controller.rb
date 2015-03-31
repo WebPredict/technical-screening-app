@@ -18,7 +18,6 @@ class QuestionsController < ApplicationController
         query += ' AND '
       end
       query += ' category_id = ? '
-      #@category_id = params[:category_id] 
       if searchparam == ""
         @questions = Question.where(query, params[:category_id]).paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
       else

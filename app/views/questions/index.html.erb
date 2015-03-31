@@ -7,7 +7,10 @@
 <%= form_tag questions_path, :class => "nicesearch", :method => 'get' do %>
   <label>Category</label>
   <div class="field">
-        <%= select_tag(:category_id, options_from_collection_for_select(Category.all, "id", "name"), prompt: "<Filter By Technology Category>", include_blank: true, :selected => params[:category_id]) %>
+        <%= select_tag(:category_id, options_from_collection_for_select(Category.all, "id", "name"), 
+        prompt: "<Filter By Technology Category>", include_blank: true, :selected => params[:category_id],
+        :onchange => "this.form.submit();"
+        ) %>
   </div>
 
   <label>Search Terms</label>
