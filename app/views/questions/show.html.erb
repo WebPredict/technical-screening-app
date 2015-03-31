@@ -47,7 +47,9 @@
         <%= link_to "Search Questions", questions_path, class: "btn btn-primary" %> 
         
         <% if logged_in? %>
-        <%= link_to "Edit Question", edit_question_path(@question), class: "btn btn-primary" %> 
+        <% if @question.user_id == @current_user.id %>
+          <%= link_to "Edit Question", edit_question_path(@question), class: "btn btn-primary" %> 
+        <% end %>
         <%= link_to "Clone Question", clone_question_path(id: @question), class: "btn btn-primary" %> 
         <%= link_to "Manage Tests", root_path, class: "btn btn-primary" %> 
         <% else %>

@@ -3,7 +3,7 @@
       <% if question.question_type_id != 2 %>
       <%= link_to question.content, question %> 
       <% else %>
-      <%= link_to question.formatted_content, question %> 
+      <%= link_to question.formatted_content, question %>
       <% end %>
 
       <% if logged_in? && current_user.premium? %>

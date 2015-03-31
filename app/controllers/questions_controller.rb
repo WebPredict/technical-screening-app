@@ -42,8 +42,13 @@ class QuestionsController < ApplicationController
         full_question = @question.content + "||" + params[:question][:answer2] + "||" + params[:question][:answer3] + "||" + 
           params[:question][:answer4] + "||" + params[:question][:answer5]
         @question.content = full_question
+        @question.answer = params[:question][:multiple_choice_answer]
+        @question.save
+      elsif @question.question_type_id == 3
+        @question.answer = params[:question][:short_answer]
+        @question.save 
       end 
-    
+      
       if @question.save
         flash[:success] = "Question created!"
         redirect_to root_url
@@ -66,7 +71,11 @@ class QuestionsController < ApplicationController
             full_question = @question.content + "||" + params[:question][:answer2] + "||" + params[:question][:answer3] + "||" + 
               params[:question][:answer4] + "||" + params[:question][:answer5]
             @question.content = full_question
+            @question.answer = params[:question][:multiple_choice_answer]
             @question.save
+          elsif @question.question_type_id == 3
+            @question.answer = params[:question][:short_answer]
+            @question.save 
           end 
 
           format.html { redirect_to @question, notice: 'Question was successfully updated.' }
@@ -134,7 +143,7 @@ class QuestionsController < ApplicationController
     @clone_question.user = current_user
     @clone_question.save
     flash[:success] = "Question cloned."
-    redirect_to @clone_question
+    redirect_to edit_question_path(@clone_question)
   end
   
   def destroy
@@ -147,7 +156,7 @@ class QuestionsController < ApplicationController
 
     def question_params
       params.require(:question).permit(:difficulty_id, :category_id, :question_type_id, :content, 
-      :answer, :answer2, :answer3, :answer4, :answer5)
+      :answer, :answer2, :answer3, :answer4, :answer5, :short_answer, :multiple_choice_answer)
     end
     
     def correct_user

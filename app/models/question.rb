@@ -1,5 +1,5 @@
 class Question < ActiveRecord::Base
-  attr_accessor :answer2, :answer3, :answer4, :answer5
+  attr_accessor :answer2, :answer3, :answer4, :answer5, :multiple_choice_answer, :short_answer
   belongs_to :user
   belongs_to :difficulty
   belongs_to :category 
@@ -28,7 +28,7 @@ class Question < ActiveRecord::Base
     if answers.size > 4
       formatted += " D) " + answers [4]
     end 
-    
+    return formatted 
   end 
   
 end
