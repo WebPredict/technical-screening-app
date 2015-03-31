@@ -1,5 +1,16 @@
 <tr id="question-<%= question.id %>">
   <td>
+      <% if @select_mode %>
+        <%= check_box_tag "question_ids[]", question.id, @preselect_checkboxes %>
+      <% elsif current_user?(question.user) %>
+            <%= link_to "X", question, class: "btn btn-xs btn-primary", method: :delete,
+                                       data: { confirm: "Delete this question?" } %>
+                                       <div class="button-spacer"></div>
+            <%= link_to "Edit", edit_question_path(question), class: "btn btn-xs btn-primary" %>
+      <% end %>
+      
+  </td>
+  <td>
       <% if question.question_type_id != 2 %>
       <%= link_to question.content, question %> 
       <% else %>
@@ -15,15 +26,4 @@
   <td><%= question.difficulty.level %></td>
   <td><%= question.question_type.name %></td>
   <td><%= link_to question.category.name, questions_path(category_id: question.category_id)  %></td>
-  <td>
-      <% if @select_mode %>
-        <%= check_box_tag "question_ids[]", question.id, @preselect_checkboxes %>
-      <% elsif current_user?(question.user) %>
-            <%= link_to "X", question, class: "btn btn-xs btn-primary", method: :delete,
-                                       data: { confirm: "Delete this question?" } %>
-                                       <div class="button-spacer"></div>
-            <%= link_to "Edit", edit_question_path(question), class: "btn btn-xs btn-primary" %>
-      <% end %>
-      
-  </td>
 </tr>

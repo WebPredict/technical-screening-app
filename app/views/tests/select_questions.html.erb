@@ -7,8 +7,9 @@
   <%= form_tag update_questions_path, :class => "nicesearch", :method => 'post' do %>
   <%= hidden_field_tag :id, @test.id %>
     <table class="table table-bordered">
-      <tr><th><%= sortable "content", "Question" %></th><th><%= sortable "answer" %></th>
-      <th><%= sortable "difficulty" %></th><th><%= sortable "question_type" %></th><th><%= sortable "category" %></th><th>Actions</th></tr>
+      <tr><th>Include Question?</th><th><%= sortable "content", "Question" %></th><th><%= sortable "answer" %></th>
+      <th><%= sortable "difficulty" %></th><th><%= sortable "question_type" %></th><th><%= sortable "category" %></th>
+      </tr>
       <% @preselect_checkboxes = true %>
       <%= render @test_questions %>
     </table>
@@ -34,8 +35,9 @@
   <%= form_tag submit_questions_path, :class => "nicesearch", :method => 'post' do %>
   <%= hidden_field_tag :id, @test.id %>
     <table class="table table-bordered">
-      <tr><th><%= sortable "content", "Question" %></th><th><%= sortable "answer" %></th>
-      <th><%= sortable "difficulty" %></th><th><%= sortable "question_type" %></th><th><%= sortable "category" %></th><th>Actions</th></tr>
+      <tr><th>Include Question?</th><th><%= sortable "content", "Question" %></th><th><%= sortable "answer" %></th>
+      <th><%= sortable "difficulty" %></th><th><%= sortable "question_type" %></th>
+      <th><%= sortable "category" %></th></tr>
       <% @preselect_checkboxes = false %>
       <%= render @questions %>
     </table>

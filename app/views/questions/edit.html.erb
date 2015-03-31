@@ -8,6 +8,11 @@
     <%= form_for(@question) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
+  		<%= f.label :question_type %>
+  		<div class="field">
+    		<%= f.collection_select(:question_type_id, QuestionType.all, :id, :name) %>
+  		</div>
+
       <%= f.label :content %>
       <%= f.text_area :content, class: 'form-control' %>
 
@@ -47,11 +52,6 @@
       <div class="field">
       <%= f.collection_select(:category_id, Category.all, :id, :name) %>
       </div>
-
-  		<%= f.label :question_type %>
-  		<div class="field">
-    		<%= f.collection_select(:question_type_id, QuestionType.all, :id, :name) %>
-  		</div>
 
       <%= f.submit "Update Question", class: "btn btn-primary" %>
       <div class="button-spacer"></div>
