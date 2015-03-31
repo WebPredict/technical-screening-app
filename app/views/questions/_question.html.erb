@@ -14,7 +14,7 @@
 
   <td><%= question.difficulty.level %></td>
   <td><%= question.question_type.name %></td>
-  <td><%= question.category.name %></td>
+  <td><%= link_to question.category.name, questions_path(category_id: question.category_id)  %></td>
   <td>
       <% if @select_mode %>
         <%= check_box_tag "question_ids[]", question.id, @preselect_checkboxes %>
