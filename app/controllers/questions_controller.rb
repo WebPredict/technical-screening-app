@@ -50,7 +50,7 @@ class QuestionsController < ApplicationController
       
       if @question.save
         flash[:success] = "Question created!"
-        redirect_to root_url
+        redirect_to @question
       else
         @candidates = current_user.candidates
         render 'static_pages/home'
@@ -77,7 +77,10 @@ class QuestionsController < ApplicationController
             @question.save 
           end 
 
-          format.html { redirect_to @question, notice: 'Question was successfully updated.' }
+          format.html { 
+            flash[:success] = "Question was successfully updated."
+            redirect_to @question
+          }
           format.json { render :show, status: :ok, location: @question }
         else
           format.html { render :edit }
@@ -96,19 +99,23 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     
     split_answers = @question.content.split("||")
-      @question.content = split_answers [0]
-      if split_answers.size > 1
-        @question.answer2 = split_answers [1]
-      end 
-      if split_answers.size > 2
-        @question.answer3 = split_answers [2]
-      end 
-      if split_answers.size > 3
-        @question.answer4 = split_answers [3]
-      end 
-      if split_answers.size > 4
-        @question.answer5 = split_answers [4]
-      end 
+    @question.content = split_answers [0]
+    if split_answers.size > 1
+      @question.answer2 = split_answers [1]
+    end 
+    if split_answers.size > 2
+      @question.answer3 = split_answers [2]
+    end 
+    if split_answers.size > 3
+      @question.answer4 = split_answers [3]
+    end 
+    if split_answers.size > 4
+      @question.answer5 = split_answers [4]
+    end 
+    
+    if @question.question_type_id == 3
+      @question.short_answer = @question.answer
+    end
   end
 
   def show
@@ -128,7 +135,7 @@ class QuestionsController < ApplicationController
       if split_answers.size > 4
         @question.answer5 = split_answers [4]
       end 
-    end 
+    end
   end
 
   def clone_question
