@@ -41,6 +41,13 @@ class TestsController < ApplicationController
     @searched = query != ''
     add_breadcrumb "Select Questions", :select_questions_path
   end
+
+  def select_random_questions
+    @test = Test.find(params[:id])
+    @test_questions = @test.questions.paginate(page: params[:page]).order(sort_column + " " + sort_direction)
+    add_breadcrumb "Select Random Questions", :select_random_questions_path
+    flash[:info] = "Specify a list of topics to choose random questions from (e.g. \"Java, HTML, SQL\")."
+  end
   
   def send_candidate_test
     @candidate = Candidate.find(params[:id])
@@ -71,7 +78,11 @@ class TestsController < ApplicationController
       @test = current_user.tests.build(test_params)
       if @test.save
         flash[:success] = "Test created!"
-        redirect_to select_questions_path(id: @test.id)
+        if params[:commit] == "Select Random Questions"
+          redirect_to select_random_questions_path(id: @test.id)
+        else
+          redirect_to select_questions_path(id: @test.id)
+        end 
       else
         render 'edit'
       end
@@ -111,6 +122,35 @@ class TestsController < ApplicationController
     redirect_to @test
   end
 
+  def submit_random_questions
+    topic_list = params[:topic_list].split(",")
+    num_per_topic = params[:num_per_topic]
+    if topic_list != nil
+      @test = Test.find(params[:id])
+      topic_list.each do |topic|
+        category = Category.find_by(name: topic.strip!)
+        if category != nil
+          cat_questions = Question.where("category_id = " + category.id.to_s)
+          (1..num_per_topic.to_i).each do |index|
+            random_question = cat_questions [Random.new.rand(cat_questions.size)]
+            @test.questions << random_question
+          end
+        else
+          cat_questions = Question.where("lower(content) like '%" + topic + "%'")
+          (1..num_per_topic.to_i).each do |index|
+            random_question = cat_questions [Random.new.rand(cat_questions.size)]
+            @test.questions << random_question
+          end
+        end
+        
+        @test.save 
+      end
+      
+    end
+    flash[:success] = "Test questions added."
+    redirect_to @test
+  end
+  
   def update_questions 
     @questions = Question.find(params[:question_ids])
     @test = Test.find(params[:id])
@@ -155,7 +195,7 @@ class TestsController < ApplicationController
   private
 
     def test_params
-      params.require(:test).permit(:name, :description, :question_ids, :is_public)
+      params.require(:test).permit(:name, :description, :question_ids, :is_public, :topic_list, :num_per_topic)
     end
     
     def correct_user

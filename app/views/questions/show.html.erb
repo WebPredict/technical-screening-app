@@ -1,5 +1,19 @@
 <% provide(:title, @question.content) %>
 <div class="page-header">
+  <section style="float:right">
+    <%= link_to "Search Questions", questions_path, class: "btn btn-sm btn-primary" %> 
+    
+    <% if logged_in? %>
+      <%= link_to "Create New Question", new_question_path, class: "btn btn-sm btn-primary" %> 
+      <% if @question.user_id == @current_user.id %>
+        <%= link_to "Edit Question", edit_question_path(@question), class: "btn btn-sm btn-primary" %> 
+      <% end %>
+    <%= link_to "Clone Question", clone_question_path(id: @question), class: "btn btn-sm btn-primary" %> 
+    <%= link_to "Manage Tests", root_path, class: "btn btn-sm btn-primary" %> 
+    <% else %>
+    <%= link_to "Sign Up", signup_path, class: "btn btn-sm btn-primary" %> 
+    <% end %>        
+  </section>
   <h3>Question Details</h3>
 </div>
 
@@ -45,20 +59,6 @@
 			<h4>Type: </h4> <%= @question.question_type.name %>
 		</section>
 		<br>
-    <section>
-        <%= link_to "Search Questions", questions_path, class: "btn btn-sm btn-primary" %> 
-        
-        <% if logged_in? %>
-          <%= link_to "Create New Question", new_question_path, class: "btn btn-sm btn-primary" %> 
-          <% if @question.user_id == @current_user.id %>
-            <%= link_to "Edit Question", edit_question_path(@question), class: "btn btn-sm btn-primary" %> 
-          <% end %>
-        <%= link_to "Clone Question", clone_question_path(id: @question), class: "btn btn-sm btn-primary" %> 
-        <%= link_to "Manage Tests", root_path, class: "btn btn-sm btn-primary" %> 
-        <% else %>
-        <%= link_to "Sign Up", signup_path, class: "btn btn-sm btn-primary" %> 
-        <% end %>        
-    </section>
   </div>
 </div>
 

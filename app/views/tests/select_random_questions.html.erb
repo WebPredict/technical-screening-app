@@ -1,0 +1,21 @@
+<% provide(:title, 'Select Random Test Questions') %>
+
+<div class="page-header">
+  <h3>Select Categories For Random Question Creation For Test '<%= @test.name %>'</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+  <%= form_tag submit_random_questions_path, :method => 'post' do %>
+    <%= hidden_field_tag :id, @test.id %>
+    
+      <%= label_tag :topic_list, "Comma separated topic list:" %>
+      <%= text_field_tag :topic_list, "Java, SQL", class: 'form-control' %>
+
+      <%= label_tag :num_per_topic, "Number of questions per topic:" %>
+      <%= text_field_tag :num_per_topic, "5", class: 'form-control' %>
+
+    <input class="btn btn-lg btn-primary" name="commit" type="submit" value="Add Random Questions" />
+  <% end %>
+  </div>
+</div>

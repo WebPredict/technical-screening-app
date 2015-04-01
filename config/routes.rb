@@ -23,8 +23,10 @@ Rails.application.routes.draw do
   delete 'logout'  => 'sessions#destroy'
   
   get 'select_questions' => 'tests#select_questions'
+  get 'select_random_questions' => 'tests#select_random_questions'
   post 'update_questions' => 'tests#update_questions'
   post 'submit_questions' => 'tests#submit_questions'
+  post 'submit_random_questions' => 'tests#submit_random_questions'
   get 'send_candidate_test' => 'tests#send_candidate_test'
   get 'clone_question' => 'questions#clone_question'
   get 'test_results' => 'tests#results'
