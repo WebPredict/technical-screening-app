@@ -123,12 +123,15 @@ class TestsController < ApplicationController
   end
 
   def submit_random_questions
-    topic_list = params[:topic_list].split(",")
+    topic_list = params[:topic_list].split(",").map(&:strip)
     num_per_topic = params[:num_per_topic]
     if topic_list != nil
       @test = Test.find(params[:id])
       topic_list.each do |topic|
-        category = Category.find_by(name: topic.strip!)
+        if topic == nil
+          next
+        end
+        category = Category.find_by(name: topic)
         if category != nil
           cat_questions = Question.where("category_id = " + category.id.to_s)
           (1..num_per_topic.to_i).each do |index|
@@ -137,9 +140,11 @@ class TestsController < ApplicationController
           end
         else
           cat_questions = Question.where("lower(content) like '%" + topic + "%'")
-          (1..num_per_topic.to_i).each do |index|
-            random_question = cat_questions [Random.new.rand(cat_questions.size)]
-            @test.questions << random_question
+          if cat_questions != nil && cat_questions.size > 0
+            (1..num_per_topic.to_i).each do |index|
+              random_question = cat_questions [Random.new.rand(cat_questions.size)]
+              @test.questions << random_question
+            end
           end
         end
         
