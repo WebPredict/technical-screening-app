@@ -4,6 +4,9 @@ class TestsController < ApplicationController
   
   helper_method :sort_column, :sort_direction
   
+  add_breadcrumb "Home", :root_path
+  add_breadcrumb "Tests", :tests_path
+
   def index
     query = ' (is_public = ? OR user_id = ? ) '
     searchparam = ""
@@ -36,6 +39,7 @@ class TestsController < ApplicationController
 
     @select_mode = true
     @searched = query != ''
+    add_breadcrumb "Select Questions", :select_questions_path
   end
   
   def send_candidate_test
@@ -119,6 +123,7 @@ class TestsController < ApplicationController
   def new
     @test = Test.new
     @select_mode = true
+    add_breadcrumb "New Test", :new_test_path
   end
   
   def sent
@@ -132,11 +137,13 @@ class TestsController < ApplicationController
   # GET /tests/1/edit
   def edit
     @test = Test.find(params[:id])
+    add_breadcrumb "Edit Test", :edit_test_path
   end
 
   def show
     @test = Test.find(params[:id])
     @test_questions = @test.questions.paginate(page: params[:page]).order(sort_column + " " + sort_direction)
+    add_breadcrumb "Show Test", :test_path
   end
 
   def destroy

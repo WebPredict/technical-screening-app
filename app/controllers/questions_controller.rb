@@ -4,6 +4,9 @@ class QuestionsController < ApplicationController
   
   helper_method :sort_column, :sort_direction
   
+  add_breadcrumb "Home", :root_path
+  add_breadcrumb "Questions", :questions_path
+  
   def index
     query = ''
     searchparam = ""
@@ -92,6 +95,7 @@ class QuestionsController < ApplicationController
   
   def new
     @question = Question.new
+    add_breadcrumb "New Question", new_question_path
   end
 
   # GET /questions/1/edit
@@ -116,6 +120,7 @@ class QuestionsController < ApplicationController
     if @question.question_type_id == 3
       @question.short_answer = @question.answer
     end
+    add_breadcrumb "Edit Question", edit_question_path
   end
 
   def show
@@ -136,6 +141,7 @@ class QuestionsController < ApplicationController
         @question.answer5 = split_answers [4]
       end 
     end
+    add_breadcrumb "Show Question", question_path
   end
 
   def clone_question

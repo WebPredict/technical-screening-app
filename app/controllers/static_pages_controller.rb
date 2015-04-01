@@ -1,6 +1,8 @@
 class StaticPagesController < ApplicationController
   helper_method :sort_column, :sort_direction
 
+  add_breadcrumb "Home", :root_path
+
   def home
     if logged_in?
       
@@ -57,12 +59,15 @@ class StaticPagesController < ApplicationController
   end
   
   def help
+    add_breadcrumb "Help", :root_path
   end
   
   def about
+    add_breadcrumb "About", :root_path
   end
 
   def contact
+    add_breadcrumb "Contact", :contact_path
   end 
   
   def sort_column

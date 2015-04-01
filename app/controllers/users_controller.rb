@@ -3,7 +3,10 @@ class UsersController < ApplicationController
                                         :following, :followers]
   before_action :correct_user, only: [:edit, :update]
   before_action :admin_user,     only: :destroy
-                                        
+                  
+                  
+  add_breadcrumb "Home", :root_path
+                      
   # GET /users
   # GET /users.json
   def index
@@ -24,6 +27,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @tests = @user.tests.paginate(page: params[:page])
+    add_breadcrumb "Show Profile", :user_path
   end
 
   # GET /users/new
@@ -35,6 +39,7 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
+    add_breadcrumb "Edit Profile", :edit_user_path
   end
 
   # POST /users

@@ -2,6 +2,9 @@ class CompaniesController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
   before_action :correct_user,   only: :destroy
   
+  add_breadcrumb "Home", :root_path
+  add_breadcrumb "Companies", :companies_path
+
   def index
     query = ''
     searchparam = ""

@@ -2,6 +2,9 @@ class TestSubmissionsController < ApplicationController
   #before_action :logged_in_user, only: [:create, :destroy]
   #before_action :correct_user,   only: :destroy
   
+  add_breadcrumb "Home", :root_path
+  add_breadcrumb "Test Submissions", :test_submissions_path
+
   helper_method :sort_column, :sort_direction
   
   def index
@@ -67,6 +70,7 @@ class TestSubmissionsController < ApplicationController
 
   def forward_submission
     @test_submission = TestSubmission.find(params[:id])
+      add_breadcrumb "Forward Submission", :forward_submission_path
   end
   
   def submit_forward_submission
@@ -78,6 +82,7 @@ class TestSubmissionsController < ApplicationController
   
   def score_test
     @test_submission = TestSubmission.find(params[:id])
+    add_breadcrumb "Score Test", :score_test_path
   end
   
   def update
@@ -95,19 +100,6 @@ class TestSubmissionsController < ApplicationController
     redirect_to root_url
   end
   
-  def update_old
-    @test_submission = TestSubmission.find(params[:id])
-    respond_to do |format|
-      if @test_submission.update_attributes(test_submission_params)
-        format.html { redirect_to @test_submission, notice: 'Test submission was successfully updated.' }
-        format.json { render :show, status: :ok, location: @test_submission }
-      else
-        format.html { render :edit }
-        format.json { render json: @test_submission.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-  
   def new
     @test_submission = TestSubmission.new
     @test_submission.test = Test.find(params[:id])
@@ -115,6 +107,7 @@ class TestSubmissionsController < ApplicationController
     @test_submission.test.questions.each do |question|
       @test_submission.answered_questions.build(question_id: question.id)
     end
+      add_breadcrumb "New Submission", :new_test_submission_path
   end
 
   def start_test
@@ -137,11 +130,13 @@ class TestSubmissionsController < ApplicationController
   # GET /test_submissions/1/edit
   def edit
     @test_submission = TestSubmission.find(params[:id])
+    add_breadcrumb "Edit Test Submission", :edit_test_submission_path
   end
 
   def show
     @test_submission = TestSubmission.find(params[:id])
     @test_submission_answers = @test_submission.answered_questions.paginate(page: params[:page]).order(sort_column + " " + sort_direction)
+    add_breadcrumb "Show Test Submission", :test_submission_path
   end
 
   def destroy
