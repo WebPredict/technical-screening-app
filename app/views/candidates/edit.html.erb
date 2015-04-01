@@ -1,12 +1,10 @@
 <% provide(:title, 'Edit Candidate') %>
 <div class="page-header">
   <h3>Edit Candidate Details</h3>
-  <div class="row">
-  <div class="col-md-12">
-        <%= link_to "Send Test", send_candidate_test_path(id: @candidate.id), :class => "btn btn-primary" %>
-        <%= link_to "Dashboard", root_path, class: "btn btn-primary" %>
-  </div>
-</div>
+  <section style="float:right">
+        <%= link_to "Send Test", send_candidate_test_path(id: @candidate.id), :class => "btn btn-sm btn-primary" %>
+        <%= link_to "Dashboard", root_path, class: "btn btn-sm btn-primary" %>
+  </section>
 </div>
 
 <div class="row">

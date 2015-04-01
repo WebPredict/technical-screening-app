@@ -29,12 +29,12 @@
       <% end %>
     </section>
     <section>
-        <%= link_to "Dashboard", root_path, class: "btn btn-primary" %> 
-        <%= link_to "Send Test", send_candidate_test_path(id: @candidate.id), :class => "btn btn-primary" %>
-        <%= link_to "Results", candidate_submissions_path(candidate_id: @candidate.id), :class => "btn btn-primary" %>
-        <%= link_to "Edit Candidate", edit_candidate_path(@candidate), class: "btn btn-primary" %> 
+        <%= link_to "Dashboard", root_path, class: "btn btn-sm btn-primary" %> 
+        <%= link_to "Send Test", send_candidate_test_path(id: @candidate.id), :class => "btn btn-sm btn-primary" %>
+        <%= link_to "Results", candidate_submissions_path(candidate_id: @candidate.id), :class => "btn btn-sm btn-primary" %>
+        <%= link_to "Edit Candidate", edit_candidate_path(@candidate), class: "btn btn-sm btn-primary" %> 
         <%= link_to "Remove Candidate", @candidate, method: :delete,
-                           data: { confirm: "Delete this candidate?" }, :class => "btn btn-warning" %>
+                           data: { confirm: "Delete this candidate?" }, :class => "btn btn-sm btn-warning" %>
     </section>
   </div>
 </div>

@@ -1,13 +1,11 @@
 <% provide(:title, 'Edit Question') %>
 <div class="page-header">
+<section style="float:right">
+        <%= link_to "Dashboard", root_path, class: "btn btn-primary btn-sm" %>
+        <%= link_to "Search Questions", questions_path, class: "btn btn-primary btn-sm" %>
+        <%= link_to "Search Tests", tests_path, class: "btn btn-primary btn-sm" %>
+  </section>
   <h3>Edit Question</h3>
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-        <%= link_to "Dashboard", root_path, class: "btn btn-primary" %>
-        <%= link_to "Search Questions", questions_path, class: "btn btn-primary" %>
-        <%= link_to "Search Tests", tests_path, class: "btn btn-primary" %>
-  </div>
-</div>
 </div>
 
 <div class="row">

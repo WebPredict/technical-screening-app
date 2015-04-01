@@ -10,9 +10,10 @@
       <%= f.label :name, "Name Your Test Submission (optional):" %>
       <%= f.text_field :name, class: 'form-control' %>
       <%= hidden_field_tag :test_id, @test_submission.test.id %>
-        <br>
+        <strong>There are <%= @test_submission.test.questions.count %> question(s) in this test.</strong>
+        <br><br>
           <%= f.fields_for :answered_questions do |aq_form|%>
-          <section><strong>Question:</strong> 
+          <section><strong>Question #<%= aq_form.index + 1 %>:</strong> 
           
           <% if @test_submission.answered_questions[aq_form.index].question.question_type_id == 2 %>
             <%= @test_submission.answered_questions[aq_form.index].question.formatted_content %>

@@ -102,6 +102,7 @@ class TestSubmissionsController < ApplicationController
   
   def new
     @test_submission = TestSubmission.new
+    @test_submission.name = "My Test Submission"
     @test_submission.test = Test.find(params[:id])
 
     @test_submission.test.questions.each do |question|
