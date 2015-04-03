@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   get 'candidate_submissions' => 'test_submissions#candidate_submissions'
   post 'submit_forward_submission' => 'test_submissions#submit_forward_submission'
   get 'forward_submission' => 'test_submissions#forward_submission'
+  post 'auto_score_test' => 'test_submissions#auto_score'
   
   resources :companies
 

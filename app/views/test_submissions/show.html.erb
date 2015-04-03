@@ -4,6 +4,7 @@
       <section style="float:right">
         <%= link_to "Candidate Details", @test_submission.candidate, class: "btn btn-sm btn-primary" %> 
         <%= link_to "Score Test", score_test_path(id: @test_submission.id), class: "btn btn-sm btn-primary" %> 
+        <%= link_to "Auto Score Test", auto_score_test_path(id: @test_submission.id), class: "btn btn-sm btn-primary", :method => :post %> 
         <%= link_to "Dashboard", root_path, class: "btn btn-sm btn-primary" %> 
       </section>
     <% end %>

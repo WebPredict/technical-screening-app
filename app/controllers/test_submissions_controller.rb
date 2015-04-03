@@ -99,6 +99,29 @@ class TestSubmissionsController < ApplicationController
     flash[:success] = "Test scored!"
     redirect_to root_url
   end
+
+  def auto_score
+    @test_submission = TestSubmission.find(params[:id])
+    @test_submission.answered_questions.each do |aq|
+      if aq.question.question_type_id == 3
+        if aq.answer.downcase.strip! == aq.question.answer.downcase.strip!
+          aq.correct = true
+        else
+          aq.correct = false
+        end
+        aq.save
+      elsif aq.question.question_type_id == 2
+        if aq.answer[0] == aq.question.answer[0]
+          aq.correct = true
+        else
+          aq.correct = false
+        end
+        aq.save
+      end
+    end
+    flash[:success] = "Test result was auto-scored to the extent possible (only multiple choice, short phrase questions)."
+    redirect_to root_url
+  end
   
   def new
     @test_submission = TestSubmission.new

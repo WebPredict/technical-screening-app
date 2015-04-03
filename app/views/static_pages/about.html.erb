@@ -24,3 +24,33 @@
     <p>Invite as many interview candidates as you'd like to take your tests, score and manage the results (as a premium member).</p>
   </div>
 </div>
+
+<div class="row">
+  <div class="col-md-12">
+    <h1>Technical Interview Screening Questions Include:</h1>
+  </div>
+</div>
+    
+<div class="row">
+  <div class="col-md-4">
+    <ul>
+    <% @categories_first.each do |category| %>
+    <li><%= link_to category.name, questions_path(category_id: category) %></li>
+    <% end %>
+    </ul>
+  </div>
+    <div class="col-md-4">
+    <ul>
+    <% @categories_second.each do |category| %>
+    <li><%= link_to category.name, questions_path(category_id: category) %></li>
+    <% end %>
+    </ul>
+  </div>
+  <div class="col-md-4">
+    <ul>
+    <% @categories_third.each do |category| %>
+    <li><%= link_to category.name, questions_path(category_id: category) %></li>
+    <% end %>
+    </ul>
+  </div>
+</div>
