@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   root 'static_pages#home'
   get 'help'    => 'static_pages#help'
   get 'about'   => 'static_pages#about'
+  get 'all_categories'   => 'static_pages#all_categories'
   get 'contact' => 'static_pages#contact'
   get 'plans' => 'memberships#plans'
   get 'bronze' => 'memberships#bronze'

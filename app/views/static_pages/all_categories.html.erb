@@ -1,0 +1,30 @@
+<% provide(:title, "About") %>
+<div class="page-header">
+    <h3>Current Technical Interview Screening Category List</h3>
+</div>
+    
+<div class="row">
+  <div class="col-md-4">
+    <ul>
+    <% @categories_first.each do |category| %>
+    <li><%= link_to category.name, questions_path(category_id: category) %></li>
+    <% end %>
+    </ul>
+  </div>
+    <div class="col-md-4">
+    <ul>
+    <% @categories_second.each do |category| %>
+    <li><%= link_to category.name, questions_path(category_id: category) %></li>
+    <% end %>
+    </ul>
+  </div>
+  <div class="col-md-4">
+    <ul>
+    <% @categories_third.each do |category| %>
+    <li><%= link_to category.name, questions_path(category_id: category) %></li>
+    <% end %>
+    </ul>
+  </div>
+</div>
+
+<h1><%= image_tag("big-logo.png") %></h1>
