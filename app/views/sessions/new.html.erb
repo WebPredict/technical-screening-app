@@ -17,9 +17,14 @@
         <span>Remember me on this computer</span>
       <% end %>
       
-      <%= f.submit "Log in", class: "btn btn-primary" %>
+      <div class="form-group">
+          <div style="float:right">
+        <%= f.submit "Log in", class: "btn btn-primary" %>
+        <span></span>New user? <%= link_to "Sign up now!", signup_path %>
+        </div>
+      </div>
+      
     <% end %>
 
-    <p>New user? <%= link_to "Sign up now!", signup_path %></p>
   </div>
 </div>
