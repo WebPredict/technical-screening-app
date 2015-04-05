@@ -13,15 +13,15 @@
       <% @preselect_checkboxes = true %>
       <%= render @test_questions %>
     </table>
-    <%= will_paginate @test_questions %>
         <div class="form-group">
           <div style="float:right">
           <input class="btn btn-primary" name="commit" type="submit" value="Update" />
         </div>
         </div>
+    <%= will_paginate @test_questions %>
   <% end %>
 <% end %>
-
+<br>
 <h3>Select Additional Questions</h3>
 <div class="row">
 <%= form_tag select_questions_path, :class => "nicesearch", :method => 'get' do %>
