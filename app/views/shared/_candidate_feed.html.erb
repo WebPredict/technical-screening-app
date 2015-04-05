@@ -13,12 +13,14 @@
           <%= link_to "Show Highest Scoring", root_path(show_all: "true"), :class => "btn btn-sm btn-default" %>
         <% end %>
       </div>
-  <table class="table">
-    <tr><th><%= sortable "name" %></th><th><%= sortable "email" %></th><th><%= sortable "phone" %></th><th>Created</th><th>Results</th><th>Actions</th></tr>
-    <tbody>
-    <%= render @candidates %>
-    </tbody>
-  </table>
+      <div class="table-responsive">
+      <table class="table">
+        <tr><th><%= sortable "name" %></th><th><%= sortable "email" %></th><th><%= sortable "phone" %></th><th>Created</th><th>Results</th><th>Actions</th></tr>
+        <tbody>
+        <%= render @candidates %>
+        </tbody>
+      </table>
+      </div>
   <%= will_paginate @candidates %>
 <% else %>
 <h3>No candidates yet.</h3>

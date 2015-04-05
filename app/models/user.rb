@@ -82,6 +82,7 @@ class User < ActiveRecord::Base
   # Sends activation email.
   def send_activation_email
     UserMailer.account_activation(self).deliver_now
+    UserMailer.notify_of_new_user(self).deliver_now
   end
   
   private
