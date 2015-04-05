@@ -56,7 +56,7 @@ class QuestionsController < ApplicationController
         redirect_to @question
       else
         @candidates = current_user.candidates
-        render 'static_pages/home'
+        render 'new'
       end
     end
   end

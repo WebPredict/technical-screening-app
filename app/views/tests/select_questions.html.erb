@@ -14,7 +14,11 @@
       <%= render @test_questions %>
     </table>
     <%= will_paginate @test_questions %>
-    <input class="btn btn-lg btn-primary" name="commit" type="submit" value="Update" />
+        <div class="form-group">
+          <div style="float:right">
+          <input class="btn btn-primary" name="commit" type="submit" value="Update" />
+        </div>
+        </div>
   <% end %>
 <% end %>
 
@@ -43,12 +47,9 @@
     </table>
         <div class="form-group">
           <div style="float:right">
-          <label class="col-md-3 control-label"></label>
-          <div class="col-md-8">
           <input class="btn btn-primary" name="commit" type="submit" value="Add Questions" />
             <span></span>
             <%= link_to "Cancel", questions_path, class: "btn btn-default" %>
-          </div>
         </div>
         </div>
 
