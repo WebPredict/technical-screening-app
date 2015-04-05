@@ -11,7 +11,17 @@
       <%= label_tag :num_per_topic, "Number of questions per topic:" %>
       <%= text_field_tag :num_per_topic, "5", class: 'form-control' %>
 
-    <input class="btn btn-lg btn-primary" name="commit" type="submit" value="Add Random Questions" />
+        <div class="form-group">
+          <div style="float:right">
+          <label class="col-md-3 control-label"></label>
+          <div class="col-md-8">
+            <input class="btn btn-primary" name="commit" type="submit" value="Add Random Questions" />
+            <span></span>
+            <%= link_to "Cancel", questions_path, class: "btn btn-default" %>
+          </div>
+        </div>
+        </div>
+
   <% end %>
   </div>
 </div>

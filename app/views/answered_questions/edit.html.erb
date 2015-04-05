@@ -24,8 +24,16 @@
       <%= f.collection_select(:category_id, Category.all, :id, :name) %>
       </div>
 
-      <%= f.submit "Update Question", class: "btn btn-primary" %>
-        <%= link_to "Dashboard", root_path, class: "btn btn-success" %>
+        <div class="form-group">
+            <div style="float:right">
+            <label class="col-md-3 control-label"></label>
+            <div class="col-md-8">
+              <input type="button" class="btn btn-primary" value="Update Question">
+              <span></span>
+              <%= link_to "Cancel", root_path, class: "btn btn-default" %>
+            </div>
+          </div>
+        </div>
     <% end %>
   </div>
 </div>

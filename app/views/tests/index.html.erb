@@ -39,6 +39,7 @@
     <% end %>
 
       <% if @single_test_select %>    
+      <br>
         <%= form_tag select_test_path, :class => "nicesearch", :method => 'post' do %>
         <%= hidden_field_tag :id, @candidate.id %>
         <table class="table table-bordered">
@@ -46,8 +47,19 @@
           <th><%= sortable "created_at" %></th><th>Select Test</th></tr>
           <%= render @tests %>
         </table>
+
+        <div class="form-group">
+          <div style="float:right">
+          <label class="col-md-3 control-label"></label>
+          <div class="col-md-8">
+            <%= submit_tag "Send Selected Test To Candidate", :class => "btn btn-primary" %>
+            <span></span>
+            <%= link_to "Cancel", root_path, class: "btn btn-default" %>
+          </div>
+        </div>
+        </div>
+
         <%= will_paginate @tests %>
-        <%= submit_tag "Send Selected Test To Candidate", :class => "btn btn-primary" %>
         <% end %>
       <% else %>
         <table class="table table-bordered">
