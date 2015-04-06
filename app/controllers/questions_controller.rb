@@ -11,9 +11,13 @@ class QuestionsController < ApplicationController
     query = ''
     searchparam = ""
     paramarr = []
+    @questions = nil
     if params[:search] && params[:search] != ''
         query += ' lower(content) LIKE ? '
         searchparam = "%#{params[:search].downcase}%"
+        @questions = Question.where(query, searchparam)
+    else
+      @questions = Question.all
     end
 
     if params[:category_id] && params[:category_id] != ''
@@ -21,15 +25,21 @@ class QuestionsController < ApplicationController
         query += ' AND '
       end
       query += ' category_id = ? '
-      if searchparam == ""
-        @questions = Question.where(query, params[:category_id]).paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
-      else
-        @questions = Question.where(query, searchparam, params[:category_id]).paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
-      end  
-    else
-      @questions = Question.where(query, searchparam).paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
+      
+      @questions = @questions.where(query, params[:category_id])
+    end
+    
+    if params[:difficulty_id] && params[:difficulty_id] != ''
+      if query != ''
+        query += ' AND '
+      end
+      query += ' difficulty_id = ? '
+      
+      @questions = @questions.where(query, params[:difficulty_id])
     end
 
+    @questions = @questions.paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
+  
     @select_mode = false
     @searched = query != ''
   end
