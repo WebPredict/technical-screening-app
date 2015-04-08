@@ -10,31 +10,23 @@ class QuestionsController < ApplicationController
   def index
     query = ''
     searchparam = ""
-    paramarr = []
     @questions = nil
     if params[:search] && params[:search] != ''
-        query += ' lower(content) LIKE ? '
+        query = ' lower(content) LIKE ? OR lower(answer) LIKE ? '
         searchparam = "%#{params[:search].downcase}%"
-        @questions = Question.where(query, searchparam)
+        @questions = Question.where(query, searchparam, searchparam)
     else
       @questions = Question.all
     end
 
     if params[:category_id] && params[:category_id] != ''
-      if query != ''
-        query += ' AND '
-      end
-      query += ' category_id = ? '
+      query = ' category_id = ? '
       
       @questions = @questions.where(query, params[:category_id])
     end
     
     if params[:difficulty_id] && params[:difficulty_id] != ''
-      if query != ''
-        query += ' AND '
-      end
-      query += ' difficulty_id = ? '
-      
+      query = ' difficulty_id = ? '
       @questions = @questions.where(query, params[:difficulty_id])
     end
 
