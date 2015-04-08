@@ -11,7 +11,11 @@
         <%= render 'shared/question_form' %>
       </section>
       <section class="lists">
-        <h3>Your Custom Tests</h3>
+      <div class="panel panel-default">
+      <div class="panel-heading">
+      <h3 class="panel-title">Your Custom Tests</h3>
+      </div>
+        <div class="panel-body">
         <% if @user.tests.any? %>
           <% @user.tests.each do |test| %>
             <div class="test_link">
@@ -21,6 +25,8 @@
         <% end %>
         <div class="other">
           <%= link_to "Create Test", new_test_path, :class => "btn btn-med btn-primary" %>
+        </div>
+        </div>
         </div>
       </section>
     </aside>

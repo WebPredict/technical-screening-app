@@ -8,29 +8,21 @@
       </h3>
     </section>
     <br>
-    <section>
-      <strong>Name: </strong><%= @user.name %></strong>
-    </section>
-    <section>
-      <strong>Email: </strong><%= @user.email %></strong>
-    </section>
-    <section>
-      <strong>Membership Level: </strong><%= 
+    <table style="width:400px">
+      <tr><th>Name:</th><td><%= @user.name %></td></tr>
+      <tr><th>Email:</th><td><%= @user.email %></td></tr>
+      <tr><th>Membership Level:</th><td><%= 
       if @user.membership_level != nil
         @user.membership_level.name
       else
         "Free"
-      end %></strong>
-    </section>
-    <section>
-      <strong>Company: </strong><%= 
+      end %></td></tr>
+      <tr><th>Company:</th><td><%= 
       if @user.company != nil
         @user.company.name
-      end %></strong>
-    </section>
-    <section>
-      <strong>Member Since: </strong><%= @user.created_at.strftime("%m/%d/%Y") if @user.created_at? %></strong>
-    </section>
+      end %></td></tr>
+      <tr><th>Member Since:</th><td><%= @user.created_at.strftime("%m/%d/%Y") if @user.created_at? %></td></tr>
+    </table>
     <br>
     <section>
       <%= link_to "Edit Profile", edit_user_path(@user), class: "btn btn-primary" %> 
