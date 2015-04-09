@@ -53,7 +53,7 @@ class StaticPagesController < ApplicationController
   end
 
   def submitcontact
-    UserMailer.contact_admin(params[:email], params[:comment]).deliver
+    UserMailer.contact_admin(params[:email], params[:comment], params[:subject]).deliver
     flash[:success] = "Thanks for your feedback... we will review it soon."
     redirect_to root_path
   end

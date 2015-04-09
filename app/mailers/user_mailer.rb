@@ -26,9 +26,10 @@ class UserMailer < ApplicationMailer
     mail to: user.email, subject: "Password reset for TechScreen.net"
   end
   
-  def contact_admin(email, content) 
+  def contact_admin(email, content, subject) 
     @email = email
     @content = content
-    mail to: 'paraglidingjeff@gmail.com', subject: email + " gave feedback"
+    @subject = subject
+    mail to: 'paraglidingjeff@gmail.com', subject: email + " gave feedback on topic: " + subject
   end
 end
