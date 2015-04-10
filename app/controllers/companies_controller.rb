@@ -30,13 +30,17 @@ class CompaniesController < ApplicationController
   end
 
   def create
-    @company = current_user.companies.build(company_params)
-    @company.users << current_user
-    if @company.save
-      flash[:success] = "Company created!"
-      redirect_to root_url
+    if params[:commit] == "Cancel"
+      redirect_to companies_path
     else
-      render 'new'
+      @company = current_user.companies.build(company_params)
+      @company.users << current_user
+      if @company.save
+        flash[:success] = "Company created!"
+        redirect_to root_url
+      else
+        render 'new'
+      end
     end
   end
 

@@ -32,16 +32,20 @@ class JobsController < ApplicationController
   end
 
   def create
-    @company = Company.find(params[:job][:company_id])
-    
-    @job = @company.jobs.build(job_params)
-    @job.user_id = current_user.id
-    if @job.save
-      flash[:success] = "Job created!"
-      redirect_to root_url
+    if params[:commit] == "Cancel"
+      redirect_to jobs_path
     else
-      @companies = current_user.companies 
-      render 'new'
+      @company = Company.find(params[:job][:company_id])
+      
+      @job = @company.jobs.build(job_params)
+      @job.user_id = current_user.id
+      if @job.save
+        flash[:success] = "Job created!"
+        redirect_to root_url
+      else
+        @companies = current_user.companies 
+        render 'new'
+      end
     end
   end
 
