@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6 }, allow_blank: true
   
   has_many :questions
-  has_many :candidates
+  has_many :candidates, dependent: :destroy
   has_many :tests, dependent: :destroy
   has_and_belongs_to_many :companies
   belongs_to :membership_level

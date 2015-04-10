@@ -77,9 +77,15 @@ class CompaniesController < ApplicationController
   end
 
   def destroy
-    @company.destroy
-    flash[:success] = "Company deleted."
-    redirect_to request.referrer || root_url
+    if !@company.jobs.any?
+      @company.destroy
+      flash[:success] = "Company deleted."
+      redirect_to request.referrer || root_url
+    else
+      flash[:warning] = "Cannot delete this company because it has jobs referencing it."
+      redirect_to request.referrer
+    end
+
   end
 
   private

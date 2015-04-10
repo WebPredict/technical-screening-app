@@ -211,9 +211,14 @@ class TestsController < ApplicationController
   end
 
   def destroy
-    @test.destroy
-    flash[:success] = "Test deleted."
-    redirect_to request.referrer || root_url
+    if !@test.test_submissions.any?
+      @test.destroy
+      flash[:success] = "Test deleted."
+      redirect_to request.referrer || root_url
+    else
+      flash[:warning] = "Cannot delete this test because it has test results referencing it."
+      redirect_to request.referrer
+    end
   end
 
   private

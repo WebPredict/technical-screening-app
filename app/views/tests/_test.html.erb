@@ -7,12 +7,16 @@
       <% if @single_test_select %>
           <%= radio_button_tag "test_ids[]", test.id %>
       <% else %>
-        <% if false && current_user?(test.user) %>
-              <%= link_to "X", test, class: "btn btn-xs btn-primary", method: :delete,
-                                         data: { confirm: "Delete this test?" } %>
-                                         <div class="button-spacer"></div>
+        <% if current_user?(test.user) %>
+          <%= link_to test, class: "btn btn-xs btn-primary", method: :delete,
+                                       data: { confirm: "Delete this test?" } do %>
+            <i class="glyphicon glyphicon-remove"></i>
+          <% end %>
         <% end %>
-        <%= link_to "Details", test, class: "btn btn-xs btn-primary" %>
+<div class="button-spacer"> </div>
+<%= link_to edit_test_path(test), class: "btn btn-xs btn-primary" do %>
+    <i class="glyphicon glyphicon-edit"></i>
+<% end %>
       <% end %>
   </td>
 </tr>

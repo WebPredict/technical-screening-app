@@ -2,7 +2,7 @@
   <td>
       <% if @select_mode %>
         <%= check_box_tag "question_ids[]", question.id, @preselect_checkboxes %>
-      <% elsif current_user?(question.user) %>
+      <% elsif current_user?(question.user) || (current_user != nil && current_user.admin?) %>
           <%= link_to question, class: "btn btn-xs btn-primary", method: :delete,
                                        data: { confirm: "Delete this question?" } do %>
             <i class="glyphicon glyphicon-remove"></i>

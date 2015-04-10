@@ -167,9 +167,14 @@ class QuestionsController < ApplicationController
   end
   
   def destroy
-    @question.destroy
-    flash[:success] = "Question deleted."
-    redirect_to request.referrer || root_url
+    if !@question.tests.any?
+      @question.destroy
+      flash[:success] = "Question deleted."
+      redirect_to request.referrer || root_url
+    else
+      flash[:warning] = "Cannot delete this question because it has tests using it."
+      redirect_to request.referrer
+    end
   end
 
   private
@@ -181,7 +186,7 @@ class QuestionsController < ApplicationController
     
     def correct_user
       @question = current_user.questions.find_by(id: params[:id])
-      redirect_to root_url if @question.nil?
+      redirect_to root_url if @question.nil? || !current_user.admin?
     end
   
     def sort_column
