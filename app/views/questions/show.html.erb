@@ -4,11 +4,11 @@
     <%= link_to "Search Questions", questions_path, class: "btn btn-sm btn-primary" %> 
     
     <% if logged_in? %>
-      <%= link_to "Create New Question", new_question_path, class: "btn btn-sm btn-primary" %> 
+      <%= link_to "Create New", new_question_path, class: "btn btn-sm btn-primary" %> 
       <% if @question.user_id == @current_user.id %>
-        <%= link_to "Edit Question", edit_question_path(@question), class: "btn btn-sm btn-primary" %> 
+        <%= link_to "Edit", edit_question_path(@question), class: "btn btn-sm btn-primary" %> 
       <% end %>
-    <%= link_to "Clone Question", clone_question_path(id: @question), class: "btn btn-sm btn-primary" %> 
+    <%= link_to "Clone", clone_question_path(id: @question), class: "btn btn-sm btn-primary" %> 
     <%= link_to "Manage Tests", root_path, class: "btn btn-sm btn-primary" %> 
     <% else %>
     <%= link_to "Sign Up", signup_path, class: "btn btn-sm btn-primary" %> 

@@ -1,11 +1,15 @@
 <% provide(:title, @test.name) %>
 <div class="page-header">
       <section style="float:right">
+        <%= link_to "Search Questions", questions_path, class: "btn btn-sm btn-primary" %> 
         <%= link_to "Search Tests", tests_path, class: "btn btn-sm btn-primary" %> 
         <%= link_to "Take Test", new_test_submission_path(id: @test.id), class: "btn btn-sm btn-primary" %> 
-        <%= link_to "Edit Test", edit_test_path(@test), class: "btn btn-sm btn-primary" %> 
-        <%= link_to "Create New Test", new_test_path, class: "btn btn-sm btn-primary" %> 
-        <%= link_to "Dashboard", root_path, class: "btn btn-sm btn-primary" %> 
+        <%= link_to "Edit", edit_test_path(@test), class: "btn btn-sm btn-primary" %> 
+        <%= link_to "Create New", new_test_path, class: "btn btn-sm btn-primary" %> 
+        <% if @test.is_public? %>
+        <%= link_to "Remove", @test, method: :delete,
+                           data: { confirm: "Delete this test?" }, :class => "btn btn-sm btn-danger" %>
+        <% end %>
     </section>
   <h3>Test Details</h3>
 </div>
