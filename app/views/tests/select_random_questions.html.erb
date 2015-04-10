@@ -11,6 +11,12 @@
       <%= label_tag :num_per_topic, "Number of questions per topic:" %>
       <%= text_field_tag :num_per_topic, "5", class: 'form-control' %>
 
+      <%= label_tag :difficulty_level, "Difficulty level:" %>
+  	  <div class="field">
+        <%= select_tag(:difficulty_level, options_from_collection_for_select(Difficulty.all, "id", "level",
+            params[:difficulty_level]), include_blank: true) %>
+      </div>
+
         <div class="form-group">
           <div style="float:right">
             <input class="btn btn-primary" name="commit" type="submit" value="Add Random Questions" />

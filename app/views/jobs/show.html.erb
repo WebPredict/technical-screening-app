@@ -1,5 +1,10 @@
 <% provide(:title, @job.name) %>
 <div class="page-header">
+    <section style="float:right">
+        <%= link_to "Edit Job", edit_job_path(@job), class: "btn btn-sm btn-primary" %> 
+        <%= link_to "Remove Job", @job, method: :delete,
+                           data: { confirm: "Delete this job?" }, :class => "btn btn-sm btn-warning" %>
+    </section>
   <h3>Job Listing Details</h3>
 </div>
 <div class="row">
@@ -24,12 +29,6 @@
         <% end %>
     </section>
     <br><br>
-    <section>
-        <%= link_to "Dashboard", root_path, class: "btn btn-sm btn-primary" %> 
-        <%= link_to "Edit Job", edit_job_path(@job), class: "btn btn-sm btn-primary" %> 
-        <%= link_to "Remove Job", @job, method: :delete,
-                           data: { confirm: "Delete this job?" }, :class => "btn btn-sm btn-warning" %>
-    </section>
   </div>
 </div>
 

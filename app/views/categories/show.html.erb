@@ -1,5 +1,9 @@
 <% provide(:title, @category.name) %>
 <div class="page-header">
+    <section>
+        <%= link_to "Dashboard", root_path, class: "btn btn-sm btn-primary" %> 
+        <%= link_to "Edit Category", edit_category_path(@category), class: "btn btn-sm btn-primary" %> 
+    </section>
   <h3>Category Details</h3>
 </div>
 <div class="row">
@@ -8,10 +12,6 @@
       <tr><th>Name:</th><td><%= @category.name %></td></tr>
       </table>
     <br>
-    <section>
-        <%= link_to "Dashboard", root_path, class: "btn btn-sm btn-primary" %> 
-        <%= link_to "Edit Category", edit_category_path(@category), class: "btn btn-sm btn-primary" %> 
-    </section>
   </div>
 </div>
 

@@ -4,20 +4,16 @@
 
 <div class="row">
   <div class="col-md-12">
-    <% if @searched %>
     <% if @test_submissions.any? %>
       <h4>Test Submissions</h4>
-    <% else %>
-      <h4>No test submissions found for this candidate.</h4>
-    <% end %>
-    <% else %>
-    <h4>Test Submissions</h4>
-    <% end %>
       <table class="table table-bordered">
         <tr><th>Candidate Name</th><th>Test Name</th><th><%= sortable "name", "Submission Name" %></th><th><%= sortable "score" %></th><th>Actions</th></tr>
         <%= render @test_submissions %>
       </table>
       <%= will_paginate @test_submissions %>
+    <% else %>
+      <h4>No test submissions found for this candidate.</h4>
+    <% end %>
   </div>
 </div>
 

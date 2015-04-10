@@ -1,5 +1,10 @@
 <% provide(:title, @company.name) %>
 <div class="page-header">
+    <section>
+        <%= link_to "Edit Company", edit_company_path(@company), class: "btn btn-sm btn-primary" %> 
+        <%= link_to "Remove Company", @company, method: :delete,
+                           data: { confirm: "Delete this company?" }, :class => "btn btn-sm btn-warning" %>
+    </section>
   <h3>Company Details</h3>
 </div>
 <div class="row">
@@ -27,12 +32,6 @@
           </table>
           <%= will_paginate @company_jobs %>
       <% end %>
-    </section>
-    <section>
-        <%= link_to "Dashboard", root_path, class: "btn btn-sm btn-primary" %> 
-        <%= link_to "Edit Company", edit_company_path(@company), class: "btn btn-sm btn-primary" %> 
-        <%= link_to "Remove Company", @company, method: :delete,
-                           data: { confirm: "Delete this company?" }, :class => "btn btn-sm btn-warning" %>
     </section>
   </div>
 </div>

@@ -46,7 +46,7 @@ class TestsController < ApplicationController
     @test = Test.find(params[:id])
     @test_questions = @test.questions.paginate(page: params[:page]).order(sort_column + " " + sort_direction)
     add_breadcrumb "Select Random Questions", :select_random_questions_path
-    flash[:info] = "Specify a list of topics to choose random questions from (e.g. \"Java, HTML, SQL\")."
+    flash.now[:info] = "Specify a list of topics to choose random questions from (e.g. \"Java, HTML, SQL\")."
   end
   
   def send_candidate_test
@@ -131,21 +131,40 @@ class TestsController < ApplicationController
         if topic == nil
           next
         end
-        category = Category.find_by(name: topic)
-        if category != nil
-          cat_questions = Question.where("category_id = " + category.id.to_s)
-          (1..num_per_topic.to_i).each do |index|
-            random_question = cat_questions [Random.new.rand(cat_questions.size)]
-            @test.questions << random_question
+        
+        difficulty = nil
+        if (params[:difficulty_level] != nil)
+          difficulty = Difficulty.find(params[:difficulty_level])
+        end
+        
+        category = Category.where("lower(name) like '%" + topic + "%'")
+        if category != nil && category.any?
+          cat_questions = Question.where("category_id = " + category.first.id.to_s)
+          if difficulty != nil
+            cat_questions = cat_questions.where("difficulty_id = " + difficulty.id.to_s)
           end
-        else
-          cat_questions = Question.where("lower(content) like '%" + topic + "%'")
-          if cat_questions != nil && cat_questions.size > 0
+          
+          if cat_questions.size < num_per_topic.to_i
+            flash[:warning] = "Could not find enough existing questions for the topic: " + category.first.name + "."
+            redirect_to request.referrer
+            return
+          else            
             (1..num_per_topic.to_i).each do |index|
               random_question = cat_questions [Random.new.rand(cat_questions.size)]
               @test.questions << random_question
             end
           end
+        else
+          flash[:warning] = "Could not find any categories matching the topic: " + topic + "."
+          redirect_to request.referrer
+          return
+#          cat_questions = Question.where("lower(content) like '%" + topic + "%'")
+#          if cat_questions != nil && cat_questions.size > 0
+#            (1..num_per_topic.to_i).each do |index|
+#              random_question = cat_questions [Random.new.rand(cat_questions.size)]
+#              @test.questions << random_question
+#            end
+#          end
         end
         
         @test.save 
@@ -200,7 +219,8 @@ class TestsController < ApplicationController
   private
 
     def test_params
-      params.require(:test).permit(:name, :description, :question_ids, :is_public, :topic_list, :num_per_topic)
+      params.require(:test).permit(:name, :description, :question_ids, :is_public, :topic_list, 
+      :difficulty_level, :num_per_topic)
     end
     
     def correct_user
