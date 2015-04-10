@@ -32,8 +32,10 @@
             <ul class="dropdown-menu">
               <li><%= link_to "Profile", current_user %></li>
               <li><%= link_to "Settings", edit_user_path(current_user) %></li>
+              <li class="divider"></li>
               <li><%= link_to "Companies", companies_path %></li>
-              <li><%= link_to "Jobs", jobs_path %></li>
+              <li><%= link_to "Candidates", candidates_path %></li>
+              <li><%= link_to "Job Listings", jobs_path %></li>
               <li class="divider"></li>
               <li>
                 <%= link_to "Log out", logout_path, method: "delete" %>
