@@ -133,7 +133,7 @@ class TestsController < ApplicationController
         end
         
         difficulty = nil
-        if (params[:difficulty_level] != nil)
+        if (params[:difficulty_level] != nil && params[:difficulty_level] != '')
           difficulty = Difficulty.find(params[:difficulty_level])
         end
         
