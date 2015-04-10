@@ -51,7 +51,7 @@ class TestsController < ApplicationController
   
   def send_candidate_test
     @candidate = Candidate.find(params[:id])
-    flash[:info] = "Select Test To Send To: " + @candidate.name
+    flash.now[:info] = "Select Test To Send To: " + @candidate.name
     @single_test_select = true
     @tests = Test.all.paginate(page: params[:page], per_page: 10)
     render 'index'

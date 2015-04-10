@@ -7,12 +7,12 @@
   <div class="col-md-4">
     <ul>
     <% @categories_first.each do |category| %>
-    <li><%= link_to category.name, questions_path(category_id: category) %>
-    <% if current_user != nil && current_user.admin? %>
+    <li><% if current_user != nil && current_user.admin? %>
       <%= link_to edit_category_path(category), class: "btn btn-xs btn-primary" do %>
-        <i class="glyphicon glyphicon-edit"></i>
+        <i class="glyphicon glyphicon-edit"></i> 
       <% end %>
     <% end %>
+ <%= link_to category.name, questions_path(category_id: category) %>
     </li>
     <% end %>
     </ul>
@@ -20,14 +20,22 @@
     <div class="col-md-4">
     <ul>
     <% @categories_second.each do |category| %>
-    <li><%= link_to category.name, questions_path(category_id: category) %></li>
+    <li><% if current_user != nil && current_user.admin? %>
+      <%= link_to edit_category_path(category), class: "btn btn-xs btn-primary" do %>
+        <i class="glyphicon glyphicon-edit"></i> 
+      <% end %>
+    <% end %> <%= link_to category.name, questions_path(category_id: category) %></li>
     <% end %>
     </ul>
   </div>
   <div class="col-md-4">
     <ul>
     <% @categories_third.each do |category| %>
-    <li><%= link_to category.name, questions_path(category_id: category) %></li>
+    <li><% if current_user != nil && current_user.admin? %>
+      <%= link_to edit_category_path(category), class: "btn btn-xs btn-primary" do %>
+        <i class="glyphicon glyphicon-edit"></i> 
+      <% end %>
+    <% end %> <%= link_to category.name, questions_path(category_id: category) %></li>
     <% end %>
     </ul>
   </div>

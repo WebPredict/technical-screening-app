@@ -97,6 +97,7 @@ class QuestionsController < ApplicationController
   
   def new
     @question = Question.new
+    flash.now[:info] = "Multiple choice and short answer questions can be automatically scored. The difficulty level does not affect scoring."
     add_breadcrumb "New Question", new_question_path
   end
 
@@ -149,15 +150,20 @@ class QuestionsController < ApplicationController
   def clone_question
     @question = Question.find(params[:id])
     @clone_question = Question.new
-    @clone_question.content = "CLONE - " + @question.content
+    @clone_question.content = @question.content
     @clone_question.answer = @question.answer
     @clone_question.difficulty_id = @question.difficulty_id
     @clone_question.category_id = @question.category_id
     @clone_question.question_type_id = @question.question_type_id
     @clone_question.user = current_user
-    @clone_question.save
-    flash[:success] = "Question cloned."
-    redirect_to edit_question_path(@clone_question)
+#    @clone_question.save
+    flash[:success] = "Question cloned. You can change any details you'd like."
+    #redirect_to edit_question_path(@clone_question)
+    
+    @question = @clone_question
+    #flash.now[:info] = "Multiple choice and short answer questions can be automatically scored. The difficulty level does not affect scoring."
+    add_breadcrumb "Cloned Question", new_question_path
+    render 'new'
   end
   
   def destroy
