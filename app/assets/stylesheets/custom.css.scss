@@ -333,6 +333,28 @@ span.picture {
   }
 }
 
+.color-row {
+  background: #e6e6e6;  
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.padded-col {
+  margin-left: 10%;
+  margin-right: 10%;
+  font-size: 1.2em;
+}
+
+.padded-bottom-row {
+  padding-bottom: 40px;
+}
+
+.offset-h3 {
+  margin-left: 0px;
+  margin-right: 0px;
+  text-align: center;
+}
+
 .jumbotron {
   h2 {
     color: #000;

@@ -52,7 +52,11 @@ class StaticPagesController < ApplicationController
         @num_candidates = 0
       end
     else
-      @questions = Question.paginate(page: params[:page], per_page: 5)
+      @categories = Category.all 
+      @categories_arrays = @categories.each_slice(@categories.count / 3).to_a
+      @categories_first = @categories_arrays [0]
+      @categories_second = @categories_arrays [1]
+      @categories_third = @categories_arrays [2]
     end
   end
 
