@@ -338,6 +338,11 @@ span.picture {
     color: #000;
   }
   background-image: image-url("bgpic.jpg");
+  h1 { 
+    font-size: 5em; 
+    -webkit-text-stroke: 1px #e6e6e6; 
+    
+  }
 }
 
 .stats {
