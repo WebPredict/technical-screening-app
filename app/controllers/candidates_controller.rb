@@ -1,6 +1,6 @@
 class CandidatesController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy, :edit, :update, :show]
-  before_action :correct_user,   only: [:create, :destroy, :edit, :update, :show]
+  before_action :correct_user,   only: [:destroy, :edit, :update, :show]
   
   helper_method :sort_column, :sort_direction
   
@@ -10,7 +10,6 @@ class CandidatesController < ApplicationController
   def index
     query = ''
     searchparam = ""
-    paramarr = []
     if params[:search] && params[:search] != ''
         query += ' lower(name) LIKE ? '
         searchparam = "%#{params[:search].downcase}%"
@@ -34,7 +33,7 @@ class CandidatesController < ApplicationController
           @single_test_select = true
           redirect_to tests_path
         else 
-          redirect_to root_url
+          redirect_to @candidate 
         end
       else
         render 'new'

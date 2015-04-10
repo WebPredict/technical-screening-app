@@ -170,7 +170,7 @@ class QuestionsController < ApplicationController
 
     def question_params
       params.require(:question).permit(:difficulty_id, :category_id, :question_type_id, :content, 
-      :answer, :answer2, :answer3, :answer4, :answer5, :short_answer, :multiple_choice_answer)
+      :answer, :answer2, :answer3, :answer4, :answer5, :short_answer, :multiple_choice_answer, :is_public)
     end
     
     def correct_user

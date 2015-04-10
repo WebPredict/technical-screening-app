@@ -17,10 +17,14 @@
       else
         "Free"
       end %></td></tr>
-      <tr><th>Company:</th><td><%= 
-      if @user.company != nil
-        @user.company.name
-      end %></td></tr>
+      <tr><th>Companies:</th><td>
+      <%if @user.companies != nil %>
+          <% @user.companies.each do |company| %>
+            <%= company.name %> 
+          <% end %>
+      <% end %>
+      
+    </td></tr>
       <tr><th>Member Since:</th><td><%= @user.created_at.strftime("%m/%d/%Y") if @user.created_at? %></td></tr>
     </table>
     <br>

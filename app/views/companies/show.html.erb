@@ -1,14 +1,39 @@
-<p id="notice"><%= notice %></p>
+<% provide(:title, @company.name) %>
+<div class="page-header">
+  <h3>Company Details</h3>
+</div>
+<div class="row">
+  <div class="col-md-12">
+        <table style="width:400px">
+      <tr><th>Name:</th><td><%= @company.name %></td></tr>
+      <tr><th>Description:</th><td><%= @company.description %></td></tr>
+      <tr><th>Manager:</th><td><%= @company.manager %></td></tr>
+      <tr><th>Email:</th><td><%= @company.email %></td></tr>
+      <tr><th>Address:</th><td><%= @company.address %></td></tr>
+      <tr><th>Phone:</th><td><%= @company.phone %></td></tr>
+      <tr><th>Website:</th><td><%= @company.website %></td></tr>
+      <tr><th>Created At:</th><td><%= @company.created_at.strftime("%m/%d/%Y") if @company.created_at? %></td></tr>
+      </table>
+    <br>
+    <section>
+      <% if @company.jobs.any? %>
+        <strong>This Company's Jobs (<%= @company.jobs.count %>)</strong>
+          <table class="table table-bordered">
+        <tr><th><%= sortable "name", "Title" %></th><th><%= sortable "description" %></th>
+        <th><%= sortable "company_id", "Company" %></th>
+        <th>Created At</th></th></tr>
 
-<p>
-  <strong>Content:</strong>
-  <%= @micropost.content %>
-</p>
+            <%= render @company_jobs %>
+          </table>
+          <%= will_paginate @company_jobs %>
+      <% end %>
+    </section>
+    <section>
+        <%= link_to "Dashboard", root_path, class: "btn btn-sm btn-primary" %> 
+        <%= link_to "Edit Company", edit_company_path(@company), class: "btn btn-sm btn-primary" %> 
+        <%= link_to "Remove Company", @company, method: :delete,
+                           data: { confirm: "Delete this company?" }, :class => "btn btn-sm btn-warning" %>
+    </section>
+  </div>
+</div>
 
-<p>
-  <strong>User:</strong>
-  <%= @micropost.user_id %>
-</p>
-
-<%= link_to 'Edit', edit_micropost_path(@micropost) %> |
-<%= link_to 'Back', microposts_path %>

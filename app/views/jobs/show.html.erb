@@ -1,0 +1,35 @@
+<% provide(:title, @job.name) %>
+<div class="page-header">
+  <h3>Job Listing Details</h3>
+</div>
+<div class="row">
+  <div class="col-md-12">
+        <table style="width:400px">
+      <tr><th>Job Title:</th><td><%= @job.name %></td></tr>
+      <tr><th>Description:</th><td><%= @job.description %></td></tr>
+      <tr><th>Manager:</th><td><%= @job.manager %></td></tr>
+      <tr><th>Phone:</th><td><%= @job.phone %></td></tr>
+      <tr><th>Created At:</th><td><%= @job.created_at.strftime("%m/%d/%Y") if @job.created_at? %></td></tr>
+      </table>
+    <br>
+    <section>
+      <% if @job_candidates != nil %>
+        <strong>This Job's Candidates</strong>
+          <table class="table table-bordered">
+            <tr><th>Candidate Name</th><th><%= sortable "name", "Submission Name" %></th><th><%= sortable "score" %></th><th>Actions</th></tr>
+
+          </table>
+        <% else %>
+          <strong>No candidates for this job yet.</strong>
+        <% end %>
+    </section>
+    <br><br>
+    <section>
+        <%= link_to "Dashboard", root_path, class: "btn btn-sm btn-primary" %> 
+        <%= link_to "Edit Job", edit_job_path(@job), class: "btn btn-sm btn-primary" %> 
+        <%= link_to "Remove Job", @job, method: :delete,
+                           data: { confirm: "Delete this job?" }, :class => "btn btn-sm btn-warning" %>
+    </section>
+  </div>
+</div>
+

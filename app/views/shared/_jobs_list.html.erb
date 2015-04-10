@@ -1,0 +1,20 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Job Listings</h3>
+    </div>
+  <div class="panel-body">
+<% if @jobs && @jobs.any? %>
+    <div class="table-responsive">
+    <table class="table">
+      <tr><th>Job Name</th><th>Description</th><th>Company</th><th>Created At</th><th>Actions</th></tr>
+      <tbody>
+      <%= render @jobs %>
+      </tbody>
+    </table>
+    </div>
+  <%= will_paginate @jobs %>
+<% else %>
+<h3>No job listings yet. <%= link_to "Add one!", new_job_path %></h3>
+<% end %>
+</div>
+</div>

@@ -1,40 +1,36 @@
-<% provide(:title, 'Edit Company') %>
+<% provide(:title, 'Edit Job') %>
 <div class="page-header">
   <section style="float:right">
         <%= link_to "Dashboard", root_path, class: "btn btn-sm btn-primary" %>
   </section>
-  <h3>Edit Company Details</h3>
+  <h3>Edit Job Details</h3>
 </div>
 
 <div class="row">
   <div class="col-md-12">
-    <%= form_for(@company) do |f| %>
+    <%= form_for(@job) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
-      <%= f.label :name %>
+      <%= f.label :name, "Job Title" %>
       <%= f.text_field :name, class: 'form-control' %>
 
       <%= f.label :description %>
       <%= f.text_area :description, class: 'form-control' %>
 
+      <%= f.label :company_id, "Company" %>
+      <div class="field">
+      <%= f.collection_select(:company_id, @companies, :id, :name) %>
+      </div>
+
       <%= f.label :manager %>
       <%= f.text_field :manager, class: 'form-control' %>
-
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
 
       <%= f.label :phone %>
       <%= f.phone_field :phone, class: 'form-control' %>
 
-      <%= f.label :website %>
-      <%= f.text_field :website, class: 'form-control' %>
-
-      <%= f.label :address %>
-      <%= f.text_field :address, class: 'form-control' %>
-
       <div class="form-group">
         <div style="float:right">
-          <%= f.submit "Update Company", class: "btn btn-primary" %>
+          <%= f.submit "Update Job", class: "btn btn-primary" %>
           <span></span>
           <%= link_to "Cancel", root_path, class: "btn btn-default" %>
       </div>

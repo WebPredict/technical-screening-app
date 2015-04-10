@@ -1,14 +1,9 @@
 <div class="page-header">
-      <section style="float:right">
-      <% if logged_in? %>
-      <%= link_to "Create New Company", new_company_path, class: "btn btn-sm btn-primary" %> 
-      <% end %>
-      </section>
-  <h3>Search Companies</h3>
+  <h3>Search Categories</h3>
 </div>
 
 <div class="row">
-<%= form_tag companies_path, :class => "nicesearch", :method => 'get' do %>
+<%= form_tag categories_path, :class => "nicesearch", :method => 'get' do %>
     <div class="input-group">
       <%= text_field_tag :search, params[:search], :class => "form-control" %>
         <div class="input-group-btn">
@@ -21,15 +16,19 @@
 <div class="row">
   <div class="col-md-12">
     <% if @searched %>
-    <% if @companies.any? %>
-      <h3>Search Results</h3>
+    <% if @categories.any? %>
+      <h3>Categories Search Results</h3>
     <% else %>
       <h3>No results found for that search term.</h3>
     <% end %>
     <% else %>
-    <h3>Companies</h3>
+    <h3>Recent Categories</h3>
     <% end %>
-    <%= render 'shared/companies' %>
+      <table class="table table-bordered">
+        <ul>
+        <%= render @categories %>
+      </ul>
+      <%= will_paginate @categories %>
   </div>
 </div>
 

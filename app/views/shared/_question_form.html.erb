@@ -16,7 +16,7 @@
   <%= f.collection_select(:category_id, Category.all, :id, :name) %>
   </div>
 
-  <%= f.label :content %>
+  <%= f.label :content, "Question" %>
   <%= f.text_area :content, class: 'form-control' %>
 
   <div id="free-form">

@@ -1,33 +1,29 @@
-<% provide(:title, "Create Candidate") %>
+<% provide(:title, "Create Job Listing") %>
 <div class="page-header">
-  <h3>Create Company</h3>
+  <h3>Create Job Listing</h3>
 </div>
 
 <div class="row">
   <div class="col-md-12">
-    <%= form_for(@company) do |f| %>
+    <%= form_for(@job) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
-     <%= f.label :name %>
+      <%= f.label :name, "Job Title" %>
       <%= f.text_field :name, class: 'form-control' %>
 
       <%= f.label :description %>
       <%= f.text_area :description, class: 'form-control' %>
 
+      <%= f.label :company_id, "Company" %>
+      <div class="field">
+      <%= f.collection_select(:company_id, @companies, :id, :name) %>
+      </div>
+  
+      <%= f.label :phone %>
+      <%= f.text_field :phone, class: 'form-control' %>
+
       <%= f.label :manager %>
       <%= f.text_field :manager, class: 'form-control' %>
-
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
-
-      <%= f.label :phone %>
-      <%= f.phone_field :phone, class: 'form-control' %>
-
-      <%= f.label :website %>
-      <%= f.text_field :website, class: 'form-control' %>
-
-      <%= f.label :address %>
-      <%= f.text_field :address, class: 'form-control' %>
 
           <div class="form-group">
             <div style="float:right">

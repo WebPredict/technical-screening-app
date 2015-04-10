@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150328162010) do
+ActiveRecord::Schema.define(version: 20150409152204) do
 
   create_table "answered_questions", force: :cascade do |t|
     t.string   "answer"
@@ -35,8 +35,10 @@ ActiveRecord::Schema.define(version: 20150328162010) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.float    "avg_score",   default: 0.0
+    t.integer  "job_id"
   end
 
+  add_index "candidates", ["job_id"], name: "index_candidates_on_job_id"
   add_index "candidates", ["user_id"], name: "index_candidates_on_user_id"
 
   create_table "categories", force: :cascade do |t|
@@ -46,16 +48,55 @@ ActiveRecord::Schema.define(version: 20150328162010) do
   end
 
   create_table "companies", force: :cascade do |t|
-    t.string "name"
-    t.string "description"
-    t.string "website"
+    t.string   "name"
+    t.string   "description"
+    t.string   "website"
+    t.integer  "user_id"
+    t.string   "address"
+    t.string   "email"
+    t.string   "manager"
+    t.string   "phone"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
+
+  add_index "companies", ["user_id"], name: "index_companies_on_user_id"
+
+  create_table "companies_users", id: false, force: :cascade do |t|
+    t.integer "company_id"
+    t.integer "user_id"
+  end
+
+  add_index "companies_users", ["company_id"], name: "index_companies_users_on_company_id"
+  add_index "companies_users", ["user_id"], name: "index_companies_users_on_user_id"
 
   create_table "difficulties", force: :cascade do |t|
     t.string   "level"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "jobs", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "manager"
+    t.string   "phone"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "company_id"
+  end
+
+  add_index "jobs", ["company_id"], name: "index_jobs_on_company_id"
+  add_index "jobs", ["user_id"], name: "index_jobs_on_user_id"
+
+  create_table "jobs_candidates", id: false, force: :cascade do |t|
+    t.integer "candidate_id"
+    t.integer "job_id"
+  end
+
+  add_index "jobs_candidates", ["candidate_id"], name: "index_jobs_candidates_on_candidate_id"
+  add_index "jobs_candidates", ["job_id"], name: "index_jobs_candidates_on_job_id"
 
   create_table "membership_levels", force: :cascade do |t|
     t.string "name"
@@ -71,9 +112,10 @@ ActiveRecord::Schema.define(version: 20150328162010) do
     t.integer  "user_id"
     t.integer  "category_id"
     t.integer  "difficulty_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.integer  "question_type_id"
+    t.boolean  "is_public",        default: true
   end
 
   add_index "questions", ["category_id"], name: "index_questions_on_category_id"

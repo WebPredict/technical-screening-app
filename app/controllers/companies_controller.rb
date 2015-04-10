@@ -5,28 +5,70 @@ class CompaniesController < ApplicationController
   add_breadcrumb "Home", :root_path
   add_breadcrumb "Companies", :companies_path
 
+  helper_method :sort_column, :sort_direction
+
   def index
     query = ''
     searchparam = ""
-    paramarr = []
     if params[:search] && params[:search] != ''
         query += ' lower(name) LIKE ? '
         searchparam = "%#{params[:search].downcase}%"
     end
 
-    @feed_items = Company.where(query, searchparam).paginate(page: params[:page], per_page: 10)
+    @companies = Company.where(query, searchparam).paginate(page: params[:page], per_page: 10)
 
     @searched = query != ''
   end
 
+  def jobs
+    @jobs = Company.find(:company_id).jobs
+  end
+  
+  def new
+    @company = Company.new
+    add_breadcrumb "New Company", new_company_path
+  end
+
   def create
     @company = current_user.companies.build(company_params)
+    @company.users << current_user
     if @company.save
       flash[:success] = "Company created!"
       redirect_to root_url
     else
-      @feed_items = []
-      render 'static_pages/home'
+      render 'new'
+    end
+  end
+
+  def show
+    @company = Company.find(params[:id])
+    add_breadcrumb "Show Company", company_path
+    @company_jobs = @company.jobs.paginate(page: params[:page]).order(sort_column + " " + sort_direction)
+  end
+  
+  # GET /companies/1/edit
+  def edit
+    @company = Company.find(params[:id])
+    add_breadcrumb "Edit Company", edit_company_path
+  end
+
+  def update
+    if params[:commit] == "Cancel"
+      redirect_to root_url
+    else
+      @company = Company.find(params[:id])
+      respond_to do |format|
+        if @company.update_attributes(company_params)
+          format.html { 
+            flash[:success] = "Company was successfully updated."
+            redirect_to @company 
+          }
+          format.json { render :show, status: :ok, location: @company }
+        else
+          format.html { render :edit }
+          format.json { render json: @company.errors, status: :unprocessable_entity }
+        end
+      end
     end
   end
 
@@ -39,7 +81,7 @@ class CompaniesController < ApplicationController
   private
 
     def company_params
-      params.require(:company).permit(:name)
+      params.require(:company).permit(:name, :description, :email, :website, :address, :phone, :manager, :user_ids)
     end
     
     def correct_user
@@ -47,4 +89,12 @@ class CompaniesController < ApplicationController
       redirect_to root_url if @company.nil?
     end
     
+    def sort_column
+      Company.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
+    end
+
 end

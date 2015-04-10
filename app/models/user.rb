@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   has_many :questions
   has_many :candidates
   has_many :tests, dependent: :destroy
-  belongs_to :company
+  has_and_belongs_to_many :companies
   belongs_to :membership_level
   
   def User.digest(string)

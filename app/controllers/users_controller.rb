@@ -88,8 +88,7 @@ class UsersController < ApplicationController
           }
           format.json { render :show, status: :ok, location: @user }
         else
-          format.html { render :edit }
-          format.json { render json: @user.errors, status: :unprocessable_entity }
+          render 'edit'
         end
       end
     end
@@ -112,7 +111,7 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:name, :email, :password, :membership_level_id,
-                                   :password_confirmation)
+                                   :password_confirmation, :company_ids)
     end
     
     def correct_user

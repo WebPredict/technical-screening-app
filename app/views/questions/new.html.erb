@@ -19,7 +19,7 @@
     <%= f.collection_select(:category_id, Category.all, :id, :name) %>
     </div>
   
-    <%= f.label :content %>
+    <%= f.label :content, "Question" %>
     <%= f.text_area :content, class: 'form-control' %>
   
     <div id="free-form">
@@ -55,6 +55,13 @@
     <%= f.collection_select(:difficulty_id, Difficulty.all, :id, :level) %>
     </div>
   
+        <div class="checkbox">
+        <%= f.label :is_public, class: "checkbox inline" do %>
+          <%= f.check_box :is_public %>
+          <span>Make Question Public</span>
+        <% end %>
+      </div>
+
         <div class="form-group">
           <div style="float:right">
           <%= f.submit "Create Question", class: "btn btn-primary" %>

@@ -29,9 +29,13 @@ class StaticPagesController < ApplicationController
         @show_all = false
       end
       
+      # TODO: this needs its own pagination param!
       @test_submissions = TestSubmission.where("user_id = ?", current_user.id).paginate(page: params[:page])
       
       @num_test_results = 0
+      
+      # TODO this needs its own pagination param!
+      @jobs = Job.where("user_id = ?", current_user.id).paginate(page: params[:page])
       
       if current_user.candidates.any?
         current_user.candidates.each do |candidate|

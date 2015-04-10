@@ -40,11 +40,14 @@ Rails.application.routes.draw do
   post 'submit_forward_submission' => 'test_submissions#submit_forward_submission'
   get 'forward_submission' => 'test_submissions#forward_submission'
   post 'auto_score_test' => 'test_submissions#auto_score'
+  get 'company_jobs' => 'companies#jobs'
   
   resources :companies
 
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
+  
+  resources :jobs
   
   resources :tests do 
     resources :questions
