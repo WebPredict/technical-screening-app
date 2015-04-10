@@ -1,7 +1,7 @@
 <% if @companies && @companies.any? %>
   <table class="table table-bordered">
     <tr><th><%= sortable "name" %></th><th><%= sortable "email" %></th><th><%= sortable "phone" %></th>
-    <th><%= sortable "manager" %></th><th><%= sortable "address" %></th><th>Created At</th><th>Jobs</th></tr>
+    <th><%= sortable "manager" %></th><th><%= sortable "address" %></th><th>Created At</th><th>Actions</th></tr>
     <%= render @companies %>
   </table>
   <%= will_paginate @companies %>

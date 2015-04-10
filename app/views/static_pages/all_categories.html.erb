@@ -7,9 +7,9 @@
   <div class="col-md-4">
     <ul>
     <% @categories_first.each do |category| %>
-    <li><% if current_user != nil && current_user.admin? %>
+    <li style="margin-top: 5px"><% if current_user != nil && current_user.admin? %>
       <%= link_to edit_category_path(category), class: "btn btn-xs btn-primary" do %>
-        <i class="glyphicon glyphicon-edit"></i> 
+        <div class="edit_icon"><i class="glyphicon glyphicon-edit"></i></div> 
       <% end %>
     <% end %>
  <%= link_to category.name, questions_path(category_id: category) %>
@@ -20,9 +20,9 @@
     <div class="col-md-4">
     <ul>
     <% @categories_second.each do |category| %>
-    <li><% if current_user != nil && current_user.admin? %>
+    <li style="margin-top: 5px"><% if current_user != nil && current_user.admin? %>
       <%= link_to edit_category_path(category), class: "btn btn-xs btn-primary" do %>
-        <i class="glyphicon glyphicon-edit"></i> 
+        <div class="edit_icon"><i class="glyphicon glyphicon-edit"></i></div> 
       <% end %>
     <% end %> <%= link_to category.name, questions_path(category_id: category) %></li>
     <% end %>
@@ -31,9 +31,9 @@
   <div class="col-md-4">
     <ul>
     <% @categories_third.each do |category| %>
-    <li><% if current_user != nil && current_user.admin? %>
+    <li style="margin-top: 5px"><% if current_user != nil && current_user.admin? %>
       <%= link_to edit_category_path(category), class: "btn btn-xs btn-primary" do %>
-        <i class="glyphicon glyphicon-edit"></i> 
+        <div class="edit_icon"><i class="glyphicon glyphicon-edit"></i></div> 
       <% end %>
     <% end %> <%= link_to category.name, questions_path(category_id: category) %></li>
     <% end %>
