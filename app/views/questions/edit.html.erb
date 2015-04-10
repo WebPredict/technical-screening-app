@@ -23,13 +23,18 @@
       <%= f.collection_select(:category_id, Category.all, :id, :name) %>
       </div>
 
+			<%= f.label :difficulty %>
+    	<div class="field">
+      <%= f.collection_select(:difficulty_id, Difficulty.all, :id, :level) %>
+      </div>
+
       <%= f.label :content, "Question" %>
       <%= f.text_area :content, class: 'form-control' %>
 
       <div class="checkbox">
         <%= f.label :is_public, class: "checkbox inline" do %>
           <%= f.check_box :is_public %>
-          <span>Make Question Public</span>
+          <span>Make Question Public (answer is always private)</span>
         <% end %>
       </div>
 
@@ -60,11 +65,6 @@
         <%= f.text_field :answer5, class: 'form-control' %>
       </div>
     
-			<%= f.label :difficulty %>
-    	<div class="field">
-      <%= f.collection_select(:difficulty_id, Difficulty.all, :id, :level) %>
-      </div>
-
       <div class="form-group">
           <div style="float:right">
           <%= f.submit "Update Question", class: "btn btn-primary" %>

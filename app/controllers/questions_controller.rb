@@ -30,7 +30,7 @@ class QuestionsController < ApplicationController
       @questions = @questions.where(query, params[:difficulty_id])
     end
 
-    @questions = @questions.paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
+    @questions = @questions.where("is_public = ?", true).paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
   
     @select_mode = false
     @searched = query != ''
@@ -97,7 +97,7 @@ class QuestionsController < ApplicationController
   
   def new
     @question = Question.new
-    flash.now[:info] = "Multiple choice and short answer questions can be automatically scored. The difficulty level does not affect scoring."
+    flash.now[:info] = "Multiple choice and short answer questions can be automatically scored. The chosen difficulty level does not affect scoring."
     add_breadcrumb "New Question", new_question_path
   end
 
