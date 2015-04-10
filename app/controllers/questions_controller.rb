@@ -186,7 +186,11 @@ class QuestionsController < ApplicationController
     
     def correct_user
       @question = current_user.questions.find_by(id: params[:id])
-      redirect_to root_url if @question.nil? || !current_user.admin?
+      if @question.nil? && current_user.admin?
+        @question = Question.find(params[:id])
+      end
+      
+      redirect_to root_url if @question.nil?
     end
   
     def sort_column
