@@ -20,7 +20,7 @@
       <tr><th>Name:</th><td><%= @test.name %></td></tr>
       <tr><th>Description:</th><td><%= @test.description %></td></tr>
       <tr><th>Privacy:</th><td>
-        <% if @test.is_public> %>
+        <% if @test.is_public? %>
         <span class="label label-info">Public</span>
         <% else %>
         <span class="label label-info">Private</span>

@@ -15,7 +15,7 @@ class CompaniesController < ApplicationController
         searchparam = "%#{params[:search].downcase}%"
     end
 
-    @companies = Company.where("user_id = ?", current_user.id)
+    @companies = current_user.companies
     
     if @companies != nil
       @companies = @companies.where(query, searchparam).paginate(page: params[:page], per_page: 10)

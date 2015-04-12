@@ -18,6 +18,7 @@ class StaticPagesController < ApplicationController
       
       @question = current_user.questions.build
       @tests = current_user.tests.paginate(page: params[:page])
+      @companies = current_user.companies.paginate(page: params[:page])
       
       @num_tests = current_user.tests.count
       
