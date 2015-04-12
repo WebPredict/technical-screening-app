@@ -39,9 +39,14 @@ class JobsController < ApplicationController
     if params[:commit] == "Cancel"
       redirect_to jobs_path
     else
-      @company = Company.find(params[:job][:company_id])
+      company_id = params[:job][:company_id]
+      if company_id != nil && company_id != ''
+        @company = Company.find(params[:job][:company_id])
+        @job = @company.jobs.build(job_params)
+      else
+        @job = Job.new(job_params)
+      end
       
-      @job = @company.jobs.build(job_params)
       @job.user_id = current_user.id
       if @job.save
         flash[:success] = "Job created!"
@@ -66,7 +71,7 @@ class JobsController < ApplicationController
     else
       @job = Job.find(params[:id])
       respond_to do |format|
-        if @company.update_attributes(job_params)
+        if @job.update_attributes(job_params)
           format.html { 
             flash[:success] = "Job was successfully updated."
             redirect_to @job 

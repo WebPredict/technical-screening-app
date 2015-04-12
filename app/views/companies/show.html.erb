@@ -15,7 +15,7 @@
       <tr><th>Manager:</th><td><%= @company.manager %></td></tr>
       <tr><th>Email:</th><td><%= @company.email %></td></tr>
       <tr><th>Address:</th><td><%= @company.address %></td></tr>
-      <tr><th>Phone:</th><td><%= @company.phone %></td></tr>
+      <tr><th>Phone:</th><td><%= phone_format(@company.phone) %></td></tr>
       <tr><th>Website:</th><td><%= @company.website %></td></tr>
       <tr><th>Created At:</th><td><%= @company.created_at.strftime("%m/%d/%Y") if @company.created_at? %></td></tr>
       </table>

@@ -1,7 +1,7 @@
 <tr id="company-<%= company.id %>">
   <td><%= link_to company.name, company %></td>
   <td><%= company.email %></td>
-  <td><%= company.phone %></td>
+  <td><%= phone_format(company.phone) %></td>
   <td><%= company.manager %></td>
   <td><%= company.address %></td>
   <td><%= company.created_at.strftime("%m/%d/%Y") if company.created_at? %></td>

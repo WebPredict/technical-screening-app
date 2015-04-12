@@ -20,7 +20,7 @@
 
       <%= f.label :company_id, "Company" %>
       <div class="field">
-      <%= f.collection_select(:company_id, @companies, :id, :name) %>
+      <%= f.collection_select(:company_id, @companies, :id, :name, include_blank: 'None') %>
       </div>
 
       <%= f.label :manager %>
