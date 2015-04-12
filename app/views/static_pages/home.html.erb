@@ -22,6 +22,8 @@
               <%= link_to test.name, test %> (<%= pluralize(test.questions.count, "question") %>)
             </div>
           <% end %>
+        <% else %>
+        <strong>No custom tests yet.</strong>
         <% end %>
         <div class="other">
           <%= link_to "Create Test", new_test_path, :class => "btn btn-med btn-primary" %>
@@ -40,12 +42,15 @@
         <%= render 'shared/jobs_list' %>
       </div>
       <div class="col-md-8">
+        <%= render 'shared/companies_list' %>
+      </div>
+      <div class="col-md-8">
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">Metrics</h3>
           </div>
           <div class="panel-body">
-          <strong>Number of Candidates per Job</strong>
+          <strong>TODO: Fix graph for Number of Candidates per Job</strong>
           </div>
         </div>
       </div>

@@ -15,8 +15,12 @@ class JobsController < ApplicationController
         searchparam = "%#{params[:search].downcase}%"
     end
 
-    @jobs = Job.where(query, searchparam).paginate(page: params[:page], per_page: 10)
-
+    @jobs = Job.where("user_id = ?", current_user.id)
+    
+    if @jobs != nil
+      @jobs = @jobs.paginate(page: params[:page], per_page: 10)
+    end
+    
     @searched = query != ''
   end
 

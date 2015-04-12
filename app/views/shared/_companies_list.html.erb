@@ -1,0 +1,21 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Companies</h3>
+    </div>
+  <div class="panel-body">
+<% if @companies && @companies.any? %>
+    <div class="table-responsive">
+      <table class="table">
+    <tr><th><%= sortable "name" %></th><th><%= sortable "email" %></th><th><%= sortable "phone" %></th>
+    <th><%= sortable "manager" %></th><th><%= sortable "address" %></th><th>Created At</th><th>Actions</th></tr>
+      <tbody>
+      <%= render @companies %>
+      </tbody>
+    </table>
+    </div>
+  <%= will_paginate @companies %>
+<% else %>
+<strong>No companies yet. <%= link_to "Add one!", new_company_path %></strong>
+<% end %>
+</div>
+</div>

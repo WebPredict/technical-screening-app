@@ -23,7 +23,7 @@
       </div>
   <%= will_paginate @candidates %>
 <% else %>
-<h3>No candidates yet.</h3>
+<strong>No candidates yet.</strong>
 <% end %>
 <%= link_to "New Candidate", new_candidate_path, class: "btn btn-primary" %>
 </div>

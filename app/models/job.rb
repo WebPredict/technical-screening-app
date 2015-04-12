@@ -8,6 +8,5 @@ class Job < ActiveRecord::Base
   validates :name, presence: true, length: { maximum: 255 }
 
   validates :user_id, presence: true
-  validates :company_id, presence: true
 
 end

@@ -44,9 +44,19 @@
       <%= 
       Nokogiri::HTML::DocumentFragment.parse(@question.answer).to_html.html_safe %> 
       <% else %>
-        <%= link_to "Employer / Recruiter Membership Required", plans_path, class: "btn btn-info" %> 
+        <%= link_to "Employer / Recruiter Membership Required", plans_path, class: "btn btn-xs btn-primary" %> 
       <% end %>
     </section>
+    <% if current_user != nil %>
+		<section>
+			<h4>Privacy: </h4> 
+			<% if @question.is_public? %>
+        <span class="label label-info">Public</span>
+        <% else %>
+        <span class="label label-info">Private</span>
+        <% end %>
+		</section>
+		<% end %>
 		<section>
 			<h4>Difficulty: </h4> 
 			<%= link_to @question.difficulty.level, questions_path(difficulty_id: @question.difficulty.id) %>

@@ -30,8 +30,12 @@ class QuestionsController < ApplicationController
       @questions = @questions.where(query, params[:difficulty_id])
     end
 
-    @questions = @questions.where("is_public = ?", true).paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
-  
+    if current_user != nil
+      @questions = @questions.where("is_public = ? OR user_id = ?", true, current_user.id).paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
+    else
+      @questions = @questions.where("is_public = ?", true).paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
+    end
+    
     @select_mode = false
     @searched = query != ''
   end
