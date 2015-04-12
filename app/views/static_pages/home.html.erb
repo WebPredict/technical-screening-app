@@ -50,7 +50,13 @@
             <h3 class="panel-title">Metrics</h3>
           </div>
           <div class="panel-body">
-          <strong>TODO: Fix graph for Number of Candidates per Job</strong>
+            <% if Rails.env.development? %>
+            <strong>Candidates Per Job</strong>
+            <%= column_chart Candidate.group(:job_id).count %>
+            <% else %>
+            <strong>Candidates Per Day</strong>
+            <%= column_chart Candidate.group_by_day(:created_at, format: "%l %P").count %>
+            <% end %>
           </div>
         </div>
       </div>

@@ -20,6 +20,7 @@ gem 'chargify_api_ares',  '1.3.3'
 gem 'breadcrumbs_on_rails'
 gem 'newrelic_rpm'
 gem 'chartkick'
+gem 'groupdate'
 
 group :development, :test do
   gem 'sqlite3',     '1.3.9'
