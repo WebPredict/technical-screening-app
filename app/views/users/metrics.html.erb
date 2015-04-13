@@ -1,0 +1,36 @@
+<% provide(:title, "Metrics") %>
+<div class="page-header">
+<h3>Metrics</h3>
+</div>
+<% if logged_in? %>
+  <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Candidates Per Job</h3>
+          </div>
+          <div class="panel-body">
+            <%= column_chart Candidate.group(:job_id).count %>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Candidates Per Day</h3>
+          </div>
+          <div class="panel-body">
+            <% if Rails.env.development? %>
+            <%= column_chart Candidate.group(:job_id).count %>
+            <% elsif Rails.env.production? %>
+            <%= column_chart Candidate.group_by_day(:created_at, format: "%l %P").count %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+  </div>
+
+<% end %>

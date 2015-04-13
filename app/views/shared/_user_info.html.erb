@@ -1,4 +1,7 @@
 <%= link_to gravatar_for(current_user, size: 50), current_user %>
 <h1><%= current_user.name %></h1>
-<span><%= link_to "view my profile", current_user %></span>
+<span>
+      <%= link_to edit_user_path(current_user.id) do %>
+    <i class="glyphicon glyphicon-cog"></i>
+    <% end %><%= link_to "view my profile", current_user %></span>
 <span><%= pluralize(current_user.questions.count, "question") %></span>

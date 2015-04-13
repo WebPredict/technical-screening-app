@@ -1,6 +1,9 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Test Results</h3>
+    <h3 class="panel-title">Test Results<span style="float:right">
+      <%= link_to test_submissions_path, class: "btn btn-xs btn-default" do %>
+    <i class="glyphicon glyphicon-search"></i>
+    <% end %></span></h3>
     </div>
   <div class="panel-body">
 <% if @test_submissions && @test_submissions.any? %>
