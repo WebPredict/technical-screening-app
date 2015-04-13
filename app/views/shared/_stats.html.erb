@@ -2,17 +2,17 @@
 <div class="stats">
   <a href="<%= test_submissions_path %>">
     <strong class="stat"> 
-      <%= @num_test_results %>
+      <span class="badge"><%= @num_test_results %></span>
     </strong> Test Results
   </a>
   <a href="<%= candidates_path %>">
     <strong class="stat">
-      <%= @num_candidates %> 
+      <span class="badge"><%= @num_candidates %></span> 
     </strong> Candidates
   </a>
   <a href="<%= tests_path %>">
     <strong class="stat">
-      <%= @num_tests %> 
+      <span class="badge"><%= @num_tests %></span>
     </strong> Tests
   </a>
 </div>

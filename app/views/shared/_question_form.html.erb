@@ -6,7 +6,7 @@
 <%= form_for(@question) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
-  <%= f.label :question_type, "Question Type" %>
+  <%= f.label :question_type, "Question Type", title: "Type of question (free form / long answer, multiple choice, short answer" %>
   <div class="field">
   <%= f.collection_select(:question_type_id, QuestionType.all, :id, :name) %>
   </div>
