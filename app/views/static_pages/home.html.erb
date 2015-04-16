@@ -52,11 +52,7 @@
           <div class="panel-body">
             <strong>Candidates Per Job</strong>
             <% if Rails.env.development? %>
-            <%= column_chart Candidate.group(:job_id).count %>
-            <% elsif true %>
-            TODO: chart supporting PostgreSQL
-            <% elsif false %>
-            <%= column_chart Candidate.group_by_day(:created_at, format: "%l %P").count %>
+            <%= column_chart Candidate.unscoped.group(:job_id).count %>
             <% end %>
           </div>
         </div>
