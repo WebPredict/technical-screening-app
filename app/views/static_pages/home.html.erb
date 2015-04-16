@@ -51,9 +51,7 @@
           </div>
           <div class="panel-body">
             <strong>Candidates Per Job</strong>
-            <% if Rails.env.development? %>
             <%= column_chart Candidate.unscoped.group(:job_id).count %>
-            <% end %>
           </div>
         </div>
       </div>

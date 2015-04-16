@@ -1,9 +1,9 @@
 <% provide(:title, @company.name) %>
 <div class="page-header">
     <section style="float:right">
-        <%= link_to "Edit Company", edit_company_path(@company), class: "btn btn-sm btn-primary" %> 
+        <%= link_to "Edit Company", edit_company_path(@company), class: "btn btn-sm btn-primary btn-responsive" %> 
         <%= link_to "Remove Company", @company, method: :delete,
-                           data: { confirm: "Delete this company?" }, :class => "btn btn-sm btn-danger" %>
+                           data: { confirm: "Delete this company?" }, :class => "btn btn-sm btn-danger btn-responsive" %>
     </section>
   <h3>Company Details</h3>
 </div>

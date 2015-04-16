@@ -151,6 +151,28 @@ aside {
   }
 }
 
+@media (max-width: 768px) {
+  .btn-responsive {
+    padding:2px 4px;
+    font-size:80%;
+    line-height: 1;
+  }
+  .text-responsive {
+    font-size: 80%;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+  .btn-responsive {
+    padding:4px 9px;
+    font-size:90%;
+    line-height: 1.2;
+  }
+  .text-responsive {
+    font-size:90%;
+  }
+}
+
 .navbar-inverse {
   background-color: #205081;
 }
@@ -365,7 +387,6 @@ span.picture {
   h1 { 
     font-size: 5em; 
     -webkit-text-stroke: 1px #e6e6e6; 
-    
   }
 }
 
