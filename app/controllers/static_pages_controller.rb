@@ -17,6 +17,7 @@ class StaticPagesController < ApplicationController
       end
       
       @question = current_user.questions.build
+      @candidate = current_user.candidates.build
       @tests = current_user.tests.paginate(page: params[:page])
       @companies = current_user.companies.paginate(page: params[:page])
       

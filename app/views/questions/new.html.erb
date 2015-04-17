@@ -79,5 +79,9 @@
     adjustQuestionForm(this.value);
   }    
 
-  $('#question_question_type_id').on('change', categoryChanged)
+  $(document).ready(function(){
+    $('#question_question_type_id').bind('change', categoryChanged);
+    $('#question_question_type_id').trigger('change');
+  });
+
 </script>

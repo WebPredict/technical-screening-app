@@ -1,9 +1,15 @@
 <tr id="candidate-<%= candidate.id %>">
   <td><%= link_to candidate.name, candidate %></td>
   <td><%= candidate.email %></td>
-  <td><%= candidate.phone %></td>
+  <td><%= phone_format(candidate.phone) %></td>
   <td><%= candidate.created_at.strftime("%m/%d/%Y") if candidate.created_at? %></td>
-  <td><%= link_to "Results", candidate_submissions_path(candidate_id: candidate.id) %></td>
+  <td>
+    <% if candidate.test_submissions.any? %>
+    <%= link_to "Results", candidate_submissions_path(candidate_id: candidate.id) %>
+    <% else %>
+    None yet.
+    <% end %>
+    </td>
   <td>
       <% if current_user?(candidate.user) %>
             <%= link_to "Send Test", send_candidate_test_path(id: candidate.id), :class => "btn btn-xs btn-primary" %>

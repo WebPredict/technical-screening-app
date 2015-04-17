@@ -14,7 +14,7 @@
         <table style="width:400px">
       <tr><th>Candidate:</th><td><%= @candidate.name %></td></tr>
       <tr><th>Email:</th><td><%= @candidate.email %></td></tr>
-      <tr><th>Phone:</th><td><%= @candidate.phone %></td></tr>
+      <tr><th>Phone:</th><td><%= phone_format(@candidate.phone) %></td></tr>
       <tr><th>Position Applied For:</th><td><%= @candidate.job_title %></td></tr>
       <tr><th>Created On:</th><td><%= @candidate.created_at.strftime("%m/%d/%Y") if @candidate.created_at? %></td></tr>
       </table>

@@ -17,7 +17,7 @@
     </div>
   <%= will_paginate @jobs %>
 <% else %>
-<strong>No job listings yet. <%= link_to "Add one!", new_job_path %></strong>
+<strong>No job listings yet. <%= link_to "Add one!", new_job_path, class: "btn btn-sm btn-primary" %></strong>
 <% end %>
 </div>
 </div>

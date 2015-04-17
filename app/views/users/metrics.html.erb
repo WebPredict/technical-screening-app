@@ -10,7 +10,7 @@
             <h3 class="panel-title">Candidates Per Job</h3>
           </div>
           <div class="panel-body">
-            <%= column_chart Candidate.unscoped.group(:job_id).count %>
+            <%= column_chart Candidate.unscoped.where("user_id = ?", current_user.id).group(:job_id).count %>
           </div>
         </div>
       </div>
@@ -26,7 +26,7 @@
             <% if Rails.env.development? %>
             <%= column_chart Candidate.unscoped.group(:job_id).count %>
             <% elsif Rails.env.production? %>
-            <%= line_chart Candidate.unscoped.group_by_day(:created_at, format: "%l %P").count %>
+            <%= line_chart Candidate.unscoped.where("user_id = ?", current_user.id).group_by_day(:created_at, format: "%l %P").count %>
             <% end %>
           </div>
         </div>
@@ -39,7 +39,7 @@
             <h3 class="panel-title">Company Jobs Percentage</h3>
           </div>
           <div class="panel-body">
-            <%= pie_chart Job.unscoped.group(:company_id).count %>
+            <%= pie_chart Job.unscoped.where("user_id = ?", current_user.id).group(:company_id).count %>
           </div>
         </div>
       </div>

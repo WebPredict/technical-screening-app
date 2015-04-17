@@ -18,7 +18,7 @@
     </div>
   <%= will_paginate @companies %>
 <% else %>
-<strong>No companies yet. <%= link_to "Add one!", new_company_path %></strong>
+<strong>No companies yet. <%= link_to "Add one!", new_company_path, class: "btn btn-sm btn-primary" %></strong>
 <% end %>
 </div>
 </div>

@@ -12,7 +12,6 @@ class UsersController < ApplicationController
   def index
     query = ''
     searchparam = ""
-    paramarr = []
     if params[:search] && params[:search] != ''
         query += ' lower(name) LIKE ?'
         searchparam = "%#{params[:search].downcase}%"

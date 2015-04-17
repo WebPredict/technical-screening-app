@@ -8,7 +8,7 @@
         <%= render 'shared/stats' %>
       </section>
       <section class="question_form">
-        <%= render 'shared/question_form' %>
+        <%= render 'shared/candidate_form' %>
       </section>
       <section class="lists">
       <div class="panel panel-default">
@@ -26,7 +26,7 @@
         <strong>No custom tests yet.</strong>
         <% end %>
         <div class="other">
-          <%= link_to "Create Test", new_test_path, :class => "btn btn-med btn-primary" %>
+          <%= link_to "Create Test", new_test_path, :class => "btn btn-sm btn-primary" %>
         </div>
         </div>
         </div>
@@ -51,7 +51,7 @@
           </div>
           <div class="panel-body">
             <strong>Candidates Per Job</strong>
-            <%= column_chart Candidate.unscoped.group(:job_id).count %>
+            <%= column_chart Candidate.unscoped.where("user_id = ?", current_user.id).group(:job_id).count %>
           </div>
         </div>
       </div>

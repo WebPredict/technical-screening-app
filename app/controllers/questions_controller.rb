@@ -2,6 +2,7 @@ class QuestionsController < ApplicationController
   before_action :logged_in_user, only: [:create, :edit, :update, :destroy]
   before_action :correct_user,   only: [:destroy, :edit, :update]
   
+  include QuestionsHelper 
   helper_method :sort_column, :sort_direction
   
   add_breadcrumb "Dashboard", :root_path
@@ -108,25 +109,9 @@ class QuestionsController < ApplicationController
   # GET /questions/1/edit
   def edit
     @question = Question.find(params[:id])
+
+    setup_question(@question)
     
-    split_answers = @question.content.split("||")
-    @question.content = split_answers [0]
-    if split_answers.size > 1
-      @question.answer2 = split_answers [1]
-    end 
-    if split_answers.size > 2
-      @question.answer3 = split_answers [2]
-    end 
-    if split_answers.size > 3
-      @question.answer4 = split_answers [3]
-    end 
-    if split_answers.size > 4
-      @question.answer5 = split_answers [4]
-    end 
-    
-    if @question.question_type_id == 3
-      @question.short_answer = @question.answer
-    end
     add_breadcrumb "Edit Question", edit_question_path
   end
 
@@ -160,12 +145,10 @@ class QuestionsController < ApplicationController
     @clone_question.category_id = @question.category_id
     @clone_question.question_type_id = @question.question_type_id
     @clone_question.user = current_user
-#    @clone_question.save
-    flash[:success] = "Question cloned. You can change any details you'd like."
-    #redirect_to edit_question_path(@clone_question)
-    
+    setup_question(@clone_question)
+    flash.now[:success] = "Question cloned. You can change any details you'd like."
+
     @question = @clone_question
-    #flash.now[:info] = "Multiple choice and short answer questions can be automatically scored. The difficulty level does not affect scoring."
     add_breadcrumb "Cloned Question", new_question_path
     render 'new'
   end
