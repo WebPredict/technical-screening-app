@@ -31,6 +31,13 @@ class JobsController < ApplicationController
 
   def new
     @job = Job.new
+    if params[:company_id] != '' && params[:company_id] != nil
+      @company = Company.find(params[:company_id])
+      if @company != nil
+        @job.company_id = @company.id
+      end
+    end
+    
     @companies = current_user.companies 
     add_breadcrumb "New Job Listing", new_job_path
   end
