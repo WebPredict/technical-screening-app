@@ -8,6 +8,7 @@
     </section>
   <h3>Job Listing Details</h3>
 </div>
+<div class="padded-row">
 <div class="row">
   <div class="col-md-12">
         <table style="width:500px">
@@ -27,10 +28,10 @@
 
           </table>
         <% else %>
-          <strong>No candidates for this job yet.</strong>
+          <strong>No candidates for this job yet. <%= link_to "Add Candidate", new_candidate_path, class: "btn btn-primary btn-responsive" %></strong>
         <% end %>
     </section>
     <br><br>
   </div>
 </div>
-
+</div>
