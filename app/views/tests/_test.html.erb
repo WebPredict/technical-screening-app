@@ -8,13 +8,13 @@
           <%= radio_button_tag "test_ids[]", test.id %>
       <% else %>
         <% if current_user?(test.user) %>
-          <%= link_to test, class: "btn btn-xs btn-primary", method: :delete,
+          <%= link_to test, class: "btn btn-xs btn-primary btn-responsive", method: :delete,
                                        data: { confirm: "Delete this test?" } do %>
             <i class="glyphicon glyphicon-remove"></i>
           <% end %>
         <% end %>
 <div class="button-spacer"> </div>
-<%= link_to edit_test_path(test), class: "btn btn-xs btn-primary" do %>
+<%= link_to edit_test_path(test), class: "btn btn-xs btn-primary btn-responsive" do %>
     <i class="glyphicon glyphicon-edit"></i>
 <% end %>
       <% end %>

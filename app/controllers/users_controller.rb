@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   before_action :admin_user,     only: :destroy
                   
                   
-  add_breadcrumb "Home", :root_path
+  add_breadcrumb "Dashboard", :root_path
                       
   # GET /users
   # GET /users.json

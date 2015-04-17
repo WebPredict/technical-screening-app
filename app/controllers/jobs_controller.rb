@@ -4,7 +4,7 @@ class JobsController < ApplicationController
   
   helper_method :sort_column, :sort_direction
 
-  add_breadcrumb "Home", :root_path
+  add_breadcrumb "Dashboard", :root_path
   add_breadcrumb "Jobs", :jobs_path
 
   def index

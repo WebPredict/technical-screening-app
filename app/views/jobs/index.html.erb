@@ -33,7 +33,7 @@
       <table class="table table-bordered">
         <tr><th><%= sortable "name", "Title" %></th><th><%= sortable "description" %></th>
         <th><%= sortable "company_id", "Company" %></th>
-        <th>Created At</th></th></tr>
+        <th>Created On</th><th>Actions</th></tr>
         <%= render @jobs %>
       </table>
       <%= will_paginate @jobs %>

@@ -17,7 +17,7 @@
       <tr><th>Address:</th><td><%= @company.address %></td></tr>
       <tr><th>Phone:</th><td><%= phone_format(@company.phone) %></td></tr>
       <tr><th>Website:</th><td><%= @company.website %></td></tr>
-      <tr><th>Created At:</th><td><%= @company.created_at.strftime("%m/%d/%Y") if @company.created_at? %></td></tr>
+      <tr><th>Created On:</th><td><%= @company.created_at.strftime("%m/%d/%Y") if @company.created_at? %></td></tr>
       </table>
     <br>
     <section>
@@ -26,7 +26,7 @@
           <table class="table table-bordered">
         <tr><th><%= sortable "name", "Title" %></th><th><%= sortable "description" %></th>
         <th><%= sortable "company_id", "Company" %></th>
-        <th>Created At</th></th></tr>
+        <th>Created On</th></th></tr>
 
             <%= render @company_jobs %>
           </table>
