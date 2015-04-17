@@ -59,7 +59,8 @@
         <% end %>
       <% else %>
         <table class="table table-bordered">
-          <tr><th><%= sortable "name" %></th><th><%= sortable "description" %></th><th># Questions</th><th><%= sortable "created_at" %></th><th>Actions</th></tr>
+          <tr><th><%= sortable "name" %></th><th><%= sortable "description" %></th><th># Questions</th>
+          <th><%= sortable "created_at", "Created On" %></th><th>Actions</th></tr>
           <%= render @tests %>
         </table>
         <%= will_paginate @tests %>
