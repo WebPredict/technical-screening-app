@@ -9,13 +9,13 @@
 </div>
 <div class="row">
   <div class="col-md-12">
-        <table style="width:400px">
+        <table style="width:500px">
       <tr><th>Job Title:</th><td><%= @job.name %></td></tr>
       <tr><th>Description:</th><td><%= @job.description %></td></tr>
       <tr><th>Manager:</th><td><%= @job.manager %></td></tr>
-      <tr><th>Company:</th><td><%= @job.company.name unless @job.company == nil %></td></tr>
+      <tr><th>Company:</th><td><%= link_to @job.company.name, @job.company unless @job.company == nil %></td></tr>
       <tr><th>Phone:</th><td><%= phone_format(@job.phone) %></td></tr>
-      <tr><th>Created At:</th><td><%= @job.created_at.strftime("%m/%d/%Y") if @job.created_at? %></td></tr>
+      <tr><th>Created On:</th><td><%= @job.created_at.strftime("%m/%d/%Y") if @job.created_at? %></td></tr>
       </table>
     <br>
     <section>
