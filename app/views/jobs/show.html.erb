@@ -8,8 +8,7 @@
     </section>
   <h3>Job Listing Details</h3>
 </div>
-<div class="padded-row">
-<div class="row">
+<div class="row padded-row">
   <div class="col-md-12">
         <table style="width:500px">
       <tr><th>Job Title:</th><td><%= @job.name %></td></tr>
@@ -19,7 +18,7 @@
       <tr><th>Phone:</th><td><%= phone_format(@job.phone) %></td></tr>
       <tr><th>Created On:</th><td><%= @job.created_at.strftime("%m/%d/%Y") if @job.created_at? %></td></tr>
       </table>
-    <br>
+    <br><br>
     <section>
       <% if @job_candidates != nil %>
         <strong>This Job's Candidates</strong>
@@ -28,10 +27,10 @@
 
           </table>
         <% else %>
-          <strong>No candidates for this job yet. <%= link_to "Add Candidate", new_candidate_path, class: "btn btn-primary btn-responsive" %></strong>
+          <strong>No candidates for this job yet. <%= link_to "Add Candidate", new_candidate_path, 
+          class: "btn btn-primary btn-sm btn-responsive" %></strong>
         <% end %>
     </section>
     <br><br>
   </div>
-</div>
 </div>
