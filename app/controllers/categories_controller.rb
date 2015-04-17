@@ -10,13 +10,12 @@ class CategoriesController < ApplicationController
   def index
     query = ''
     searchparam = ""
-    paramarr = []
     if params[:search] && params[:search] != ''
         query += ' lower(name) LIKE ? '
         searchparam = "%#{params[:search].downcase}%"
     end
 
-    @candidates = Category.where(query, searchparam).paginate(page: params[:page], per_page: 10)
+    @categories = Category.where(query, searchparam).paginate(page: params[:page], per_page: 10)
 
     @searched = query != ''
   end
