@@ -5,5 +5,9 @@
   <td><%= company.manager %></td>
   <td><%= company.address %></td>
   <td><%= company.created_at.strftime("%m/%d/%Y") if company.created_at? %></td>
-  <td><%= link_to "Jobs", company %></td>
+  <td>
+    <% if company.jobs.any? %>
+    <%= link_to "Show Jobs", company, class: "btn btn-xs btn-primary" %>
+    <% end %>
+    </td>
 </tr>

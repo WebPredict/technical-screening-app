@@ -59,6 +59,14 @@ class CandidatesController < ApplicationController
   
   def new
     @candidate = Candidate.new
+    if params[:job_id] != '' && params[:job_id] != nil
+      @job = Job.find(params[:job_id])
+      if @job != nil
+        @candidate.job_title = @job.name
+      end
+    end
+
+    add_breadcrumb "New Candidate", new_candidate_path
   end
 
   # GET /candidates/1/edit

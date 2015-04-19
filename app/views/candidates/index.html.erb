@@ -1,4 +1,9 @@
 <div class="page-header">
+    <section style="float:right">
+      <% if logged_in? %>
+      <%= link_to "Create New Candidate", new_candidate_path, class: "btn btn-sm btn-primary btn-responsive" %> 
+      <% end %>
+      </section>
   <h3>Search Candidates</h3>
 </div>
 

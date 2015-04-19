@@ -7,5 +7,8 @@
     <% end %>
     </td>
   <td><%= job.created_at.strftime("%m/%d/%Y") if job.created_at? %></td>
-  <td></td>
+  <td>
+    <%= link_to "Create Candidate For Job", new_candidate_path(job_id: job.id), class: "btn btn-xs btn-primary" %>
+    
+  </td>
 </tr>

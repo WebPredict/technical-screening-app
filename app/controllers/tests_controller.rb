@@ -217,7 +217,7 @@ class TestsController < ApplicationController
 
     def test_params
       params.require(:test).permit(:name, :description, :question_ids, :is_public, :topic_list, 
-      :difficulty_level, :num_per_topic)
+      :difficulty_level, :num_per_topic, :created_at)
     end
     
     def correct_user
