@@ -10,6 +10,7 @@
       <%= f.label :name, "Name Your Test Submission (optional):" %>
       <%= f.text_field :name, class: 'form-control' %>
       <%= hidden_field_tag :test_id, @test_submission.test.id %>
+      <%= hidden_field_tag :email, @test_submission.candidate.email %>
         <strong>There are <%= @test_submission.test.questions.count %> question(s) in this test.</strong>
         <br><br>
           <%= f.fields_for :answered_questions do |aq_form|%>
