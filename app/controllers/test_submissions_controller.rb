@@ -32,6 +32,8 @@ class TestSubmissionsController < ApplicationController
   def create
     if params[:id] != nil
       @candidate = Candidate.find(params[:id])
+    elsif params[:email] != nil
+      @candidate = Candidate.find_by(email: params[:email])
     else
       @candidate = Candidate.new 
       @candidate.name = current_user.name + " - test taker"
