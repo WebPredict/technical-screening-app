@@ -10,7 +10,6 @@ class TestsController < ApplicationController
   def index
     query = ' (is_public = ? OR user_id = ? ) '
     searchparam = ""
-    paramarr = []
     if params[:search] && params[:search] != ''
         query += ' AND lower(name) LIKE ? '
         searchparam = "%#{params[:search].downcase}%"
@@ -51,7 +50,7 @@ class TestsController < ApplicationController
   
   def send_candidate_test
     @candidate = Candidate.find(params[:id])
-    flash.now[:info] = "Select Test To Send To: " + @candidate.name
+    flash.now[:info] = "Select an existing screening test to send to candidate '" + @candidate.name + "':"
     @single_test_select = true
     @tests = Test.all.paginate(page: params[:page], per_page: 10)
     render 'index'
@@ -158,13 +157,6 @@ class TestsController < ApplicationController
           flash[:warning] = "Could not find any categories matching the topic: " + topic + "."
           redirect_to request.referrer
           return
-#          cat_questions = Question.where("lower(content) like '%" + topic + "%'")
-#          if cat_questions != nil && cat_questions.size > 0
-#            (1..num_per_topic.to_i).each do |index|
-#              random_question = cat_questions [Random.new.rand(cat_questions.size)]
-#              @test.questions << random_question
-#            end
-#          end
         end
         
         @test.save 

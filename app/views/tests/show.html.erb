@@ -2,7 +2,7 @@
 <div class="page-header">
       <section style="float:right">
         <%= link_to "Search", tests_path, class: "btn btn-sm btn-primary btn-responsive" %> 
-        <%= link_to "Take Test", new_test_submission_path(id: @test.id), class: "btn btn-sm btn-primary btn-responsive" %> 
+        <%= link_to "See Candidate's View", new_test_submission_path(id: @test.id), class: "btn btn-sm btn-primary btn-responsive" %> 
         <%= link_to "Edit", edit_test_path(@test), class: "btn btn-sm btn-primary btn-responsive" %> 
         <%= link_to "Create", new_test_path, class: "btn btn-sm btn-primary btn-responsive" %> 
         <%= link_to "Search Questions", questions_path, class: "btn btn-sm btn-primary btn-responsive" %> 
@@ -16,7 +16,7 @@
 
 <div class="row">
   <div class="col-md-12">
-    <table style="width:500px">
+    <table style="width:400px">
       <tr><th>Name:</th><td><%= @test.name %></td></tr>
       <tr><th>Description:</th><td><%= @test.description %></td></tr>
       <tr><th>Privacy:</th><td>
@@ -39,6 +39,8 @@
           <%= render @test_questions %>
         </table>
         <%= will_paginate @test_questions %>
+      <% else %>
+      <h3>No questions added to this test yet.</h3>
       <% end %>
     </section>
   </div>

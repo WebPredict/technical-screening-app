@@ -21,15 +21,19 @@
 <div class="row">
   <div class="col-md-12">
     <% if @searched %>
+      <% if @companies.any? %>
+        <h3>Search Results</h3>
+      <% else %>
+        <h3>No results found for that search term.</h3>
+      <% end %>
+    <% else %>
+      <h3>Companies</h3>
+    <% end %>
     <% if @companies.any? %>
-      <h3>Search Results</h3>
-    <% else %>
-      <h3>No results found for that search term.</h3>
-    <% end %>
-    <% else %>
-    <h3>Companies</h3>
-    <% end %>
     <%= render 'shared/companies' %>
+    <% else %>
+    <h3>No companies yet.</h3>
+    <% end %>
   </div>
 </div>
 

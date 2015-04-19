@@ -36,7 +36,7 @@
         </td>
       <% end %>
 
-  <td><%= link_to question.difficulty.level, questions_path(difficulty_id: question.difficulty_id)  %></td>
+  <td><%= question.difficulty.level %></td>
   <td><%= question.question_type.name %></td>
-  <td><%= link_to question.category.name, questions_path(category_id: question.category_id)  %></td>
+  <td><%= question.category.name %></td>
 </tr>

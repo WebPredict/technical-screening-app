@@ -97,7 +97,7 @@ class TestSubmissionsController < ApplicationController
       aq.save
     end
     flash[:success] = "Test scored!"
-    redirect_to root_url
+    redirect_to @test_submission
   end
 
   def auto_score
@@ -119,8 +119,8 @@ class TestSubmissionsController < ApplicationController
         aq.save
       end
     end
-    flash[:success] = "Test result was auto-scored to the extent possible (only multiple choice, short phrase questions)."
-    redirect_to root_url
+    flash[:success] = "Multiple choice and short phrase questions have been automatically scored. You can manually override scores via the 'Score Test' button."
+    redirect_to @test_submission
   end
   
   def new

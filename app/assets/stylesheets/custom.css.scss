@@ -398,6 +398,12 @@ span.picture {
   text-align: center;
 }
 
+.table-responsive {
+  th {
+    white-space: nowrap;
+  }
+}
+
 .jumbotron {
   h2 {
     color: #000;
