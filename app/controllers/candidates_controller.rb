@@ -18,7 +18,7 @@ class CandidatesController < ApplicationController
     @candidates = current_user.candidates
     
     if @candidates != nil
-      @candidates = Candidate.where(query, searchparam).paginate(page: params[:page], per_page: 10)
+      @candidates = @candidates.where(query, searchparam).paginate(page: params[:page], per_page: 10)
     end
   
     @searched = query != ''
@@ -32,7 +32,11 @@ class CandidatesController < ApplicationController
         searchparam = "%#{params[:search].downcase}%"
     end
 
-    @candidates = Candidate.where(query, searchparam).paginate(page: params[:page], per_page: 10)
+    @candidates = current_user.candidates
+    
+    if @candidates != nil
+      @candidates = @candidates.where(query, searchparam).paginate(page: params[:page], per_page: 10)
+    end
 
     @searched = query != ''
   end
