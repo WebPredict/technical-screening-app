@@ -31,7 +31,7 @@ class TestSubmissionsController < ApplicationController
   def create
     if params[:id] != nil
       @candidate = Candidate.find(params[:id])
-    elsif params[:email] != nil
+    elsif params[:email] != nil && params[:email] != ''
       @candidate = Candidate.find_by(email: params[:email])
     else
       @candidate = Candidate.new 
@@ -50,6 +50,8 @@ class TestSubmissionsController < ApplicationController
       @test_submission.test.questions.each_with_index do |question, index|
         @test_submission.answered_questions[index].question = question
         @test_submission.answered_questions[index].test_submission = @test_submission
+        
+        # TODO: keep track of number of blank questions and warn user about them
       end
       
       if @test_submission.save
@@ -126,6 +128,7 @@ class TestSubmissionsController < ApplicationController
   
   def new
     @test_submission = TestSubmission.new
+    @test_submission.candidate = Candidate.new 
     @test_submission.name = "My Test Submission"
     @test_submission.test = Test.find(params[:id])
 
