@@ -47,7 +47,7 @@ class CandidatesController < ApplicationController
     
     if @candidates.any?
       @candidates.first.send_test(@test, current_user.email)
-      flash[:success] = "Test sent to candidate " + @candidate.name + "."
+      flash[:success] = "Test sent to candidate " + @candidates.first.name + "."
       redirect_to root_url
     else
       flash[:info] = "Please select a test to send."
