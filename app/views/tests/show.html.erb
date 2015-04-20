@@ -2,10 +2,11 @@
 <div class="page-header">
       <section style="float:right">
         <%= link_to "Search", tests_path, class: "btn btn-sm btn-primary btn-responsive" %> 
-        <%= link_to "See Candidate's View", new_test_submission_path(id: @test.id), class: "btn btn-sm btn-primary btn-responsive" %> 
+        <%= link_to "Send Test", send_test_candidate_path(id: @test.id), class: "btn btn-sm btn-primary btn-responsive" %>
         <%= link_to "Edit", edit_test_path(@test), class: "btn btn-sm btn-primary btn-responsive" %> 
         <%= link_to "Create", new_test_path, class: "btn btn-sm btn-primary btn-responsive" %> 
         <%= link_to "Search Questions", questions_path, class: "btn btn-sm btn-primary btn-responsive" %> 
+        <%= link_to "See Candidate's View", new_test_submission_path(id: @test.id), class: "btn btn-sm btn-primary btn-responsive" %> 
         <% if @test.is_public? %>
         <%= link_to "Remove", @test, method: :delete,
                            data: { confirm: "Delete this test?" }, :class => "btn btn-sm btn-danger btn-responsive" %>

@@ -5,7 +5,6 @@
 <p>
   <%= @sender_email %> has requested that you complete the test '<%= @test.name %>' on TechScreen.net! 
 </p>
-<br>
 <p>Please click on the link below to start your test: <%= link_to "Start Test", start_test_url(email: @candidate.email, token: @candidate.test_token,
                                                     test_id: @test.id) %>
 </p>
