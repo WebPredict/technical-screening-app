@@ -61,7 +61,7 @@ class TestsController < ApplicationController
     @tests = Test.find(params[:test_ids])
     
     if @tests.any?
-      @candidate.send_test(@tests.first)
+      @candidate.send_test(@tests.first, current_user.email)
       flash[:success] = "Test sent to candidate " + @candidate.name + "."
       redirect_to root_url
     else

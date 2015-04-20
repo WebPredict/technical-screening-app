@@ -5,15 +5,16 @@ class CandidateMailer < ApplicationMailer
   #
   #   en.user_mailer.password_reset.subject
   #
-  def send_test(candidate, test)
+  def send_test(candidate, test, sender_email)
     @candidate = candidate
     @test = test
-    mail to: candidate.email, subject: "Test from TechScreen.net"
+    @sender_email = sender_email
+    mail to: candidate.email, subject: @test.name + " Test from TechScreen.net"
   end
   
   def send_results(candidate, test_submission, destination)
     @candidate = candidate
     @test_submission = test_submission
-    mail to: destination, subject: "Test Results From TechScreen.net"
+    mail to: destination, subject: "Test Results From TechScreen.net for test " + @test_submission.test.name
   end
 end

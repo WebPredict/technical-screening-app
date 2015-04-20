@@ -20,6 +20,41 @@ class CandidatesController < ApplicationController
     @searched = query != ''
   end
 
+  def filter_candidates
+    query = ''
+    searchparam = ""
+    if params[:search] && params[:search] != ''
+        query += ' lower(name) LIKE ? '
+        searchparam = "%#{params[:search].downcase}%"
+    end
+
+    @candidates = Candidate.where(query, searchparam).paginate(page: params[:page], per_page: 10)
+
+    @searched = query != ''
+  end
+
+  def send_candidate_test
+    @test = Test.find(params[:id])
+    flash.now[:info] = "Select an existing candidate to send test '" + @test.name + "':"
+    @single_candidate_select = true
+    @candidates = Candidate.all.paginate(page: params[:page], per_page: 10)
+    render 'send_test'
+  end
+  
+  def select_candidate
+    @test = Test.find(params[:id])
+    @candidates = Candidate.find(params[:candidate_ids])
+    
+    if @candidates.any?
+      @candidates.first.send_test(@test, current_user.email)
+      flash[:success] = "Test sent to candidate " + @candidate.name + "."
+      redirect_to root_url
+    else
+      flash[:info] = "Please select a test to send."
+      render 'send_test'
+    end
+  end
+
   def create
     if params[:commit] == "Cancel"
       redirect_to root_url

@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   post 'submit_questions' => 'tests#submit_questions'
   post 'submit_random_questions' => 'tests#submit_random_questions'
   get 'send_candidate_test' => 'tests#send_candidate_test'
+  get 'send_test_candidate' => 'candidates#send_candidate_test'
   get 'clone_question' => 'questions#clone_question'
   get 'test_results' => 'tests#results'
   get 'sent_tests' => 'tests#sent'
@@ -42,6 +43,8 @@ Rails.application.routes.draw do
   post 'auto_score_test' => 'test_submissions#auto_score'
   get 'company_jobs' => 'companies#jobs'
   get 'metrics' => 'users#metrics'
+  post 'select_candidate' => 'candidates#select_candidate'
+  post 'filter_candidates' => 'candidates#filter_candidates'
   
   resources :companies
 

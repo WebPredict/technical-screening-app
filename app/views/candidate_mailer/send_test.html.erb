@@ -3,7 +3,8 @@
 <p>Hello <%= @candidate.name %>,</p>
 
 <p>
-Welcome to TechScreen.net! Click on the link below to start your test:
+  <%= @sender_email %> has requested that you complete the test '<%= @test.name %>' on TechScreen.net! 
+  Please click on the link below to start your test: 
 </p>
 
 <%= link_to "Start Test", start_test_url(email: @candidate.email, token: @candidate.test_token,

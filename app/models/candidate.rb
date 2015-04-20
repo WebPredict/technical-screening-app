@@ -38,9 +38,9 @@ class Candidate < ActiveRecord::Base
     return @score
   end
   
-  def send_test(test)
+  def send_test(test, sender_email)
     create_test_digest
-    CandidateMailer.send_test(self, test).deliver_now
+    CandidateMailer.send_test(self, test, sender_email).deliver_now
   end
   
   def send_results(test_submission, destination)

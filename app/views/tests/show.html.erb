@@ -31,7 +31,7 @@
     <br>
     <section>
       <% if @test.questions.any? %>
-        <strong>This Test's Questions</strong> (<%= @test.questions.count %>)
+        <h4>This Test's Questions (<%= @test.questions.count %>):</h4>
         <table class="table table-bordered">
           <tr><th>Actions</th><th><%= sortable "content", "Question" %></th><th><%= sortable "answer" %></th>
           <th><%= sortable "difficulty" %></th><th><%= sortable "question_type" %></th>

@@ -12,6 +12,12 @@
                                        data: { confirm: "Delete this test?" } do %>
             <i class="glyphicon glyphicon-remove"></i>
           <% end %>
+          
+          <div class="button-spacer"> </div>
+          <%= link_to send_test_candidate_path(id: test.id), class: "btn btn-xs btn-primary btn-responsive" do %>
+            <i class="glyphicon glyphicon-send" title="Send Test"></i>
+          <% end %>
+
         <% end %>
 <div class="button-spacer"> </div>
 <%= link_to edit_test_path(test), class: "btn btn-xs btn-primary btn-responsive" do %>
