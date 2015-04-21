@@ -136,7 +136,7 @@ class TestsController < ApplicationController
           difficulty = Difficulty.find(params[:difficulty_level])
         end
         
-        category = Category.where("lower(name) like '%" + topic + "%'")
+        category = Category.where("lower(name) like '%" + topic.downcase + "%'")
         if category != nil && category.any?
           cat_questions = Question.where("category_id = " + category.first.id.to_s)
           if difficulty != nil
