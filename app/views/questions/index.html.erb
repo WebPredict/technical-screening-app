@@ -21,7 +21,7 @@
         ) %>
   </div>
 
-  <label>Search Terms</label>
+  <label>Question Contains</label>
   <div class="field">
     <div class="input-group">
       <%= text_field_tag :search, params[:search], :class => "form-control" %>
@@ -43,7 +43,7 @@
       <h4>No results found for that search term.</h4>
     <% end %>
     <% else %>
-    <h4>Recent Questions</h4>
+    <h4>All Questions</h4>
     <% end %>
     <div class="table-responsive">
       <table class="table table-bordered">

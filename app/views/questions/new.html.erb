@@ -43,6 +43,7 @@
       <%= f.text_field :short_answer, class: 'form-control' %>
       </div>
       <div id="multiple-choice" style="display:none">
+        <div class="alert alert-info">Enter all multiple choice answers below, and select the correct one.</div>
         <label class="radio-inline">
         <%= f.radio_button :multiple_choice_answer, "A)", checked: false %><strong> Answer Choice A</strong>
         </label>

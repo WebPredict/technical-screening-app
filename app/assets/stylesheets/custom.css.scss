@@ -174,7 +174,7 @@ aside {
     line-height: 1.2;
   }
   .text-responsive {
-    font-size: 80%;
+    font-size: 90%;
   }
 
   .row {
@@ -263,6 +263,11 @@ input, textarea, select, .uneditable-input {
 
 input {
   height: auto !important;
+}
+
+input[type="radio"] {
+  margin-top: -1px;
+  vertical-align: middle;
 }
 
 #error_explanation {
