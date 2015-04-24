@@ -49,9 +49,9 @@ class CandidatesController < ApplicationController
     @candidates = current_user.candidates
     
     if @candidates != nil
-      @candidates = @candidates.where(query, searchparam).paginate(page: params[:page], per_page: 10)
+      @candidates = @candidates.paginate(page: params[:page], per_page: 10)
     end
-
+ 
     render 'send_test'
   end
   
