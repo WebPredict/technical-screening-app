@@ -49,7 +49,10 @@ class Candidate < ActiveRecord::Base
   
   private
     def create_test_digest
-      self.test_token = Candidate.new_token
-      update_attribute(:test_digest, Candidate.digest(self.test_token))
+      # probably fine for now to just create this once
+      if self.test_token == nil
+        self.test_token = Candidate.new_token
+        update_attribute(:test_digest, Candidate.digest(self.test_token))
+      end
     end
 end
