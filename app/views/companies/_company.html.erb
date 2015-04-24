@@ -7,7 +7,9 @@
   <td><%= company.created_at.strftime("%m/%d/%Y") if company.created_at? %></td>
   <td>
     <% if company.jobs.any? %>
-    <%= link_to "Show Jobs", company, class: "btn btn-xs btn-primary" %>
+    <%= link_to "Show Jobs", company, class: "btn btn-xs btn-primary btn-responsive" %>
     <% end %>
+    <div class="button-spacer"> </div>
+    <%= link_to "Add Job", new_job_path(company_id: company.id), class: "btn btn-xs btn-primary btn-responsive" %> 
     </td>
 </tr>

@@ -1,8 +1,4 @@
 <tr id="test-<%= test.id %>">
-  <td><%= link_to test.name, test %></td>
-  <td><%= test.description %></td>
-  <td><%= test.questions.count %></td>
-  <td><%= test.created_at.strftime("%m/%d/%Y") %></td>
   <td>
       <% if @single_test_select %>
           <%= radio_button_tag "test_ids[]", test.id %>
@@ -26,4 +22,8 @@
 
       <% end %>
   </td>
+  <td><%= link_to test.name, test %></td>
+  <td><%= test.description %></td>
+  <td><%= test.questions.count %></td>
+  <td><%= test.created_at.strftime("%m/%d/%Y") %></td>
 </tr>

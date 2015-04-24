@@ -42,8 +42,8 @@
         <%= form_tag select_test_path, :class => "nicesearch", :method => 'post' do %>
         <%= hidden_field_tag :id, @candidate.id %>
         <table class="table table-bordered">
-          <tr><th><%= sortable "name" %></th><th><%= sortable "description" %></th><th># Questions</th>
-          <th><%= sortable "created_at", "Created On" %></th><th>Select Test</th></tr>
+          <tr><th>Select Test</th><th><%= sortable "name" %></th><th><%= sortable "description" %></th><th># Questions</th>
+          <th><%= sortable "created_at", "Created On" %></th></tr>
           <%= render @tests %>
         </table>
 
@@ -59,8 +59,8 @@
         <% end %>
       <% else %>
         <table class="table table-bordered">
-          <tr><th><%= sortable "name" %></th><th><%= sortable "description" %></th><th># Questions</th>
-          <th><%= sortable "created_at", "Created On" %></th><th>Actions</th></tr>
+          <tr><th>Actions</th><th><%= sortable "name" %></th><th><%= sortable "description" %></th><th># Questions</th>
+          <th><%= sortable "created_at", "Created On" %></th></tr>
           <%= render @tests %>
         </table>
         <%= will_paginate @tests %>
