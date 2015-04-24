@@ -1,13 +1,14 @@
 <% provide(:title, @test_submission.candidate.name) %>
 <div class="page-header">
-    <% if @test_submission.answered_questions.any? %>
-      <section style="float:right">
+      <section class="laptop-section" style="float:right">
+        <%= link_to "Search", test_submissions_path, class: "btn btn-sm btn-primary btn-responsive" %> 
         <%= link_to "Candidate Details", @test_submission.candidate, class: "btn btn-sm btn-primary btn-responsive" %> 
+    <% if @test_submission.answered_questions.any? %>
         <%= link_to "Score Test", score_test_path(id: @test_submission.id), class: "btn btn-sm btn-primary btn-responsive" %> 
         <%= link_to "Auto Score Test", auto_score_test_path(id: @test_submission.id), class: "btn btn-sm btn-primary btn-responsive", :method => :post %> 
+    <% end %>
         <%= link_to "Dashboard", root_path, class: "btn btn-sm btn-primary btn-responsive" %> 
       </section>
-    <% end %>
   <h3>Test Submission Details</h3>
 </div>
 
@@ -40,10 +41,15 @@
           <%= will_paginate @test_submission_answers %>
       <% end %>
     </section>
-    <section>
-        <%= link_to "Score Test", score_test_path(id: @test_submission.id), class: "btn btn-sm btn-primary" %> 
-        <%= link_to "Dashboard", root_path, class: "btn btn-sm btn-primary" %> 
-    </section>
+      <section class="mobile-section" style="float:right">
+        <%= link_to "Search", test_submissions_path, class: "btn btn-sm btn-primary btn-responsive" %> 
+        <%= link_to "Candidate Details", @test_submission.candidate, class: "btn btn-sm btn-primary btn-responsive" %> 
+    <% if @test_submission.answered_questions.any? %>
+        <%= link_to "Score Test", score_test_path(id: @test_submission.id), class: "btn btn-sm btn-primary btn-responsive" %> 
+        <%= link_to "Auto Score Test", auto_score_test_path(id: @test_submission.id), class: "btn btn-sm btn-primary btn-responsive", :method => :post %> 
+    <% end %>
+        <%= link_to "Dashboard", root_path, class: "btn btn-sm btn-primary btn-responsive" %> 
+      </section>
   </div>
 </div>
 

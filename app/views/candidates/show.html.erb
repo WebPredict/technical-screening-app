@@ -1,6 +1,7 @@
 <% provide(:title, @candidate.name) %>
 <div class="page-header">
-    <section style="float:right">
+    <section class="laptop-section" style="float:right">
+        <%= link_to "Search", candidates_path, class: "btn btn-sm btn-primary btn-responsive" %> 
         <%= link_to "Send Test", send_candidate_test_path(id: @candidate.id), :class => "btn btn-sm btn-primary btn-responsive" %>
         <%= link_to "Results", candidate_submissions_path(candidate_id: @candidate.id), :class => "btn btn-sm btn-primary btn-responsive" %>
         <%= link_to "Edit Candidate", edit_candidate_path(@candidate), class: "btn btn-sm btn-primary btn-responsive" %> 
@@ -30,6 +31,14 @@
           </table>
           <%= will_paginate @candidate_test_submissions %>
       <% end %>
+    </section>
+    <section class="mobile-section" style="float:right">
+        <%= link_to "Search", candidates_path, class: "btn btn-sm btn-primary btn-responsive" %> 
+        <%= link_to "Send Test", send_candidate_test_path(id: @candidate.id), :class => "btn btn-sm btn-primary btn-responsive" %>
+        <%= link_to "Results", candidate_submissions_path(candidate_id: @candidate.id), :class => "btn btn-sm btn-primary btn-responsive" %>
+        <%= link_to "Edit Candidate", edit_candidate_path(@candidate), class: "btn btn-sm btn-primary btn-responsive" %> 
+        <%= link_to "Remove Candidate", @candidate, method: :delete,
+                           data: { confirm: "Delete this candidate?" }, :class => "btn btn-sm btn-danger btn-responsive" %>
     </section>
   </div>
 </div>
