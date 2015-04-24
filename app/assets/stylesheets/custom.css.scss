@@ -167,6 +167,15 @@ aside {
   font-size: 1.2em;
 }
 
+@media (min-width: 993px) {
+  .mobile-section {
+    display: none;
+  }
+  .laptop-section {
+    display: inline;
+  }
+}
+
 @media (max-width: 768px) {
   .btn-responsive {
     padding:4px 9px;
@@ -206,7 +215,12 @@ aside {
   .text-responsive {
     font-size:90%;
   }
-  
+  .mobile-section {
+    display: none;
+  }
+  .laptop-section {
+    display: inline;
+  }
   .row {
     margin-left: 1%;
     margin-right: 1%;

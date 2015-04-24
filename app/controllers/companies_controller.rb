@@ -42,8 +42,6 @@ class CompaniesController < ApplicationController
       if @company.save
         flash[:success] = "Company created!"
         redirect_to @company
-        add_breadcrumb "Show Company", company_path
-        @company_jobs = @company.jobs.paginate(page: params[:page]).order(sort_column + " " + sort_direction)
       else
         render 'new'
       end

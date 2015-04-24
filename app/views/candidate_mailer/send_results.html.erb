@@ -16,5 +16,5 @@ The time taken was: <%= @test_submission.formatted_time %>.
 <br>
 <% @test_submission.answered_questions.each do |aq| %>
   <p><strong><%= aq.question.content %></strong></p>
-  <p><strong>Answer:</strong><%= aq.answer %></p>
+  <p><strong>Answer: </strong><%= aq.answer %></p>
 <% end %>
