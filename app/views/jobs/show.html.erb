@@ -22,15 +22,16 @@
     <br><br>
     <section>
       <% if @job_candidates != nil && @job_candidates.count > 0 %>
-        <strong>This Job's Candidates</strong>
+        <h4>This Job's Candidates:</h4>
           <table class="table table-bordered">
-            <tr><th>Candidate Name</th><th><%= sortable "name", "Submission Name" %></th><th><%= sortable "score" %></th><th>Actions</th></tr>
+            <tr><th><%= sortable "name" %></th><th><%= sortable "email" %></th><th><%= sortable "phone" %></th>
+        <th>Created On</th></th><th>Submissions</th></th><th>Actions</th></tr>
 
             <%= render @job_candidates %>
           </table>
           <%= will_paginate @job_candidates %>
         <% else %>
-          <strong>No candidates for this job yet. <%= link_to "Add Candidate", new_candidate_path, 
+          <strong>No candidates for this job yet. <%= link_to "Add Candidate", new_candidate_path(job_id: @job.id), 
           class: "btn btn-primary btn-sm btn-responsive" %></strong>
         <% end %>
     </section>

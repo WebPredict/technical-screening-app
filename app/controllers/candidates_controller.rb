@@ -45,7 +45,13 @@ class CandidatesController < ApplicationController
     @test = Test.find(params[:id])
     flash.now[:info] = "Select an existing candidate to send test '" + @test.name + "':"
     @single_candidate_select = true
-    @candidates = Candidate.all.paginate(page: params[:page], per_page: 10)
+    
+    @candidates = current_user.candidates
+    
+    if @candidates != nil
+      @candidates = @candidates.where(query, searchparam).paginate(page: params[:page], per_page: 10)
+    end
+
     render 'send_test'
   end
   
