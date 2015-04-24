@@ -6,7 +6,14 @@
 Here are the candidate's results from TechScreen.net for test "<%= @test_submission.test.name %>:"
 </p>
 <br>
-
+<% if @test_submission.is_scored? %>
+The score was: <%= @test_submission.formatted_score %>
+<% else %>
+Has not been scored yet.
+<% end %>
+<br>
+The time taken was: <%= @test_submission.formatted_time %>.
+<br>
 <% @test_submission.answered_questions.each do |aq| %>
   <p><strong><%= aq.question.content %></strong></p>
   <p><strong>Answer:</strong><%= aq.answer %></p>

@@ -1,15 +1,16 @@
 <% provide(:title, @test.name) %>
 <div class="page-header">
-      <section style="float:right">
-        <%= link_to "Search", tests_path, class: "btn btn-sm btn-primary btn-responsive" %> 
-        <%= link_to "Send Test", send_test_candidate_path(id: @test.id), class: "btn btn-sm btn-primary btn-responsive" %>
-        <%= link_to "Edit", edit_test_path(@test), class: "btn btn-sm btn-primary btn-responsive" %> 
-        <%= link_to "Create", new_test_path, class: "btn btn-sm btn-primary btn-responsive" %> 
-        <%= link_to "Search Questions", questions_path, class: "btn btn-sm btn-primary btn-responsive" %> 
-        <%= link_to "See Candidate's View", new_test_submission_path(id: @test.id), class: "btn btn-sm btn-primary btn-responsive" %> 
-        <% if @test.is_public? %>
+      <section class="laptop-section" style="float:right">
+        <%= link_to "Search", tests_path, class: "btn btn-xs btn-primary btn-responsive" %> 
+        <%= link_to "Send Test", send_test_candidate_path(id: @test.id), class: "btn btn-xs btn-primary btn-responsive" %>
+        <%= link_to "Edit", edit_test_path(@test), class: "btn btn-xs btn-primary btn-responsive" %> 
+        <%= link_to "Create", new_test_path, class: "btn btn-xs btn-primary btn-responsive" %> 
+        <%= link_to "Search Questions", questions_path, class: "btn btn-xs btn-primary btn-responsive" %> 
+        <%= link_to "See Candidate's View", new_test_submission_path(id: @test.id), class: "btn btn-xs btn-primary btn-responsive" %> 
+        <%= link_to "Clone", clone_test_path(id: @test), class: "btn btn-xs btn-primary btn-responsive" %> 
+        <% if !@test.is_public? %>
         <%= link_to "Remove", @test, method: :delete,
-                           data: { confirm: "Delete this test?" }, :class => "btn btn-sm btn-danger btn-responsive" %>
+                           data: { confirm: "Delete this test?" }, :class => "btn btn-xs btn-danger btn-responsive" %>
         <% end %>
     </section>
   <h3>Test Details</h3>
@@ -44,6 +45,20 @@
       <h3>No questions added to this test yet.</h3>
       <% end %>
     </section>
+    <section class="mobile-section" style="float:right">
+        <%= link_to "Search", tests_path, class: "btn btn-sm btn-primary btn-responsive" %> 
+        <%= link_to "Send Test", send_test_candidate_path(id: @test.id), class: "btn btn-sm btn-primary btn-responsive" %>
+        <%= link_to "Edit", edit_test_path(@test), class: "btn btn-sm btn-primary btn-responsive" %> 
+        <%= link_to "Create", new_test_path, class: "btn btn-sm btn-primary btn-responsive" %> 
+        <%= link_to "Search Questions", questions_path, class: "btn btn-sm btn-primary btn-responsive" %> 
+        <%= link_to "See Candidate's View", new_test_submission_path(id: @test.id), class: "btn btn-sm btn-primary btn-responsive" %> 
+        <%= link_to "Clone", clone_test_path(id: @test), class: "btn btn-sm btn-primary btn-responsive" %> 
+        <% if !@test.is_public? %>
+        <%= link_to "Remove", @test, method: :delete,
+                           data: { confirm: "Delete this test?" }, :class => "btn btn-sm btn-danger btn-responsive" %>
+        <% end %>
+    </section>
+
   </div>
 </div>
 

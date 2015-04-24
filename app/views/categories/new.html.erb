@@ -8,6 +8,8 @@
     <%= form_for(@category) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
+    <%= hidden_field_tag :job_id, @job_id %>
+
       <%= f.label :name %>
       <%= f.text_field :name, class: 'form-control' %>
 

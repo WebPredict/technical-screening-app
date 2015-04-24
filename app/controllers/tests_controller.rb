@@ -88,6 +88,19 @@ class TestsController < ApplicationController
     end
   end
 
+  def clone_test 
+    @test = Test.find(params[:id])
+    @clone_test = Test.new
+    @clone_test.name = @test.name
+    @clone_test.description = @test.description
+    @clone_test.user = current_user
+    flash.now[:success] = "Test cloned. You can change any details you'd like."
+
+    @test = @clone_test
+    add_breadcrumb "Cloned Test", new_test_path
+    render 'new'
+  end
+
   def update
     if params[:commit] == "Cancel"
       redirect_to root_url
@@ -206,7 +219,7 @@ class TestsController < ApplicationController
     if !@test.test_submissions.any?
       @test.destroy
       flash[:success] = "Test deleted."
-      redirect_to request.referrer || root_url
+      redirect_to tests_path
     else
       flash[:warning] = "Cannot delete this test because it has test results referencing it."
       redirect_to request.referrer

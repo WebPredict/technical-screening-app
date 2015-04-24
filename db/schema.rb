@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150410004909) do
+ActiveRecord::Schema.define(version: 20150423150331) do
 
   create_table "answered_questions", force: :cascade do |t|
     t.string   "answer"
@@ -138,8 +138,11 @@ ActiveRecord::Schema.define(version: 20150410004909) do
     t.integer  "user_id"
     t.integer  "candidate_id"
     t.integer  "test_id"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.boolean  "is_scored",    default: false
+    t.datetime "start_time"
+    t.datetime "end_time"
   end
 
   add_index "test_submissions", ["candidate_id"], name: "index_test_submissions_on_candidate_id"

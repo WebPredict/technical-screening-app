@@ -16,17 +16,17 @@
       <% else %>
 
       <% if current_user?(candidate.user) %>
-                <%= link_to send_candidate_test_path(id: candidate.id), class: "btn btn-xs btn-primary btn-responsive" do %>
+                <%= link_to send_candidate_test_path(id: candidate.id), class: "btn btn-xs btn-primary" do %>
             <i class="glyphicon glyphicon-send" title="Send Test"></i>
           <% end %>
 
           <div class="button-spacer"> </div>
-          <%= link_to candidate, class: "btn btn-xs btn-primary btn-responsive", method: :delete,
+          <%= link_to candidate, class: "btn btn-xs btn-primary", method: :delete,
                                        data: { confirm: "Delete this candidate?" } do %>
             <i class="glyphicon glyphicon-remove"></i>
           <% end %>
           <div class="button-spacer"> </div>
-          <%= link_to edit_candidate_path(candidate), class: "btn btn-xs btn-primary btn-responsive" do %>
+          <%= link_to edit_candidate_path(candidate), class: "btn btn-xs btn-primary" do %>
             <i class="glyphicon glyphicon-edit"></i>
           <% end %>
       <% end %>

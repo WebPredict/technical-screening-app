@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "admin@techscreen.herokuapp.com"
+  default from: "TechScreen@techscreen.herokuapp.com"
   layout 'mailer'
 end

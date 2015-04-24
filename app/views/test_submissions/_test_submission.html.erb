@@ -3,6 +3,7 @@
   <td><%= link_to test_submission.test.name, test_submission.test %></td>
   <td><%= link_to test_submission.name, test_submission %></td>
   <td><%= test_submission.formatted_score %></td>
+  <td><%= test_submission.formatted_time %></td>
   <td>
       <% if current_user?(test_submission.user) %>
             <% if false %>

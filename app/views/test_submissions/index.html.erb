@@ -24,7 +24,8 @@
     <h3>Recent Test Submissions</h3>
     <% end %>
       <table class="table table-bordered">
-        <tr><th>Candidate Name</th><th>Test Name</th><th><%= sortable "name", "Submission Name" %></th><th><%= sortable "score" %></th><th>Actions</th></tr>
+        <tr><th>Candidate Name</th><th>Test Name</th><th><%= sortable "name", "Submission Name" %></th>
+        <th><%= sortable "score" %></th><th><%= sortable "time" %></th><th>Actions</th></tr>
         <%= render @test_submissions %>
       </table>
       <%= will_paginate @test_submissions %>

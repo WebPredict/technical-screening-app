@@ -41,7 +41,9 @@ class CompaniesController < ApplicationController
       @company.users << current_user
       if @company.save
         flash[:success] = "Company created!"
-        redirect_to root_url
+        redirect_to @company
+        add_breadcrumb "Show Company", company_path
+        @company_jobs = @company.jobs.paginate(page: params[:page]).order(sort_column + " " + sort_direction)
       else
         render 'new'
       end
@@ -84,7 +86,7 @@ class CompaniesController < ApplicationController
     if !@company.jobs.any?
       @company.destroy
       flash[:success] = "Company deleted."
-      redirect_to request.referrer || root_url
+      redirect_to companies_path
     else
       flash[:warning] = "Cannot delete this company because it has jobs referencing it."
       redirect_to request.referrer

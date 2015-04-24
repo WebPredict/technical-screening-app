@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   get 'send_candidate_test' => 'tests#send_candidate_test'
   get 'send_test_candidate' => 'candidates#send_candidate_test'
   get 'clone_question' => 'questions#clone_question'
+  get 'clone_test' => 'tests#clone_test'
   get 'test_results' => 'tests#results'
   get 'sent_tests' => 'tests#sent'
   get 'start_test' => 'test_submissions#start_test'

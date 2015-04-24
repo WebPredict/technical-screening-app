@@ -46,6 +46,9 @@ class TestSubmissionsController < ApplicationController
       @test_submission.test = Test.find(params[:test_id])
       @test_submission.candidate = @candidate
 
+      @test_submission.start_time = session[:start_time]
+      @test_submission.end_time = Time.now
+
       # load collection
       @test_submission.test.questions.each_with_index do |question, index|
         @test_submission.answered_questions[index].question = question
@@ -99,6 +102,8 @@ class TestSubmissionsController < ApplicationController
       end
       aq.save
     end
+    @test_submission.is_scored = true
+    @test_submission.save
     flash[:success] = "Test scored!"
     redirect_to @test_submission
   end
@@ -122,6 +127,8 @@ class TestSubmissionsController < ApplicationController
         aq.save
       end
     end
+    @test_submission.is_scored = true
+    @test_submission.save
     flash[:success] = "Multiple choice and short phrase questions have been automatically scored. You can manually override scores via the 'Score Test' button."
     redirect_to @test_submission
   end
@@ -131,7 +138,7 @@ class TestSubmissionsController < ApplicationController
     @test_submission.candidate = Candidate.new 
     @test_submission.name = "My Test Submission"
     @test_submission.test = Test.find(params[:id])
-
+    session[:start_time] = Time.now
     @test_submission.test.questions.each do |question|
       @test_submission.answered_questions.build(question_id: question.id)
     end
@@ -141,6 +148,7 @@ class TestSubmissionsController < ApplicationController
   def start_test
     @test_submission = TestSubmission.new
     @test_submission.candidate = Candidate.find_by(email: params[:email])
+    session[:start_time] = Time.now
     
     if @test_submission.candidate && @test_submission.candidate.valid_token?(params[:token])
       @test_submission.test = Test.find(params[:test_id])
@@ -151,8 +159,13 @@ class TestSubmissionsController < ApplicationController
       end
       render 'new'
     else
-      flash[:error] = "Invalid test token."
-      redirect_to root_url
+      if @test_submission.candidate
+        flash[:error] = "Invalid test token - could not find candidate by email: " + params[:email]
+        redirect_to root_url
+      else
+        flash[:error] = "Invalid test token - candidate found but token invalid/expired."
+        redirect_to root_url
+      end
     end
   end
 

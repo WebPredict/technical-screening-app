@@ -70,6 +70,13 @@ class CandidatesController < ApplicationController
       @candidate = current_user.candidates.build(candidate_params)
       if @candidate.save
         flash[:success] = "Candidate created!"
+        if params[:job_id] != '' && params[:job_id] != nil
+          @job = Job.find(params[:job_id])
+          if @job != nil
+            @job.candidates << @candidate 
+            @job.save 
+          end
+        end 
         
         if params[:commit] == "Save And Send Test"
           flash[:info] = "Select test to send to candidate:"
@@ -102,10 +109,12 @@ class CandidatesController < ApplicationController
   
   def new
     @candidate = Candidate.new
+    @job_id = ''
     if params[:job_id] != '' && params[:job_id] != nil
       @job = Job.find(params[:job_id])
       if @job != nil
         @candidate.job_title = @job.name
+        @job_id = @job.id
       end
     end
 
@@ -125,13 +134,13 @@ class CandidatesController < ApplicationController
   def destroy
     @candidate.destroy
     flash[:success] = "Candidate deleted."
-    redirect_to request.referrer || root_url
+    redirect_to candidates_path
   end
 
   private
 
     def candidate_params
-      params.require(:candidate).permit(:name, :phone, :email, :job_title)
+      params.require(:candidate).permit(:name, :phone, :email, :job_title, :job_id)
     end
     
     def correct_user

@@ -170,8 +170,15 @@ aside {
 @media (max-width: 768px) {
   .btn-responsive {
     padding:4px 9px;
+    margin: 1px;
     font-size:90%;
     line-height: 1.2;
+  }
+  .mobile-section {
+    display: inline;
+  }
+  .laptop-section {
+    display: none;
   }
   .text-responsive {
     font-size: 90%;

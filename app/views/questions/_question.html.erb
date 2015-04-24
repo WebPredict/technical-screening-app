@@ -3,16 +3,16 @@
       <% if @select_mode %>
         <%= check_box_tag "question_ids[]", question.id, @preselect_checkboxes %>
       <% elsif current_user?(question.user) || (current_user != nil && current_user.admin?) %>
-          <%= link_to question, class: "btn btn-xs btn-primary btn-responsive", method: :delete,
+          <%= link_to question, class: "btn btn-xs btn-primary", method: :delete,
                                        data: { confirm: "Delete this question?" } do %>
             <i class="glyphicon glyphicon-remove"></i>
           <% end %>
 <div class="button-spacer"> </div>
-<%= link_to edit_question_path(question), class: "btn btn-xs btn-primary btn-responsive" do %>
+<%= link_to edit_question_path(question), class: "btn btn-xs btn-primary" do %>
     <i class="glyphicon glyphicon-edit"></i>
 <% end %>
       <% else %>
-<%= link_to question, class: "btn btn-xs btn-primary btn-responsive" do %>
+<%= link_to question, class: "btn btn-xs btn-primary" do %>
     <i class="glyphicon glyphicon-eye-open"></i>
 <% end %>
       <% end %>

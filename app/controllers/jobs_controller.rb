@@ -26,6 +26,8 @@ class JobsController < ApplicationController
 
   def show
     @job = Job.find(params[:id])
+    @job_candidates = @job.candidates.paginate(page: params[:page]).order(sort_column + " " + sort_direction)
+
     add_breadcrumb "Show Job Listing", job_path
   end
 
@@ -57,7 +59,7 @@ class JobsController < ApplicationController
       @job.user_id = current_user.id
       if @job.save
         flash[:success] = "Job created!"
-        redirect_to root_url
+        redirect_to @job
       else
         @companies = current_user.companies 
         render 'new'
@@ -95,7 +97,7 @@ class JobsController < ApplicationController
   def destroy
     @job.destroy
     flash[:success] = "Job deleted."
-    redirect_to request.referrer || root_url
+    redirect_to jobs_path
   end
 
   private
