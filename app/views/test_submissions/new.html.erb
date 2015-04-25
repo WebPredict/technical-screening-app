@@ -40,6 +40,10 @@
     
           <div class="form-group">
             <div style="float:right">
+              <% if @confirm_submit %>
+                <%= f.submit "Confirm", class: "btn btn-primary" %>
+                <span></span>
+              <% end %>
             <%= f.submit "Submit Test", class: "btn btn-primary" %>
               <span></span>
               <%= link_to "Cancel", root_path, class: "btn btn-default" %>

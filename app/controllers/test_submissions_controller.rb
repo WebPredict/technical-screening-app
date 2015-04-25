@@ -10,12 +10,12 @@ class TestSubmissionsController < ApplicationController
   def index
     query = ''
     searchparam = ""
-    if params[:search] && params[:search] != ''
-        query += ' lower(name) LIKE ? '
+    if !params[:search].blank?
+        query += ' lower(name) LIKE ? AND user_id = ? '
         searchparam = "%#{params[:search].downcase}%"
     end
 
-    @test_submissions = TestSubmission.where(query, searchparam).paginate(page: params[:page], per_page: 10)
+    @test_submissions = TestSubmission.where(query, searchparam, current_user.id).paginate(page: params[:page], per_page: 10)
 
     @searched = query != ''
   end
@@ -49,24 +49,33 @@ class TestSubmissionsController < ApplicationController
       @test_submission.start_time = session[:start_time]
       @test_submission.end_time = Time.now
 
+      unanswered = 0
       # load collection
       @test_submission.test.questions.each_with_index do |question, index|
         @test_submission.answered_questions[index].question = question
         @test_submission.answered_questions[index].test_submission = @test_submission
         
-        # TODO: keep track of number of blank questions and warn user about them
-      end
-      
-      if @test_submission.save
-        flash[:success] = "Test submission created!"
-        redirect_to root_url
-      else
-        @test_submission.test.questions.each do |question|
-          @test_submission.answered_questions.build(question_id: question.id)
+        if @test_submission.answered_questions[index].answer.blank?
+          unanswered = unanswered + 1
         end
+      end
 
-        flash[:error] = "Test submission could not be saved."
-        render 'edit'
+      if unanswered > 0 && params[:commit] != "Confirm"
+        @confirm_submit = true
+        flash[:warning] = "You have " + unanswered.to_s + " unanswered questions. Press Confirm to submit as is, or continue editing."
+        render 'new'
+      else
+        if @test_submission.save
+          flash[:success] = "Test submission created!"
+          redirect_to root_url
+        else
+          @test_submission.test.questions.each do |question|
+            @test_submission.answered_questions.build(question_id: question.id)
+          end
+  
+          flash[:error] = "Test submission could not be saved."
+          render 'edit'
+        end
       end
     else
       flash[:error] = "Test submission could not be saved because the candidate is missing."

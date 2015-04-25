@@ -145,11 +145,17 @@ class TestsController < ApplicationController
         end
         
         difficulty = nil
-        if (params[:difficulty_level] != nil && params[:difficulty_level] != '')
+        if (!params[:difficulty_level].blank?)
           difficulty = Difficulty.find(params[:difficulty_level])
         end
         
-        category = Category.where("lower(name) like '%" + topic.downcase + "%'")
+        # first try exact name, then if no results, try partial:
+        category = Category.where("lower(name) = '" + topic.downcase + "'")
+        
+        if category == nil
+          category = Category.where("lower(name) like '%" + topic.downcase + "%'")
+        end
+      
         if category != nil && category.any?
           cat_questions = Question.where("category_id = " + category.first.id.to_s)
           if difficulty != nil
@@ -160,10 +166,11 @@ class TestsController < ApplicationController
             flash[:warning] = "Could not find enough existing questions for the topic: " + category.first.name + "."
             redirect_to request.referrer
             return
-          else            
+          else     
+            cat_questions = cat_questions.shuffle
             (1..num_per_topic.to_i).each do |index|
-              random_question = cat_questions [Random.new.rand(cat_questions.size)]
-              @test.questions << random_question
+              random_question = cat_questions [index]
+                @test.questions << random_question
             end
           end
         else
