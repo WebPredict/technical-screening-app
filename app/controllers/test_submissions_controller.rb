@@ -8,14 +8,15 @@ class TestSubmissionsController < ApplicationController
   helper_method :sort_column, :sort_direction
   
   def index
-    query = ''
+    query = 'user_id = ?'
     searchparam = ""
     if !params[:search].blank?
-        query += ' lower(name) LIKE ? AND user_id = ? '
+        query += ' AND lower(name) LIKE ?'
         searchparam = "%#{params[:search].downcase}%"
+      @test_submissions = TestSubmission.where(query, current_user, searchparam).paginate(page: params[:page], per_page: 10)
+    else
+      @test_submissions = TestSubmission.where(query, current_user).paginate(page: params[:page], per_page: 10)
     end
-
-    @test_submissions = TestSubmission.where(query, searchparam, current_user.id).paginate(page: params[:page], per_page: 10)
 
     @searched = query != ''
   end
