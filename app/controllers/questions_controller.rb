@@ -89,7 +89,15 @@ class QuestionsController < ApplicationController
 
           format.html { 
             flash[:success] = "Question was successfully updated."
-            redirect_to @question
+            if params[:commit] == "Save And Goto Next TODO"
+              @question = Question.where("lower(answer) LIKE ? OR lower(answer) LIKE ?", "%todo%", "%answer%").first
+              setup_question(@question)
+    
+              add_breadcrumb "Edit Question", edit_question_path
+              render 'edit'
+            else
+              redirect_to @question
+            end
           }
           format.json { render :show, status: :ok, location: @question }
         else

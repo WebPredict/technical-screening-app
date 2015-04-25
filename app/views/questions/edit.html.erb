@@ -68,6 +68,9 @@
     
       <div class="form-group">
           <div style="float:right">
+            <% if current_user.admin? %>
+          <%= f.submit "Save And Goto Next TODO", class: "btn btn-primary" %>
+            <% end %>
           <%= f.submit "Update Question", class: "btn btn-primary" %>
             <span></span>
             <%= link_to "Cancel", questions_path, class: "btn btn-default" %>

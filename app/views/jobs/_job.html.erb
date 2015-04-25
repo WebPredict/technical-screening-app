@@ -1,6 +1,6 @@
 <tr id="job-<%= job.id %>">
   <td><%= link_to job.name, job %></td>
-  <td><%= job.description %></td>
+  <td><%= truncate(job.description, 250) %></td>
   <td>
     <% if job.company != nil %>
     <%= link_to job.company.name, job.company %>

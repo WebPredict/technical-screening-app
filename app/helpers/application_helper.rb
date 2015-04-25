@@ -22,6 +22,14 @@ module ApplicationHelper
     number_to_phone(num, area_code: num != nil && num.size == 10)
   end
   
+  def truncate(value, size)
+    if value == nil || value.size <= size
+      value
+    else
+      value[0..size - 3] + "..."
+    end
+  end
+  
   def yes_no(value)
     if value == nil || value == false
       "No"
