@@ -12,23 +12,36 @@ class QuestionsController < ApplicationController
     query = ''
     searchparam = ""
     @questions = nil
-    if params[:search] && params[:search] != ''
+    if !params[:remember_search].blank? && !session[:question_search].blank?
+      params[:search] = session[:question_search]
+    end
+    
+    if !params[:search].blank?
         query = ' lower(content) LIKE ? OR lower(answer) LIKE ? '
         searchparam = "%#{params[:search].downcase}%"
         @questions = Question.where(query, searchparam, searchparam)
+        session[:question_search] = params[:search]
     else
       @questions = Question.all
     end
 
-    if params[:category_id] && params[:category_id] != ''
+    if !params[:remember_search].blank? && !session[:question_category].blank?
+      params[:category_id] = session[:question_category]
+    end
+    if !params[:category_id].blank?
       query = ' category_id = ? '
       
       @questions = @questions.where(query, params[:category_id])
+      session[:question_category] = params[:category_id]
     end
     
-    if params[:difficulty_id] && params[:difficulty_id] != ''
+    if !params[:remember_search].blank? && !session[:question_difficulty].blank?
+      params[:difficulty_id] = session[:question_difficulty]
+    end
+    if !params[:difficulty_id].blank?
       query = ' difficulty_id = ? '
       @questions = @questions.where(query, params[:difficulty_id])
+      session[:question_difficulty] = params[:difficulty_id]
     end
 
     if current_user != nil
@@ -96,7 +109,11 @@ class QuestionsController < ApplicationController
               add_breadcrumb "Edit Question", edit_question_path
               render 'edit'
             else
-              redirect_to @question
+              if params[:commit] == "Save And Return To Search"
+                redirect_to questions_path(:remember_search => "true")
+              else
+                redirect_to @question
+              end
             end
           }
           format.json { render :show, status: :ok, location: @question }
