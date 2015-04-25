@@ -25,9 +25,9 @@ class StaticPagesController < ApplicationController
       
       if show_all
         @show_all = true
-        @candidates = current_user.candidates.unscoped.paginate(page: params[:page]).order("avg_score desc")
+        @candidates = current_user.candidates.paginate(page: params[:page]).order("avg_score desc")
       else
-        @candidates = current_user.candidates.unscoped.paginate(page: params[:page]).order(sort_column + " " + sort_direction)
+        @candidates = current_user.candidates.paginate(page: params[:page]).order(sort_column + " " + sort_direction)
         @show_all = false
       end
       

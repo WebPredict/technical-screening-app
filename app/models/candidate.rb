@@ -1,7 +1,6 @@
 class Candidate < ActiveRecord::Base
   attr_accessor :test_token
   belongs_to :user
-  default_scope -> { order(created_at: :desc) }
 
   has_and_belongs_to_many :jobs, :join_table => :jobs_candidates
   has_many :test_submissions, dependent: :destroy  
