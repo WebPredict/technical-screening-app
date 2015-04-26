@@ -6,12 +6,13 @@
 <p>
 Welcome to TechScreen.net! If you are a paying member, your account is already activated.
 
-For free accounts, click on the link below to activate your account:
+For free accounts, click 
 <%= link_to "Activate", edit_account_activation_url(@user.activation_token,
                                                     email: @user.email) %>
+to activate your account.
 </p>
 <p>
-  To get started, you can <%= link_to "Log In", login_path %> and start setting up 
+  After your account is activated, you can get started by <%= link_to "Logging In", login_path %> and setting up 
   candidates, job listings, screening tests, and companies. For more information about how to get
   various tasks done with TechScreen.net, please see the <%= link_to "Help", help_path %> section.
 </p>

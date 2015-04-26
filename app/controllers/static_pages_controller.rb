@@ -53,6 +53,11 @@ class StaticPagesController < ApplicationController
       else
         @num_candidates = 0
       end
+      
+      if @num_tests == 0 && @num_candidates == 0 && !current_user.companies.any?
+        flash.now[:info] = "Welcome to TechScreen.net! You can view your candidates, candidate test results, tests, job listings, and companies all on this dashboard."
+      end
+      
     else
       @categories = Category.all 
       @categories_arrays = @categories.each_slice(@categories.count / 3).to_a
