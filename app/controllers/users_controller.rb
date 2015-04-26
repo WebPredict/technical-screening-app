@@ -67,6 +67,23 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit_subscription
+    @user = User.find(params[:id])
+    if @user.membership_level.id == 1
+      flash[:info] = "You've only signed up for the free version."
+      redirect_to root_url
+    elsif @user.membership_level.id == 2
+      redirect_to generate_url("https://techscreen-net.chargify.com/subscribe/g7zjvxxj/bronze", 
+        {reference: "4RKzhs3YJMNAAV2v7Zo" + @user.id.to_s})
+    elsif @user.membership_level.id == 3
+      redirect_to generate_url("https://techscreen-net.chargify.com/subscribe/vryykwj4/gold", 
+        {reference: "4RKzhs3YJMNAAV2v7Zo" + @user.id.to_s})
+    elsif @user.membership_level.id == 4
+      redirect_to generate_url("https://techscreen-net.chargify.com/subscribe/zhksdhbm/platinum", 
+        {reference: "4RKzhs3YJMNAAV2v7Zo" + @user.id.to_s})
+    end
+  end
+  
   def generate_url(url, params = {})
     uri = URI(url)
     uri.query = params.to_query

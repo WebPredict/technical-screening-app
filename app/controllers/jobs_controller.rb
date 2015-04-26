@@ -21,6 +21,10 @@ class JobsController < ApplicationController
       @jobs = @jobs.paginate(page: params[:page], per_page: 10)
     end
     
+    if current_user.jobs == nil || !current_user.jobs.any?
+      flash.now[:info] = "You can create a job listing for candidates to be associated with, and help keep track of what they've applied for."
+    end
+
     @searched = query != ''
   end
 
