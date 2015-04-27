@@ -34,7 +34,7 @@
     <section>
       <% if @test_submission.answered_questions.any? %>
         <strong>Answered Questions</strong> (<%= @test_submission.answered_questions.count %>)
-          <table class="table table-bordered">
+          <table class="table table-bordered show-header">
             <tr><th><%= sortable "question" %></th><th><%= sortable "answer", "Their Answer" %></th>
             <th>Marked As Correct?</th><th>Correct Answer</th></tr>
             <%= render @test_submission_answers %>
