@@ -32,7 +32,7 @@ class TestSubmissionsController < ApplicationController
   def create
     if params[:id] != nil
       @candidate = Candidate.find(params[:id])
-    elsif params[:email] != nil && params[:email] != ''
+    elsif !params[:email].blank?
       @candidate = Candidate.find_by(email: params[:email])
     else
       @candidate = Candidate.new 
@@ -43,7 +43,7 @@ class TestSubmissionsController < ApplicationController
     end
     if @candidate
       @test_submission = @candidate.test_submissions.build(test_submission_params)
-      @test_submission.user = @candidate.user
+      @test_submission.user = current_user
       @test_submission.test = Test.find(params[:test_id])
       @test_submission.candidate = @candidate
 
@@ -63,7 +63,7 @@ class TestSubmissionsController < ApplicationController
 
       if unanswered > 0 && params[:commit] != "Confirm"
         @confirm_submit = true
-        flash[:warning] = "You have " + unanswered.to_s + " unanswered questions. Press Confirm to submit as is, or continue editing."
+        flash[:warning] = "You have " + unanswered.to_s + " unanswered question(s). Press Confirm to submit as is, or continue editing."
         render 'new'
       else
         if @test_submission.save
@@ -125,7 +125,7 @@ class TestSubmissionsController < ApplicationController
     @test_submission = TestSubmission.find(params[:id])
     @test_submission.answered_questions.each do |aq|
       if aq.question.question_type_id == 3
-        if aq.answer.downcase.strip! == aq.question.answer.downcase.strip!
+        if aq.answer.downcase.strip == aq.question.answer.downcase.strip
           aq.correct = true
         else
           aq.correct = false

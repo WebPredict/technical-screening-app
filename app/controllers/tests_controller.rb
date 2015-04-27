@@ -13,7 +13,7 @@ class TestsController < ApplicationController
     if !params[:search].blank?
         query += ' AND lower(name) LIKE ? '
         searchparam = "%#{params[:search].downcase}%"
-      @tests = Test.where(query, true, current_user, searchparam)..order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 10)
+      @tests = Test.where(query, true, current_user, searchparam).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 10)
     else
       @tests = Test.where(query, true, current_user).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 10)
     end
@@ -35,9 +35,9 @@ class TestsController < ApplicationController
     if params[:search] && params[:search] != ''
         query += ' AND lower(content) LIKE ? '
         searchparam = "%#{params[:search].downcase}%"
-      @questions = Question.where(query, @test.id, searchparam).paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
+      @questions = Question.where(query, @test.id, searchparam).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 10)
     else
-      @questions = Question.where(query, @test.id).paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
+      @questions = Question.where(query, @test.id).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 10)
     end
 
     @select_mode = true
@@ -106,10 +106,10 @@ class TestsController < ApplicationController
   end
 
   def update
+    @test = Test.find(params[:id])
     if params[:commit] == "Cancel"
-      redirect_to root_url
+      redirect_to @test
     else
-      @test = Test.find(params[:id])
       respond_to do |format|
         if @test.update_attributes(test_params)
           format.html { 
@@ -250,7 +250,7 @@ class TestsController < ApplicationController
     end
   
     def sort_column
-      Test.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+      (Question.column_names.include?(params[:sort]) || Test.column_names.include?(params[:sort])) ? params[:sort] : "created_at"
     end
 
     def sort_direction
