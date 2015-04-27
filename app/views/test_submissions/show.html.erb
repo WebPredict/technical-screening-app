@@ -1,13 +1,14 @@
 <% provide(:title, @test_submission.candidate.name) %>
 <div class="page-header">
       <section class="laptop-section" style="float:right">
-        <%= link_to "Search", test_submissions_path, class: "btn btn-sm btn-primary btn-responsive" %> 
-        <%= link_to "Candidate Details", @test_submission.candidate, class: "btn btn-sm btn-primary btn-responsive" %> 
+        <%= link_to "Search", test_submissions_path, class: "btn btn-xs btn-primary btn-responsive" %> 
+        <%= link_to "Candidate Details", @test_submission.candidate, class: "btn btn-xs btn-primary btn-responsive" %> 
     <% if @test_submission.answered_questions.any? %>
-        <%= link_to "Manually Score Test", score_test_path(id: @test_submission.id), class: "btn btn-sm btn-primary btn-responsive" %> 
-        <%= link_to "Auto Score Test", auto_score_test_path(id: @test_submission.id), class: "btn btn-sm btn-primary btn-responsive", :method => :post %> 
+        <%= link_to "Manually Score Test", score_test_path(id: @test_submission.id), class: "btn btn-xs btn-primary btn-responsive" %> 
+        <%= link_to "Auto Score Test", auto_score_test_path(id: @test_submission.id), class: "btn btn-xs btn-primary btn-responsive", :method => :post %> 
     <% end %>
-        <%= link_to "Dashboard", root_path, class: "btn btn-sm btn-primary btn-responsive" %> 
+        <%= link_to "Forward", forward_submission_path(id: @test_submission.id), class: "btn btn-xs btn-primary" %>
+        <%= link_to "Dashboard", root_path, class: "btn btn-xs btn-primary btn-responsive" %> 
       </section>
   <h3>Test Submission Details</h3>
 </div>
@@ -42,13 +43,14 @@
       <% end %>
     </section>
       <section class="mobile-section" style="float:right">
-        <%= link_to "Search", test_submissions_path, class: "btn btn-sm btn-primary btn-responsive" %> 
-        <%= link_to "Candidate Details", @test_submission.candidate, class: "btn btn-sm btn-primary btn-responsive" %> 
+        <%= link_to "Search", test_submissions_path, class: "btn btn-xs btn-primary btn-responsive" %> 
+        <%= link_to "Candidate Details", @test_submission.candidate, class: "btn btn-xs btn-primary btn-responsive" %> 
     <% if @test_submission.answered_questions.any? %>
-        <%= link_to "Manually Score Test", score_test_path(id: @test_submission.id), class: "btn btn-sm btn-primary btn-responsive" %> 
-        <%= link_to "Auto Score Test", auto_score_test_path(id: @test_submission.id), class: "btn btn-sm btn-primary btn-responsive", :method => :post %> 
+        <%= link_to "Manually Score Test", score_test_path(id: @test_submission.id), class: "btn btn-xs btn-primary btn-responsive" %> 
+        <%= link_to "Auto Score Test", auto_score_test_path(id: @test_submission.id), class: "btn btn-xs btn-primary btn-responsive", :method => :post %> 
     <% end %>
-        <%= link_to "Dashboard", root_path, class: "btn btn-sm btn-primary btn-responsive" %> 
+        <%= link_to "Forward", forward_submission_path(id: @test_submission.id), class: "btn btn-xs btn-primary" %>
+        <%= link_to "Dashboard", root_path, class: "btn btn-xs btn-primary btn-responsive" %> 
       </section>
   </div>
 </div>
