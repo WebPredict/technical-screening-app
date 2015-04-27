@@ -23,7 +23,7 @@
     <section>
       <% if @candidate.test_submissions.any? %>
         <strong>This Candidate's Test Submissions (<%= @candidate.test_submissions.count %>)</strong>
-          <table class="table table-bordered">
+          <table class="table table-bordered show-header">
             <tr><th>Candidate Name</th><th>Test Name</th><th><%= sortable "name", "Submission Name" %></th>
             <th><%= sortable "score" %></th><th><%= sortable "time", "Time Taken" %></th><th>Actions</th></tr>
 
