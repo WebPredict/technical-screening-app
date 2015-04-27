@@ -30,7 +30,7 @@
     <% end %>
     <% if @jobs.any? %>
     <h3>Recent Jobs</h3>
-      <table class="table table-bordered">
+      <table class="table table-bordered show-header">
         <tr><th><%= sortable "name", "Title" %></th><th><%= sortable "description" %></th>
         <th><%= sortable "company_id", "Company" %></th>
         <th>Created On</th><th>Actions</th></tr>

@@ -23,6 +23,7 @@
 </div>
 </div>
         
+<br>
 <div class="row">
   <div class="col-md-12">
     <% if @searched %>
@@ -41,7 +42,7 @@
       <br>
         <%= form_tag select_test_path, :class => "nicesearch", :method => 'post' do %>
         <%= hidden_field_tag :id, @candidate.id %>
-        <table class="table table-bordered">
+        <table class="table table-bordered show-header">
           <tr><th>Select Test</th><th><%= sortable "name" %></th><th><%= sortable "description" %></th><th># Questions</th>
           <th><%= sortable "created_at", "Created On" %></th></tr>
           <%= render @tests %>
@@ -58,7 +59,7 @@
         <%= will_paginate @tests %>
         <% end %>
       <% else %>
-        <table class="table table-bordered">
+        <table class="table table-bordered show-header">
           <tr><th>Actions</th><th><%= sortable "name" %></th><th><%= sortable "description" %></th><th># Questions</th>
           <th><%= sortable "created_at", "Created On" %></th></tr>
           <%= render @tests %>
