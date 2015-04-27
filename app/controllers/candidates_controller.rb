@@ -23,7 +23,7 @@ class CandidatesController < ApplicationController
     end
 
     if @candidates != nil
-      @candidates = @candidates.where(query, searchparam).paginate(page: params[:page], per_page: 10)
+      @candidates = @candidates.where(query, searchparam).paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
     end
   
     @searched = query != ''

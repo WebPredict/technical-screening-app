@@ -8,14 +8,14 @@ class TestsController < ApplicationController
   add_breadcrumb "Tests", :tests_path
 
   def index
-    query = ' (is_public = ? OR user_id = ? ) '
+    query = ' (is_public = ? OR user_id = ?) '
     searchparam = ""
     if !params[:search].blank?
         query += ' AND lower(name) LIKE ? '
         searchparam = "%#{params[:search].downcase}%"
-      @tests = Test.where(query, true, current_user, searchparam).paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
+      @tests = Test.where(query, true, current_user, searchparam)..order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 10)
     else
-      @tests = Test.where(query, true, current_user).paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
+      @tests = Test.where(query, true, current_user).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 10)
     end
 
     if current_user != nil && (current_user.tests == nil || !current_user.tests.any?)
@@ -35,9 +35,9 @@ class TestsController < ApplicationController
     if params[:search] && params[:search] != ''
         query += ' AND lower(content) LIKE ? '
         searchparam = "%#{params[:search].downcase}%"
-      @questions = Question.where(query, @test.id, searchparam).paginate(page: params[:page], per_page: 10)
+      @questions = Question.where(query, @test.id, searchparam).paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
     else
-      @questions = Question.where(query, @test.id).paginate(page: params[:page], per_page: 10)
+      @questions = Question.where(query, @test.id).paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
     end
 
     @select_mode = true

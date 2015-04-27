@@ -1,6 +1,5 @@
 class Company < ActiveRecord::Base
   has_and_belongs_to_many :users
-  default_scope -> { order(created_at: :desc) }
   #mount_uploader :picture, PictureUploader
   #validates :user_id, presence: true
   validates :name, presence: true, length: { maximum: 255 }

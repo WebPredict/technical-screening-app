@@ -206,11 +206,11 @@ class QuestionsController < ApplicationController
     end
   
     def sort_column
-      Question.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+      Question.column_names.include?(params[:sort]) ? params[:sort] : "category_id"
     end
 
     def sort_direction
-      %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 end
 

@@ -18,7 +18,7 @@ class JobsController < ApplicationController
     @jobs = Job.where("user_id = ?", current_user.id)
     
     if @jobs != nil
-      @jobs = @jobs.paginate(page: params[:page], per_page: 10)
+      @jobs = @jobs.paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
     end
     
     if current_user.jobs == nil || !current_user.jobs.any?

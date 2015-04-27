@@ -25,19 +25,19 @@ class StaticPagesController < ApplicationController
       
       if show_all
         @show_all = true
-        @candidates = current_user.candidates.paginate(page: params[:page]).order("avg_score desc")
+        @candidates = current_user.candidates.paginate(page: params[:page], per_page: 5).order("avg_score desc")
       else
-        @candidates = current_user.candidates.paginate(page: params[:page]).order(sort_column + " " + sort_direction)
+        @candidates = current_user.candidates.paginate(page: params[:page], per_page: 5).order(sort_column + " " + sort_direction)
         @show_all = false
       end
       
       # TODO: this needs its own pagination param!
-      @test_submissions = TestSubmission.where("user_id = ?", current_user.id).paginate(page: params[:page])
+      @test_submissions = TestSubmission.where("user_id = ?", current_user.id).paginate(page: params[:page], per_page: 5)
       
       @num_test_results = 0
       
       # TODO this needs its own pagination param!
-      @jobs = Job.where("user_id = ?", current_user.id).paginate(page: params[:page])
+      @jobs = Job.where("user_id = ?", current_user.id).paginate(page: params[:page], per_page: 5)
       
       if current_user.candidates.any?
         current_user.candidates.each do |candidate|
