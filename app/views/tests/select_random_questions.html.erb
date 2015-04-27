@@ -11,11 +11,12 @@
       <%= label_tag :num_per_topic, "Number of questions per topic:" %>
       <%= text_field_tag :num_per_topic, "5", class: 'form-control' %>
 
-      <%= label_tag :difficulty_level, "Difficulty level:" %>
-  	  <div class="field">
-        <%= select_tag(:difficulty_level, options_from_collection_for_select(Difficulty.all, "id", "level",
-            params[:difficulty_level]), include_blank: true) %>
-      </div>
+      <%= label_tag :difficulty_level, "Difficulty Levels To Include:" %>
+      <% Difficulty.all.each do |diff| %>
+        <label class="checkbox-inline">
+          <input type="checkbox" name="difficulty_level_<%= diff.id %>" id="difficulty_level_<%= diff.id %>" value="<%= diff.id %>" > <%= diff.level %>
+        </label>
+      <% end %>
 
         <div class="form-group btn-responsive">
           <div style="float:right">

@@ -81,7 +81,7 @@ class TestsController < ApplicationController
       @test = current_user.tests.build(test_params)
       if @test.save
         flash[:success] = "Test created!"
-        if params[:commit] == "Select Random Questions"
+        if params[:commit] == "Save And Add Random Questions"
           redirect_to select_random_questions_path(id: @test.id)
         else
           redirect_to select_questions_path(id: @test.id)
@@ -149,8 +149,22 @@ class TestsController < ApplicationController
         end
         
         difficulty = nil
-        if (!params[:difficulty_level].blank?)
-          difficulty = Difficulty.find(params[:difficulty_level])
+        if (params[:difficulty_level_1] == "1")
+          difficulty = "1"
+        end
+        if (params[:difficulty_level_2] == "2")
+          if difficulty == nil 
+            difficulty = "2"
+          else
+            difficulty = difficulty + ", 2"
+          end
+        end
+        if (params[:difficulty_level_3] == "3")
+          if difficulty == nil 
+            difficulty = "3"
+          else
+            difficulty = difficulty + ", 3"
+          end
         end
         
         # first try exact name, then if no results, try partial:
@@ -163,7 +177,7 @@ class TestsController < ApplicationController
         if category != nil && category.any?
           cat_questions = Question.where("category_id = " + category.first.id.to_s)
           if difficulty != nil
-            cat_questions = cat_questions.where("difficulty_id = " + difficulty.id.to_s)
+            cat_questions = cat_questions.where("difficulty_id IN (" + difficulty + ")")
           end
           
           if cat_questions.size < num_per_topic.to_i
@@ -241,7 +255,7 @@ class TestsController < ApplicationController
 
     def test_params
       params.require(:test).permit(:name, :description, :question_ids, :is_public, :topic_list, 
-      :difficulty_level, :num_per_topic, :created_at)
+      :difficulty_level, :num_per_topic, :created_at, :difficulty_level_1, :difficulty_level_2, :difficulty_level_3)
     end
     
     def correct_user
