@@ -78,16 +78,36 @@ class TestsController < ApplicationController
     if params[:commit] == "Cancel"
       redirect_to root_url
     else
-      @test = current_user.tests.build(test_params)
-      if @test.save
-        flash[:success] = "Test created!"
-        if params[:commit] == "Save And Add Random Questions"
-          redirect_to select_random_questions_path(id: @test.id)
-        else
-          redirect_to select_questions_path(id: @test.id)
-        end 
+      if current_user.membership_level_id == 1 && current_user.tests.any? && 
+        current_user.tests.count > Limits::MAX_TESTS_FREE
+        flash[:info] = "Limit for number of tests for free membership level is: " + Limits::MAX_TESTS_FREE.to_s + ". Upgrade now to increase your limit!"
+        redirect_to plans_path
+      elsif current_user.membership_level_id == 2 && current_user.tests.any? && 
+        current_user.tests.count > Limits::MAX_TESTS_BRONZE
+        flash[:info] = "Limit for number of tests for Bronze membership level is: " + Limits::MAX_TESTS_BRONZE.to_s + ". Upgrade now to increase your limit!"
+        redirect_to plans_path
+      elsif current_user.membership_level_id == 3 && current_user.tests.any? && 
+        current_user.tests.count > Limits::MAX_TESTS_GOLD
+        flash[:info] = "Limit for number of tests for Gold membership level is: " + Limits::MAX_TESTS_GOLD.to_s + ". Upgrade now to increase your limit!"
+        redirect_to plans_path
+      elsif current_user.membership_level_id == 4 && current_user.tests.any? && 
+        current_user.tests.count > Limits::MAX_TESTS_PLATINUM
+        flash[:info] = "Limit for number of tests for Platinum membership level is: " + Limits::MAX_TESTS_PLATINUM.to_s + 
+        ". Contact us to increase your limit!"
+        redirect_to plans_path
       else
-        render 'edit'
+
+        @test = current_user.tests.build(test_params)
+        if @test.save
+          flash[:success] = "Test created!"
+          if params[:commit] == "Save And Add Random Questions"
+            redirect_to select_random_questions_path(id: @test.id)
+          else
+            redirect_to select_questions_path(id: @test.id)
+          end 
+        else
+          render 'edit'
+        end
       end
     end
   end

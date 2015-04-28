@@ -78,26 +78,45 @@ class CandidatesController < ApplicationController
     if params[:commit] == "Cancel"
       redirect_to root_url
     else 
-      @candidate = current_user.candidates.build(candidate_params)
-      if @candidate.save
-        flash[:success] = "Candidate created!"
-        if params[:job_id] != '' && params[:job_id] != nil
-          @job = Job.find(params[:job_id])
-          if @job != nil
-            @job.candidates << @candidate 
-            @job.save 
-          end
-        end 
-        
-        if params[:commit] == "Save And Send Test"
-          flash[:info] = "Select test to send to candidate:"
-          @single_test_select = true
-          redirect_to tests_path
-        else 
-          redirect_to @candidate 
-        end
+      if current_user.membership_level_id == 1 && current_user.candidates.any? && 
+        current_user.candidates.count > Limits::MAX_CANDIDATES_FREE
+        flash[:info] = "Limit for number of candidates for free membership level is: " + Limits::MAX_CANDIDATES_FREE.to_s + ". Upgrade now to increase your limit!"
+        redirect_to plans_path
+      elsif current_user.membership_level_id == 2 && current_user.candidates.any? && 
+        current_user.candidates.count > Limits::MAX_CANDIDATES_BRONZE
+        flash[:info] = "Limit for number of candidates for Bronze membership level is: " + Limits::MAX_CANDIDATES_BRONZE.to_s + ". Upgrade now to increase your limit!"
+        redirect_to plans_path
+      elsif current_user.membership_level_id == 3 && current_user.candidates.any? && 
+        current_user.candidates.count > Limits::MAX_CANDIDATES_GOLD
+        flash[:info] = "Limit for number of candidates for Gold membership level is: " + Limits::MAX_CANDIDATES_GOLD.to_s + ". Upgrade now to increase your limit!"
+        redirect_to plans_path
+      elsif current_user.membership_level_id == 4 && current_user.candidates.any? && 
+        current_user.candidates.count > Limits::MAX_CANDIDATES_PLATINUM
+        flash[:info] = "Limit for number of candidates for Platinum membership level is: " + Limits::MAX_CANDIDATES_PLATINUM.to_s + 
+        ". Contact us to increase your limit!"
+        redirect_to plans_path
       else
-        render 'new'
+        @candidate = current_user.candidates.build(candidate_params)
+        if @candidate.save
+          flash[:success] = "Candidate created!"
+          if params[:job_id] != '' && params[:job_id] != nil
+            @job = Job.find(params[:job_id])
+            if @job != nil
+              @job.candidates << @candidate 
+              @job.save 
+            end
+          end 
+          
+          if params[:commit] == "Save And Send Test"
+            flash[:info] = "Select test to send to candidate:"
+            @single_test_select = true
+            redirect_to tests_path
+          else 
+            redirect_to @candidate 
+          end
+        else
+          render 'new'
+        end
       end
     end
   end

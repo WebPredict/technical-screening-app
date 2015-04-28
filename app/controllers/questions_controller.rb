@@ -58,25 +58,46 @@ class QuestionsController < ApplicationController
     if params[:commit] == "Cancel"
       redirect_to root_url
     else
-      @question = current_user.questions.build(question_params)
       
-      if @question.question_type_id == 2
-        full_question = @question.content + "||" + params[:question][:answer2] + "||" + params[:question][:answer3] + "||" + 
-          params[:question][:answer4] + "||" + params[:question][:answer5]
-        @question.content = full_question
-        @question.answer = params[:question][:multiple_choice_answer]
-        @question.save
-      elsif @question.question_type_id == 3
-        @question.answer = params[:question][:short_answer]
-        @question.save 
-      end 
-      
-      if @question.save
-        flash[:success] = "Question created!"
-        redirect_to @question
+      if current_user.membership_level_id == 1 && current_user.questions.any? && 
+        current_user.questions.count > Limits::MAX_QUESTIONS_FREE
+        flash[:info] = "Limit for number of questions for free membership level is: " + Limits::MAX_QUESTIONS_FREE.to_s + ". Upgrade now to increase your limit!"
+        redirect_to plans_path
+      elsif current_user.membership_level_id == 2 && current_user.questions.any? && 
+        current_user.questions.count > Limits::MAX_QUESTIONS_BRONZE
+        flash[:info] = "Limit for number of questions for Bronze membership level is: " + Limits::MAX_QUESTIONS_BRONZE.to_s + ". Upgrade now to increase your limit!"
+        redirect_to plans_path
+      elsif current_user.membership_level_id == 3 && current_user.questions.any? && 
+        current_user.questions.count > Limits::MAX_QUESTIONS_GOLD
+        flash[:info] = "Limit for number of questions for Gold membership level is: " + Limits::MAX_QUESTIONS_GOLD.to_s + ". Upgrade now to increase your limit!"
+        redirect_to plans_path
+      elsif current_user.membership_level_id == 4 && current_user.questions.any? && 
+        current_user.questions.count > Limits::MAX_QUESTIONS_PLATINUM
+        flash[:info] = "Limit for number of questions for Platinum membership level is: " + Limits::MAX_QUESTIONS_PLATINUM.to_s + 
+        ". Contact us to increase your limit!"
+        redirect_to plans_path
       else
-        @candidates = current_user.candidates
-        render 'new'
+
+        @question = current_user.questions.build(question_params)
+        
+        if @question.question_type_id == 2
+          full_question = @question.content + "||" + params[:question][:answer2] + "||" + params[:question][:answer3] + "||" + 
+            params[:question][:answer4] + "||" + params[:question][:answer5]
+          @question.content = full_question
+          @question.answer = params[:question][:multiple_choice_answer]
+          @question.save
+        elsif @question.question_type_id == 3
+          @question.answer = params[:question][:short_answer]
+          @question.save 
+        end 
+        
+        if @question.save
+          flash[:success] = "Question created!"
+          redirect_to @question
+        else
+          @candidates = current_user.candidates
+          render 'new'
+        end
       end
     end
   end
