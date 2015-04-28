@@ -161,7 +161,7 @@ class TestSubmissionsController < ApplicationController
 
   def start_test
     @test_submission = TestSubmission.new
-    @test_submission.candidate = Candidate.find_by(email: params[:email])
+    @test_submission.candidate = Candidate.find_by(id: params[:id])
     session[:start_time] = Time.now
     
     if @test_submission.candidate && @test_submission.candidate.valid_token?(params[:token])
@@ -181,7 +181,7 @@ class TestSubmissionsController < ApplicationController
         end  
         redirect_to root_url
       else
-        flash[:error] = "Invalid test token - could not find candidate by email: " + params[:email]
+        flash[:error] = "Invalid test token - could not find candidate by id: " + params[:id]
         redirect_to root_url
       end
     end
