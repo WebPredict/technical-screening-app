@@ -24,6 +24,14 @@ class Candidate < ActiveRecord::Base
     BCrypt::Password.new(test_digest).is_password?(token)
   end
   
+  def has_digest?
+    if test_digest != nil
+      return true
+    else
+      return false
+    end 
+  end 
+  
   def average_score
     @score = 0
     

@@ -174,10 +174,14 @@ class TestSubmissionsController < ApplicationController
       render 'new'
     else
       if @test_submission.candidate
-        flash[:error] = "Invalid test token - could not find candidate by email: " + params[:email]
+        if @test_submission.candidate.has_digest?
+          flash[:error] = "Invalid test token - candidate found but token invalid/expired."
+        else
+          flash[:error] = "Nonexistent test_digest for candidate: " + @test_submission.candidate.name + " / " + @test_submission.candidate.email
+        end  
         redirect_to root_url
       else
-        flash[:error] = "Invalid test token - candidate found but token invalid/expired."
+        flash[:error] = "Invalid test token - could not find candidate by email: " + params[:email]
         redirect_to root_url
       end
     end
