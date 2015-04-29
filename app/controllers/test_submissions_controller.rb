@@ -43,7 +43,7 @@ class TestSubmissionsController < ApplicationController
     end
     if @candidate
       @test_submission = @candidate.test_submissions.build(test_submission_params)
-      @test_submission.user = current_user
+      @test_submission.user = @candidate.user 
       @test_submission.test = Test.find(params[:test_id])
       @test_submission.candidate = @candidate
 
