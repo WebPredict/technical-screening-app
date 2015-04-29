@@ -11,9 +11,9 @@ class TestsController < ApplicationController
     query = ' (is_public = ? OR user_id = ?) '
     searchparam = ""
     if !params[:search].blank?
-        query += ' AND lower(name) LIKE ? '
+        query += ' AND (lower(name) LIKE ? OR lower(description) LIKE ?) '
         searchparam = "%#{params[:search].downcase}%"
-      @tests = Test.where(query, true, current_user, searchparam).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 10)
+      @tests = Test.where(query, true, current_user, searchparam, searchparam).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 10)
     else
       @tests = Test.where(query, true, current_user).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 10)
     end
