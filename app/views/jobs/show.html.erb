@@ -1,6 +1,6 @@
 <% provide(:title, @job.name) %>
-<div class="page-header btn-responsive">
-    <section style="float:right">
+<div class="page-header">
+    <section class="laptop-section" style="float:right">
         <%= link_to "Search", jobs_path, class: "btn btn-sm btn-primary btn-responsive" %> 
         <%= link_to "Create", new_job_path, class: "btn btn-sm btn-primary btn-responsive" %> 
         <%= link_to "Edit", edit_job_path(@job), class: "btn btn-sm btn-primary btn-responsive" %> 
@@ -36,5 +36,13 @@
         <% end %>
     </section>
     <br><br>
+        <section class="mobile-section" style="float:right">
+        <%= link_to "Search", jobs_path, class: "btn btn-sm btn-primary btn-responsive" %> 
+        <%= link_to "Create", new_job_path, class: "btn btn-sm btn-primary btn-responsive" %> 
+        <%= link_to "Edit", edit_job_path(@job), class: "btn btn-sm btn-primary btn-responsive" %> 
+        <%= link_to "Remove", @job, method: :delete,
+                           data: { confirm: "Delete this job?" }, :class => "btn btn-sm btn-danger btn-responsive" %>
+    </section>
+
   </div>
 </div>
