@@ -134,7 +134,12 @@ class TestsController < ApplicationController
         if @test.update_attributes(test_params)
           format.html { 
             flash[:success] = "Test was successfully updated."
-            redirect_to @test 
+            
+            if params[:commit] == "Save And Modify Questions"
+              redirect_to select_questions_path(id: @test.id)
+            else
+              redirect_to @test
+            end
           }
           format.json { render :show, status: :ok, location: @test }
         else

@@ -1,9 +1,7 @@
 <% provide(:title, 'Edit Test') %>
 <div class="page-header">
   <section style="float:right">
-    <%= link_to "Add/Remove Questions", select_questions_path(id: @test.id), class: "btn btn-sm btn-primary" %>
-    <%= link_to "Search Tests", tests_path, class: "btn btn-sm btn-primary" %>
-    <%= link_to "Dashboard", root_path, class: "btn btn-sm btn-primary" %>
+    <%= link_to "Modify Questions", select_questions_path(id: @test.id), class: "btn btn-sm btn-primary" %>
   </section>
   <h3>Edit Test</h3>
 </div>
@@ -28,7 +26,9 @@
 
       <div class="form-group">
             <div style="float:right">
-            <%= f.submit "Update Test", class: "btn btn-primary" %>
+            <%= f.submit "Save And Modify Questions", class: "btn btn-primary" %>
+              <span></span>
+            <%= f.submit "Save", class: "btn btn-primary" %>
               <span></span>
               <%= link_to "Cancel", tests_path, class: "btn btn-default" %>
           </div>

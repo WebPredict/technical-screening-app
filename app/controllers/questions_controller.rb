@@ -1,7 +1,8 @@
 class QuestionsController < ApplicationController
-  before_action :logged_in_user, only: [:create, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:create, :edit, :update, :destroy, :make_easy, :make_medium, :make_hard]
   before_action :correct_user,   only: [:destroy, :edit, :update]
-  
+  before_action :admin_user,     only: [:make_easy, :make_medium, :make_hard]
+
   include QuestionsHelper 
   helper_method :sort_column, :sort_direction
   
@@ -148,7 +149,7 @@ class QuestionsController < ApplicationController
   
   def new
     @question = Question.new
-    flash.now[:info] = "Multiple choice and short answer questions can be automatically scored. The chosen difficulty level does not affect scoring."
+    flash.now[:info] = "Multiple choice and short phrase questions can be automatically scored. The chosen difficulty level does not affect scoring."
     add_breadcrumb "New Question", new_question_path
   end
 
@@ -161,6 +162,30 @@ class QuestionsController < ApplicationController
     add_breadcrumb "Edit Question", edit_question_path
   end
 
+  def make_easy
+    @question = Question.find(params[:id])
+    @question.difficulty_id = 1
+    @question.save
+    flash[:info] = "Question updated to easy."
+    redirect_to questions_path
+  end
+  
+  def make_medium
+    @question = Question.find(params[:id])
+    @question.difficulty_id = 2
+    @question.save
+    flash[:info] = "Question updated to medium."
+    redirect_to questions_path
+  end
+  
+  def make_hard
+    @question = Question.find(params[:id])
+    @question.difficulty_id = 3
+    @question.save
+    flash[:info] = "Question updated to hard."
+    redirect_to questions_path
+  end
+  
   def show
     @question = Question.find(params[:id])
     if @question.question_type_id == 2
