@@ -155,7 +155,12 @@ class TestsController < ApplicationController
       @test.save
     end
     flash[:success] = "Test questions added."
-    redirect_to @test
+    
+    if (params[:commit] == "Add Questions And Search Again")
+      redirect_to select_questions_path(id: @test.id)
+    else
+      redirect_to @test
+    end
   end
 
   def submit_random_questions
@@ -257,6 +262,11 @@ class TestsController < ApplicationController
   def show
     @test = Test.find(params[:id])
     @test_questions = @test.questions.paginate(page: params[:page]).order(sort_column + " " + sort_direction)
+    
+    if current_user != nil
+      @test_results = @test.test_submissions.where("user_id = ?", current_user.id).paginate(page: params[:page]).order(sort_column + " " + sort_direction)
+    end
+    
     add_breadcrumb "Show Test", :test_path
   end
 

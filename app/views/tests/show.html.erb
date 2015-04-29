@@ -48,6 +48,19 @@
       <h3>No questions added to this test yet.</h3>
       <% end %>
     </section>
+    <section>
+      <% if @test_results != nil && @test_results.any? %>
+        <h4>This Test's Submissions / Results (<%= @test_results.count %>):</h4>
+      <table class="table table-bordered show-header">
+        <tr><th>Candidate Name</th><th>Test Name</th><th><%= sortable "name", "Submission Name" %></th>
+        <th><%= sortable "score" %></th><th><%= sortable "time" %></th><th>Actions</th></tr>
+        <%= render @test_results %>
+      </table>
+        <%= will_paginate @test_results %>
+      <% else %>
+      <h3>No results for this test yet.</h3>
+      <% end %>
+    </section>
     <section class="mobile-section" style="float:right">
         <%= link_to "Search", tests_path, class: "btn btn-sm btn-primary btn-responsive" %> 
         <%= link_to "Send Test", send_test_candidate_path(id: @test.id), class: "btn btn-sm btn-primary btn-responsive" %>
