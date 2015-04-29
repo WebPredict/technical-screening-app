@@ -1,6 +1,6 @@
 <tr id="candidate-<%= candidate.id %>">
   <td><%= link_to candidate.name, candidate %></td>
-  <td><%= candidate.email %></td>
+  <td><a href="mailto:<%= candidate.email %>"><%= candidate.email %></a></td>
   <td><%= phone_format(candidate.phone) %></td>
   <td><%= candidate.created_at.strftime("%m/%d/%Y") if candidate.created_at? %></td>
   <td>
