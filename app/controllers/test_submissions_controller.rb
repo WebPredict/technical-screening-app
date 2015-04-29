@@ -30,7 +30,7 @@ class TestSubmissionsController < ApplicationController
   end
 
   def create
-    if params[:id] != nil
+    if !params[:id].blank?
       @candidate = Candidate.find(params[:id])
     elsif !params[:email].blank?
       @candidate = Candidate.find_by(email: params[:email])
@@ -75,7 +75,7 @@ class TestSubmissionsController < ApplicationController
           end
   
           flash[:error] = "Test submission could not be saved."
-          render 'edit'
+          render 'new'
         end
       end
     else
@@ -150,6 +150,7 @@ class TestSubmissionsController < ApplicationController
   def new
     @test_submission = TestSubmission.new
     @test_submission.candidate = Candidate.new 
+    @candidate_id = ''
     @test_submission.name = "My Test Submission"
     @test_submission.test = Test.find(params[:id])
     session[:start_time] = Time.now
@@ -163,6 +164,8 @@ class TestSubmissionsController < ApplicationController
     @test_submission = TestSubmission.new
     @test_submission.candidate = Candidate.find_by(id: params[:id])
     session[:start_time] = Time.now
+    
+    @candidate_id = params[:id]
     
     if @test_submission.candidate && @test_submission.candidate.valid_token?(params[:token])
       @test_submission.test = Test.find(params[:test_id])
