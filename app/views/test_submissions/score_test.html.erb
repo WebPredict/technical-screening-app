@@ -16,7 +16,7 @@
 
       <% if @test_submission.answered_questions.any? %>
         <table class="table">
-          <tr><th>Question</th><th>Given Answer</th><th>Correct?</th></tr>
+          <tr><th>Question</th><th>Their Answer</th><th>Correct Answer</th><th>Correct?</th></tr>
         <% @test_submission.answered_questions.each do |aq| %>
           <tr>
           <td>
@@ -26,6 +26,7 @@
                 <%= aq.question.formatted_content %>
                 <% end %>
           <td><%= aq.answer %></td>
+          <td><%= Nokogiri::HTML::DocumentFragment.parse(aq.question.answer).to_html.html_safe %></td>
           <td>
               <%= check_box_tag "answered_question_ids[]", aq.id, false, class: "checkbox" %>
           </td>

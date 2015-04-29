@@ -107,7 +107,7 @@ class CandidatesController < ApplicationController
             end
           end 
           
-          if params[:commit] == "Save And Send Test"
+          if params[:commit] == "Create And Send Test"
             flash[:info] = "Select test to send to candidate:"
             @single_test_select = true
             redirect_to tests_path
