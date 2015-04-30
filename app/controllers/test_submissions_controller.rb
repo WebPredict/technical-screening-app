@@ -171,7 +171,7 @@ class TestSubmissionsController < ApplicationController
     if @test_submission.candidate && @test_submission.candidate.valid_token?(params[:token])
       @test_submission.test = Test.find(params[:test_id])
       @test_submission.name = @test_submission.candidate.name + "'s Test Submission for test: " + @test_submission.test.name
-      flash[:info] = "Test: '" + test.name + "' has " + test.questions.count.to_s + " question(s). It is timed."
+      flash[:info] = "Test: '" + @test_submission.test.name + "' has " + @test_submission.test.questions.count.to_s + " question(s). It is timed."
       @test_submission.test.questions.each do |question|
         # testing
         @test_submission.answered_questions.build(question_id: question.id)
