@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   end
   
   def premium?
-    return membership_level != nil && membership_level.name != 'Free'
+    return membership_level != nil && membership_level.id != 1
   end
   
   def feed
