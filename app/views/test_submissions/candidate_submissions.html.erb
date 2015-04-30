@@ -11,8 +11,8 @@
     <% if @test_submissions.any? %>
       <h4>Test Submissions</h4>
       <table class="table table-bordered show-header">
-        <tr><th>Candidate Name</th><th>Test Name</th><th><%= sortable "name", "Submission Name" %></th>
-        <th><%= sortable "score" %></th><th><%= sortable "time", "Time Taken" %></th><th>Actions</th></tr>
+        <tr><th>Actions</th><th>Candidate Name</th><th>Test Name</th><th><%= sortable "name", "Submission Name" %></th>
+        <th><%= sortable "score" %></th><th><%= sortable "time", "Time Taken" %></th></tr>
         <%= render @test_submissions %>
       </table>
       <%= will_paginate @test_submissions %>

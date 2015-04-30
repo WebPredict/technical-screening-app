@@ -1,4 +1,9 @@
 <tr id="job-<%= job.id %>">
+  <td>
+    <%= link_to "Create Candidate For Job", new_candidate_path(job_id: job.id), class: "btn btn-xs btn-primary" %>
+    <div class="button-spacer"></div>
+    <%= link_to "View Candidates For Job", job, class: "btn btn-xs btn-primary" %>
+  </td>
   <td><%= link_to job.name, job %></td>
   <td><%= truncate(job.description, 250) %></td>
   <td>
@@ -7,9 +12,4 @@
     <% end %>
     </td>
   <td><%= job.created_at.strftime("%m/%d/%Y") if job.created_at? %></td>
-  <td>
-    <%= link_to "Create Candidate For Job", new_candidate_path(job_id: job.id), class: "btn btn-xs btn-primary" %>
-    <div class="button-spacer"></div>
-    <%= link_to "View Candidates For Job", job, class: "btn btn-xs btn-primary" %>
-  </td>
 </tr>
