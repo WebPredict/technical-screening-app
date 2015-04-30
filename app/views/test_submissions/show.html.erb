@@ -8,7 +8,9 @@
         <%= link_to "Auto Score Test", auto_score_test_path(id: @test_submission.id), class: "btn btn-xs btn-primary btn-responsive", :method => :post %> 
     <% end %>
         <%= link_to "Forward", forward_submission_path(id: @test_submission.id), class: "btn btn-xs btn-primary" %>
-        <%= link_to "Dashboard", root_path, class: "btn btn-xs btn-primary btn-responsive" %> 
+        <%= link_to "Remove", @test_submission, method: :delete,
+                           data: { confirm: "Delete this test submission?" }, 
+                           :class => "btn btn-xs btn-danger btn-responsive" %>
       </section>
   <h3>Test Submission Details</h3>
 </div>
@@ -50,7 +52,9 @@
         <%= link_to "Auto Score Test", auto_score_test_path(id: @test_submission.id), class: "btn btn-xs btn-primary btn-responsive", :method => :post %> 
     <% end %>
         <%= link_to "Forward", forward_submission_path(id: @test_submission.id), class: "btn btn-xs btn-primary" %>
-        <%= link_to "Dashboard", root_path, class: "btn btn-xs btn-primary btn-responsive" %> 
+        <%= link_to "Remove", @test_submission, method: :delete,
+                           data: { confirm: "Delete this test submission?" }, 
+                           :class => "btn btn-xs btn-danger btn-responsive" %>
       </section>
   </div>
 </div>
