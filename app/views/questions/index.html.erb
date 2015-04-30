@@ -51,9 +51,9 @@
           <% if current_user != nil %>
           <th>Actions</th>
           <% end %>
-          <th><%= sortable "content", "Question" %></th><th><%= sortable "answer" %></th>
-        <th><%= sortable "difficulty_id", "Difficulty" %></th><th><%= sortable "question_type_id", "Question Type" %></th>
-        <th><%= sortable "category_id", "Category" %></th></tr>
+          <th><%= sortable_with_search "content", "Question" %></th><th><%= sortable_with_search "answer" %></th>
+        <th><%= sortable_with_search "difficulty_id", "Difficulty" %></th><th><%= sortable_with_search "question_type_id", "Question Type" %></th>
+        <th><%= sortable_with_search "category_id", "Category" %></th></tr>
         <%= render @questions %>
       </table>
     </div>

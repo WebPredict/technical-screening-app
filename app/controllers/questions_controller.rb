@@ -21,11 +21,11 @@ class QuestionsController < ApplicationController
         query = ' lower(content) LIKE ? OR lower(answer) LIKE ? '
         searchparam = "%#{params[:search].downcase}%"
         @questions = Question.where(query, searchparam, searchparam)
-        session[:question_search] = params[:search]
     else
       @questions = Question.all
     end
-
+    session[:question_search] = params[:search]
+    
     if !params[:remember_search].blank? && !session[:question_category].blank?
       params[:category_id] = session[:question_category]
     end
@@ -33,8 +33,8 @@ class QuestionsController < ApplicationController
       query = ' category_id = ? '
       
       @questions = @questions.where(query, params[:category_id])
-      session[:question_category] = params[:category_id]
     end
+    session[:question_category] = params[:category_id]
     
     if !params[:remember_search].blank? && !session[:question_difficulty].blank?
       params[:difficulty_id] = session[:question_difficulty]
@@ -42,8 +42,8 @@ class QuestionsController < ApplicationController
     if !params[:difficulty_id].blank?
       query = ' difficulty_id = ? '
       @questions = @questions.where(query, params[:difficulty_id])
-      session[:question_difficulty] = params[:difficulty_id]
     end
+    session[:question_difficulty] = params[:difficulty_id]
 
     if current_user != nil
       @questions = @questions.where("is_public = ? OR user_id = ?", true, current_user.id).paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
