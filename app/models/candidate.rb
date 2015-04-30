@@ -1,7 +1,6 @@
 class Candidate < ActiveRecord::Base
   attr_accessor :test_token
   belongs_to :user
-  default_scope -> { order(created_at: :desc) }
 
   has_and_belongs_to_many :jobs, :join_table => :jobs_candidates
   has_many :test_submissions, dependent: :destroy  
@@ -24,6 +23,14 @@ class Candidate < ActiveRecord::Base
     return false if test_digest.nil?
     BCrypt::Password.new(test_digest).is_password?(token)
   end
+  
+  def has_digest?
+    if test_digest != nil
+      return true
+    else
+      return false
+    end 
+  end 
   
   def average_score
     @score = 0
@@ -49,7 +56,10 @@ class Candidate < ActiveRecord::Base
   
   private
     def create_test_digest
-      self.test_token = Candidate.new_token
-      update_attribute(:test_digest, Candidate.digest(self.test_token))
+      # probably fine for now to just create this once
+      if self.test_token == nil
+        self.test_token = Candidate.new_token
+        update_attribute(:test_digest, Candidate.digest(self.test_token))
+      end
     end
 end

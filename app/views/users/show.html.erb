@@ -8,14 +8,14 @@
       </h3>
     </section>
     <br>
-    <table style="width:400px">
+    <table class="table">
       <tr><th>Name:</th><td><%= @user.name %></td></tr>
       <tr><th>Email:</th><td><%= @user.email %></td></tr>
       <tr><th>Membership Level:</th><td><%= 
       if @user.membership_level != nil
         @user.membership_level.name
       else
-        "Free"
+        "Free 2 Week Trial"
       end %></td></tr>
       <tr><th>Companies:</th><td>
       <%if @user.companies != nil %>

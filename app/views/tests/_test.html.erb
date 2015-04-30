@@ -23,7 +23,7 @@
       <% end %>
   </td>
   <td><%= link_to test.name, test %></td>
-  <td><%= test.description %></td>
+  <td><%= truncate(test.description, 255) %></td>
   <td><%= test.questions.count %></td>
   <td><%= test.created_at.strftime("%m/%d/%Y") %></td>
 </tr>

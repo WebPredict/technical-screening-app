@@ -8,14 +8,18 @@ class TestsController < ApplicationController
   add_breadcrumb "Tests", :tests_path
 
   def index
-    query = ' (is_public = ? OR user_id = ? ) '
+    query = ' (is_public = ? OR user_id = ?) '
     searchparam = ""
-    if params[:search] && params[:search] != ''
-        query += ' AND lower(name) LIKE ? '
+    if !params[:search].blank?
+        query += ' AND (lower(name) LIKE ? OR lower(description) LIKE ?) '
         searchparam = "%#{params[:search].downcase}%"
-      @tests = Test.where(query, true, current_user, searchparam).paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
+      @tests = Test.where(query, true, current_user, searchparam, searchparam).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 10)
     else
-      @tests = Test.where(query, true, current_user).paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
+      @tests = Test.where(query, true, current_user).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 10)
+    end
+
+    if current_user != nil && (current_user.tests == nil || !current_user.tests.any?)
+      flash.now[:info] = "You can create a screening test to send to a job candidate, or browse existing tests here. You can also clone and modify existing tests."
     end
 
     @searched = query != ''
@@ -31,9 +35,9 @@ class TestsController < ApplicationController
     if params[:search] && params[:search] != ''
         query += ' AND lower(content) LIKE ? '
         searchparam = "%#{params[:search].downcase}%"
-      @questions = Question.where(query, @test.id, searchparam).paginate(page: params[:page], per_page: 10)
+      @questions = Question.where(query, @test.id, searchparam).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 10)
     else
-      @questions = Question.where(query, @test.id).paginate(page: params[:page], per_page: 10)
+      @questions = Question.where(query, @test.id).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 10)
     end
 
     @select_mode = true
@@ -74,16 +78,36 @@ class TestsController < ApplicationController
     if params[:commit] == "Cancel"
       redirect_to root_url
     else
-      @test = current_user.tests.build(test_params)
-      if @test.save
-        flash[:success] = "Test created!"
-        if params[:commit] == "Select Random Questions"
-          redirect_to select_random_questions_path(id: @test.id)
-        else
-          redirect_to select_questions_path(id: @test.id)
-        end 
+      if current_user.membership_level_id == 1 && current_user.tests.any? && 
+        current_user.tests.count > Limits::MAX_TESTS_FREE
+        flash[:info] = "Limit for number of tests for free membership level is: " + Limits::MAX_TESTS_FREE.to_s + ". Upgrade now to increase your limit!"
+        redirect_to plans_path
+      elsif current_user.membership_level_id == 2 && current_user.tests.any? && 
+        current_user.tests.count > Limits::MAX_TESTS_BRONZE
+        flash[:info] = "Limit for number of tests for Bronze membership level is: " + Limits::MAX_TESTS_BRONZE.to_s + ". Upgrade now to increase your limit!"
+        redirect_to plans_path
+      elsif current_user.membership_level_id == 3 && current_user.tests.any? && 
+        current_user.tests.count > Limits::MAX_TESTS_GOLD
+        flash[:info] = "Limit for number of tests for Gold membership level is: " + Limits::MAX_TESTS_GOLD.to_s + ". Upgrade now to increase your limit!"
+        redirect_to plans_path
+      elsif current_user.membership_level_id == 4 && current_user.tests.any? && 
+        current_user.tests.count > Limits::MAX_TESTS_PLATINUM
+        flash[:info] = "Limit for number of tests for Platinum membership level is: " + Limits::MAX_TESTS_PLATINUM.to_s + 
+        ". Contact us to increase your limit!"
+        redirect_to plans_path
       else
-        render 'edit'
+
+        @test = current_user.tests.build(test_params)
+        if @test.save
+          flash[:success] = "Test created!"
+          if params[:commit] == "Save And Add Random Questions"
+            redirect_to select_random_questions_path(id: @test.id)
+          else
+            redirect_to select_questions_path(id: @test.id)
+          end 
+        else
+          render 'edit'
+        end
       end
     end
   end
@@ -102,15 +126,20 @@ class TestsController < ApplicationController
   end
 
   def update
+    @test = Test.find(params[:id])
     if params[:commit] == "Cancel"
-      redirect_to root_url
+      redirect_to @test
     else
-      @test = Test.find(params[:id])
       respond_to do |format|
         if @test.update_attributes(test_params)
           format.html { 
             flash[:success] = "Test was successfully updated."
-            redirect_to @test 
+            
+            if params[:commit] == "Save And Modify Questions"
+              redirect_to select_questions_path(id: @test.id)
+            else
+              redirect_to @test
+            end
           }
           format.json { render :show, status: :ok, location: @test }
         else
@@ -131,7 +160,12 @@ class TestsController < ApplicationController
       @test.save
     end
     flash[:success] = "Test questions added."
-    redirect_to @test
+    
+    if (params[:commit] == "Add Questions And Search Again")
+      redirect_to select_questions_path(id: @test.id)
+    else
+      redirect_to @test
+    end
   end
 
   def submit_random_questions
@@ -145,25 +179,46 @@ class TestsController < ApplicationController
         end
         
         difficulty = nil
-        if (params[:difficulty_level] != nil && params[:difficulty_level] != '')
-          difficulty = Difficulty.find(params[:difficulty_level])
+        if (params[:difficulty_level_1] == "1")
+          difficulty = "1"
+        end
+        if (params[:difficulty_level_2] == "2")
+          if difficulty == nil 
+            difficulty = "2"
+          else
+            difficulty = difficulty + ", 2"
+          end
+        end
+        if (params[:difficulty_level_3] == "3")
+          if difficulty == nil 
+            difficulty = "3"
+          else
+            difficulty = difficulty + ", 3"
+          end
         end
         
-        category = Category.where("lower(name) like '%" + topic.downcase + "%'")
+        # first try exact name, then if no results, try partial:
+        category = Category.where("lower(name) = '" + topic.downcase + "'")
+        
+        if category == nil
+          category = Category.where("lower(name) like '%" + topic.downcase + "%'")
+        end
+      
         if category != nil && category.any?
           cat_questions = Question.where("category_id = " + category.first.id.to_s)
           if difficulty != nil
-            cat_questions = cat_questions.where("difficulty_id = " + difficulty.id.to_s)
+            cat_questions = cat_questions.where("difficulty_id IN (" + difficulty + ")")
           end
           
           if cat_questions.size < num_per_topic.to_i
             flash[:warning] = "Could not find enough existing questions for the topic: " + category.first.name + "."
             redirect_to request.referrer
             return
-          else            
+          else     
+            cat_questions = cat_questions.shuffle
             (1..num_per_topic.to_i).each do |index|
-              random_question = cat_questions [Random.new.rand(cat_questions.size)]
-              @test.questions << random_question
+              random_question = cat_questions [index]
+                @test.questions << random_question
             end
           end
         else
@@ -212,6 +267,11 @@ class TestsController < ApplicationController
   def show
     @test = Test.find(params[:id])
     @test_questions = @test.questions.paginate(page: params[:page]).order(sort_column + " " + sort_direction)
+    
+    if current_user != nil
+      @test_results = @test.test_submissions.where("user_id = ?", current_user.id).paginate(page: params[:page]).order(sort_column + " " + sort_direction)
+    end
+    
     add_breadcrumb "Show Test", :test_path
   end
 
@@ -230,7 +290,7 @@ class TestsController < ApplicationController
 
     def test_params
       params.require(:test).permit(:name, :description, :question_ids, :is_public, :topic_list, 
-      :difficulty_level, :num_per_topic, :created_at)
+      :difficulty_level, :num_per_topic, :created_at, :difficulty_level_1, :difficulty_level_2, :difficulty_level_3)
     end
     
     def correct_user
@@ -239,7 +299,7 @@ class TestsController < ApplicationController
     end
   
     def sort_column
-      Test.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+      (Question.column_names.include?(params[:sort]) || Test.column_names.include?(params[:sort])) ? params[:sort] : "created_at"
     end
 
     def sort_direction

@@ -46,8 +46,12 @@
     <h4>All Questions</h4>
     <% end %>
     <div class="table-responsive">
-      <table class="table table-bordered">
-        <tr><th>Actions</th><th><%= sortable "content", "Question" %></th><th><%= sortable "answer" %></th>
+      <table class="table table-bordered show-header">
+        <tr>
+          <% if current_user != nil %>
+          <th>Actions</th>
+          <% end %>
+          <th><%= sortable "content", "Question" %></th><th><%= sortable "answer" %></th>
         <th><%= sortable "difficulty_id", "Difficulty" %></th><th><%= sortable "question_type_id", "Question Type" %></th>
         <th><%= sortable "category_id", "Category" %></th></tr>
         <%= render @questions %>

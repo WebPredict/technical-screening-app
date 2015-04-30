@@ -189,10 +189,21 @@ aside {
   .laptop-section {
     display: none;
   }
-  .text-responsive {
-    font-size: 90%;
-  }
 
+  footer {
+    ul {
+      li {
+        margin-left: 8px;
+      }
+    }
+  }
+  
+  .responsive-image {
+    width: 300px;
+  }
+  .header-responsive {
+    font-size: 80%;
+  }
   .row {
     margin-left: 1px;
     margin-right: 1px;
@@ -255,6 +266,12 @@ aside {
 
 .tables-custom {
   background: #f5f5f5;
+}
+
+.show-header {
+  th {
+    background: #f5f5f5;
+  }
 }
 
 .gravatar {

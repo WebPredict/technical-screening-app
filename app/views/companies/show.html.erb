@@ -26,7 +26,7 @@
     <section>
       <% if @company.jobs.any? %>
         <strong>This Company's Jobs (<%= @company.jobs.count %>)</strong>
-          <table class="table table-bordered">
+          <table class="table table-bordered show-header">
         <tr><th><%= sortable "name", "Title" %></th><th><%= sortable "description" %></th>
         <th><%= sortable "company_id", "Company" %></th>
         <th>Created On</th><th>Actions</th></tr>

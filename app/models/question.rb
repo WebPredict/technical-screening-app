@@ -1,8 +1,6 @@
 class Question < ActiveRecord::Base
   attr_accessor :answer2, :answer3, :answer4, :answer5, :multiple_choice_answer, :short_answer
     
-  default_scope -> { order(category_id: :asc) }
-
   belongs_to :user
   belongs_to :difficulty
   belongs_to :category 

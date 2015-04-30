@@ -3,7 +3,10 @@
       <section class="laptop-section" style="float:right">
         <%= link_to "Search", tests_path, class: "btn btn-xs btn-primary btn-responsive" %> 
         <%= link_to "Send Test", send_test_candidate_path(id: @test.id), class: "btn btn-xs btn-primary btn-responsive" %>
-        <%= link_to "Edit", edit_test_path(@test), class: "btn btn-xs btn-primary btn-responsive" %> 
+
+        <% if current_user != nil && @test.user_id == current_user.id %>        
+          <%= link_to "Edit", edit_test_path(@test), class: "btn btn-xs btn-primary btn-responsive" %> 
+        <% end %>
         <%= link_to "Create", new_test_path, class: "btn btn-xs btn-primary btn-responsive" %> 
         <%= link_to "Search Questions", questions_path, class: "btn btn-xs btn-primary btn-responsive" %> 
         <%= link_to "See Candidate's View", new_test_submission_path(id: @test.id), class: "btn btn-xs btn-primary btn-responsive" %> 
@@ -34,7 +37,7 @@
     <section>
       <% if @test.questions.any? %>
         <h4>This Test's Questions (<%= @test.questions.count %>):</h4>
-        <table class="table table-bordered">
+        <table class="table table-bordered show-header">
           <tr><th>Actions</th><th><%= sortable "content", "Question" %></th><th><%= sortable "answer" %></th>
           <th><%= sortable "difficulty" %></th><th><%= sortable "question_type" %></th>
           <th><%= sortable "category" %></th></tr>
@@ -45,10 +48,25 @@
       <h3>No questions added to this test yet.</h3>
       <% end %>
     </section>
+    <section>
+      <% if @test_results != nil && @test_results.any? %>
+        <h4>This Test's Submissions / Results (<%= @test_results.count %>):</h4>
+      <table class="table table-bordered show-header">
+        <tr><th>Candidate Name</th><th>Test Name</th><th><%= sortable "name", "Submission Name" %></th>
+        <th><%= sortable "score" %></th><th><%= sortable "time" %></th><th>Actions</th></tr>
+        <%= render @test_results %>
+      </table>
+        <%= will_paginate @test_results %>
+      <% else %>
+      <h3>No results for this test yet.</h3>
+      <% end %>
+    </section>
     <section class="mobile-section" style="float:right">
         <%= link_to "Search", tests_path, class: "btn btn-sm btn-primary btn-responsive" %> 
         <%= link_to "Send Test", send_test_candidate_path(id: @test.id), class: "btn btn-sm btn-primary btn-responsive" %>
+        <% if current_user != nil && @test.user_id == current_user.id %>        
         <%= link_to "Edit", edit_test_path(@test), class: "btn btn-sm btn-primary btn-responsive" %> 
+        <% end %>
         <%= link_to "Create", new_test_path, class: "btn btn-sm btn-primary btn-responsive" %> 
         <%= link_to "Search Questions", questions_path, class: "btn btn-sm btn-primary btn-responsive" %> 
         <%= link_to "See Candidate's View", new_test_submission_path(id: @test.id), class: "btn btn-sm btn-primary btn-responsive" %> 

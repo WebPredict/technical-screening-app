@@ -1,5 +1,5 @@
 <% if @companies && @companies.any? %>
-  <table class="table table-bordered">
+  <table class="table table-bordered show-header">
     <tr><th><%= sortable "name" %></th><th><%= sortable "email" %></th><th><%= sortable "phone" %></th>
     <th><%= sortable "manager" %></th><th><%= sortable "address" %></th><th><%= sortable "created_at", "Created On" %></th><th>Actions</th></tr>
     <%= render @companies %>

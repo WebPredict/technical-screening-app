@@ -18,9 +18,13 @@ class JobsController < ApplicationController
     @jobs = Job.where("user_id = ?", current_user.id)
     
     if @jobs != nil
-      @jobs = @jobs.paginate(page: params[:page], per_page: 10)
+      @jobs = @jobs.paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
     end
     
+    if current_user.jobs == nil || !current_user.jobs.any?
+      flash.now[:info] = "You can create a job listing for candidates to be associated with, and help keep track of what they've applied for."
+    end
+
     @searched = query != ''
   end
 
@@ -48,23 +52,44 @@ class JobsController < ApplicationController
     if params[:commit] == "Cancel"
       redirect_to jobs_path
     else
-      company_id = params[:job][:company_id]
-      if company_id != nil && company_id != ''
-        @company = Company.find(params[:job][:company_id])
-        @job = @company.jobs.build(job_params)
-      else
-        @job = Job.new(job_params)
-      end
       
-      @job.user_id = current_user.id
-      if @job.save
-        flash[:success] = "Job created!"
-        redirect_to @job
+      if current_user.membership_level_id == 1 && current_user.jobs.any? && 
+        current_user.jobs.count > Limits::MAX_JOB_LISTINGS_FREE
+        flash[:info] = "Limit for number of job listings for free membership level is: " + Limits::MAX_JOB_LISTINGS_FREE.to_s + ". Upgrade now to increase your limit!"
+        redirect_to plans_path
+      elsif current_user.membership_level_id == 2 && current_user.jobs.any? && 
+        current_user.jobs.count > Limits::MAX_JOB_LISTINGS_BRONZE
+        flash[:info] = "Limit for number of job listings for Bronze membership level is: " + Limits::MAX_JOB_LISTINGS_BRONZE.to_s + ". Upgrade now to increase your limit!"
+        redirect_to plans_path
+      elsif current_user.membership_level_id == 3 && current_user.jobs.any? && 
+        current_user.jobs.count > Limits::MAX_JOB_LISTINGS_GOLD
+        flash[:info] = "Limit for number of job listings for Gold membership level is: " + Limits::MAX_JOB_LISTINGS_GOLD.to_s + ". Upgrade now to increase your limit!"
+        redirect_to plans_path
+      elsif current_user.membership_level_id == 4 && current_user.jobs.any? && 
+        current_user.jobs.count > Limits::MAX_JOB_LISTINGS_PLATINUM
+        flash[:info] = "Limit for number of job listings for Platinum membership level is: " + Limits::MAX_JOB_LISTINGS_PLATINUM.to_s + 
+        ". Contact us to increase your limit!"
+        redirect_to plans_path
       else
-        @companies = current_user.companies 
-        render 'new'
+      
+        company_id = params[:job][:company_id]
+        if company_id != nil && company_id != ''
+          @company = Company.find(params[:job][:company_id])
+          @job = @company.jobs.build(job_params)
+        else
+          @job = Job.new(job_params)
+        end
+        
+        @job.user_id = current_user.id
+        if @job.save
+          flash[:success] = "Job created!"
+          redirect_to @job
+        else
+          @companies = current_user.companies 
+          render 'new'
+        end
       end
-    end
+    end 
   end
 
   # GET /jobs/1/edit

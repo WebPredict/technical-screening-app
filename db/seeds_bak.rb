@@ -29,12 +29,12 @@ Difficulty.create!(level: "Easy")
 Difficulty.create!(level: "Medium")
 Difficulty.create!(level: "Hard")
 
-MembershipLevel.create!(name: "Free")
+MembershipLevel.create!(name: "Free 2 Week Trial")
 MembershipLevel.create!(name: "Bronze")
 MembershipLevel.create!(name: "Gold")
 MembershipLevel.create!(name: "Platinum")
 
-QuestionType.create!(name: "Free Form")
+QuestionType.create!(name: "Open-Ended")
 QuestionType.create!(name: "Multiple Choice")
 QuestionType.create!(name: "Short Phrase")
 

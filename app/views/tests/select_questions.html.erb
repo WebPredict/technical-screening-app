@@ -7,8 +7,12 @@
   <%= form_tag update_questions_path, :class => "nicesearch", :method => 'post' do %>
   <%= hidden_field_tag :id, @test.id %>
     <table class="table table-bordered">
-      <tr><th>Include Question?</th><th><%= sortable "content", "Question" %></th><th><%= sortable "answer" %></th>
-      <th><%= sortable "difficulty" %></th><th><%= sortable "question_type" %></th><th><%= sortable "category" %></th>
+      <tr><th>Include Question?</th><th><%= sortable_with_id "content", "Question", @test.id %></th>
+      <th><%= sortable_with_id "answer", "Answer", @test.id %></th>
+      <th><%= sortable_with_id "difficulty_id", "Difficulty", @test.id %></th>
+      <th><%= sortable_with_id "question_type_id", "Question Type", @test.id %></th>
+      <th><%= sortable_with_id "category_id", "Category", @test.id %></th></tr>
+
       </tr>
       <% @preselect_checkboxes = true %>
       <%= render @test_questions %>
@@ -40,17 +44,21 @@
   <%= form_tag submit_questions_path, :class => "nicesearch", :method => 'post' do %>
   <%= hidden_field_tag :id, @test.id %>
     <table class="table table-bordered">
-      <tr><th>Include Question?</th><th><%= sortable "content", "Question" %></th><th><%= sortable "answer" %></th>
-      <th><%= sortable "difficulty" %></th><th><%= sortable "question_type" %></th>
-      <th><%= sortable "category" %></th></tr>
+      <tr><th>Include Question?</th><th><%= sortable_with_id "content", "Question", @test.id %></th>
+      <th><%= sortable_with_id "answer", "Answer", @test.id %></th>
+      <th><%= sortable_with_id "difficulty_id", "Difficulty", @test.id %></th>
+      <th><%= sortable_with_id "question_type_id", "Question Type", @test.id %></th>
+      <th><%= sortable_with_id "category_id", "Category", @test.id %></th></tr>
       <% @preselect_checkboxes = false %>
       <%= render @questions %>
     </table>
         <div class="form-group btn-responsive">
           <div style="float:right">
+          <input class="btn btn-primary" name="commit" type="submit" value="Add Questions And Search Again" />
+            <span></span>
           <input class="btn btn-primary" name="commit" type="submit" value="Add Questions" />
             <span></span>
-            <%= link_to "Cancel", questions_path, class: "btn btn-default" %>
+            <%= link_to "Cancel", @test, class: "btn btn-default" %>
         </div>
         </div>
 

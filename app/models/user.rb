@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   end
   
   def premium?
-    return membership_level != nil && membership_level.name != 'Free'
+    return membership_level != nil && membership_level.id != 1
   end
   
   def feed
@@ -43,6 +43,14 @@ class User < ActiveRecord::Base
   def remember
     self.remember_token = User.new_token
     update_attribute(:remember_digest, User.digest(remember_token))
+  end
+  
+  def trial_expired?
+    if membership_level_id == 1 && created_at < 14.days.ago
+      true
+    else
+      false
+    end
   end
   
   def authenticated?(remember_token)

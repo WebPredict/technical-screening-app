@@ -4,7 +4,6 @@ class TestSubmission < ActiveRecord::Base
   belongs_to :test
   has_many :answered_questions
   accepts_nested_attributes_for :answered_questions
-  default_scope -> { order(created_at: :desc) }
 
   validates :user_id, presence: true
   validates :candidate_id, presence: true
@@ -42,6 +41,32 @@ class TestSubmission < ActiveRecord::Base
       end
       @score *= 100.0
       return "#{@score.round(1)} % (" + num_right.to_s + " out of " + num_questions.to_s + ")"
+    end
+  end
+  
+  def update_avg_scores 
+    if is_scored
+      num_right = 0
+      num_questions = 0
+      
+      if answered_questions.any?
+        num_questions = answered_questions.size
+        answered_questions.each do |aq|
+          if aq.correct?
+            num_right += 1
+          end
+        end
+      end
+      
+      if num_questions != 0
+        @score = num_right.to_f / num_questions.to_f
+      else
+        @score = 0
+      end
+      @score *= 100.0
+      
+      candidate.avg_score = @score
+      candidate.save
     end
   end
   

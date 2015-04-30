@@ -4,7 +4,6 @@ class UsersController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
   before_action :admin_user,     only: :destroy
                   
-                  
   add_breadcrumb "Dashboard", :root_path
                       
   # GET /users
@@ -67,6 +66,26 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit_subscription
+    @user = User.find(params[:id])
+    if @user.membership_level.id == 1
+      flash[:info] = "You've only signed up for the free version."
+      redirect_to root_url
+    elsif @user.membership_level.id == 2
+    redirect_to "https://www.billingportal.com/s/techscreen-net"
+#      redirect_to generate_url("https://techscreen-net.chargify.com/subscribe/g7zjvxxj/bronze", 
+#        {reference: "4RKzhs3YJMNAAV2v7Zo" + @user.id.to_s})
+    elsif @user.membership_level.id == 3
+    redirect_to "https://www.billingportal.com/s/techscreen-net"
+#      redirect_to generate_url("https://techscreen-net.chargify.com/subscribe/vryykwj4/gold", 
+#        {reference: "4RKzhs3YJMNAAV2v7Zo" + @user.id.to_s})
+    elsif @user.membership_level.id == 4
+    redirect_to "https://www.billingportal.com/s/techscreen-net"
+#      redirect_to generate_url("https://techscreen-net.chargify.com/subscribe/zhksdhbm/platinum", 
+#        {reference: "4RKzhs3YJMNAAV2v7Zo" + @user.id.to_s})
+    end
+  end
+  
   def generate_url(url, params = {})
     uri = URI(url)
     uri.query = params.to_query
@@ -120,9 +139,5 @@ class UsersController < ApplicationController
     def correct_user
       @user = User.find(params[:id])
       redirect_to root_url unless current_user?(@user)
-    end
-    
-    def admin_user
-      redirect_to(root_url) unless current_user.admin?
     end
 end

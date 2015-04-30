@@ -38,7 +38,9 @@
     <%= f.label :answer %>
     <%= f.text_area :answer, rows: "10", class: 'form-control' %>
     </div>
-          <div id="short-phrase" style="display:none">
+      <div id="short-phrase" style="display:none">
+        <div class="alert alert-info">Short Phrase is for one or two word answer questions (e.g. fill-in-the-blank). 
+          NOTE: Auto-scoring Short Phrase questions will not ignore punctuation or common words like "the" or "an."</div>
       <%= f.label :short_answer, "Short Phrase Answer" %>
       <%= f.text_field :short_answer, class: 'form-control' %>
       </div>

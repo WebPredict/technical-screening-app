@@ -13,7 +13,10 @@
       <section class="lists">
       <div class="panel panel-default">
       <div class="panel-heading">
-      <h3 class="panel-title">Your Custom Tests</h3>
+      <h3 class="panel-title">Your Recent Tests<span style="float:right">
+      <%= link_to tests_path, class: "btn btn-xs btn-default" do %>
+    <i class="glyphicon glyphicon-search"></i>
+    <% end %></span></h3>
       </div>
         <div class="panel-body">
         <% if @user.tests.any? %>
@@ -38,27 +41,30 @@
       <div class="col-md-8">
         <%= render 'shared/test_results' %>
       </div>
-      <div class="col-md-8" style="float: right">
+      <div class="col-md-8">
         <%= render 'shared/jobs_list' %>
       </div>
-      <div class="col-md-8" style="float: right">
+      <div class="col-md-8">
         <%= render 'shared/companies_list' %>
       </div>
-      <div class="col-md-8" style="float: right">
+    </div>
+      
+    <div class="row">
+      <div class="col-md-12">
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">Metrics</h3>
           </div>
           <div class="panel-body">
             <strong>Candidates Per Job</strong>
-            <%= column_chart Candidate.unscoped.where("user_id = ?", current_user.id).group(:job_id).count %>
+            <%= column_chart current_user.candidates.joins(:jobs).group(:'jobs.name').count %>
           </div>
         </div>
       </div>
   </div>
 <% else %>
 <div class="center jumbotron">
-  <h1>Welcome to TechScreen</h1>
+  <h1><span class="header-responsive">Welcome to TechScreen</span></h1>
 
   <h2>
     Screen your interview candidates with ease.
@@ -91,16 +97,19 @@
 <div class="row color-row">
   <div class="col-md-10 padded-col">
     <h3>Feature Details</h3>
-  <ul>
-  <li>TechScreen.net helps you set up screening tests for software development candidates.</li>
-  <li>Quickly assemble screening tests from a large library of technology topics and questions.</li> 
-  <li>Use existing popular screening tests, and enhance them with your own screening content.</li> 
-  <li>Easily manage your candidates' results. Forward results on to employers, auto-score tests.</li>
-  <li>Automatically generate screening tests simply by specifying a topic list and a # of questions. </li>
-  <li>For example, enter: <strong>"Java, SQL, HTML, JavaScript", Questions per topic: 5...</strong>.</li>
-  <li>...and voila! You've got a screening test with 20 questions on those 4 topics.</li>  
-  <li>Sort + filter by highest scoring / most recent candidates' test results.</li>
-  </ul>
+    <ul>
+    <li>TechScreen.net helps you set up screening tests for software development candidates.</li>
+    <li>Quickly assemble screening tests from a large library of technology topics and questions.</li> 
+    <li>Use existing popular screening tests, and enhance them with your own screening content.</li> 
+      <li>Easily manage your candidates' results. Forward results on to employers, auto-score tests.</li>
+      <li>Automatically generate screening tests simply by specifying a topic list and a # of questions. </li>
+      <li>For example, enter: <strong>"Java, SQL, HTML, JavaScript", Questions per topic: 5...</strong>.</li>
+      <li>...and voila! You've got a screening test with 20 questions on those 4 topics.</li>  
+      <li>Manage job listings, company listings, custom screening tests all from one dashboard.</li>
+      <li>View metrics for insight into your candidate screening and placement success.</li>
+      <li>Sort + filter by highest scoring / most recent candidates' test results.</li>
+    </ul>
+  </div>
 </div>
 </div>
 

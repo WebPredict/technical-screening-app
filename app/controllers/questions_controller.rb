@@ -1,7 +1,8 @@
 class QuestionsController < ApplicationController
-  before_action :logged_in_user, only: [:create, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:create, :edit, :update, :destroy, :make_easy, :make_medium, :make_hard]
   before_action :correct_user,   only: [:destroy, :edit, :update]
-  
+  before_action :admin_user,     only: [:make_easy, :make_medium, :make_hard]
+
   include QuestionsHelper 
   helper_method :sort_column, :sort_direction
   
@@ -12,23 +13,36 @@ class QuestionsController < ApplicationController
     query = ''
     searchparam = ""
     @questions = nil
-    if params[:search] && params[:search] != ''
+    if !params[:remember_search].blank? && !session[:question_search].blank?
+      params[:search] = session[:question_search]
+    end
+    
+    if !params[:search].blank?
         query = ' lower(content) LIKE ? OR lower(answer) LIKE ? '
         searchparam = "%#{params[:search].downcase}%"
         @questions = Question.where(query, searchparam, searchparam)
+        session[:question_search] = params[:search]
     else
       @questions = Question.all
     end
 
-    if params[:category_id] && params[:category_id] != ''
+    if !params[:remember_search].blank? && !session[:question_category].blank?
+      params[:category_id] = session[:question_category]
+    end
+    if !params[:category_id].blank?
       query = ' category_id = ? '
       
       @questions = @questions.where(query, params[:category_id])
+      session[:question_category] = params[:category_id]
     end
     
-    if params[:difficulty_id] && params[:difficulty_id] != ''
+    if !params[:remember_search].blank? && !session[:question_difficulty].blank?
+      params[:difficulty_id] = session[:question_difficulty]
+    end
+    if !params[:difficulty_id].blank?
       query = ' difficulty_id = ? '
       @questions = @questions.where(query, params[:difficulty_id])
+      session[:question_difficulty] = params[:difficulty_id]
     end
 
     if current_user != nil
@@ -45,25 +59,46 @@ class QuestionsController < ApplicationController
     if params[:commit] == "Cancel"
       redirect_to root_url
     else
-      @question = current_user.questions.build(question_params)
       
-      if @question.question_type_id == 2
-        full_question = @question.content + "||" + params[:question][:answer2] + "||" + params[:question][:answer3] + "||" + 
-          params[:question][:answer4] + "||" + params[:question][:answer5]
-        @question.content = full_question
-        @question.answer = params[:question][:multiple_choice_answer]
-        @question.save
-      elsif @question.question_type_id == 3
-        @question.answer = params[:question][:short_answer]
-        @question.save 
-      end 
-      
-      if @question.save
-        flash[:success] = "Question created!"
-        redirect_to @question
+      if current_user.membership_level_id == 1 && current_user.questions.any? && 
+        current_user.questions.count > Limits::MAX_QUESTIONS_FREE
+        flash[:info] = "Limit for number of questions for free membership level is: " + Limits::MAX_QUESTIONS_FREE.to_s + ". Upgrade now to increase your limit!"
+        redirect_to plans_path
+      elsif current_user.membership_level_id == 2 && current_user.questions.any? && 
+        current_user.questions.count > Limits::MAX_QUESTIONS_BRONZE
+        flash[:info] = "Limit for number of questions for Bronze membership level is: " + Limits::MAX_QUESTIONS_BRONZE.to_s + ". Upgrade now to increase your limit!"
+        redirect_to plans_path
+      elsif current_user.membership_level_id == 3 && current_user.questions.any? && 
+        current_user.questions.count > Limits::MAX_QUESTIONS_GOLD
+        flash[:info] = "Limit for number of questions for Gold membership level is: " + Limits::MAX_QUESTIONS_GOLD.to_s + ". Upgrade now to increase your limit!"
+        redirect_to plans_path
+      elsif current_user.membership_level_id == 4 && current_user.questions.any? && 
+        current_user.questions.count > Limits::MAX_QUESTIONS_PLATINUM
+        flash[:info] = "Limit for number of questions for Platinum membership level is: " + Limits::MAX_QUESTIONS_PLATINUM.to_s + 
+        ". Contact us to increase your limit!"
+        redirect_to plans_path
       else
-        @candidates = current_user.candidates
-        render 'new'
+
+        @question = current_user.questions.build(question_params)
+        
+        if @question.question_type_id == 2
+          full_question = @question.content + "||" + params[:question][:answer2] + "||" + params[:question][:answer3] + "||" + 
+            params[:question][:answer4] + "||" + params[:question][:answer5]
+          @question.content = full_question
+          @question.answer = params[:question][:multiple_choice_answer]
+          @question.save
+        elsif @question.question_type_id == 3
+          @question.answer = params[:question][:short_answer]
+          @question.save 
+        end 
+        
+        if @question.save
+          flash[:success] = "Question created!"
+          redirect_to @question
+        else
+          @candidates = current_user.candidates
+          render 'new'
+        end
       end
     end
   end
@@ -89,7 +124,19 @@ class QuestionsController < ApplicationController
 
           format.html { 
             flash[:success] = "Question was successfully updated."
-            redirect_to @question
+            if params[:commit] == "Save And Goto Next TODO"
+              @question = Question.where("lower(answer) LIKE ? OR lower(answer) LIKE ?", "%todo%", "%answer%").first
+              setup_question(@question)
+    
+              add_breadcrumb "Edit Question", edit_question_path
+              render 'edit'
+            else
+              if params[:commit] == "Save And Return To Search"
+                redirect_to questions_path(:remember_search => "true")
+              else
+                redirect_to @question
+              end
+            end
           }
           format.json { render :show, status: :ok, location: @question }
         else
@@ -102,7 +149,7 @@ class QuestionsController < ApplicationController
   
   def new
     @question = Question.new
-    flash.now[:info] = "Multiple choice and short answer questions can be automatically scored. The chosen difficulty level does not affect scoring."
+    flash.now[:info] = "Multiple choice and short phrase questions can be automatically scored. The chosen difficulty level does not affect scoring."
     add_breadcrumb "New Question", new_question_path
   end
 
@@ -115,6 +162,30 @@ class QuestionsController < ApplicationController
     add_breadcrumb "Edit Question", edit_question_path
   end
 
+  def make_easy
+    @question = Question.find(params[:id])
+    @question.difficulty_id = 1
+    @question.save
+    flash[:info] = "Question updated to easy."
+    redirect_to questions_path
+  end
+  
+  def make_medium
+    @question = Question.find(params[:id])
+    @question.difficulty_id = 2
+    @question.save
+    flash[:info] = "Question updated to medium."
+    redirect_to questions_path
+  end
+  
+  def make_hard
+    @question = Question.find(params[:id])
+    @question.difficulty_id = 3
+    @question.save
+    flash[:info] = "Question updated to hard."
+    redirect_to questions_path
+  end
+  
   def show
     @question = Question.find(params[:id])
     if @question.question_type_id == 2
@@ -181,11 +252,11 @@ class QuestionsController < ApplicationController
     end
   
     def sort_column
-      Question.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+      Question.column_names.include?(params[:sort]) ? params[:sort] : "category_id"
     end
 
     def sort_direction
-      %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 end
 

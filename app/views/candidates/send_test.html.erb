@@ -31,7 +31,8 @@
         <%= form_tag select_candidate_path, :class => "nicesearch", :method => 'post' do %>
           <%= hidden_field_tag :id, @test.id %>
           <table class="table table-bordered">
-          <tr><th><%= sortable "name" %></th><th><%= sortable "email" %></th><th><%= sortable "phone" %></th>
+          <tr><th><%= sortable_with_id "name", "Name", @test.id %></th><th><%= sortable_with_id "email", "Email", @test.id %></th>
+          <th><%= sortable_with_id "phone", "Phone", @test.id %></th>
           <th>Created On</th></th><th>Submissions</th></th><th>Actions</th></tr>
             <%= render @candidates %>
           </table>

@@ -1,9 +1,9 @@
 <% provide(:title, 'Edit Question') %>
 <div class="page-header">
 <section style="float:right">
-        <%= link_to "Dashboard", root_path, class: "btn btn-primary btn-sm" %>
-        <%= link_to "Search Questions", questions_path, class: "btn btn-primary btn-sm" %>
-        <%= link_to "Search Tests", tests_path, class: "btn btn-primary btn-sm" %>
+        <%= link_to "Dashboard", root_path, class: "btn btn-primary btn-sm btn-responsive" %>
+        <%= link_to "Search Questions", questions_path, class: "btn btn-primary btn-sm btn-responsive" %>
+        <%= link_to "Search Tests", tests_path, class: "btn btn-primary btn-sm btn-responsive" %>
   </section>
   <h3>Edit Question</h3>
 </div>
@@ -68,9 +68,13 @@
     
       <div class="form-group">
           <div style="float:right">
-          <%= f.submit "Update Question", class: "btn btn-primary" %>
+            <% if current_user.admin? %>
+          <%= f.submit "Save And Goto Next TODO", class: "btn btn-primary btn-sm btn-responsive" %>
+            <% end %>
+          <%= f.submit "Save And Return To Search", class: "btn btn-primary btn-sm btn-responsive" %>
+          <%= f.submit "Save", class: "btn btn-primary btn-sm btn-responsive" %>
             <span></span>
-            <%= link_to "Cancel", questions_path, class: "btn btn-default" %>
+            <%= link_to "Cancel", questions_path, class: "btn btn-default btn-sm btn-responsive" %>
         </div>
         </div>
 
