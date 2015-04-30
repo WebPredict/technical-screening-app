@@ -18,7 +18,8 @@
       </div>
       <div class="table-responsive">
       <table class="table">
-        <tr><th><%= sortable "name" %></th><th>Email</th><th>Phone</th><th>Created On</th><th>Results</th><th>Actions</th></tr>
+        <tr><th>Actions</th><th><%= sortable "name" %></th><th>Email</th><th>Phone</th><th>Created On</th>
+        <th>Results</th></tr>
         <tbody>
         <%= render @candidates %>
         </tbody>

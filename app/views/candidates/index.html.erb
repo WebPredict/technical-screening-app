@@ -30,8 +30,8 @@
       <% if @candidates.any? %>
       <h4>Recent Candidates</h4>
       <table class="table table-bordered show-header">
-        <tr><th><%= sortable "name" %></th><th><%= sortable "email" %></th><th><%= sortable "phone" %></th>
-        <th>Created On</th></th><th>Submissions</th></th><th>Actions</th></tr>
+        <tr><th>Actions</th><th><%= sortable "name" %></th><th><%= sortable "email" %></th><th><%= sortable "phone" %></th>
+        <th>Created On</th></th><th>Submissions</th></th></tr>
         <%= render @candidates %>
       </table>
       <%= will_paginate @candidates %>

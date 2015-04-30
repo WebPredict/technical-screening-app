@@ -167,6 +167,12 @@ aside {
   font-size: 1.2em;
 }
 
+.btn-table {
+  td {
+    padding: 1px;
+  }
+}
+
 @media (min-width: 993px) {
   .mobile-section {
     display: none;

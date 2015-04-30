@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   get 'subscribe' => 'memberships#subscribe'
   get 'edit_subscription' => 'users#edit_subscription'
 
+  get 'dashboard_configure' => 'static_pages#configure'
+  
   get 'make_easy' => 'questions#make_easy'
   get 'make_medium' => 'questions#make_medium'
   get 'make_hard' => 'questions#make_hard'

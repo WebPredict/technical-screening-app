@@ -75,6 +75,11 @@ class StaticPagesController < ApplicationController
     end
   end
 
+  def configure
+    flash[:info] = "Dashboard configuration coming soon!"
+    redirect_to root_url
+  end
+  
   def submitcontact
     UserMailer.contact_admin(params[:email], params[:comment], params[:subject]).deliver
     flash[:success] = "Thanks for your feedback... we will review it soon."
