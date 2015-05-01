@@ -80,7 +80,10 @@ class QuestionsController < ApplicationController
       else
 
         @question = current_user.questions.build(question_params)
-        
+        session[:question_type_id] = @question.question_type_id
+        session[:category_id] = @question.category_id
+        session[:difficulty_id] = @question.difficulty_id
+
         if @question.question_type_id == 2
           full_question = @question.content + "||" + params[:question][:answer2] + "||" + params[:question][:answer3] + "||" + 
             params[:question][:answer4] + "||" + params[:question][:answer5]
@@ -125,7 +128,7 @@ class QuestionsController < ApplicationController
           format.html { 
             flash[:success] = "Question was successfully updated."
             if params[:commit] == "Save And Goto Next TODO"
-              @question = Question.where("lower(answer) LIKE ? OR lower(answer) LIKE ?", "%todo%", "%answer%").first
+              @question = Question.where("lower(answer) LIKE ?", "%todo%").first
               setup_question(@question)
     
               add_breadcrumb "Edit Question", edit_question_path
@@ -149,6 +152,20 @@ class QuestionsController < ApplicationController
   
   def new
     @question = Question.new
+    
+    if !session[:question_type_id].blank?
+      @question.question_type_id = session[:question_type_id]
+    end
+    if !session[:difficulty_id].blank?
+      @question.difficulty_id = session[:difficulty_id]
+    end
+    if !session[:question_category].blank?
+      @question.category_id = session[:question_category]
+    end
+    if !session[:category_id].blank?
+      @question.category_id = session[:category_id]
+    end
+
     flash.now[:info] = "Multiple choice and short phrase questions can be automatically scored. The chosen difficulty level does not affect scoring."
     add_breadcrumb "New Question", new_question_path
   end
