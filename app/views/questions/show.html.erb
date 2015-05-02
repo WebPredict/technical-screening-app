@@ -69,11 +69,13 @@
 			<h4>Type: </h4> <%= @question.question_type.name %>
 		</section>
   <% if current_user != nil && current_user.admin? %>
-  <br>
+    <br>
     <section class="laptop-section">
     <%= link_to "Easy", make_easy_path(id: @question.id), class: "btn btn-sm btn-primary btn-responsive" %> 
     <%= link_to "Medium", make_medium_path(id: @question.id), class: "btn btn-sm btn-primary btn-responsive" %> 
     <%= link_to "Hard", make_hard_path(id: @question.id), class: "btn btn-sm btn-primary btn-responsive" %> 
+    <%= link_to "Random", random_question_path, class: "btn btn-sm btn-primary btn-responsive" %> 
+    <%= link_to "Next", next_question_path(id: @question.id), class: "btn btn-sm btn-primary btn-responsive" %> 
     </section>
   <% end %>
 

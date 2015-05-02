@@ -187,6 +187,17 @@ class QuestionsController < ApplicationController
     redirect_to questions_path
   end
   
+  def next_question
+    @question = Question.find(params[:id].to_i + 1)
+    redirect_to @question
+  end
+  
+  def random_question
+    count = Question.all.count
+    @question = Question.find(Random.rand(count) + 1)
+    redirect_to @question
+  end
+  
   def make_medium
     @question = Question.find(params[:id])
     @question.difficulty_id = 2
