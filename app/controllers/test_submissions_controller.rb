@@ -86,12 +86,20 @@ class TestSubmissionsController < ApplicationController
 
   def forward_submission
     @test_submission = TestSubmission.find(params[:id])
-      add_breadcrumb "Forward Submission", :forward_submission_path
+    add_breadcrumb "Forward Submission", :forward_submission_path
   end
   
   def submit_forward_submission
     @test_submission = TestSubmission.find(params[:test_submission_id])
     @test_submission.candidate.send_results(@test_submission, params[:email])
+    
+    if @test_submission.sent_to == nil
+      @test_submission.sent_to = params[:email]
+    else
+      @test_submission.sent_to = @test_submission.sent_to + ", " + params[:email]
+    end 
+    @test_submission.save
+    
     flash[:success] = "Test results sent!"
     redirect_to root_path
   end

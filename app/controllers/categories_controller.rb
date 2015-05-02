@@ -22,19 +22,13 @@ class CategoriesController < ApplicationController
 
   def create
     if params[:commit] == "Cancel"
-      redirect_to root_url
+      redirect_to all_categories_path
     else 
-      @candidate = current_user.candidates.build(candidate_params)
-      if @candidate.save
-        flash[:success] = "Candidate created!"
+      @category = Category.new(category_params)
+      if @category.save
+        flash[:success] = "Category " + @category.name + " created!"
         
-        if params[:commit] == "Save And Send Test"
-          flash[:info] = "Select test to send to candidate:"
-          @single_test_select = true
-          redirect_to tests_path
-        else 
-          redirect_to root_url
-        end
+          redirect_to all_categories_path
       else
         render 'new'
       end
@@ -45,7 +39,10 @@ class CategoriesController < ApplicationController
     @category = Category.find(params[:id])
     respond_to do |format|
       if @category.update_attributes(category_params)
-        format.html { redirect_to @category, notice: 'Category was successfully updated.' }
+        format.html { 
+          flash[:success] = "Category was successfully updated."
+          redirect_to @category
+        }
         format.json { render :show, status: :ok, location: @category }
       else
         format.html { render :edit }
@@ -74,7 +71,6 @@ class CategoriesController < ApplicationController
   end
 
   private
-
     def category_params
       params.require(:category).permit(:name)
     end

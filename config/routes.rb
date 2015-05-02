@@ -53,6 +53,7 @@ Rails.application.routes.draw do
   post 'auto_score_test' => 'test_submissions#auto_score'
   get 'company_jobs' => 'companies#jobs'
   get 'metrics' => 'users#metrics'
+  get 'add_note' => 'candidates#add_note'
   post 'select_candidate' => 'candidates#select_candidate'
   post 'filter_candidates' => 'candidates#filter_candidates'
   
@@ -72,6 +73,7 @@ Rails.application.routes.draw do
   resources :test_submissions
   resources :questions
   resources :users 
+  resources :notes
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
