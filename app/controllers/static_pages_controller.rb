@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-  helper_method :sort_column, :sort_direction
+  helper_method :sort_column, :sort_direction, :tr_sort_column, :tr_sort_direction
 
   add_breadcrumb "Dashboard", :root_path
 
@@ -41,7 +41,8 @@ class StaticPagesController < ApplicationController
         end
         
         # TODO: this needs its own pagination param!
-        @test_submissions = TestSubmission.where("user_id = ?", current_user.id).paginate(page: params[:page], per_page: 5)
+        @test_submissions = TestSubmission.where("user_id = ?", current_user.id).order(tr_sort_column + " " + tr_sort_direction).paginate(page: params[:page], 
+          per_page: 5)
         
         @num_test_results = 0
         
@@ -120,6 +121,14 @@ class StaticPagesController < ApplicationController
 
   def sort_direction
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
+  end
+
+  def tr_sort_column
+    TestSubmission.column_names.include?(params[:tr_sort]) ? params[:tr_sort] : "created_at"
+  end
+
+  def tr_sort_direction
+    %w[asc desc].include?(params[:tr_direction]) ? params[:tr_direction] : "desc"
   end
     
 end
