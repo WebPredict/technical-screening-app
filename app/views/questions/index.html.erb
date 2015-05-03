@@ -13,7 +13,7 @@
     
 <%= form_tag questions_path, :class => "nicesearch", :method => 'get' do %>
   <label>Category <a href class="btn btn-primary btn-xs" data-toggle="modal" data-target="#categoryList">
-  Show List
+  Show Full List
 </a>
 </label>
   
@@ -35,11 +35,7 @@
         <div class="row">
             <ul>
             <% @categories.each do |category| %>
-            <li style="margin-top: 5px"><% if current_user != nil && current_user.admin? %>
-              <%= link_to edit_category_path(category), class: "btn btn-xs btn-primary" do %>
-                <div class="edit_icon"><i class="glyphicon glyphicon-edit"></i></div> 
-              <% end %>
-            <% end %>
+            <li style="margin-top: 5px">
          <%= link_to category.name, questions_path(category_id: category) %>
             </li>
             <% end %>

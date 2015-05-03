@@ -5,7 +5,7 @@
   <%= form_tag submit_random_questions_path, :method => 'post' do %>
     <%= hidden_field_tag :id, @test.id %>
     
-      <%= label_tag :topic_list, "Comma separated topic list:" %>
+      <%= label_tag :topic_list, "Comma Separated Topic List" %>
        <a href class="btn btn-primary btn-xs" data-toggle="modal" data-target="#categoryList">
    Show Categories List
 </a>
@@ -25,12 +25,7 @@
         <div class="row">
             <ul>
             <% @categories.each do |category| %>
-            <li style="margin-top: 5px"><% if current_user != nil && current_user.admin? %>
-              <%= link_to edit_category_path(category), class: "btn btn-xs btn-primary" do %>
-                <div class="edit_icon"><i class="glyphicon glyphicon-edit"></i></div> 
-              <% end %>
-            <% end %>
-         <%= link_to category.name, questions_path(category_id: category) %>
+            <li style="margin-top: 5px"><%= category.name %>
             </li>
             <% end %>
             </ul>
@@ -44,7 +39,7 @@
   </div>
 
 
-      <%= label_tag :num_per_topic, "Number of questions per topic:" %>
+      <%= label_tag :num_per_topic, "Number Of Questions Per Category" %>
       <%= text_field_tag :num_per_topic, "5", class: 'form-control' %>
 
       <%= label_tag :difficulty_level, "Difficulty Levels To Include:" %>
