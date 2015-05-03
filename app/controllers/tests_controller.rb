@@ -50,6 +50,7 @@ class TestsController < ApplicationController
     @test_questions = @test.questions.paginate(page: params[:page]).order(sort_column + " " + sort_direction)
     add_breadcrumb "Select Random Questions", :select_random_questions_path
     flash.now[:info] = "Specify a list of topics to choose random questions from (e.g. \"Java, HTML, SQL\")."
+    @categories = Category.all
   end
   
   def send_candidate_test

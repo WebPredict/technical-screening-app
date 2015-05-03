@@ -35,6 +35,16 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def autocomplete
+    @categories = Category.order(:name).where("lower(name) like ?", "%#{params[:term].downcase}%")
+    respond_to do |format|
+      format.html
+      format.json { 
+        render json: @categories.map(&:name)
+      }
+    end
+  end
+  
   def update
     @category = Category.find(params[:id])
     respond_to do |format|
@@ -72,7 +82,7 @@ class CategoriesController < ApplicationController
 
   private
     def category_params
-      params.require(:category).permit(:name)
+      params.require(:category).permit(:name, :term)
     end
     
     def admin_user

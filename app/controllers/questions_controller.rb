@@ -17,6 +17,8 @@ class QuestionsController < ApplicationController
       params[:search] = session[:question_search]
     end
     
+    @categories = Category.all
+    
     if !params[:search].blank?
         query = ' lower(content) LIKE ? OR lower(answer) LIKE ? '
         searchparam = "%#{params[:search].downcase}%"
@@ -29,8 +31,22 @@ class QuestionsController < ApplicationController
     if !params[:remember_search].blank? && !session[:question_category].blank?
       params[:category_id] = session[:question_category]
     end
+    
+    if !params[:category].blank?
+      found_cat = Category.where("name = ?", params[:category])
+      if found_cat.any?
+        params[:category_id] = found_cat.first.id
+      else
+        params[:category_id] = "0"
+      end
+    end
+    
     if !params[:category_id].blank?
       query = ' category_id = ? '
+      
+      if params[:category].blank?
+        params[:category] = Category.find(params[:category_id]).name
+      end
       
       @questions = @questions.where(query, params[:category_id])
     end

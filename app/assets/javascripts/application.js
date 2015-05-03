@@ -14,4 +14,17 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require turbolinks
+//= require jquery-ui
 //= require_tree .
+
+var ready;
+ready = (function() {
+  $('a[href="' + this.location.pathname + '"]').parent().addClass('active');
+  $("#navbar-search-input").autocomplete({
+    source: '/categories/autocomplete.json',
+  });
+});
+
+$(document).ready(ready);
+$(document).on('page:load', ready);
+

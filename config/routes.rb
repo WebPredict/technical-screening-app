@@ -61,7 +61,12 @@ Rails.application.routes.draw do
   
   resources :companies
 
-  resources :categories 
+  resources :categories do
+    collection do
+      get 'autocomplete'
+    end
+  end
+  
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
   
@@ -71,9 +76,9 @@ Rails.application.routes.draw do
     resources :questions
   end
 
+  resources :questions 
   resources :candidates
   resources :test_submissions
-  resources :questions
   resources :users 
   resources :notes
   
