@@ -5,7 +5,7 @@
   <%= form_tag submit_random_questions_path, :method => 'post' do %>
     <%= hidden_field_tag :id, @test.id %>
     
-      <%= label_tag :topic_list, "Comma Separated Topic List" %>
+      <%= label_tag :topic_list, "Comma Separated Topic List" %><span style="margin-left: 10px"></span>
        <a href class="btn btn-primary btn-xs" data-toggle="modal" data-target="#categoryList">
    Show Categories List
 </a>
@@ -37,8 +37,6 @@
     </div>
   </div>
   </div>
-
-
       <%= label_tag :num_per_topic, "Number Of Questions Per Category" %>
       <%= text_field_tag :num_per_topic, "5", class: 'form-control' %>
 
