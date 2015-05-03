@@ -98,16 +98,18 @@ footer {
     float: left;
   }
   ul {
-    float: right;
     list-style: none;
     li {
-      float: left;
-      margin-left: 15px;
-    }
+        float: left;
+        margin-left: 8px;
+      }
   }
-  
+
   .centered_list {
+    width: 100%;
+    float: none;
     text-align: center;
+    margin-left: 15px;
   }
 }
 
@@ -200,14 +202,6 @@ aside {
     display: none;
   }
 
-  footer {
-    ul {
-      li {
-        margin-left: 8px;
-      }
-    }
-  }
-  
   .responsive-image {
     width: 300px;
   }
