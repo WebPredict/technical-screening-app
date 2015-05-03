@@ -76,7 +76,7 @@ class CandidatesController < ApplicationController
 
   def create
     if params[:commit] == "Cancel"
-      redirect_to root_url
+      redirect_to candidates_path
     else 
       if current_user.membership_level_id == 1 && current_user.candidates.any? && 
         current_user.candidates.count > Limits::MAX_CANDIDATES_FREE
