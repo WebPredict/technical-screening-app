@@ -84,7 +84,7 @@ class QuestionsController < ApplicationController
         if @question.is_public?
           num_existing = Question.where("is_public = ? AND content = ?", true, @question.content).count
           if num_existing > 0
-            flash[:warning] = "This public question already exists. Please use that question or modify this one to avoid creating a duplicate."
+            flash.now[:warning] = "This public question already exists. Please use that question or modify this one to avoid creating a duplicate."
             render 'new'
             return
           end
@@ -96,7 +96,7 @@ class QuestionsController < ApplicationController
 
         if @question.question_type_id == 2
           if params[:question][:multiple_choice_answer].blank?
-            flash[:warning] = "You must select an answer for a multiple choice question."
+            flash.now[:warning] = "You must select an answer for a multiple choice question."
             render 'new'
             return
           else
