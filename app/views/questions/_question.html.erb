@@ -2,13 +2,11 @@
   
   <% if current_user != nil %>
   <td>
-    <table class="btn-table">
-      <tr>
       <% if @select_mode %>
-        <td>
           <%= check_box_tag "question_ids[]", question.id, @preselect_checkboxes %>
-        </td>
       <% elsif current_user?(question.user) || (current_user != nil && current_user.admin?) %>
+      <table class="btn-table">
+        <tr>
         <td>
           <%= link_to question, class: "btn btn-xs btn-primary", method: :delete,
                                        data: { confirm: "Delete this question?" } do %>
@@ -20,15 +18,13 @@
           <i class="glyphicon glyphicon-edit"></i>
         <% end %>
         </td>
+      </tr>
+      </table>
       <% else %>
-        <td>
         <%= link_to question, class: "btn btn-xs btn-primary" do %>
           <i class="glyphicon glyphicon-eye-open"></i>
           <% end %>
-        </td>
       <% end %>
-      </tr>
-      </table>
   </td>
   <% end %>
   <td>

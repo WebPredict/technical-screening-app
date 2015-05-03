@@ -101,7 +101,7 @@ class TestSubmissionsController < ApplicationController
     @test_submission.save
     
     flash[:success] = "Test results sent!"
-    redirect_to root_path
+    redirect_to @test_submission
   end
   
   def score_test
@@ -188,13 +188,13 @@ class TestSubmissionsController < ApplicationController
     else
       if @test_submission.candidate
         if @test_submission.candidate.has_digest?
-          flash[:error] = "Invalid test token - candidate found but token invalid/expired."
+          flash[:warning] = "Invalid test token - candidate found but token invalid/expired."
         else
-          flash[:error] = "Nonexistent test_digest for candidate: " + @test_submission.candidate.name + " / " + @test_submission.candidate.email
+          flash[:warning] = "Nonexistent test_digest for candidate: " + @test_submission.candidate.name + " / " + @test_submission.candidate.email
         end  
         redirect_to root_url
       else
-        flash[:error] = "Invalid test token - could not find candidate by id: " + params[:id]
+        flash[:warning] = "Invalid test token - could not find candidate by id: " + params[:id]
         redirect_to root_url
       end
     end
@@ -213,9 +213,10 @@ class TestSubmissionsController < ApplicationController
   end
 
   def destroy
+    @test_submission = TestSubmission.find(params[:id])
     @test_submission.destroy
     flash[:success] = "Test submission deleted."
-    redirect_to request.referrer || root_url
+    redirect_to test_submissions_path
   end
 
   private

@@ -91,6 +91,14 @@ class StaticPagesController < ApplicationController
     add_breadcrumb "Help", :root_path
   end
   
+  def privacy
+    add_breadcrumb "Privacy", :root_path
+  end
+  
+  def terms
+    add_breadcrumb "Terms And Conditions", :root_path
+  end
+  
   def about
     @categories = Category.all 
     @categories_arrays = @categories.each_slice(@categories.count / 3).to_a

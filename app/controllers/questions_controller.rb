@@ -80,16 +80,32 @@ class QuestionsController < ApplicationController
       else
 
         @question = current_user.questions.build(question_params)
+        
+        if @question.is_public?
+          num_existing = Question.where("is_public = ? AND content = ?", true, @question.content).count
+          if num_existing > 0
+            flash[:warning] = "This public question already exists. Please use that question or modify this one to avoid creating a duplicate."
+            render 'new'
+            return
+          end
+        end
+      
         session[:question_type_id] = @question.question_type_id
         session[:category_id] = @question.category_id
         session[:difficulty_id] = @question.difficulty_id
 
         if @question.question_type_id == 2
-          full_question = @question.content + "||" + params[:question][:answer2] + "||" + params[:question][:answer3] + "||" + 
-            params[:question][:answer4] + "||" + params[:question][:answer5]
-          @question.content = full_question
-          @question.answer = params[:question][:multiple_choice_answer]
-          @question.save
+          if params[:question][:multiple_choice_answer].blank?
+            flash[:warning] = "You must select an answer for a multiple choice question."
+            render 'new'
+            return
+          else
+            full_question = @question.content + "||" + params[:question][:answer2] + "||" + params[:question][:answer3] + "||" + 
+              params[:question][:answer4] + "||" + params[:question][:answer5]
+            @question.content = full_question
+            @question.answer = params[:question][:multiple_choice_answer]
+            @question.save
+          end
         elsif @question.question_type_id == 3
           @question.answer = params[:question][:short_answer]
           @question.save 
@@ -243,6 +259,7 @@ class QuestionsController < ApplicationController
     @clone_question.difficulty_id = @question.difficulty_id
     @clone_question.category_id = @question.category_id
     @clone_question.question_type_id = @question.question_type_id
+    @clone_question.is_public = false
     @clone_question.user = current_user
     setup_question(@clone_question)
     flash.now[:success] = "Question cloned. You can change any details you'd like."

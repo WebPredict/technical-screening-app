@@ -1,11 +1,19 @@
 <footer class="footer">
   <small>
-    Screen your interview candidates with ease.
+    Screen your interview candidates with ease. 
   </small>
   <nav>
-    <ul>
+    <ul><small>
+      <%= link_to "Privacy Policy", privacy_path %>
+      <%= link_to "Terms of Service", terms_path %>
+      </small>
+    </ul>
+  </nav>
+      
+  <nav>
+    <ul style="centered_list">
       <li><%= link_to "Plans", plans_path %></li>
-      <li><%= link_to "About",   about_path %></li>
+      <li><%= link_to "About", about_path %></li>
       <li><%= link_to "Help", help_path %></li>
       <li><%= link_to "Contact", contact_path %></li>
       <li><%= link_to "News", news_path %></li>

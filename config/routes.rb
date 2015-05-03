@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   root 'static_pages#home'
   get 'help'    => 'static_pages#help'
+  get 'privacy'    => 'static_pages#privacy'
+  get 'terms'    => 'static_pages#terms'
   get 'about'   => 'static_pages#about'
   get 'all_categories'   => 'static_pages#all_categories'
   get 'contact' => 'static_pages#contact'

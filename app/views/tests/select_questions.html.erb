@@ -6,7 +6,7 @@
 </div>
   <%= form_tag update_questions_path, :class => "nicesearch", :method => 'post' do %>
   <%= hidden_field_tag :id, @test.id %>
-    <table class="table table-bordered">
+    <table class="table table-bordered show-header">
       <tr><th>Include Question?</th><th><%= sortable_with_id "content", "Question", @test.id %></th>
       <th><%= sortable_with_id "answer", "Answer", @test.id %></th>
       <th><%= sortable_with_id "difficulty_id", "Difficulty", @test.id %></th>
@@ -43,7 +43,7 @@
 <% if @questions.any? %>
   <%= form_tag submit_questions_path, :class => "nicesearch", :method => 'post' do %>
   <%= hidden_field_tag :id, @test.id %>
-    <table class="table table-bordered">
+    <table class="table table-bordered show-header">
       <tr><th>Include Question?</th><th><%= sortable_with_id "content", "Question", @test.id %></th>
       <th><%= sortable_with_id "answer", "Answer", @test.id %></th>
       <th><%= sortable_with_id "difficulty_id", "Difficulty", @test.id %></th>
