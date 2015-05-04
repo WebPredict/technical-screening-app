@@ -22,9 +22,9 @@ class QuestionsController < ApplicationController
     if !params[:search].blank?
         query = ' lower(content) LIKE ? OR lower(answer) LIKE ? '
         searchparam = "%#{params[:search].downcase}%"
-        @questions = Question.where(query, searchparam, searchparam)
+        @questions = Question.where(query, searchparam, searchparam).joins(:category)
     else
-      @questions = Question.all
+      @questions = Question.all.joins(:category)
     end
     session[:question_search] = params[:search]
     
@@ -313,7 +313,7 @@ class QuestionsController < ApplicationController
     end
   
     def sort_column
-      Question.column_names.include?(params[:sort]) ? params[:sort] : "category_id"
+      (Question.column_names.include?(params[:sort]) || params[:sort] == "categories.name") ? params[:sort] : "categories.name"
     end
 
     def sort_direction
