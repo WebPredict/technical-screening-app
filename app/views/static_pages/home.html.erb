@@ -56,12 +56,17 @@
             <h3 class="panel-title">Metrics</h3>
           </div>
           <div class="panel-body">
-            <strong>Candidates Per Job</strong>
-            <%= column_chart current_user.candidates.joins(:jobs).group(:'jobs.name').count %>
+            <strong>Candidates Per Day</strong>
+            <% if Rails.env.development? %>
+            <%= column_chart Candidate.where("user_id = ?", current_user.id).group(:job_id).count %>
+            <% elsif Rails.env.production? %>
+            <%= line_chart Candidate.where("user_id = ?", current_user.id).group_by_day(:created_at, 
+              format: "%B %d, %Y").count, discrete: true %>
+            <% end %>
           </div>
         </div>
       </div>
-  </div>
+    </div>
 <% else %>
 <div class="center jumbotron">
   <h1><span class="header-responsive">Welcome to TechScreen</span></h1>

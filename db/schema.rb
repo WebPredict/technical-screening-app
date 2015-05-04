@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150423150331) do
+ActiveRecord::Schema.define(version: 20150502132509) do
 
   create_table "answered_questions", force: :cascade do |t|
     t.string   "answer"
@@ -102,6 +102,15 @@ ActiveRecord::Schema.define(version: 20150423150331) do
     t.string "name"
   end
 
+  create_table "notes", force: :cascade do |t|
+    t.string   "content"
+    t.integer  "candidate_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notes", ["candidate_id"], name: "index_notes_on_candidate_id"
+
   create_table "question_types", force: :cascade do |t|
     t.string "name"
   end
@@ -143,6 +152,7 @@ ActiveRecord::Schema.define(version: 20150423150331) do
     t.boolean  "is_scored",    default: false
     t.datetime "start_time"
     t.datetime "end_time"
+    t.string   "sent_to"
   end
 
   add_index "test_submissions", ["candidate_id"], name: "index_test_submissions_on_candidate_id"

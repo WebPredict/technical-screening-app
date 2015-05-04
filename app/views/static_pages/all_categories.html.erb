@@ -1,5 +1,10 @@
 <% provide(:title, "About") %>
 <div class="page-header">
+      <% if current_user != nil && current_user.admin? %>
+      <section style="float:right">
+        <%=link_to "New Category", new_category_path, class: "btn btn-sm btn-primary btn-responsive" %>
+      </section>
+      <% end %>
     <h3>Technical Interview Screening Category List</h3>
 </div>
     

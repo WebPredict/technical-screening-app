@@ -1,10 +1,4 @@
 <tr id="company-<%= company.id %>">
-  <td><%= link_to company.name, company %></td>
-  <td><%= company.email %></td>
-  <td><%= phone_format(company.phone) %></td>
-  <td><%= company.manager %></td>
-  <td><%= company.address %></td>
-  <td><%= company.created_at.strftime("%m/%d/%Y") if company.created_at? %></td>
   <td>
     <% if company.jobs.any? %>
     <%= link_to "Show Jobs", company, class: "btn btn-xs btn-primary btn-responsive" %>
@@ -12,4 +6,10 @@
     <div class="button-spacer"> </div>
     <%= link_to "Add Job", new_job_path(company_id: company.id), class: "btn btn-xs btn-primary btn-responsive" %> 
     </td>
+  <td><%= link_to company.name, company %></td>
+  <td><%= company.email %></td>
+  <td><%= phone_format(company.phone) %></td>
+  <td><%= company.manager %></td>
+  <td><%= company.address %></td>
+  <td><%= company.created_at.strftime("%m/%d/%Y") if company.created_at? %></td>
 </tr>

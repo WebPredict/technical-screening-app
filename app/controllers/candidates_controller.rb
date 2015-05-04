@@ -10,7 +10,7 @@ class CandidatesController < ApplicationController
   def index
     query = ''
     searchparam = ""
-    if params[:search] && params[:search] != ''
+    if !params[:search].blank?
         query += ' lower(name) LIKE ? '
         searchparam = "%#{params[:search].downcase}%"
     end
@@ -76,7 +76,7 @@ class CandidatesController < ApplicationController
 
   def create
     if params[:commit] == "Cancel"
-      redirect_to root_url
+      redirect_to candidates_path
     else 
       if current_user.membership_level_id == 1 && current_user.candidates.any? && 
         current_user.candidates.count > Limits::MAX_CANDIDATES_FREE
@@ -121,6 +121,12 @@ class CandidatesController < ApplicationController
     end
   end
 
+  def add_note
+    @note = Note.new
+    @note.candidate_id = params[:id]
+    render 'notes/new'
+  end 
+
   def update
     @candidate = Candidate.find(params[:id])
     respond_to do |format|
@@ -159,6 +165,7 @@ class CandidatesController < ApplicationController
   def show
     @candidate = Candidate.find(params[:id])
     @candidate_test_submissions = @candidate.test_submissions.paginate(page: params[:page]).order(sort_column + " " + sort_direction)
+    @candidate_notes = @candidate.notes.paginate(page: params[:page])
   end
 
   def destroy

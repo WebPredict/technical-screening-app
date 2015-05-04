@@ -13,9 +13,9 @@ class TestSubmissionsController < ApplicationController
     if !params[:search].blank?
         query += ' AND lower(name) LIKE ?'
         searchparam = "%#{params[:search].downcase}%"
-      @test_submissions = TestSubmission.where(query, current_user, searchparam).paginate(page: params[:page], per_page: 10)
+      @test_submissions = TestSubmission.where(query, current_user, searchparam).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 10)
     else
-      @test_submissions = TestSubmission.where(query, current_user).paginate(page: params[:page], per_page: 10)
+      @test_submissions = TestSubmission.where(query, current_user).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 10)
     end
 
     @searched = query != ''
@@ -86,14 +86,22 @@ class TestSubmissionsController < ApplicationController
 
   def forward_submission
     @test_submission = TestSubmission.find(params[:id])
-      add_breadcrumb "Forward Submission", :forward_submission_path
+    add_breadcrumb "Forward Submission", :forward_submission_path
   end
   
   def submit_forward_submission
     @test_submission = TestSubmission.find(params[:test_submission_id])
     @test_submission.candidate.send_results(@test_submission, params[:email])
+    
+    if @test_submission.sent_to == nil
+      @test_submission.sent_to = params[:email]
+    else
+      @test_submission.sent_to = @test_submission.sent_to + ", " + params[:email]
+    end 
+    @test_submission.save
+    
     flash[:success] = "Test results sent!"
-    redirect_to root_path
+    redirect_to @test_submission
   end
   
   def score_test
@@ -150,6 +158,7 @@ class TestSubmissionsController < ApplicationController
   def new
     @test_submission = TestSubmission.new
     @test_submission.candidate = Candidate.new 
+    @test_submission.candidate.name = "Candidate View"
     @candidate_id = ''
     @test_submission.name = "My Test Submission"
     @test_submission.test = Test.find(params[:id])
@@ -169,7 +178,8 @@ class TestSubmissionsController < ApplicationController
     
     if @test_submission.candidate && @test_submission.candidate.valid_token?(params[:token])
       @test_submission.test = Test.find(params[:test_id])
-
+      @test_submission.name = @test_submission.candidate.name + "'s Test Submission for test: " + @test_submission.test.name
+      flash[:info] = "Test: '" + @test_submission.test.name + "' has " + @test_submission.test.questions.count.to_s + " question(s). It is timed."
       @test_submission.test.questions.each do |question|
         # testing
         @test_submission.answered_questions.build(question_id: question.id)
@@ -178,13 +188,13 @@ class TestSubmissionsController < ApplicationController
     else
       if @test_submission.candidate
         if @test_submission.candidate.has_digest?
-          flash[:error] = "Invalid test token - candidate found but token invalid/expired."
+          flash[:warning] = "Invalid test token - candidate found but token invalid/expired."
         else
-          flash[:error] = "Nonexistent test_digest for candidate: " + @test_submission.candidate.name + " / " + @test_submission.candidate.email
+          flash[:warning] = "Nonexistent test_digest for candidate: " + @test_submission.candidate.name + " / " + @test_submission.candidate.email
         end  
         redirect_to root_url
       else
-        flash[:error] = "Invalid test token - could not find candidate by id: " + params[:id]
+        flash[:warning] = "Invalid test token - could not find candidate by id: " + params[:id]
         redirect_to root_url
       end
     end
@@ -203,9 +213,10 @@ class TestSubmissionsController < ApplicationController
   end
 
   def destroy
+    @test_submission = TestSubmission.find(params[:id])
     @test_submission.destroy
     flash[:success] = "Test submission deleted."
-    redirect_to request.referrer || root_url
+    redirect_to test_submissions_path
   end
 
   private

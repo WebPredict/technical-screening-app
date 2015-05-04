@@ -1,6 +1,10 @@
 <% provide(:title, 'Create Submission') %>
 <div class="page-header">
+  <% if @test_submission.candidate != nil %>
+  <h3>Test Submission For: <%= @test_submission.candidate.name %></h3>      
+  <% else %>
   <h3>Your Test Submission</h3>      
+  <% end %>
 </div>
 <div class="row">
   <div class="col-md-12">
@@ -12,10 +16,12 @@
       <%= hidden_field_tag :test_id, @test_submission.test.id %>
       <%= hidden_field_tag :id, @candidate_id %>
       <%= hidden_field_tag :email, @test_submission.candidate.email %>
-        <strong>There are <%= @test_submission.test.questions.count %> question(s) in this test.</strong>
         <br><br>
           <%= f.fields_for :answered_questions do |aq_form|%>
-          <section><strong>Question #<%= aq_form.index + 1 %>:</strong> 
+          <section>
+            <strong>Question #<%= aq_form.index + 1 %>:</strong> 
+            <span style="float:right">Category: 
+            <%= @test_submission.answered_questions[aq_form.index].question.category.name %></span> 
           
           <% if @test_submission.answered_questions[aq_form.index].question.question_type_id == 2 %>
             <%= @test_submission.answered_questions[aq_form.index].question.formatted_content %>

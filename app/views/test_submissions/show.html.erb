@@ -8,7 +8,9 @@
         <%= link_to "Auto Score Test", auto_score_test_path(id: @test_submission.id), class: "btn btn-xs btn-primary btn-responsive", :method => :post %> 
     <% end %>
         <%= link_to "Forward", forward_submission_path(id: @test_submission.id), class: "btn btn-xs btn-primary" %>
-        <%= link_to "Dashboard", root_path, class: "btn btn-xs btn-primary btn-responsive" %> 
+        <%= link_to "Remove", @test_submission, method: :delete,
+                           data: { confirm: "Delete this test submission?" }, 
+                           :class => "btn btn-xs btn-danger btn-responsive" %>
       </section>
   <h3>Test Submission Details</h3>
 </div>
@@ -16,18 +18,20 @@
 <div class="row">
   <div class="col-md-12">
     <table style="width:400px">
-
     <tr>
       <th>Test Result For:</th><td><%= @test_submission.candidate.name %></td>
     </tr>
     <tr>
       <th>Test Name:</th><td> <%= link_to @test_submission.test.name, @test_submission.test %></td>
-    </section>
+    </tr>
     <tr>
       <th>Score:</th> <td><%= @test_submission.formatted_score %></td>
-    </section>
+    </tr>
     <tr>
       <th>Time Taken:</th><td> <%= @test_submission.formatted_time %></td>
+    </tr>
+    <tr>
+      <th>Sent To:</th><td> <%= @test_submission.sent_to %></td>
     </tr>
     </table>
     <br>
@@ -50,7 +54,9 @@
         <%= link_to "Auto Score Test", auto_score_test_path(id: @test_submission.id), class: "btn btn-xs btn-primary btn-responsive", :method => :post %> 
     <% end %>
         <%= link_to "Forward", forward_submission_path(id: @test_submission.id), class: "btn btn-xs btn-primary" %>
-        <%= link_to "Dashboard", root_path, class: "btn btn-xs btn-primary btn-responsive" %> 
+        <%= link_to "Remove", @test_submission, method: :delete,
+                           data: { confirm: "Delete this test submission?" }, 
+                           :class => "btn btn-xs btn-danger btn-responsive" %>
       </section>
   </div>
 </div>

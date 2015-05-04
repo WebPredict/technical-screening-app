@@ -4,13 +4,14 @@
         <%= link_to "Search", candidates_path, class: "btn btn-sm btn-primary btn-responsive" %> 
         <%= link_to "Send Test", send_candidate_test_path(id: @candidate.id), :class => "btn btn-sm btn-primary btn-responsive" %>
         <%= link_to "Results", candidate_submissions_path(candidate_id: @candidate.id), :class => "btn btn-sm btn-primary btn-responsive" %>
-        <%= link_to "Edit Candidate", edit_candidate_path(@candidate), class: "btn btn-sm btn-primary btn-responsive" %> 
-        <%= link_to "Remove Candidate", @candidate, method: :delete,
+        <%= link_to "Edit", edit_candidate_path(@candidate), class: "btn btn-sm btn-primary btn-responsive" %> 
+        <%= link_to "Add Note", add_note_path(id: @candidate.id), class: "btn btn-sm btn-primary btn-responsive" %> 
+        <%= link_to "Remove", @candidate, method: :delete,
                            data: { confirm: "Delete this candidate?" }, :class => "btn btn-sm btn-danger btn-responsive" %>
     </section>
   <h3>Candidate Details</h3>
 </div>
-<div class="row">
+<div class="row min-padded-row">
   <div class="col-md-12">
         <table class="table">
       <tr><th>Candidate:</th><td><%= @candidate.name %></td></tr>
@@ -30,14 +31,33 @@
             <%= render @candidate_test_submissions %>
           </table>
           <%= will_paginate @candidate_test_submissions %>
+      <% else %>
+        <h4>No test submissions yet.</h4>
       <% end %>
+      <br>
+    </section>
+    <section>
+      <% if @candidate.notes.any? %>
+        <strong>Notes On This Candidate</strong>
+          <table class="table table-bordered show-header">
+            <tr><th><%= sortable "content" %></th>
+            <th><%= sortable "created_at" %></th><th>Actions</th></tr>
+
+            <%= render @candidate_notes %>
+          </table>
+          <%= will_paginate @candidate_notes %>
+      <% else %>
+        <h4>No notes added yet.</h4>
+      <% end %>
+      <br>
     </section>
     <section class="mobile-section" style="float:right">
         <%= link_to "Search", candidates_path, class: "btn btn-sm btn-primary btn-responsive" %> 
         <%= link_to "Send Test", send_candidate_test_path(id: @candidate.id), :class => "btn btn-sm btn-primary btn-responsive" %>
         <%= link_to "Results", candidate_submissions_path(candidate_id: @candidate.id), :class => "btn btn-sm btn-primary btn-responsive" %>
-        <%= link_to "Edit Candidate", edit_candidate_path(@candidate), class: "btn btn-sm btn-primary btn-responsive" %> 
-        <%= link_to "Remove Candidate", @candidate, method: :delete,
+        <%= link_to "Edit", edit_candidate_path(@candidate), class: "btn btn-sm btn-primary btn-responsive" %> 
+        <%= link_to "Add Note", add_note_path(id: @candidate.id), class: "btn btn-sm btn-primary btn-responsive" %> 
+        <%= link_to "Remove", @candidate, method: :delete,
                            data: { confirm: "Delete this candidate?" }, :class => "btn btn-sm btn-danger btn-responsive" %>
     </section>
   </div>

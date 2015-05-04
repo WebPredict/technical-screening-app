@@ -1,25 +1,30 @@
 <tr id="test-<%= test.id %>">
   <td>
-      <% if @single_test_select %>
-          <%= radio_button_tag "test_ids[]", test.id %>
-      <% else %>
+    <% if @single_test_select %>
+        <%= radio_button_tag "test_ids[]", test.id %>
+    <% else %>
+      <table class="btn-table">
+      <tr>
         <% if current_user?(test.user) %>
+          <td>
           <%= link_to test, class: "btn btn-xs btn-primary", method: :delete,
                                        data: { confirm: "Delete this test?" } do %>
             <i class="glyphicon glyphicon-remove"></i>
           <% end %>
-          
-          <div class="button-spacer"> </div>
+          </td>
+          <td>
           <%= link_to edit_test_path(test), class: "btn btn-xs btn-primary" do %>
               <i class="glyphicon glyphicon-edit"></i>
           <% end %>
-
+          </td>
         <% end %>
-          <div class="button-spacer"> </div>
+        <td>
           <%= link_to send_test_candidate_path(id: test.id), class: "btn btn-xs btn-primary" do %>
             <i class="glyphicon glyphicon-send" title="Send Test"></i>
           <% end %>
-
+        </td>
+        </tr>
+        </table>
       <% end %>
   </td>
   <td><%= link_to test.name, test %></td>

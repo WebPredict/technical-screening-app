@@ -17,14 +17,9 @@
       else
         "Free 2 Week Trial"
       end %></td></tr>
-      <tr><th>Companies:</th><td>
-      <%if @user.companies != nil %>
-          <% @user.companies.each do |company| %>
-            <%= company.name %> 
-          <% end %>
-      <% end %>
-      
-    </td></tr>
+      <tr><th>Companies:</th>
+        <td><%= @user.company_list %></td>
+      </tr>
       <tr><th>Member Since:</th><td><%= @user.created_at.strftime("%m/%d/%Y") if @user.created_at? %></td></tr>
     </table>
     <br>

@@ -5,16 +5,45 @@
   <%= form_tag submit_random_questions_path, :method => 'post' do %>
     <%= hidden_field_tag :id, @test.id %>
     
-      <%= label_tag :topic_list, "Comma separated topic list:" %>
+      <%= label_tag :topic_list, "Comma Separated Topic List" %><span style="margin-left: 10px"></span>
+       <a href class="btn btn-primary btn-xs" data-toggle="modal" data-target="#categoryList">
+   Show Categories List
+</a>
       <%= text_field_tag :topic_list, "Java, SQL", class: 'form-control' %>
 
-      <%= label_tag :num_per_topic, "Number of questions per topic:" %>
+
+<!-- Modal -->
+<div class="modal fade" id="categoryList" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Available Categories</h4>
+      </div>
+      <div class="modal-body">
+        
+        <div class="row">
+            <ul>
+            <% @categories.each do |category| %>
+            <li style="margin-top: 5px"><%= category.name %>
+            </li>
+            <% end %>
+            </ul>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+  </div>
+      <%= label_tag :num_per_topic, "Number Of Questions Per Category" %>
       <%= text_field_tag :num_per_topic, "5", class: 'form-control' %>
 
       <%= label_tag :difficulty_level, "Difficulty Levels To Include:" %>
       <% Difficulty.all.each do |diff| %>
         <label class="checkbox-inline">
-          <input type="checkbox" name="difficulty_level_<%= diff.id %>" id="difficulty_level_<%= diff.id %>" value="<%= diff.id %>" > <%= diff.level %>
+          <input type="checkbox" name="difficulty_level_<%= diff.id %>" id="difficulty_level_<%= diff.id %>" value="<%= diff.id %>" /> <%= diff.level %>
         </label>
       <% end %>
 

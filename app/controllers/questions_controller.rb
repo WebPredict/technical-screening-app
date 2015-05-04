@@ -17,24 +17,40 @@ class QuestionsController < ApplicationController
       params[:search] = session[:question_search]
     end
     
+    @categories = Category.all
+    
     if !params[:search].blank?
         query = ' lower(content) LIKE ? OR lower(answer) LIKE ? '
         searchparam = "%#{params[:search].downcase}%"
         @questions = Question.where(query, searchparam, searchparam)
-        session[:question_search] = params[:search]
     else
       @questions = Question.all
     end
-
+    session[:question_search] = params[:search]
+    
     if !params[:remember_search].blank? && !session[:question_category].blank?
       params[:category_id] = session[:question_category]
     end
+    
+    if !params[:category].blank?
+      found_cat = Category.where("name = ?", params[:category])
+      if found_cat.any?
+        params[:category_id] = found_cat.first.id
+      else
+        params[:category_id] = "0"
+      end
+    end
+    
     if !params[:category_id].blank?
       query = ' category_id = ? '
       
+      if params[:category].blank?
+        params[:category] = Category.find(params[:category_id]).name
+      end
+      
       @questions = @questions.where(query, params[:category_id])
-      session[:question_category] = params[:category_id]
     end
+    session[:question_category] = params[:category_id]
     
     if !params[:remember_search].blank? && !session[:question_difficulty].blank?
       params[:difficulty_id] = session[:question_difficulty]
@@ -42,8 +58,8 @@ class QuestionsController < ApplicationController
     if !params[:difficulty_id].blank?
       query = ' difficulty_id = ? '
       @questions = @questions.where(query, params[:difficulty_id])
-      session[:question_difficulty] = params[:difficulty_id]
     end
+    session[:question_difficulty] = params[:difficulty_id]
 
     if current_user != nil
       @questions = @questions.where("is_public = ? OR user_id = ?", true, current_user.id).paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
@@ -81,12 +97,31 @@ class QuestionsController < ApplicationController
 
         @question = current_user.questions.build(question_params)
         
+        if @question.is_public?
+          num_existing = Question.where("is_public = ? AND content = ?", true, @question.content).count
+          if num_existing > 0
+            flash.now[:warning] = "This public question already exists. Please use that question or modify this one to avoid creating a duplicate."
+            render 'new'
+            return
+          end
+        end
+      
+        session[:question_type_id] = @question.question_type_id
+        session[:category_id] = @question.category_id
+        session[:difficulty_id] = @question.difficulty_id
+
         if @question.question_type_id == 2
-          full_question = @question.content + "||" + params[:question][:answer2] + "||" + params[:question][:answer3] + "||" + 
-            params[:question][:answer4] + "||" + params[:question][:answer5]
-          @question.content = full_question
-          @question.answer = params[:question][:multiple_choice_answer]
-          @question.save
+          if params[:question][:multiple_choice_answer].blank?
+            flash.now[:warning] = "You must select an answer for a multiple choice question."
+            render 'new'
+            return
+          else
+            full_question = @question.content + "||" + params[:question][:answer2] + "||" + params[:question][:answer3] + "||" + 
+              params[:question][:answer4] + "||" + params[:question][:answer5]
+            @question.content = full_question
+            @question.answer = params[:question][:multiple_choice_answer]
+            @question.save
+          end
         elsif @question.question_type_id == 3
           @question.answer = params[:question][:short_answer]
           @question.save 
@@ -125,7 +160,7 @@ class QuestionsController < ApplicationController
           format.html { 
             flash[:success] = "Question was successfully updated."
             if params[:commit] == "Save And Goto Next TODO"
-              @question = Question.where("lower(answer) LIKE ? OR lower(answer) LIKE ?", "%todo%", "%answer%").first
+              @question = Question.where("lower(answer) LIKE ?", "%todo%").first
               setup_question(@question)
     
               add_breadcrumb "Edit Question", edit_question_path
@@ -149,6 +184,20 @@ class QuestionsController < ApplicationController
   
   def new
     @question = Question.new
+    
+    if !session[:question_type_id].blank?
+      @question.question_type_id = session[:question_type_id]
+    end
+    if !session[:difficulty_id].blank?
+      @question.difficulty_id = session[:difficulty_id]
+    end
+    if !session[:question_category].blank?
+      @question.category_id = session[:question_category]
+    end
+    if !session[:category_id].blank?
+      @question.category_id = session[:category_id]
+    end
+
     flash.now[:info] = "Multiple choice and short phrase questions can be automatically scored. The chosen difficulty level does not affect scoring."
     add_breadcrumb "New Question", new_question_path
   end
@@ -168,6 +217,17 @@ class QuestionsController < ApplicationController
     @question.save
     flash[:info] = "Question updated to easy."
     redirect_to questions_path
+  end
+  
+  def next_question
+    @question = Question.find(params[:id].to_i + 1)
+    redirect_to @question
+  end
+  
+  def random_question
+    count = Question.all.count
+    @question = Question.find(Random.rand(count) + 1)
+    redirect_to @question
   end
   
   def make_medium
@@ -215,6 +275,7 @@ class QuestionsController < ApplicationController
     @clone_question.difficulty_id = @question.difficulty_id
     @clone_question.category_id = @question.category_id
     @clone_question.question_type_id = @question.question_type_id
+    @clone_question.is_public = false
     @clone_question.user = current_user
     setup_question(@clone_question)
     flash.now[:success] = "Question cloned. You can change any details you'd like."
@@ -228,7 +289,7 @@ class QuestionsController < ApplicationController
     if !@question.tests.any?
       @question.destroy
       flash[:success] = "Question deleted."
-      redirect_to request.referrer || root_url
+      redirect_to questions_path
     else
       flash[:warning] = "Cannot delete this question because it has tests using it."
       redirect_to request.referrer

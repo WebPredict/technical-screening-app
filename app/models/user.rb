@@ -45,6 +45,20 @@ class User < ActiveRecord::Base
     update_attribute(:remember_digest, User.digest(remember_token))
   end
   
+  def company_list
+    list = ''
+    if companies.any?
+      companies.each do |c|
+        if list == ''
+          list = c.name
+        else
+          list = list + ", " + c.name
+        end 
+      end
+    end
+    return list
+  end 
+
   def trial_expired?
     if membership_level_id == 1 && created_at < 14.days.ago
       true

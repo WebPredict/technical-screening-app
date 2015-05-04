@@ -5,15 +5,7 @@ module ApplicationHelper
     css_class = column == sort_column ? "current #{sort_direction}" : nil
     direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
     
-    sort_icon = ''
-    
-    if column == sort_column
-      if sort_direction == "asc"
-        sort_icon = "<span class=\"glyphicon glyphicon-chevron-up\"></span>"
-      elsif sort_direction == "desc"
-        sort_icon = "<span class=\"glyphicon glyphicon-chevron-down\"></span>"
-      end
-    end
+    sort_icon = determine_sort_icon(column, sort_column, sort_direction)
     
     link_to raw(sort_icon + title), {:sort => column, :direction => direction}, {:class => css_class}
   end
@@ -23,8 +15,23 @@ module ApplicationHelper
     css_class = column == sort_column ? "current #{sort_direction}" : nil
     direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
     
-    sort_icon = ''
+    sort_icon = determine_sort_icon(column, sort_column, sort_direction)
     
+    link_to raw(sort_icon + title), {:sort => column, :direction => direction, :id => id_val}, {:class => css_class}
+  end
+
+  def sortable_with_search(column, title = nil)
+    title ||= column.titleize
+    css_class = column == sort_column ? "current #{sort_direction}" : nil
+    direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
+    
+    sort_icon = determine_sort_icon(column, sort_column, sort_direction)
+    
+    link_to raw(sort_icon + title), {:sort => column, :direction => direction, :remember_search => "true"}, {:class => css_class}
+  end
+
+  def determine_sort_icon(column, sort_column, sort_direction)
+    sort_icon = ''
     if column == sort_column
       if sort_direction == "asc"
         sort_icon = "<span class=\"glyphicon glyphicon-chevron-up\"></span>"
@@ -32,10 +39,9 @@ module ApplicationHelper
         sort_icon = "<span class=\"glyphicon glyphicon-chevron-down\"></span>"
       end
     end
-    
-    link_to raw(sort_icon + title), {:sort => column, :direction => direction, :id => id_val}, {:class => css_class}
+    return sort_icon  
   end
-
+  
   def phone_format(num)
     number_to_phone(num, area_code: num != nil && num.size == 10)
   end

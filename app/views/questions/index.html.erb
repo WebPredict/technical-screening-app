@@ -10,17 +10,44 @@
 
 <div class="row">
   <div class="col-md-12">
-<%= form_tag questions_path, :class => "nicesearch", :method => 'get' do %>
-  <label>Category</label>
-  <div class="field">
     
-      <%= select_tag(:category_id, options_from_collection_for_select(Category.all, "id", "name", 
-            params[:category_id]), 
-        prompt: "<Filter By Technology Category>", include_blank: true, :selected => params[:category_id],
-        :onchange => "this.form.submit();"
-        ) %>
-  </div>
+<%= form_tag questions_path, id: "search-questions-form", :class => "nicesearch", :method => 'get' do %>
+  <label>Category <span style="margin-left: 10px"></span><a href class="btn btn-primary btn-xs" data-toggle="modal" data-target="#categoryList">
+  Show Full List
+</a>
+</label>
+  
+   <div class="field">
+     <%= text_field_tag :category, params[:category], id: "navbar-search-input", class: 'form-control', 
+     placeholder: 'Category Name...' %>
+   </div>
 
+<!-- Modal -->
+<div class="modal fade" id="categoryList" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Available Categories</h4>
+      </div>
+      <div class="modal-body">
+        
+        <div class="row">
+            <ul>
+            <% @categories.each do |category| %>
+            <li style="margin-top: 5px">
+         <%= link_to category.name, questions_path(category_id: category) %>
+            </li>
+            <% end %>
+            </ul>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
   <label>Question Contains</label>
   <div class="field">
     <div class="input-group">
@@ -51,9 +78,9 @@
           <% if current_user != nil %>
           <th>Actions</th>
           <% end %>
-          <th><%= sortable "content", "Question" %></th><th><%= sortable "answer" %></th>
-        <th><%= sortable "difficulty_id", "Difficulty" %></th><th><%= sortable "question_type_id", "Question Type" %></th>
-        <th><%= sortable "category_id", "Category" %></th></tr>
+          <th><%= sortable_with_search "content", "Question" %></th><th><%= sortable_with_search "answer" %></th>
+        <th><%= sortable_with_search "difficulty_id", "Difficulty" %></th><th><%= sortable_with_search "question_type_id", "Question Type" %></th>
+        <th><%= sortable_with_search "category_id", "Category" %></th></tr>
         <%= render @questions %>
       </table>
     </div>
@@ -80,3 +107,17 @@
   </div>
 </div>
 <% end %>
+
+<script>
+ // $('#search-questions-form').on('input', function() {
+    //$('#search-questions-form').submit();
+//    alert('input called');
+//  });
+
+//$(function () {
+//  $('#search-questions-form').on("input",function() {
+//    alert($(this).val());
+//  });
+//});
+
+</script>

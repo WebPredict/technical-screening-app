@@ -3,7 +3,9 @@ class Candidate < ActiveRecord::Base
   belongs_to :user
 
   has_and_belongs_to_many :jobs, :join_table => :jobs_candidates
-  has_many :test_submissions, dependent: :destroy  
+  has_many :test_submissions, dependent: :destroy 
+  has_many :notes, dependent: :destroy 
+  
   validates :user_id, presence: true
   validates :name, presence: true
   validates :email, presence: true

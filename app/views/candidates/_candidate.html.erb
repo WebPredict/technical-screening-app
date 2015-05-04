@@ -1,4 +1,33 @@
 <tr id="candidate-<%= candidate.id %>">
+  <td>
+      <% if @single_candidate_select %>
+      <%= radio_button_tag "candidate_ids[]", candidate.id %>
+      <% else %>
+
+        <% if current_user?(candidate.user) %>
+        <table class="btn-table">
+          <tr>
+            <td>
+                  <%= link_to send_candidate_test_path(id: candidate.id), class: "btn btn-xs btn-primary" do %>
+              <i class="glyphicon glyphicon-send" title="Send Test"></i>
+            <% end %>
+            </td>
+            <td>
+            <%= link_to candidate, class: "btn btn-xs btn-primary", method: :delete,
+                                         data: { confirm: "Delete this candidate?" } do %>
+              <i class="glyphicon glyphicon-remove"></i>
+            <% end %>
+            </td>
+            <td>
+            <%= link_to edit_candidate_path(candidate), class: "btn btn-xs btn-primary" do %>
+              <i class="glyphicon glyphicon-edit"></i>
+            <% end %>
+            </td>
+            </tr>
+          </table>
+        <% end %>
+      <% end %>
+  </td>
   <td><%= link_to candidate.name, candidate %></td>
   <td><a href="mailto:<%= candidate.email %>"><%= candidate.email %></a></td>
   <td><%= phone_format(candidate.phone) %></td>
@@ -10,26 +39,4 @@
     None yet.
     <% end %>
     </td>
-  <td>
-      <% if @single_candidate_select %>
-      <%= radio_button_tag "candidate_ids[]", candidate.id %>
-      <% else %>
-
-        <% if current_user?(candidate.user) %>
-                  <%= link_to send_candidate_test_path(id: candidate.id), class: "btn btn-xs btn-primary" do %>
-              <i class="glyphicon glyphicon-send" title="Send Test"></i>
-            <% end %>
-  
-            <div class="button-spacer"> </div>
-            <%= link_to candidate, class: "btn btn-xs btn-primary", method: :delete,
-                                         data: { confirm: "Delete this candidate?" } do %>
-              <i class="glyphicon glyphicon-remove"></i>
-            <% end %>
-            <div class="button-spacer"> </div>
-            <%= link_to edit_candidate_path(candidate), class: "btn btn-xs btn-primary" do %>
-              <i class="glyphicon glyphicon-edit"></i>
-            <% end %>
-        <% end %>
-      <% end %>
-  </td>
 </tr>

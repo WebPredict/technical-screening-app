@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   root 'static_pages#home'
   get 'help'    => 'static_pages#help'
+  get 'privacy'    => 'static_pages#privacy'
+  get 'terms'    => 'static_pages#terms'
   get 'about'   => 'static_pages#about'
   get 'all_categories'   => 'static_pages#all_categories'
   get 'contact' => 'static_pages#contact'
@@ -17,9 +19,13 @@ Rails.application.routes.draw do
   get 'subscribe' => 'memberships#subscribe'
   get 'edit_subscription' => 'users#edit_subscription'
 
+  get 'dashboard_configure' => 'static_pages#configure'
+  
   get 'make_easy' => 'questions#make_easy'
   get 'make_medium' => 'questions#make_medium'
   get 'make_hard' => 'questions#make_hard'
+  get 'random_question' => 'questions#random_question'
+  get 'next_question' => 'questions#next_question'
   
   get 'news' => 'static_pages#news'
   get 'signup'  => 'users#new'
@@ -49,12 +55,18 @@ Rails.application.routes.draw do
   post 'auto_score_test' => 'test_submissions#auto_score'
   get 'company_jobs' => 'companies#jobs'
   get 'metrics' => 'users#metrics'
+  get 'add_note' => 'candidates#add_note'
   post 'select_candidate' => 'candidates#select_candidate'
   post 'filter_candidates' => 'candidates#filter_candidates'
   
   resources :companies
 
-  resources :categories 
+  resources :categories do
+    collection do
+      get 'autocomplete'
+    end
+  end
+  
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
   
@@ -64,10 +76,11 @@ Rails.application.routes.draw do
     resources :questions
   end
 
+  resources :questions 
   resources :candidates
   resources :test_submissions
-  resources :questions
   resources :users 
+  resources :notes
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

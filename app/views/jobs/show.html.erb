@@ -4,16 +4,18 @@
         <%= link_to "Search", jobs_path, class: "btn btn-sm btn-primary btn-responsive" %> 
         <%= link_to "Create", new_job_path, class: "btn btn-sm btn-primary btn-responsive" %> 
         <%= link_to "Edit", edit_job_path(@job), class: "btn btn-sm btn-primary btn-responsive" %> 
+        <%= link_to "Add Candidate", new_candidate_path(job_id: @job.id), 
+          class: "btn btn-primary btn-sm btn-responsive" %>
         <%= link_to "Remove", @job, method: :delete,
                            data: { confirm: "Delete this job?" }, :class => "btn btn-sm btn-danger btn-responsive" %>
     </section>
   <h3>Job Listing Details</h3>
 </div>
-<div class="row padded-row">
+<div class="row min-padded-row">
   <div class="col-md-12">
         <table class="table">
       <tr><th>Job Title:</th><td><%= @job.name %></td></tr>
-      <tr><th>Description:</th><td><%= @job.description %></td></tr>
+      <tr><th>Description:</th><td><%= Nokogiri::HTML::DocumentFragment.parse(@job.description).to_html.html_safe %></td></tr>
       <tr><th>Manager:</th><td><%= @job.manager %></td></tr>
       <tr><th>Company:</th><td><%= link_to @job.company.name, @job.company unless @job.company == nil %></td></tr>
       <tr><th>Phone:</th><td><%= phone_format(@job.phone) %></td></tr>
@@ -24,8 +26,8 @@
       <% if @job_candidates != nil && @job_candidates.count > 0 %>
         <h4>This Job's Candidates:</h4>
           <table class="table table-bordered show-header">
-            <tr><th><%= sortable "name" %></th><th><%= sortable "email" %></th><th><%= sortable "phone" %></th>
-        <th>Created On</th></th><th>Submissions</th></th><th>Actions</th></tr>
+            <tr><th>Actions</th><th><%= sortable "name" %></th><th><%= sortable "email" %></th><th><%= sortable "phone" %></th>
+        <th>Created On</th></th><th>Submissions</th></tr>
 
             <%= render @job_candidates %>
           </table>

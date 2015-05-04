@@ -1,0 +1,25 @@
+<% provide(:title, "Create Note") %>
+<div class="page-header">
+  <h3>Create Note</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <%= form_for(@note) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.hidden_field :candidate_id %>
+      
+      <%= f.label :content %>
+      <%= f.text_area :content, rows: "5", class: 'form-control' %>
+
+          <div class="form-group">
+            <div style="float:right">
+              <%= f.submit "Create", class: "btn btn-primary" %>
+              <span></span>
+              <%= f.submit "Cancel", class: "btn btn-default" %>
+          </div>
+          </div>
+    <% end %>
+  </div>
+</div>

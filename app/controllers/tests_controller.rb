@@ -50,6 +50,7 @@ class TestsController < ApplicationController
     @test_questions = @test.questions.paginate(page: params[:page]).order(sort_column + " " + sort_direction)
     add_breadcrumb "Select Random Questions", :select_random_questions_path
     flash.now[:info] = "Specify a list of topics to choose random questions from (e.g. \"Java, HTML, SQL\")."
+    @categories = Category.all
   end
   
   def send_candidate_test
@@ -118,6 +119,7 @@ class TestsController < ApplicationController
     @clone_test.name = @test.name
     @clone_test.description = @test.description
     @clone_test.user = current_user
+    @clone_test.is_public = false
     flash.now[:success] = "Test cloned. You can change any details you'd like."
 
     @test = @clone_test
@@ -290,7 +292,8 @@ class TestsController < ApplicationController
 
     def test_params
       params.require(:test).permit(:name, :description, :question_ids, :is_public, :topic_list, 
-      :difficulty_level, :num_per_topic, :created_at, :difficulty_level_1, :difficulty_level_2, :difficulty_level_3)
+      :difficulty_level, :num_per_topic, :created_at, :difficulty_level_1, :difficulty_level_2, 
+      :difficulty_level_3)
     end
     
     def correct_user

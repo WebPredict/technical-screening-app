@@ -5,8 +5,8 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   
   def admin_user
-      redirect_to(root_url) unless current_user.admin?
-    end
+    redirect_to(root_url) unless current_user.admin?
+  end
 
   private 
     def logged_in_user
