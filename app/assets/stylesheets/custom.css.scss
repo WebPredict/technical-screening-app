@@ -312,6 +312,10 @@ input[type="radio"] {
   vertical-align: middle;
 }
 
+input[type="checkbox"] {
+  width: 15px;  
+}
+
 #error_explanation {
   color: red;
   ul {
