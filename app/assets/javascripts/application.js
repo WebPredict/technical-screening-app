@@ -15,6 +15,11 @@
 //= require bootstrap
 //= require turbolinks
 //= require jquery-ui
+//= require froala_editor.min.js
+//= require plugins/font_family.min.js
+//= require plugins/font_size.min.js
+//= require plugins/file_upload.min.js
+//= require plugins/lists.min.js
 //= require_tree .
 
 var ready;
@@ -24,6 +29,11 @@ ready = (function() {
     source: '/categories/autocomplete.json',
   });
 });
+
+//  $('#search-questions-form').bind("change keyup",function() {
+//    alert('change keyup called');
+//    $('#search-questions-form').submit();
+//  });
 
 $(document).ready(ready);
 $(document).on('page:load', ready);

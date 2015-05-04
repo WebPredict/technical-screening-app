@@ -11,7 +11,7 @@
 <div class="row">
   <div class="col-md-12">
     
-<%= form_tag questions_path, :class => "nicesearch", :method => 'get' do %>
+<%= form_tag questions_path, id: "search-questions-form", :class => "nicesearch", :method => 'get' do %>
   <label>Category <span style="margin-left: 10px"></span><a href class="btn btn-primary btn-xs" data-toggle="modal" data-target="#categoryList">
   Show Full List
 </a>
@@ -107,3 +107,17 @@
   </div>
 </div>
 <% end %>
+
+<script>
+ // $('#search-questions-form').on('input', function() {
+    //$('#search-questions-form').submit();
+//    alert('input called');
+//  });
+
+//$(function () {
+//  $('#search-questions-form').on("input",function() {
+//    alert($(this).val());
+//  });
+//});
+
+</script>

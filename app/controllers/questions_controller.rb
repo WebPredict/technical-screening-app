@@ -289,7 +289,7 @@ class QuestionsController < ApplicationController
     if !@question.tests.any?
       @question.destroy
       flash[:success] = "Question deleted."
-      redirect_to request.referrer || root_url
+      redirect_to questions_path
     else
       flash[:warning] = "Cannot delete this question because it has tests using it."
       redirect_to request.referrer

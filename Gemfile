@@ -22,7 +22,9 @@ gem 'newrelic_rpm'
 gem 'chartkick'
 gem 'groupdate'
 
+gem 'font-awesome-rails'
 gem 'jquery-ui-rails'
+gem "wysiwyg-rails"
 
 group :development, :test do
   gem 'sqlite3',     '1.3.9'

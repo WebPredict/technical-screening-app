@@ -7,6 +7,10 @@
       <%= link_to "Create", new_question_path, class: "btn btn-sm btn-primary btn-responsive" %> 
       <% if @question.user_id == @current_user.id %>
         <%= link_to "Edit", edit_question_path(@question), class: "btn btn-sm btn-primary btn-responsive" %> 
+        <% if !@question.is_public? %>
+        <%= link_to "Remove", @question, method: :delete,
+                           data: { confirm: "Delete this question?" }, :class => "btn btn-sm btn-danger btn-responsive" %>
+        <% end %>
       <% end %>
     <%= link_to "Clone", clone_question_path(id: @question), class: "btn btn-sm btn-primary btn-responsive" %> 
     <%= link_to "Search Tests", tests_path, class: "btn btn-sm btn-primary btn-responsive" %> 
@@ -41,8 +45,7 @@
     <section>
       <h4> Answer: </h4> 
       <% if logged_in? && current_user.premium? %>
-      <%= 
-      Nokogiri::HTML::DocumentFragment.parse(@question.answer).to_html.html_safe %> 
+      <%= Nokogiri::HTML::DocumentFragment.parse(@question.answer).to_html.html_safe %> 
       <% else %>
         <%= link_to "Employer / Recruiter Membership Required", plans_path, class: "btn btn-xs btn-primary" %> 
       <% end %>

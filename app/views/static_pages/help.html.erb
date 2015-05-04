@@ -18,35 +18,37 @@
 </div>
 <br>
 <div class="row">
-  <a id="candidates"></a>
   <div class="panel-group" id="accordion">
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+        <a id="candidates" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
           Manage Candidates
         </a>
       </h4>
     </div>
     <div id="collapseOne" class="panel-collapse collapse in">
       <div class="panel-body">
-        <p><strong>How do I send a test to a candidate?</strong> Log in, go to your dashboard, 
-  then click "New Candidate" and fill in the appropriate fields and save. The new candidate will appear in your dashboard. 
-  Click 'Send Test' next to the candidate's name and select the test you wish to send. When the candidate submits their test results, 
-  the results will immediately be available on your dashboard.</p>
+        <p><strong>How do I send a test to a candidate?</strong> 
+        
+        Go to your dashboard, then in the "Add New Candidate" section on the left, fill in the appropriate fields 
+        and click "Create Candidate." The new candidate will appear on your dashboard and in the Candidate Details page. 
+        Click 'Send Test' and select the test you wish to send. When the candidate submits their test results, 
+        the results will immediately be available on your dashboard.</p>
   <p>  <strong>How do I ensure a candidate does not cheat on the test?</strong> One easy and effective approach 
   is to have the candidate on the phone while they take the test, and view their screen in a web meeting while they are entering the answers.
-  A more fool-proof approach would be to have the candidate appear in person to take the screening test.</p>
+  A more fool-proof approach would be to have the candidate appear in person to take the screening test.
+    All tests are timed beginning when the user clicks on the 'Start Test' link, ending when they submit their results.
+  </p>
   
       </div>
     </div>
   </div>
   
-  <a id="questions"></a>
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+        <a id="questions" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
           Manage Questions
         </a>
       </h4>
@@ -65,6 +67,7 @@
       <strong>What's the difference between a short phrase type question and open-ended?</strong> 
   Short phrase questions are intended for just that: questions with one or two word answers. 
   They can be automatically scored (whitespace and capitalization will be ignored in scoring, but not punctuation).
+  Open-ended questions typically have longer answers and are not automically scored (you must manually score them after the candidate takes the test).
   Short phrase questions can be manually rescored if you believe the automatic scoring is in error for any particular question.
   </p>
   <p>
@@ -75,28 +78,28 @@
       <strong>Can I make my tests / questions public or private?</strong> Yes, for any test or question you create,
   you have the option of making them private (only viewable to you), or public.
   </p>
-  <p>  <strong>How do I create a short phrase question?</strong> Log in, go to your dashboard, 
-  enter the 'Create New Question' section and choice 'Short Phrase' for Question Type.
+  <p>  <strong>How do I create a short phrase question?</strong> Log in, go 'Test Material' -> 'Questions', 
+  click the 'Create New Question' section and choice 'Short Phrase' for Question Type.
 </p>
-<p>  <strong>How do I create a multiple-choice question?</strong> Log in, go to your dashboard, 
-  enter the 'Create New Question' section and choice 'Multiple Choice' for Question Type.
+<p>  <strong>How do I create a multiple-choice question?</strong> Log in, go 'Test Material' -> 'Questions', 
+  click the 'Create New Question' section and choice 'Multiple Choice' for Question Type.
 </p>
       </div>
     </div>
   </div>
 
-  <a id="tests"></a>
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+        <a id="tests" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
           Manage Tests
         </a>
       </h4>
     </div>
     <div id="collapseThree" class="panel-collapse collapse">
       <div class="panel-body">
-    <p><strong>How do I create a new test?</strong> Log in, go to your dashboard, scroll down and click 'Create Test.'</p>
+    <p><strong>How do I create a new test?</strong> You can go to your dashboard, scroll down and click 'Create Test'
+    or go to 'Test Material' -> 'Tests' and click 'Create New Test.'</p>
     
     <p>  <strong>How do I create a new test populated with random questions from specific topics?</strong> 
   Log in, go to your dashboard, scroll down and click 'Create Test.' After specifying a test name, you are given the option to 'Select Random Questions.' 
@@ -108,11 +111,10 @@
     </div>
   </div>
 
-    <a id="testresults"></a>
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+          <a id="testresults" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
             Manage Test Results / Submissions
           </a>
         </h4>
@@ -121,8 +123,8 @@
         <div class="panel-body">
           <p>  <strong>How do I send test results to an employer?</strong> Log in, go to your dashboard, 
   scroll down to 'Test Results' section and click 'Forward' on the test result.</p>
-  <p>  <strong>How do I view test results?</strong> Log in, go to your dashboard, scroll down and look for 
-  'Test Submissions.' Or, look in the candidates section and click 'Results.'
+  <p>  <strong>How do I view test results?</strong> Go to your dashboard, scroll down and look for 
+  'Test Results.' Or, look in the candidates section and click 'Results.'
 </p>
       <p>  <strong>How can I tell how long it took for a candidate to take a test?</strong> The candidate's
   test taking time is automatically started when they click the 'Start Test' link, and stopped when they
@@ -131,11 +133,10 @@
       </div>
     </div>
 
-    <a id="companies"></a>
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+          <a id="companies" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
             Manage Companies
           </a>
         </h4>
@@ -149,11 +150,10 @@
       </div>
     </div>
 
-    <a id="joblistings"></a>
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">
+          <a id="joblistings" data-toggle="collapse" data-parent="#accordion" href="#collapseSix">
             Manage Job Listings
           </a>
         </h4>
@@ -161,18 +161,17 @@
       <div id="collapseSix" class="panel-collapse collapse">
         <div class="panel-body">
           <p><strong>How do I create a job listing? </strong>After logging in, go to 'Opportunities' -> 'Job Listings' 
-          and click 'Create Job Listing.'</p>
+          and click 'Create New Job Listing.'</p>
           <p><strong>How do I associate a candidate with a job listing?</strong> View the job listing details page, 
           and from there click 'Add Candidate.'</p>
       </div>
       </div>
     </div>
 
-    <a id="account"></a>
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">
+          <a id="account" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">
             Manage Account
           </a>
         </h4>
@@ -187,7 +186,8 @@
               <strong>How do I contact you for more information on another topic?</strong>
   Try the <%= link_to "Contact Us", contact_path %> page.
           </p>
-          <p><strong>How do I change my profile details?</strong> After logging in, go to 'Account' -> 'Profile' then click 'Edit.'</p>
+          <p><strong>How do I change my profile details?</strong> After logging in, go to 'Account' -> 'Profile' then 
+          click 'Edit Profile.'</p>
       </div>
       </div>
     </div>

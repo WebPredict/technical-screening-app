@@ -43,7 +43,7 @@
       <%= label_tag :difficulty_level, "Difficulty Levels To Include:" %>
       <% Difficulty.all.each do |diff| %>
         <label class="checkbox-inline">
-          <input type="checkbox" name="difficulty_level_<%= diff.id %>" id="difficulty_level_<%= diff.id %>" value="<%= diff.id %>" > <%= diff.level %>
+          <input type="checkbox" name="difficulty_level_<%= diff.id %>" id="difficulty_level_<%= diff.id %>" value="<%= diff.id %>" /> <%= diff.level %>
         </label>
       <% end %>
 
