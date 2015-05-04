@@ -77,7 +77,7 @@ class TestsController < ApplicationController
   
   def create
     if params[:commit] == "Cancel"
-      redirect_to root_url
+      redirect_to tests_path
     else
       if current_user.membership_level_id == 1 && current_user.tests.any? && 
         current_user.tests.count > Limits::MAX_TESTS_FREE

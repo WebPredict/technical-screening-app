@@ -27,13 +27,13 @@ ready = (function() {
   $('a[href="' + this.location.pathname + '"]').parent().addClass('active');
   $("#navbar-search-input").autocomplete({
     source: '/categories/autocomplete.json',
+    select: function(event, ui) {
+        //alert ("selected is: " + ui.item.label);
+        $('#navbar-search-input').val(ui.item.label);
+        $('#search-questions-form').submit();
+      }
   });
 });
-
-//  $('#search-questions-form').bind("change keyup",function() {
-//    alert('change keyup called');
-//    $('#search-questions-form').submit();
-//  });
 
 $(document).ready(ready);
 $(document).on('page:load', ready);
