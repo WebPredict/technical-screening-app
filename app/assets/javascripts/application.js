@@ -28,7 +28,6 @@ ready = (function() {
   $("#navbar-search-input").autocomplete({
     source: '/categories/autocomplete.json',
     select: function(event, ui) {
-        //alert ("selected is: " + ui.item.label);
         $('#navbar-search-input').val(ui.item.label);
         $('#search-questions-form').submit();
       }

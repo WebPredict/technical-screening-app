@@ -50,7 +50,7 @@
 
         <div class="form-group">
           <div style="float:right">
-            <%= submit_tag "Send Selected Test To Candidate", :class => "btn btn-primary btn-responsive" %>
+            <%= submit_tag "Send Selected Test To Candidate", id: "send_test_submit", disabled: true, :class => "btn btn-primary btn-responsive" %>
             <span></span>
             <%= link_to "Cancel", root_path, class: "btn btn-default btn-responsive" %>
         </div>
@@ -68,3 +68,12 @@
       <% end %>
   </div>
 </div>
+
+<script>
+  $(function () {
+    $('input[type="radio"]').change (function () {
+      $('#send_test_submit').removeAttr('disabled');
+    });
+  });
+  
+</script>

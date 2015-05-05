@@ -40,7 +40,7 @@
 
       <div id="free-form">
       <%= f.label :answer %>
-      <%= f.text_area :answer, rows: "10", class: 'form-control' %>
+      <%= f.text_area :answer, rows: "10", class: 'text-small' %>
       </div>
       <div id="short-phrase" style="display:none">
       <%= f.label :short_answer, "Short Phrase Answer" %>
@@ -91,6 +91,12 @@
   $(document).ready(function(){
     $('#question_question_type_id').bind('change', categoryChanged);
     $('#question_question_type_id').trigger('change');
+  });
+
+  $(function() {
+    $('#question_answer').editable({
+      inlineMode: false
+    });
   });
 
 </script>

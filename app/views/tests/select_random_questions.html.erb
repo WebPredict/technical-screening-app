@@ -25,7 +25,7 @@
         <div class="row">
             <ul>
             <% @categories.each do |category| %>
-            <li style="margin-top: 5px"><%= category.name %>
+            <li style="margin-top: 5px"><a class="category_link" href="#"><%= category.name %></a>
             </li>
             <% end %>
             </ul>
@@ -43,7 +43,7 @@
       <%= label_tag :difficulty_level, "Difficulty Levels To Include:" %>
       <% Difficulty.all.each do |diff| %>
         <label class="checkbox-inline">
-          <input type="checkbox" name="difficulty_level_<%= diff.id %>" id="difficulty_level_<%= diff.id %>" value="<%= diff.id %>" /> <%= diff.level %>
+          <input type="checkbox" checked name="difficulty_level_<%= diff.id %>" id="difficulty_level_<%= diff.id %>" value="<%= diff.id %>" /> <%= diff.level %>
         </label>
       <% end %>
 
@@ -58,3 +58,23 @@
   <% end %>
   </div>
 </div>
+
+<script>
+  
+  $(function () {
+    $('.category_link').click(function (event) {
+      //alert ('got here with val: ' + $(this).text());
+      var categoryDialog = $('#categoryList');
+      
+      var existing = $('#topic_list').val();
+      if (existing == '')
+        $('#topic_list').val($(this).text());
+      else
+        $('#topic_list').val(existing + ', ' + $(this).text());
+        
+      categoryDialog.modal('hide');
+      event.stopPropagation();
+    });
+  });
+  
+</script>
