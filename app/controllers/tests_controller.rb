@@ -100,7 +100,7 @@ class TestsController < ApplicationController
 
         @test = current_user.tests.build(test_params)
         if Test.where("name = ? and user_id = ?", @test.name, current_user.id).count > 0
-          flash[:warning] = "You already have a test named " + @test.name + ". Please rename."
+          flash.now[:warning] = "You already have a test named " + @test.name + ". Please rename."
           render 'new'
         else
           if @test.save

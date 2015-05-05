@@ -99,7 +99,7 @@ class CandidatesController < ApplicationController
         @candidate = current_user.candidates.build(candidate_params)
         
         if Candidate.where("email = ? and user_id = ?", @candidate.email, current_user.id).count > 0
-          flash[:warning] = "You already have a candidate named " + @candidate.email + ". Please use that one or create one with a different email."
+          flash.now[:warning] = "You already have a candidate named " + @candidate.email + ". Please use that one or create one with a different email."
           render 'new'
         else
           if @candidate.save
