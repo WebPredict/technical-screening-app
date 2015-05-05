@@ -99,15 +99,20 @@ class TestsController < ApplicationController
       else
 
         @test = current_user.tests.build(test_params)
-        if @test.save
-          flash[:success] = "Test created!"
-          if params[:commit] == "Save And Add Random Questions"
-            redirect_to select_random_questions_path(id: @test.id)
-          else
-            redirect_to select_questions_path(id: @test.id)
-          end 
+        if Test.where("name = ? and user_id = ?", @test.name, current_user.id).count > 0
+          flash[:warning] = "You already have a test named " + @test.name + ". Please rename."
+          render 'new'
         else
-          render 'edit'
+          if @test.save
+            flash[:success] = "Test created!"
+            if params[:commit] == "Save And Add Random Questions"
+              redirect_to select_random_questions_path(id: @test.id)
+            else
+              redirect_to select_questions_path(id: @test.id)
+            end 
+          else
+            render 'new'
+          end
         end
       end
     end
@@ -116,7 +121,7 @@ class TestsController < ApplicationController
   def clone_test 
     @test = Test.find(params[:id])
     @clone_test = Test.new
-    @clone_test.name = @test.name
+    @clone_test.name = @test.name + " - CLONE"
     @clone_test.description = @test.description
     @clone_test.user = current_user
     @clone_test.is_public = false

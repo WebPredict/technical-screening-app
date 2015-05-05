@@ -97,25 +97,31 @@ class CandidatesController < ApplicationController
         redirect_to plans_path
       else
         @candidate = current_user.candidates.build(candidate_params)
-        if @candidate.save
-          flash[:success] = "Candidate created!"
-          if params[:job_id] != '' && params[:job_id] != nil
-            @job = Job.find(params[:job_id])
-            if @job != nil
-              @job.candidates << @candidate 
-              @job.save 
-            end
-          end 
-          
-          if params[:commit] == "Create And Send Test"
-            flash[:info] = "Select test to send to candidate:"
-            @single_test_select = true
-            redirect_to tests_path
-          else 
-            redirect_to @candidate 
-          end
-        else
+        
+        if Candidate.where("email = ? and user_id = ?", @candidate.email, current_user.id).count > 0
+          flash[:warning] = "You already have a candidate named " + @candidate.email + ". Please use that one or create one with a different email."
           render 'new'
+        else
+          if @candidate.save
+            flash[:success] = "Candidate created!"
+            if params[:job_id] != '' && params[:job_id] != nil
+              @job = Job.find(params[:job_id])
+              if @job != nil
+                @job.candidates << @candidate 
+                @job.save 
+              end
+            end 
+            
+            if params[:commit] == "Create And Send Test"
+              flash[:info] = "Select test to send to candidate:"
+              @single_test_select = true
+              redirect_to tests_path
+            else 
+              redirect_to @candidate 
+            end
+          else
+            render 'new'
+          end
         end
       end
     end

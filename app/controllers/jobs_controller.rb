@@ -101,7 +101,7 @@ class JobsController < ApplicationController
 
   def update
     if params[:commit] == "Cancel"
-      redirect_to root_url
+      redirect_to jobs_path
     else
       @job = Job.find(params[:id])
       respond_to do |format|
