@@ -1,5 +1,5 @@
 <div class="page-header">
-    <section style="float:right">
+    <section class="laptop-section" style="float:right">
       <% if logged_in? %>
       <%= link_to "Create New Question", new_question_path, class: "btn btn-sm btn-primary btn-responsive" %> 
       <%= link_to "Search Tests", tests_path, class: "btn btn-sm btn-primary btn-responsive" %> 
@@ -91,8 +91,8 @@
 <% if logged_in? %>
 <div class="row">
   <div class="col-md-12">
-    <section>
-      <%= link_to "Dashboard", root_path, class: "btn btn-primary btn-responsive" %> 
+    <section class="mobile-section">
+      <%= link_to "Search Tests", tests_path, class: "btn btn-sm btn-primary btn-responsive" %> 
       <%= link_to "Create New Question", new_question_path, class: "btn btn-primary btn-responsive" %> 
     </section>
   </div>

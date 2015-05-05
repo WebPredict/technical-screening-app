@@ -1,5 +1,5 @@
 <div class="page-header">
-     <section style="float:right">
+     <section class="laptop-section" style="float:right">
       <%= link_to "Create New Test", new_test_path, class: "btn btn-sm btn-primary btn-responsive" %> 
       <%= link_to "Search Questions", questions_path, class: "btn btn-sm btn-primary btn-responsive" %> 
     </section>
@@ -67,6 +67,13 @@
         <%= will_paginate @tests %>
       <% end %>
   </div>
+</div>
+
+<div class="row">
+       <section class="mobile-section" style="float:right">
+      <%= link_to "Create New Test", new_test_path, class: "btn btn-sm btn-primary btn-responsive" %> 
+      <%= link_to "Search Questions", questions_path, class: "btn btn-sm btn-primary btn-responsive" %> 
+    </section>
 </div>
 
 <script>

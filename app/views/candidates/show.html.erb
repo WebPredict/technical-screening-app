@@ -40,8 +40,8 @@
       <% if @candidate.notes.any? %>
         <strong>Notes On This Candidate</strong>
           <table class="table table-bordered show-header">
-            <tr><th><%= sortable "content" %></th>
-            <th><%= sortable "created_at" %></th><th>Actions</th></tr>
+            <tr><th>Actions</th><th><%= sortable "content" %></th>
+            <th><%= sortable "created_at" %></th></tr>
 
             <%= render @candidate_notes %>
           </table>

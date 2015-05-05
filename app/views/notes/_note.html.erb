@@ -1,1 +1,11 @@
-<tr><td><%= note.content %></td><td><%= note.created_at.strftime("%m/%d/%Y") unless note.created_at.nil? %></td><td></td></tr>
+<tr>
+  <td>
+  <% if current_user?(note.candidate.user) %>
+          <%= link_to note_path(id: note.id, candidate_id: note.candidate.id), class: "btn btn-xs btn-primary", method: :delete,
+                                       data: { confirm: "Delete this note?" } do %>
+            <i class="glyphicon glyphicon-remove"></i>
+          <% end %>
+  <% end %>
+  </td>
+  <td><%= note.content %></td><td><%= note.created_at.strftime("%m/%d/%Y") unless note.created_at.nil? %></td>
+</tr>
