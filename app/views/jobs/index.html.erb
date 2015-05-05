@@ -1,5 +1,5 @@
 <div class="page-header">
-      <section style="float:right">
+      <section class="laptop-section" style="float:right">
       <% if logged_in? %>
       <%= link_to "Create New Job Listing", new_job_path, class: "btn btn-sm btn-primary btn-responsive" %> 
       <% end %>
@@ -43,3 +43,10 @@
   </div>
 </div>
 
+<div class="row">
+   <section class="mobile-section" style="float:right">
+      <% if logged_in? %>
+      <%= link_to "Create New Job Listing", new_job_path, class: "btn btn-sm btn-primary btn-responsive" %> 
+      <% end %>
+    </section>
+</div>
