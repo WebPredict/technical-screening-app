@@ -65,7 +65,11 @@
           <%= question.formatted_content %>
         </h4>
           <p class="list-group-item-text">
-            <%= question.answer %>
+          <% if logged_in? && current_user.premium? %>
+            <%= Nokogiri::HTML::DocumentFragment.parse(question.answer).to_html.html_safe %></td>
+          <% else %>
+            <i class="glyphicon glyphicon-user"></i>
+          <% end %>
           </p>
     </a>
 </div>

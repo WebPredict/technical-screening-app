@@ -37,12 +37,21 @@
     <section>
       <% if @test.questions.any? %>
         <h4>This Test's Questions (<%= @test.questions.count %>):</h4>
-        <table class="table table-bordered show-header">
-          <tr><th>Actions</th><th><%= sortable "content", "Question" %></th><th><%= sortable "answer" %></th>
-          <th><%= sortable "difficulty" %></th><th><%= sortable "question_type" %></th>
-          <th><%= sortable "category" %></th></tr>
-          <%= render @test_questions %>
-        </table>
+        
+        <div class="laptop-section">
+          <table class="table table-bordered show-header">
+            <tr><th>Actions</th><th><%= sortable "content", "Question" %></th><th><%= sortable "answer" %></th>
+            <th><%= sortable "difficulty" %></th><th><%= sortable "question_type" %></th>
+            <th><%= sortable "category" %></th></tr>
+            <%= render @test_questions %>
+          </table>
+        </div>
+        <div class="mobile-section">
+          <div class="list-group">
+            <%= render @test_questions %>
+          </div>
+        </div>
+
         <%= will_paginate @test_questions %>
       <% else %>
       <h3>No questions added to this test yet.</h3>
