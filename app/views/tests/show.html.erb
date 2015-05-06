@@ -48,7 +48,7 @@
         </div>
         <div class="mobile-section">
           <div class="list-group">
-            <%= render @test_questions %>
+            <%= render partial: "questions/mobile_question", collection: @test_questions, as: :question %>
           </div>
         </div>
 
@@ -70,7 +70,7 @@
         </div>
         <div class="mobile-section">
           <div class="list-group">
-            <%= render @test_results %>
+            <%= render partial: "test_submissions/mobile_test_submission", collection: @test_results, as: :test_submission %>
           </div>
         </div>
         <%= will_paginate @test_results %>
