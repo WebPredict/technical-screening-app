@@ -78,7 +78,7 @@
         </div>
         <div class="mobile-section">
           <div class="list-group">
-            <%= render @tests %>
+              <%= render partial: "mobile_test", collection: @tests, as: :test %>
           </div>
         </div>
         
