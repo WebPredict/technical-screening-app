@@ -7,13 +7,13 @@
 <div class="row">
   <%= form_tag update_questions_path, :class => "nicesearch", :method => 'post' do %>
   <%= hidden_field_tag :id, @test.id %>
-    <table class="table table-bordered show-header">
-      <tr><th>Include Question?</th><th><%= sortable_with_id "content", "Question", @test.id %></th>
+    <table class="table table-bordered show-header" id="selected_questions_table">
+      <tr><th><%= check_box_tag "selected_questions_selectall", "1", true , :onclick => "toggleSelectedQuestions()" %> 
+      Include All</th><th><%= sortable_with_id "content", "Question", @test.id %></th>
       <th><%= sortable_with_id "answer", "Answer", @test.id %></th>
       <th><%= sortable_with_id "difficulty_id", "Difficulty", @test.id %></th>
       <th><%= sortable_with_id "question_type_id", "Question Type", @test.id %></th>
       <th><%= sortable_with_id "category_id", "Category", @test.id %></th></tr>
-
       </tr>
       <% @preselect_checkboxes = true %>
       <%= render @test_questions %>
@@ -45,8 +45,9 @@
 <% if @questions.any? %>
   <%= form_tag submit_questions_path, :class => "nicesearch", :method => 'post' do %>
   <%= hidden_field_tag :id, @test.id %>
-    <table class="table table-bordered show-header">
-      <tr><th>Include Question?</th><th><%= sortable_with_id "content", "Question", @test.id %></th>
+    <table class="table table-bordered show-header" id="available_questions_table">
+      <tr><th><%= check_box_tag "available_questions_selectall", "1", false , :onclick => "toggleAvailableQuestions()" %> Add All</th>
+      <th><%= sortable_with_id "content", "Question", @test.id %></th>
       <th><%= sortable_with_id "answer", "Answer", @test.id %></th>
       <th><%= sortable_with_id "difficulty_id", "Difficulty", @test.id %></th>
       <th><%= sortable_with_id "question_type_id", "Question Type", @test.id %></th>
