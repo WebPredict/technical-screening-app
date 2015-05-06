@@ -26,6 +26,8 @@
     <section>
       <% if @company.jobs.any? %>
         <strong>This Company's Jobs (<%= @company.jobs.count %>)</strong>
+        
+        <div class="laptop-section">
           <table class="table table-bordered show-header">
         <tr><th>Actions</th><th><%= sortable "name", "Title" %></th><th><%= sortable "description" %></th>
         <th><%= sortable "company_id", "Company" %></th>
@@ -33,6 +35,13 @@
 
             <%= render @company_jobs %>
           </table>
+          </div>
+          
+        <div class="mobile-section">
+          <div class="list-group">
+            <%= render @company_jobs %>
+          </div>
+        </div>
           <%= will_paginate @company_jobs %>
       <% end %>
     </section>

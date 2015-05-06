@@ -21,21 +21,29 @@
 <div class="row">
   <div class="col-md-12">
     <% if @searched %>
-    <% if @jobs.any? %>
-      <h4>Jobs Search Results</h4>
+      <% if @jobs.any? %>
+        <h4>Jobs Search Results</h4>
+      <% else %>
+        <h4>No results found for that search term.</h4>
+      <% end %>
     <% else %>
-      <h4>No results found for that search term.</h4>
-    <% end %>
-    <% else %>
+      <h4>Recent Jobs</h4>
     <% end %>
     <% if @jobs.any? %>
-    <h4>Recent Jobs</h4>
+    <div class="laptop-section">
       <table class="table table-bordered show-header">
         <tr><th>Actions</th><th><%= sortable "name", "Title" %></th><th><%= sortable "description" %></th>
         <th><%= sortable "company_id", "Company" %></th>
         <th>Created On</th></tr>
         <%= render @jobs %>
       </table>
+      </div>
+    <div class="mobile-section">
+      <div class="list-group">
+        <%= render @jobs %>
+      </div>
+    </div>
+      
       <%= will_paginate @jobs %>
     <% else %>
     <h3>No job listings yet.</h3>

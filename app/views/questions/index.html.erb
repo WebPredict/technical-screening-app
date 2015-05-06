@@ -72,18 +72,27 @@
     <% else %>
     <h4>All Questions</h4>
     <% end %>
+    
+    <div class="laptop-section">
     <div class="table-responsive">
-      <table class="table table-bordered show-header">
-        <tr>
-          <% if current_user != nil %>
-          <th>Actions</th>
-          <% end %>
-          <th><%= sortable_with_search "content", "Question" %></th><th><%= sortable_with_search "answer" %></th>
-        <th><%= sortable_with_search "difficulty_id", "Difficulty" %></th><th><%= sortable_with_search "question_type_id", "Question Type" %></th>
-        <th><%= sortable_with_search "categories.name", "Category" %></th></tr>
-        <%= render @questions %>
-      </table>
-    </div>
+        <table class="table table-bordered show-header">
+          <tr>
+            <% if current_user != nil %>
+            <th>Actions</th>
+            <% end %>
+            <th><%= sortable_with_search "content", "Question" %></th><th><%= sortable_with_search "answer" %></th>
+          <th><%= sortable_with_search "difficulty_id", "Difficulty" %></th><th><%= sortable_with_search "question_type_id", "Question Type" %></th>
+          <th><%= sortable_with_search "categories.name", "Category" %></th></tr>
+          <%= render @questions %>
+        </table>
+      </div>
+      </div>
+      <div class="mobile-section">
+        <div class="list-group">
+          <%= render @questions %>
+        </div>
+      </div>
+
       <%= will_paginate @questions %>
   </div>
 </div>
