@@ -1,3 +1,4 @@
+<div class="laptop-section">
 <tr id="candidate-<%= candidate.id %>">
   <td>
       <% if @single_candidate_select %>
@@ -40,3 +41,32 @@
     <% end %>
     </td>
 </tr>
+</div>
+
+<div class="mobile-section">
+  <a class="list-group-item" href="/candidates/<%= candidate.id %>" >
+        <small class="list-group-item-text">
+            Created on
+            <span><%= candidate.created_at.strftime("%m/%d/%Y") if candidate.created_at? %></span>
+        </small>
+        <h4 class="list-group-item-heading">
+          <%= candidate.name %>
+        </h4>
+           <% if @single_candidate_select %>
+            <%= radio_button_tag "candidate_ids[]", candidate.id %>
+          <% end %>
+          <p class="list-group-item-text">
+            <% if !candidate.phone.blank? %>
+              <%= phone_format(candidate.phone) %> / 
+            <% end %>
+            <%= candidate.email %>
+          </p>
+          <p class="list-group-item-text">
+            <% if candidate.test_submissions.any? %> 
+            See Results
+            <% else %>
+            No results yet.
+            <% end %>
+          </p>
+    </a>
+</div>

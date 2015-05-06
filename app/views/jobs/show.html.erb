@@ -25,12 +25,21 @@
     <section>
       <% if @job_candidates != nil && @job_candidates.count > 0 %>
         <h4>This Job's Candidates:</h4>
+        
+        <div class="laptop-section">
           <table class="table table-bordered show-header">
             <tr><th>Actions</th><th><%= sortable "name" %></th><th><%= sortable "email" %></th><th><%= sortable "phone" %></th>
-        <th>Created On</th></th><th>Submissions</th></tr>
+            <th>Created On</th></th><th>Submissions</th></tr>
 
             <%= render @job_candidates %>
           </table>
+        </div>
+        <div class="mobile-section">
+          <div class="list-group">
+            <%= render @job_candidates %>
+          </div>
+        </div>
+
           <%= will_paginate @job_candidates %>
         <% else %>
           <strong>No candidates for this job yet. <%= link_to "Add Candidate", new_candidate_path(job_id: @job.id), 
