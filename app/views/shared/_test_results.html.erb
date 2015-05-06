@@ -7,15 +7,23 @@
     </div>
   <div class="panel-body">
 <% if @test_submissions && @test_submissions.any? %>
-    <div class="table-responsive">
-    <table class="table">
-      <tr><th>Actions</th><th>Candidate Name</th><th>Test Name</th><th>Test Submission</th>
-      <th>Score</th><th>Time</th></tr>
-      <tbody>
-      <%= render @test_submissions %>
-      </tbody>
-    </table>
+    <div class="mobile-section">
+      <div class="table-responsive">
+      <table class="table">
+        <tr><th>Actions</th><th>Candidate Name</th><th>Test Name</th><th>Test Submission</th>
+        <th>Score</th><th>Time</th></tr>
+        <tbody>
+        <%= render @test_submissions %>
+        </tbody>
+      </table>
+      </div>
     </div>
+    <div class="mobile-section">
+      <div class="list-group">
+        <%= render @test_submissions %>
+      </div>
+    </div>
+  
   <%= will_paginate @test_submissions %>
 <% else %>
 <strong>No test results yet.</strong>

@@ -1,3 +1,4 @@
+<div class="laptop-section">
 <tr id="company-<%= company.id %>">
   <td>
     <% if company.jobs.any? %>
@@ -13,3 +14,33 @@
   <td><%= company.address %></td>
   <td><%= company.created_at.strftime("%m/%d/%Y") if company.created_at? %></td>
 </tr>
+</div>
+
+<div class="mobile-section">
+  <a class="list-group-item" href="/companies/<%= company.id %>" >
+        <small class="list-group-item-text">
+            Created on
+            <span><%= company.created_at.strftime("%m/%d/%Y") if company.created_at? %></span>
+        </small>
+        <h4 class="list-group-item-heading">
+          <%= company.name %>
+        </h4>
+          <p class="list-group-item-text">
+            <% if !company.phone.blank? %>
+              <%= phone_format(company.phone) %> / 
+            <% end %>
+            <%= company.email %>
+          </p>
+          <% if !company.address.blank? %>
+            <p class="list-group-item-text">
+                <%= company.address %> 
+            </p>
+          <% end %>
+          
+          <% if !company.manager.blank? %>
+            <p class="list-group-item-text">
+                Manager: <%= company.manager %> 
+            </p>
+          <% end %>
+    </a>
+</div>

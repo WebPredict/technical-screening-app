@@ -60,11 +60,19 @@
     <section>
       <% if @test_results != nil && @test_results.any? %>
         <h4>This Test's Submissions / Results (<%= @test_results.count %>):</h4>
-      <table class="table table-bordered show-header">
-        <tr><th>Actions</th><th>Candidate Name</th><th>Test Name</th><th><%= sortable "name", "Submission Name" %></th>
-        <th><%= sortable "score" %></th><th><%= sortable "time" %></th></tr>
-        <%= render @test_results %>
-      </table>
+        
+        <div class="laptop-section">
+          <table class="table table-bordered show-header">
+            <tr><th>Actions</th><th>Candidate Name</th><th>Test Name</th><th><%= sortable "name", "Submission Name" %></th>
+            <th><%= sortable "score" %></th><th><%= sortable "time" %></th></tr>
+            <%= render @test_results %>
+          </table>
+        </div>
+        <div class="mobile-section">
+          <div class="list-group">
+            <%= render @test_results %>
+          </div>
+        </div>
         <%= will_paginate @test_results %>
       <% else %>
       <h3>No results for this test yet.</h3>
