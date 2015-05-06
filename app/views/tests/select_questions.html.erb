@@ -8,8 +8,8 @@
   <%= form_tag update_questions_path, :class => "nicesearch", :method => 'post' do %>
   <%= hidden_field_tag :id, @test.id %>
     <table class="table table-bordered show-header" id="selected_questions_table">
-      <tr><th><%= check_box_tag "selected_questions_selectall", "1", true , :onclick => "toggleSelectedQuestions()" %> 
-      Include All</th><th><%= sortable_with_id "content", "Question", @test.id %></th>
+      <tr><th><div class="header-checkbox"><%= check_box_tag "selected_questions_selectall", "1", true , :onclick => "toggleSelectedQuestions()" %> 
+      Toggle</div></th><th><%= sortable_with_id "content", "Question", @test.id %></th>
       <th><%= sortable_with_id "answer", "Answer", @test.id %></th>
       <th><%= sortable_with_id "difficulty_id", "Difficulty", @test.id %></th>
       <th><%= sortable_with_id "question_type_id", "Question Type", @test.id %></th>
@@ -46,7 +46,8 @@
   <%= form_tag submit_questions_path, :class => "nicesearch", :method => 'post' do %>
   <%= hidden_field_tag :id, @test.id %>
     <table class="table table-bordered show-header" id="available_questions_table">
-      <tr><th><%= check_box_tag "available_questions_selectall", "1", false , :onclick => "toggleAvailableQuestions()" %> Add All</th>
+      <tr><th><div class="header-checkbox"><%= check_box_tag "available_questions_selectall", "1", false , :onclick => "toggleAvailableQuestions()" %> Toggle
+      </div></th>
       <th><%= sortable_with_id "content", "Question", @test.id %></th>
       <th><%= sortable_with_id "answer", "Answer", @test.id %></th>
       <th><%= sortable_with_id "difficulty_id", "Difficulty", @test.id %></th>
