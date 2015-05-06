@@ -1,5 +1,4 @@
 
-<div class="laptop-section">
 <tr id="question-<%= question.id %>">
   
   <% if current_user != nil %>
@@ -47,29 +46,4 @@
   <td><%= question.question_type.name %></td>
   <td><%= question.category.name %></td>
 </tr>
-</div>
 
-<div class="mobile-section">
-  <a class="list-group-item" href="/questions/<%= question.id %>" >
-        <small class="list-group-item-text">
-            Created on
-            <span><%= question.created_at.strftime("%m/%d/%Y") if question.created_at? %></span>
-        </small>
-         <p class="list-group-item-text">
-           <strong><%= question.category.name %> / <%= question.difficulty.level %> / <%= question.question_type.name %></strong>
-           </p>
-           <% if current_user != nil && @select_mode %>
-          <%= check_box_tag "question_ids[]", question.id, @preselect_checkboxes %>
-          <% end %>
-        <h4 class="list-group-item-heading">
-          <%= question.formatted_content %>
-        </h4>
-          <p class="list-group-item-text">
-          <% if logged_in? && current_user.premium? %>
-            <%= Nokogiri::HTML::DocumentFragment.parse(question.answer).to_html.html_safe %></td>
-          <% else %>
-            <i class="glyphicon glyphicon-user"></i>
-          <% end %>
-          </p>
-    </a>
-</div>

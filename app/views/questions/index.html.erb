@@ -86,12 +86,12 @@
           <%= render @questions %>
         </table>
       </div>
+    </div>
+    <div class="mobile-section">
+      <div class="list-group">
+          <%= render partial: "mobile_question", collection: @questions, as: :question %>
       </div>
-      <div class="mobile-section">
-        <div class="list-group">
-          <%= render @questions %>
-        </div>
-      </div>
+    </div>
 
       <%= will_paginate @questions %>
   </div>

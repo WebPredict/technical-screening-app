@@ -93,10 +93,12 @@
     $('#question_question_type_id').trigger('change');
   });
 
+  <% if params[:edit_raw].blank? %>
   $(function() {
     $('#question_answer').editable({
       inlineMode: false
     });
   });
+  <% end %>
 
 </script>

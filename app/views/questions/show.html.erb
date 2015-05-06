@@ -7,6 +7,9 @@
       <%= link_to "Create", new_question_path, class: "btn btn-sm btn-primary btn-responsive" %> 
       <% if @question.user_id == @current_user.id %>
         <%= link_to "Edit", edit_question_path(@question), class: "btn btn-sm btn-primary btn-responsive" %> 
+        <% if @current_user.admin? %>
+        <%= link_to "Edit Raw", edit_question_path(@question, edit_raw: true), class: "btn btn-sm btn-primary btn-responsive" %> 
+        <% end %>
         <% if !@question.is_public? %>
         <%= link_to "Remove", @question, method: :delete,
                            data: { confirm: "Delete this question?" }, :class => "btn btn-sm btn-danger btn-responsive" %>
