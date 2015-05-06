@@ -91,17 +91,24 @@ class TestSubmissionsController < ApplicationController
   
   def submit_forward_submission
     @test_submission = TestSubmission.find(params[:test_submission_id])
-    @test_submission.candidate.send_results(@test_submission, params[:email])
     
-    if @test_submission.sent_to == nil
-      @test_submission.sent_to = params[:email]
-    else
-      @test_submission.sent_to = @test_submission.sent_to + ", " + params[:email]
-    end 
-    @test_submission.save
-    
-    flash[:success] = "Test results sent!"
-    redirect_to @test_submission
+    email = params[:email]
+    if email =~ /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i   
+      @test_submission.candidate.send_results(@test_submission, params[:email])
+      
+      if @test_submission.sent_to == nil
+        @test_submission.sent_to = params[:email]
+      else
+        @test_submission.sent_to = @test_submission.sent_to + ", " + params[:email]
+      end 
+      @test_submission.save
+      
+      flash[:success] = "Test results sent!"
+      redirect_to @test_submission
+    else 
+      flash.now[:danger] = "Please enter a valid email address."
+      render 'forward_submission'
+    end
   end
   
   def score_test
