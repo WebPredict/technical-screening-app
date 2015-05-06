@@ -21,7 +21,7 @@
     </div>
     <div class="mobile-section">
       <div class="list-group">
-        <%= render @companies %>
+        <%= render partial: "companies/mobile_company", collection: @companies, as: :company %>
       </div>
     </div>
   <%= will_paginate @companies %>

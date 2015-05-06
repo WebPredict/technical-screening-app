@@ -30,7 +30,7 @@
       </div>
       <div class="mobile-section">
         <div class="list-group">
-          <%= render @candidates %>
+          <%= render partial: "candidates/mobile_candidate", collection: @candidates, as: :candidate %>
         </div>
       </div>
 
