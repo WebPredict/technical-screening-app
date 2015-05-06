@@ -188,27 +188,26 @@ aside {
   }
   
   .featured_list {
-    width: 70%;
     font-size: 1.2em;
     margin: 0 auto 10px;
+    list-style-type: none;
   }
-
 
 }
 
 @media (max-width: 500px) {
   .featured_list {
-    width: 90%;
     font-size: 1.2em;
     margin: 0 auto 10px;
+    list-style-type: none;
   }
 }
 
 @media(min-width: 501px) and (max-width: 768px) {
   .featured_list {
-    width: 70%;
     font-size: 1.2em;
     margin: 0 auto 10px;
+    list-style-type: none;
   }
 }
 
@@ -288,7 +287,7 @@ div.scrollable {
   }
   
   .featured_list {
-    width: 70%;
+    list-style-type: none;
     font-size: 1.2em;
     margin: 0 auto 10px;
   }
