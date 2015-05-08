@@ -12,11 +12,18 @@
   <div class="col-md-12">
     
 <%= form_tag questions_path, id: "search-questions-form", :class => "nicesearch", :method => 'get' do %>
+    <% if logged_in? %>
+     <div style="float: right">
+      <label>Only My Questions 
+          <%= check_box_tag "only_my_questions", "1", params[:only_my_questions], data: {"size" => "mini" } %></label>
+      </label>
+    </div>
+    <% end %>
+
   <label>Category <span style="margin-left: 10px"></span><a href class="btn btn-primary btn-xs" data-toggle="modal" data-target="#categoryList">
   Show Full List
 </a>
 </label>
-  
    <div class="field">
      <%= text_field_tag :category, params[:category], id: "navbar-search-input", class: 'form-control', 
      placeholder: 'Category Name...' %>
@@ -57,6 +64,7 @@
         </div>
     </div>
     </div>
+    
 <% end %>
 </div>
 </div>
@@ -116,3 +124,7 @@
   </div>
 </div>
 <% end %>
+
+<script>
+    $("[name='only_my_questions']").bootstrapSwitch();
+</script>

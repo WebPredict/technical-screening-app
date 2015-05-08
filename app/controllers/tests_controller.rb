@@ -8,16 +8,30 @@ class TestsController < ApplicationController
   add_breadcrumb "Tests", :tests_path
 
   def index
-    query = ' (is_public = ? OR user_id = ?) '
-    searchparam = ""
-    if !params[:search].blank?
-        query += ' AND (lower(name) LIKE ? OR lower(description) LIKE ?) '
-        searchparam = "%#{params[:search].downcase}%"
-      @tests = Test.where(query, true, current_user, searchparam, searchparam).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 10)
-    else
-      @tests = Test.where(query, true, current_user).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 10)
-    end
-
+    only_mine = params[:only_my_tests]
+    
+    if only_mine.blank?
+      query = ' (is_public = ? OR user_id = ?) '
+      searchparam = ""
+      if !params[:search].blank?
+          query += ' AND (lower(name) LIKE ? OR lower(description) LIKE ?) '
+          searchparam = "%#{params[:search].downcase}%"
+        @tests = Test.where(query, true, current_user, searchparam, searchparam).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 10)
+      else
+        @tests = Test.where(query, true, current_user).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 10)
+      end
+    else 
+      query = ' user_id = ? '
+      searchparam = ""
+      if !params[:search].blank?
+          query += ' AND (lower(name) LIKE ? OR lower(description) LIKE ?) '
+          searchparam = "%#{params[:search].downcase}%"
+        @tests = Test.where(query, current_user, searchparam, searchparam).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 10)
+      else
+        @tests = Test.where(query, current_user).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 10)
+      end
+    end 
+    
     if current_user != nil && (current_user.tests == nil || !current_user.tests.any?)
       flash.now[:info] = "You can create a screening test to send to a job candidate, or browse existing tests here. You can also clone and modify existing tests."
     end
@@ -298,7 +312,7 @@ class TestsController < ApplicationController
     def test_params
       params.require(:test).permit(:name, :description, :question_ids, :is_public, :topic_list, 
       :difficulty_level, :num_per_topic, :created_at, :difficulty_level_1, :difficulty_level_2, 
-      :difficulty_level_3)
+      :difficulty_level_3, :only_my_tests)
     end
     
     def correct_user

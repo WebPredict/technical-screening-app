@@ -20,6 +20,7 @@
 //= require plugins/font_size.min.js
 //= require plugins/file_upload.min.js
 //= require plugins/lists.min.js
+//= require bootstrap-switch
 //= require_tree .
 
 var ready;

@@ -61,8 +61,14 @@ class QuestionsController < ApplicationController
     end
     session[:question_difficulty] = params[:difficulty_id]
 
+    only_mine = params[:only_my_questions]
+    
     if current_user != nil
-      @questions = @questions.where("is_public = ? OR user_id = ?", true, current_user.id).paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
+      if only_mine.blank?
+        @questions = @questions.where("is_public = ? OR user_id = ?", true, current_user.id).paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
+      else
+        @questions = @questions.where("user_id = ?", current_user.id).paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
+      end
     else
       @questions = @questions.where("is_public = ?", true).paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
     end
@@ -300,7 +306,8 @@ class QuestionsController < ApplicationController
 
     def question_params
       params.require(:question).permit(:difficulty_id, :category_id, :question_type_id, :content, 
-      :answer, :answer2, :answer3, :answer4, :answer5, :short_answer, :multiple_choice_answer, :is_public)
+      :answer, :answer2, :answer3, :answer4, :answer5, :short_answer, :multiple_choice_answer, 
+      :is_public, :only_my_questions)
     end
     
     def correct_user
