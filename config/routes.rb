@@ -27,6 +27,9 @@ Rails.application.routes.draw do
   get 'random_question' => 'questions#random_question'
   get 'next_question' => 'questions#next_question'
   
+  get 'close_job' => 'jobs#close'
+  get 'open_job' => 'jobs#open'
+  
   get 'news' => 'static_pages#news'
   get 'signup'  => 'users#new'
   get    'login'   => 'sessions#new'

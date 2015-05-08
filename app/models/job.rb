@@ -6,4 +6,8 @@ class Job < ActiveRecord::Base
   validates :name, presence: true, length: { maximum: 255 }
   validates :user_id, presence: true
 
+  def open?
+    return closed_date == nil
+  end 
+
 end

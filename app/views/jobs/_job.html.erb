@@ -13,6 +13,7 @@
     <% end %>
     </td>
   <td><%= job.created_at.strftime("%m/%d/%Y") if job.created_at? %></td>
+  <td><%= job.closed_date.strftime("%m/%d/%Y") if job.closed_date? %></td>
 </tr>
 </div>
 

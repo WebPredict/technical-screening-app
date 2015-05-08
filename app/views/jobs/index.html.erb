@@ -34,7 +34,7 @@
       <table class="table table-bordered show-header">
         <tr><th>Actions</th><th><%= sortable "name", "Title" %></th><th><%= sortable "description" %></th>
         <th><%= sortable "company_id", "Company" %></th>
-        <th>Created On</th></tr>
+        <th><%= sortable "created_at", "Created On" %></th><th><%= sortable "closed_date", "Closed On" %></th></tr>
         <%= render @jobs %>
       </table>
       </div>

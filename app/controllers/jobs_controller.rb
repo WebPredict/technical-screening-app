@@ -1,6 +1,6 @@
 class JobsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy, :edit, :update, :show]
-  before_action :correct_user,   only: [:destroy, :edit, :update, :show]
+  before_action :correct_user,   only: [:destroy, :edit, :update, :show, :open, :close]
   
   helper_method :sort_column, :sort_direction
 
@@ -99,6 +99,22 @@ class JobsController < ApplicationController
     add_breadcrumb "Edit Job Listing", edit_job_path
   end
 
+  def close
+    @job = Job.find(params[:id])
+    @job.closed_date = Time.now
+    @job.save 
+    flash[:success] = "Job closed."
+    redirect_to @job
+  end
+  
+  def open
+    @job = Job.find(params[:id])
+    @job.closed_date = nil
+    @job.save 
+    flash[:success] = "Job re-opened."
+    redirect_to @job
+  end
+  
   def update
     if params[:commit] == "Cancel"
       redirect_to jobs_path

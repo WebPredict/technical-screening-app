@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150502132509) do
+ActiveRecord::Schema.define(version: 20150508161037) do
 
   create_table "answered_questions", force: :cascade do |t|
     t.string   "answer"
@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(version: 20150502132509) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.datetime "closed_date"
   end
 
   add_index "jobs", ["company_id"], name: "index_jobs_on_company_id"

@@ -4,6 +4,12 @@
         <%= link_to "Search", jobs_path, class: "btn btn-sm btn-primary btn-responsive" %> 
         <%= link_to "Create", new_job_path, class: "btn btn-sm btn-primary btn-responsive" %> 
         <%= link_to "Edit", edit_job_path(@job), class: "btn btn-sm btn-primary btn-responsive" %> 
+        
+        <% if @job.open? %>
+          <%= link_to "Close", close_job_path(id: @job.id), data: { confirm: "Close this job?" }, class: "btn btn-sm btn-primary btn-responsive" %> 
+        <% else %>
+          <%= link_to "Open", open_job_path(id: @job.id), class: "btn btn-sm btn-primary btn-responsive" %> 
+        <% end %>
         <%= link_to "Add Candidate", new_candidate_path(job_id: @job.id), 
           class: "btn btn-primary btn-sm btn-responsive" %>
         <%= link_to "Remove", @job, method: :delete,
@@ -14,7 +20,11 @@
 <div class="row min-padded-row">
   <div class="col-md-12">
         <table class="table">
-      <tr><th>Job Title:</th><td><%= @job.name %></td></tr>
+      <tr><th>Job Title:</th><td><%= @job.name %> <% if @job.open? %>
+        <span class="label label-info">Open</span>
+        <% else %>
+        <span class="label label-info">Closed</span>
+        <% end %></td></tr>
       <tr><th>Description:</th><td><%= Nokogiri::HTML::DocumentFragment.parse(@job.description).to_html.html_safe %></td></tr>
       <tr><th>Manager:</th><td><%= @job.manager %></td></tr>
       <tr><th>Company:</th><td><%= link_to @job.company.name, @job.company unless @job.company == nil %></td></tr>
