@@ -353,6 +353,7 @@ input {
 input[type="radio"] {
   margin-top: -1px;
   vertical-align: middle;
+  width: 15px; 
 }
 
 input[type="checkbox"] {
@@ -526,6 +527,7 @@ span.picture {
 .jumbotron {
   h2 {
     color: #000;
+    font-size: 2em;
   }
   background-image: image-url("bgpic.jpg");
   h1 { 

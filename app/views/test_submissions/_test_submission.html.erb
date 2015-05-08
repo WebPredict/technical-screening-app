@@ -12,7 +12,7 @@
             <%= link_to "Forward", forward_submission_path(id: test_submission.id), class: "btn btn-xs btn-primary" %>
       <% end %>
   </td>
-  <td><%= test_submission.candidate.name %></td>
+  <td><%= link_to test_submission.candidate.name, test_submission.candidate %></td>
   <td><%= link_to test_submission.test.name, test_submission.test %></td>
   <td><%= link_to test_submission.name, test_submission %></td>
   <td><%= test_submission.formatted_score %></td>

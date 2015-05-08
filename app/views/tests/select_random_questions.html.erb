@@ -9,7 +9,7 @@
        <a href class="btn btn-primary btn-xs" data-toggle="modal" data-target="#categoryList">
    Show Categories List
 </a>
-      <%= text_field_tag :topic_list, "Category List...", class: 'form-control' %>
+      <%= text_field_tag :topic_list, params[:topic_list], class: 'form-control', placeholder: 'Category List...' %>
 
 
 <!-- Modal -->
