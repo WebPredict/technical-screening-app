@@ -20,6 +20,11 @@
         </div>
     </div>
     <br>
+    <% if @single_test_select %>
+      <%= hidden_field_tag :id, @candidate.id %>
+      <%= hidden_field_tag :single_test_select, @single_test_select %>
+    <% end %>
+        
   <div class="col-md-12">
     <div style="float:right">
     <label>Only My Tests 
@@ -51,7 +56,7 @@
         <%= form_tag select_test_path, :class => "nicesearch", :method => 'post' do %>
         <%= hidden_field_tag :id, @candidate.id %>
         
-        <div class="mobile-section">
+        <div class="laptop-section">
           <table class="table table-bordered show-header">
             <tr><th>Select Test</th><th><%= sortable "name" %></th><th><%= sortable "description" %></th><th># Questions</th>
             <th><%= sortable "created_at", "Created On" %></th></tr>

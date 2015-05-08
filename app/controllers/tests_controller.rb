@@ -9,7 +9,12 @@ class TestsController < ApplicationController
 
   def index
     only_mine = params[:only_my_tests]
+    @single_test_select = params[:single_test_select]
     
+    if !@single_test_select.blank?
+      @candidate = Candidate.find(params[:id])
+    end
+
     if only_mine.blank?
       query = ' (is_public = ? OR user_id = ?) '
       searchparam = ""
