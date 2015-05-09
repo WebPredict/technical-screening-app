@@ -69,7 +69,7 @@ class CandidatesController < ApplicationController
       flash[:success] = "Test sent to candidate " + @candidates.first.name + "."
       redirect_to root_url
     else
-      flash[:info] = "Please select a test to send."
+      flash.now[:info] = "Please select a candidate to send to."
       render 'send_test'
     end
   end

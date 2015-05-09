@@ -141,10 +141,60 @@ class JobsController < ApplicationController
     redirect_to jobs_path
   end
 
+  def add_candidate
+    @job = Job.find(params[:job_id])
+    flash.now[:info] = "Select an existing candidate to add to job '" + @job.name + "':"
+
+    @candidates = current_user.candidates
+    @single_candidate_select = true
+ 
+    if @candidates != nil
+      @candidates = @candidates.paginate(page: params[:page], per_page: 10)
+    end
+ 
+    render 'add_candidate'
+  end
+  
+  def filter_add_candidates
+    query = ''
+    searchparam = ""
+    if params[:search] && params[:search] != ''
+        query += ' lower(name) LIKE ? '
+        searchparam = "%#{params[:search].downcase}%"
+    end
+
+    @candidates = current_user.candidates
+    
+    if @candidates != nil
+      @candidates = @candidates.where(query, searchparam).paginate(page: params[:page], per_page: 10)
+    end
+
+    @searched = query != ''
+  end
+
+  def select_add_candidate
+    @job = Job.find(params[:id])
+    if params[:commit] == "Cancel"
+      redirect_to @job 
+    else
+      @candidates = Candidate.find(params[:candidate_ids])
+      
+      if @candidates.any?
+        @job.candidates << @candidates.first 
+        @job.save 
+        flash[:success] = "Candidate " + @candidates.first.name + " added to job '" + @job.name + ".'"
+        redirect_to @job
+      else
+        flash.now[:info] = "Please select a candidate to add."
+        render 'add_candidate'
+      end
+    end
+  end
+
   private
 
     def job_params
-      params.require(:job).permit(:name, :description, :company_id, :manager, :phone)
+      params.require(:job).permit(:name, :description, :company_id, :manager, :phone, :job_id)
     end
     
     def correct_user

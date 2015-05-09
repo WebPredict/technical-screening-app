@@ -37,6 +37,8 @@ Rails.application.routes.draw do
   post  'submitcontact' => 'static_pages#submitcontact'
   delete 'logout'  => 'sessions#destroy'
   
+  get 'add_candidate' => 'jobs#add_candidate'
+  post 'select_add_candidate' => 'jobs#select_add_candidate'
   get 'select_questions' => 'tests#select_questions'
   get 'select_random_questions' => 'tests#select_random_questions'
   post 'update_questions' => 'tests#update_questions'
@@ -61,6 +63,7 @@ Rails.application.routes.draw do
   get 'add_note' => 'candidates#add_note'
   post 'select_candidate' => 'candidates#select_candidate'
   post 'filter_candidates' => 'candidates#filter_candidates'
+  post 'filter_add_candidates' => 'jobs#filter_add_candidates'
   
   resources :companies
 

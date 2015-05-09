@@ -1,13 +1,10 @@
 <div class="page-header">
-     <section style="float:right">
-      <%= link_to "Create New Candidate", new_candidate_path, class: "btn btn-sm btn-primary btn-responsive" %> 
-    </section>
-<h3>Filter Candidates To Send</h3>
+<h3>Filter Candidates To Add</h3>
 </div>
 <div class="row">
   <div class="col-md-12">
 
-<%= form_tag filter_candidates_path, :class => "nicesearch", :method => 'get' do %>
+<%= form_tag filter_add_candidates_path, :class => "nicesearch", :method => 'get' do %>
     <div class="input-group">
       <%= text_field_tag :search, params[:search], :class => "form-control" %>
         <div class="input-group-btn">
@@ -28,21 +25,21 @@
       <% end %>
     <% end %>
       <br>
-        <%= form_tag select_candidate_path, :class => "nicesearch", :method => 'post' do %>
-          <%= hidden_field_tag :id, @test.id %>
+        <%= form_tag select_add_candidate_path, :class => "nicesearch", :method => 'post' do %>
+          <%= hidden_field_tag :id, @job.id %>
           <table class="table table-bordered show-header">
-          <tr><th>Actions</th><th><%= sortable_with_id "name", "Name", @test.id %></th><th><%= sortable_with_id "email", "Email", @test.id %></th>
-          <th><%= sortable_with_id "phone", "Phone", @test.id %></th>
+          <tr><th>Actions</th><th><%= sortable_with_id "name", "Name", @job.id %></th><th><%= sortable_with_id "email", "Email", @job.id %></th>
+          <th><%= sortable_with_id "phone", "Phone", @job.id %></th>
           <th>Created On</th></th><th>Submissions</th></th></tr>
             <%= render @candidates %>
           </table>
   
           <div class="form-group">
             <div style="float:right">
-              <%= submit_tag "Send Test To Selected Candidate", id: "send_test_submit", disabled: true, 
+              <%= submit_tag "Add Selected Candidate", id: "add_candidate_submit", disabled: true, 
               :class => "btn btn-primary btn-responsive" %>
               <span></span>
-          <%= f.submit "Cancel", class: "btn btn-default btn-responsive" %>
+              <%= submit_tag "Cancel", class: "btn btn-default btn-responsive" %>
           </div>
           </div>
   
@@ -54,7 +51,7 @@
 <script>
   $(function () {
     $('input[type="radio"]').change (function () {
-      $('#send_test_submit').removeAttr('disabled');
+      $('#add_candidate_submit').removeAttr('disabled');
     });
   });
   

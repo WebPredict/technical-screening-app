@@ -46,19 +46,23 @@ class CategoriesController < ApplicationController
   end
   
   def update
-    @category = Category.find(params[:id])
-    respond_to do |format|
-      if @category.update_attributes(category_params)
-        format.html { 
-          flash[:success] = "Category was successfully updated."
-          redirect_to @category
-        }
-        format.json { render :show, status: :ok, location: @category }
-      else
-        format.html { render :edit }
-        format.json { render json: @category.errors, status: :unprocessable_entity }
+    if params[:commit] == "Cancel"
+      redirect_to all_categories_path
+    else 
+      @category = Category.find(params[:id])
+      respond_to do |format|
+        if @category.update_attributes(category_params)
+          format.html { 
+            flash[:success] = "Category was successfully updated."
+            redirect_to @category
+          }
+          format.json { render :show, status: :ok, location: @category }
+        else
+          format.html { render :edit }
+          format.json { render json: @category.errors, status: :unprocessable_entity }
+        end
       end
-    end
+    end 
   end
   
   def new

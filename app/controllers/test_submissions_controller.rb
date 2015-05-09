@@ -30,6 +30,15 @@ class TestSubmissionsController < ApplicationController
   end
 
   def create
+    if params[:commit] == "Cancel"
+      if logged_in?
+        redirect_to Test.find(params[:test_id])
+      else
+        redirect_to root_url
+      end 
+      return 
+    end 
+    
     if !params[:id].blank?
       @candidate = Candidate.find(params[:id])
     elsif !params[:email].blank?

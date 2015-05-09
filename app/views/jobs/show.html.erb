@@ -1,16 +1,17 @@
 <% provide(:title, @job.name) %>
 <div class="page-header">
     <section class="laptop-section" style="float:right">
-        <%= link_to "Search", jobs_path, class: "btn btn-sm btn-primary btn-responsive" %> 
-        <%= link_to "Create", new_job_path, class: "btn btn-sm btn-primary btn-responsive" %> 
-        <%= link_to "Edit", edit_job_path(@job), class: "btn btn-sm btn-primary btn-responsive" %> 
-        
         <% if @job.open? %>
           <%= link_to "Close", close_job_path(id: @job.id), data: { confirm: "Close this job?" }, class: "btn btn-sm btn-primary btn-responsive" %> 
         <% else %>
           <%= link_to "Open", open_job_path(id: @job.id), class: "btn btn-sm btn-primary btn-responsive" %> 
         <% end %>
+        <%= link_to "Search", jobs_path, class: "btn btn-sm btn-primary btn-responsive" %> 
+        <%= link_to "Create", new_job_path, class: "btn btn-sm btn-primary btn-responsive" %> 
+        <%= link_to "Edit", edit_job_path(@job), class: "btn btn-sm btn-primary btn-responsive" %> 
         <%= link_to "Add Candidate", new_candidate_path(job_id: @job.id), 
+          class: "btn btn-primary btn-sm btn-responsive" %>
+        <%= link_to "Add Existing Candidate", add_candidate_path(job_id: @job.id), 
           class: "btn btn-primary btn-sm btn-responsive" %>
         <%= link_to "Remove", @job, method: :delete,
                            data: { confirm: "Delete this job?" }, :class => "btn btn-sm btn-danger btn-responsive" %>
@@ -58,6 +59,11 @@
     </section>
     <br><br>
         <section class="mobile-section" style="float:right">
+        <% if @job.open? %>
+          <%= link_to "Close", close_job_path(id: @job.id), data: { confirm: "Close this job?" }, class: "btn btn-sm btn-primary btn-responsive" %> 
+        <% else %>
+          <%= link_to "Open", open_job_path(id: @job.id), class: "btn btn-sm btn-primary btn-responsive" %> 
+        <% end %>
         <%= link_to "Search", jobs_path, class: "btn btn-sm btn-primary btn-responsive" %> 
         <%= link_to "Create", new_job_path, class: "btn btn-sm btn-primary btn-responsive" %> 
         <%= link_to "Edit", edit_job_path(@job), class: "btn btn-sm btn-primary btn-responsive" %> 
