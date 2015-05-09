@@ -94,7 +94,7 @@ class QuestionsController < ApplicationController
         current_user.questions.count > Limits::MAX_QUESTIONS_GOLD
         flash[:info] = "Limit for number of questions for Gold membership level is: " + Limits::MAX_QUESTIONS_GOLD.to_s + ". Upgrade now to increase your limit!"
         redirect_to plans_path
-      elsif current_user.membership_level_id == 4 && current_user.questions.any? && 
+      elsif !current_user.admin? && current_user.membership_level_id == 4 && current_user.questions.any? && 
         current_user.questions.count > Limits::MAX_QUESTIONS_PLATINUM
         flash[:info] = "Limit for number of questions for Platinum membership level is: " + Limits::MAX_QUESTIONS_PLATINUM.to_s + 
         ". Contact us to increase your limit!"
