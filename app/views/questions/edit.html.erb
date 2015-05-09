@@ -101,4 +101,13 @@
   });
   <% end %>
 
+  <% if @question.answer == 'A)' %>
+  $('#question_multiple_choice_answer_a').prop("checked", true);
+  <% elsif @question.answer == 'B)' %>
+  $('#question_multiple_choice_answer_b').prop("checked", true);
+  <% elsif @question.answer == 'C)' %>
+  $('#question_multiple_choice_answer_c').prop("checked", true);
+  <% elsif @question.answer == 'D)' %>
+  $('#question_multiple_choice_answer_d').prop("checked", true);
+  <% end %>
 </script>
