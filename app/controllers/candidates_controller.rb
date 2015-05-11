@@ -134,17 +134,21 @@ class CandidatesController < ApplicationController
   end 
 
   def update
-    @candidate = Candidate.find(params[:id])
-    respond_to do |format|
-      if @candidate.update_attributes(candidate_params)
-        format.html { 
-            flash[:success] = "Candidate was successfully updated."
-            redirect_to @candidate 
-          }
-        format.json { render :show, status: :ok, location: @candidate }
-      else
-        format.html { render :edit }
-        format.json { render json: @candidate.errors, status: :unprocessable_entity }
+    if params[:commit] == "Cancel"
+      redirect_to candidates_path
+    else
+      @candidate = Candidate.find(params[:id])
+      respond_to do |format|
+        if @candidate.update_attributes(candidate_params)
+          format.html { 
+              flash[:success] = "Candidate was successfully updated."
+              redirect_to @candidate 
+            }
+          format.json { render :show, status: :ok, location: @candidate }
+        else
+          format.html { render :edit }
+          format.json { render json: @candidate.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

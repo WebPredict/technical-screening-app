@@ -30,8 +30,14 @@
 <br>
 <div class="row">
 <h3>Select Additional Questions</h3>
-<%= form_tag select_questions_path, :class => "nicesearch", :method => 'get' do %>
+<%= form_tag select_questions_path, id: "search-questions-form", :class => "nicesearch", :method => 'get' do %>
   <%= hidden_field_tag :id, @test.id %>
+  
+    <div class="field">
+     <%= text_field_tag :category, params[:category], id: "navbar-search-input", class: 'form-control', 
+     placeholder: 'Category Name...' %>
+   </div>
+
     <div class="input-group">
       <%= text_field_tag :search, params[:search], :class => "form-control" %>
         <div class="input-group-btn">

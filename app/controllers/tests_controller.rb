@@ -52,13 +52,23 @@ class TestsController < ApplicationController
     query = "id NOT IN (#{question_ids})"
 
     if params[:search] && params[:search] != ''
-        query += ' AND lower(content) LIKE ? '
-        searchparam = "%#{params[:search].downcase}%"
+      query += ' AND lower(content) LIKE ? '
+      searchparam = "%#{params[:search].downcase}%"
       @questions = Question.where(query, @test.id, searchparam).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 10)
     else
       @questions = Question.where(query, @test.id).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 10)
     end
 
+    if !params[:category].blank?
+      found_cat = Category.where("name = ?", params[:category])
+      if found_cat.any?
+        params[:category_id] = found_cat.first.id
+      else
+        params[:category_id] = "0"
+      end
+      @questions = @questions.where("category_id = ?", params[:category_id])
+    end
+    
     @select_mode = true
     @searched = query != ''
     add_breadcrumb "Select Questions", :select_questions_path
