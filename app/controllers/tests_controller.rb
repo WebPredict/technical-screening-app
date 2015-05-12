@@ -205,10 +205,10 @@ class TestsController < ApplicationController
   end
 
   def submit_random_questions
+    @test = Test.find(params[:id])
     topic_list = params[:topic_list].split(",").map(&:strip)
     num_per_topic = params[:num_per_topic]
     if topic_list != nil
-      @test = Test.find(params[:id])
       topic_list.each do |topic|
         if topic == nil
           next
