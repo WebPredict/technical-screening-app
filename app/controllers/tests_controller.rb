@@ -253,7 +253,7 @@ class TestsController < ApplicationController
           else     
             cat_questions = cat_questions.shuffle
             (1..num_per_topic.to_i).each do |index|
-              random_question = cat_questions [index]
+              random_question = cat_questions [index - 1]
                 @test.questions << random_question
             end
           end
