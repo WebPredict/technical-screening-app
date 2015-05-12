@@ -18,6 +18,13 @@ class TestSubmission < ActiveRecord::Base
     end
   end 
 
+  def set_times(start_t, end_t)
+    update_attributes(:start_time => start_t, :end_time => end_t)
+    if end_time != nil && start_time != nil 
+      update_attribute(:duration, (end_time - start_time).to_i)
+    end 
+  end 
+  
   def formatted_score
     if !is_scored
       return "Not scored yet"
@@ -65,6 +72,7 @@ class TestSubmission < ActiveRecord::Base
       end
       @score *= 100.0
       
+      update_attribute(:score, @score)
       candidate.avg_score = @score
       candidate.save
     end

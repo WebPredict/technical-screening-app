@@ -56,9 +56,11 @@ class TestSubmissionsController < ApplicationController
       @test_submission.test = Test.find(params[:test_id])
       @test_submission.candidate = @candidate
 
-      @test_submission.start_time = session[:start_time]
-      @test_submission.end_time = Time.now
+      #@test_submission.start_time = session[:start_time]
+      #@test_submission.end_time = Time.now
 
+      @test_submission.set_times(session[:start_time], Time.now)
+      
       unanswered = 0
       # load collection
       @test_submission.test.questions.each_with_index do |question, index|
