@@ -15,7 +15,13 @@ class JobsController < ApplicationController
         searchparam = "%#{params[:search].downcase}%"
     end
 
+    only_open = params[:only_open_jobs]
+
     @jobs = Job.where("user_id = ?", current_user.id)
+    
+    if !only_open.blank?
+      @jobs = @jobs.where("closed_date is null")
+    end 
     
     if @jobs != nil
       @jobs = @jobs.paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
