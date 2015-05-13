@@ -3,13 +3,13 @@
             Created on
             <span><%= test.created_at.strftime("%m/%d/%Y") if test.created_at? %></span>
         </small>
-         <p class="list-group-item-text">
+         <p class="list-group-item-heading">
            <strong><%= test.name %> (<%= pluralize(test.questions.count, "question") %>)</strong>
            </p>
            <% if @single_test_select %>
               <%= radio_button_tag "test_ids[]", test.id %>
           <% end %>
-        <h4 class="list-group-item-heading">
-          <%= test.description %>
-        </h4>
+        <p class="list-group-item-text">
+          <strong><%= test.description %></strong>
+        </p>
     </a>

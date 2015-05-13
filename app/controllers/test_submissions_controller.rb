@@ -56,11 +56,6 @@ class TestSubmissionsController < ApplicationController
       @test_submission.test = Test.find(params[:test_id])
       @test_submission.candidate = @candidate
 
-      #@test_submission.start_time = session[:start_time]
-      #@test_submission.end_time = Time.now
-
-      @test_submission.set_times(session[:start_time], Time.now)
-      
       unanswered = 0
       # load collection
       @test_submission.test.questions.each_with_index do |question, index|
@@ -77,6 +72,7 @@ class TestSubmissionsController < ApplicationController
         flash[:warning] = "You have " + unanswered.to_s + " unanswered question(s). Press Confirm to submit as is, or continue editing."
         render 'new'
       else
+        @test_submission.set_times(session[:start_time], Time.now)
         if @test_submission.save
           flash[:success] = "Test submission created!"
           redirect_to root_url
