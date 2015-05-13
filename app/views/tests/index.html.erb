@@ -12,7 +12,7 @@
 <div class="row">
   <div class="col-md-12">
 
-<%= form_tag tests_path, :class => "nicesearch", :method => 'get' do %>
+<%= form_tag tests_path, id: "search-tests-form", :class => "nicesearch", :method => 'get' do %>
     <div class="input-group">
       <%= text_field_tag :search, params[:search], :class => "form-control" %>
         <div class="input-group-btn">
@@ -106,7 +106,7 @@
       <%= link_to "Search Questions", questions_path, class: "btn btn-sm btn-primary btn-responsive" %> 
     </section>
 </div>
-
+ 
 <script>
   $(function () {
     $('input[type="radio"]').change (function () {
@@ -116,4 +116,10 @@
   
   $("[name='only_my_tests']").bootstrapSwitch();
 
+  $(function () {
+    $("[name='only_my_tests']").change(function () {
+      alert ('detected change');
+      $('#search-tests-form').submit();
+    });
+  });
 </script>
