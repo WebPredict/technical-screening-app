@@ -201,6 +201,14 @@ aside {
     margin: 0 auto 10px;
     list-style-type: none;
   }
+  
+  .jumbotron {
+    h2 {
+      color:  #e6e6e6;
+      font-size: 2em;
+      -webkit-text-stroke: 1px #000; 
+    }
+  }
 }
 
 @media(min-width: 501px) and (max-width: 768px) {
@@ -526,11 +534,16 @@ span.picture {
   }
 }
 
+@media(min-width: 501px) {
+  .jumbotron {
+    h2 {
+      color: #000;
+      font-size: 2em;
+    }
+  }  
+}
+
 .jumbotron {
-  h2 {
-    color: #000;
-    font-size: 2em;
-  }
   background-image: image-url("bgpic.jpg");
   h1 { 
     font-size: 5em; 
