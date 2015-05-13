@@ -116,10 +116,8 @@
   
   $("[name='only_my_tests']").bootstrapSwitch();
 
-  $(function () {
-    $("[name='only_my_tests']").change(function () {
-      alert ('detected change');
-      $('#search-tests-form').submit();
-    });
+  $('input[name="only_my_tests"]').on('switchChange.bootstrapSwitch', function(event, state) {
+    $('#search-tests-form').submit();
   });
+
 </script>

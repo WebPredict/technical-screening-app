@@ -129,4 +129,9 @@
 
 <script>
     $("[name='only_my_questions']").bootstrapSwitch();
+    
+  $('input[name="only_my_questions"]').on('switchChange.bootstrapSwitch', function(event, state) {
+    $('#search-questions-form').submit();
+  });
+
 </script>
