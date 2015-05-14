@@ -26,7 +26,7 @@ class StaticPagesController < ApplicationController
         #@tests = current_user.tests.paginate(page: params[:page])
         @companies = current_user.companies.paginate(page: params[:page])
         
-        @tests = current_user.tests.joins(:tests_questions)
+        @tests = current_user.tests
 
         @num_tests = @tests.count
         
