@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :logged_in_user, only: [:show]
-  before_action :admin_user,   only: [:create, :edit, :update, :show]
+  before_action :admin_user,   only: [:create, :edit, :update, :show, :edit_by_name]
   
   helper_method :sort_column, :sort_direction
   
@@ -72,6 +72,15 @@ class CategoriesController < ApplicationController
   # GET /categories/1/edit
   def edit
     @category = Category.find(params[:id])
+  end
+
+  def edit_by_name
+    if !params[:name].blank?
+      @category = Category.where('name = ?', params[:name]).first
+    else
+      @category = Category.find(params[:id])
+    end
+    render 'edit'
   end
 
   def show

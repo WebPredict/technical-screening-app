@@ -61,6 +61,7 @@ Rails.application.routes.draw do
   get 'company_jobs' => 'companies#jobs'
   get 'metrics' => 'users#metrics'
   get 'add_note' => 'candidates#add_note'
+  get 'edit_category_by_name' => 'categories#edit_by_name'
   post 'select_candidate' => 'candidates#select_candidate'
   post 'filter_candidates' => 'candidates#filter_candidates'
   post 'filter_add_candidates' => 'jobs#filter_add_candidates'
