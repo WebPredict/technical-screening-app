@@ -122,10 +122,10 @@ class JobsController < ApplicationController
   end
   
   def update
-    if params[:commit] == "Cancel"
-      redirect_to jobs_path
-    else
       @job = Job.find(params[:id])
+    if params[:commit] == "Cancel"
+      redirect_to @job
+    else
       respond_to do |format|
         if @job.update_attributes(job_params)
           format.html { 

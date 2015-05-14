@@ -134,10 +134,10 @@ class CandidatesController < ApplicationController
   end 
 
   def update
+    @candidate = Candidate.find(params[:id])
     if params[:commit] == "Cancel"
-      redirect_to candidates_path
+      redirect_to @candidate
     else
-      @candidate = Candidate.find(params[:id])
       respond_to do |format|
         if @candidate.update_attributes(candidate_params)
           format.html { 
