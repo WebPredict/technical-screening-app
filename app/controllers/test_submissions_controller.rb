@@ -165,7 +165,7 @@ class TestSubmissionsController < ApplicationController
     @test_submission.is_scored = true
     @test_submission.save
     @test_submission.update_avg_scores
-    flash[:success] = "Multiple choice and short phrase questions have been automatically scored. You can manually override scores via the 'Score Test' button."
+    flash[:success] = "Multiple choice and short phrase questions have been automatically scored. You can manually override scores via the 'Manually Score Test' button."
     redirect_to @test_submission
   end
   
