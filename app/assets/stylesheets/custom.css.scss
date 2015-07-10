@@ -22,6 +22,11 @@ textarea {
   }
 }
 
+.center-big {
+  text-align: center;
+    font-size: 1.2em;
+}
+
 /* typography */
 
 h1, h2, h3, h4, h5, h6 {
@@ -191,6 +196,7 @@ aside {
     font-size: 1.2em;
     margin: 0 auto 10px;
     list-style-type: none;
+    float: right;
   }
 
 }
