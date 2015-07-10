@@ -31,7 +31,7 @@
   <td>
       <%= link_to question.formatted_content, question %>
       
-      <% if logged_in? && current_user.premium? %>
+      <% if current_user == nil || logged_in? %>
         <td><%= Nokogiri::HTML::DocumentFragment.parse(question.answer).to_html.html_safe %></td>
       <% else %>
       <td>

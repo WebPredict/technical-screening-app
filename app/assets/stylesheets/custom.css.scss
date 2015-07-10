@@ -544,7 +544,9 @@ span.picture {
 }
 
 .jumbotron {
-  background-image: image-url("bgpic.jpg");
+//  background-image: image-url("bgpic.jpg");
+  background-image: image-url("AdobeStock_60085706_WM.jpg");
+  background-size: 100%;
   h1 { 
     font-size: 5em; 
     -webkit-text-stroke: 1px #e6e6e6; 
