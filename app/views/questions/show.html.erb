@@ -47,7 +47,10 @@
     </section>
     <section>
       <h4> Answer: </h4> 
-      <% if logged_in? && current_user.premium? %>
+      <% 
+      # if logged_in? && current_user.premium?
+      if true
+      %>
       <%= Nokogiri::HTML::DocumentFragment.parse(@question.answer).to_html.html_safe %> 
       <% else %>
         <%= link_to "Employer / Recruiter Membership Required", plans_path, class: "btn btn-xs btn-primary" %> 
