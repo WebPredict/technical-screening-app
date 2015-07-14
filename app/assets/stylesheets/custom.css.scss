@@ -15,9 +15,6 @@ textarea {
   resize: vertical;
 }
 
-.ease {
-  color: #000;
-}
 .panel-narrow {
   width: 75%;
 }
@@ -199,6 +196,11 @@ aside {
     display: inline;
   }
   
+  .ease {
+    color: #000;
+    font-size: 1.2em;
+  }
+
   .featured_list {
     font-size: 1.2em;
     margin: 0 auto 10px;
