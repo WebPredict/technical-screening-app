@@ -31,15 +31,12 @@
   <td>
       <%= link_to question.formatted_content, question %>
       
-      <% if current_user == nil || logged_in? %>
+      <% if logged_in? && current_user.premium? %>
         <td><%= Nokogiri::HTML::DocumentFragment.parse(question.answer).to_html.html_safe %></td>
       <% else %>
       <td>
-        <%= link_to plans_path, class: "btn btn-xs btn-primary" do %>
-          <i class="glyphicon glyphicon-user"></i>
-        <% end %>
-
-        </td>
+          <%= link_to "Sign Up To View Answers", plans_path, class: "btn btn-xs btn-primary" %> 
+      </td>
       <% end %>
 
   <td><%= question.difficulty.level %></td>

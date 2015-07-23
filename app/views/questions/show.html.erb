@@ -48,12 +48,11 @@
     <section>
       <h4> Answer: </h4> 
       <% 
-      # if logged_in? && current_user.premium?
-      if true
+      if logged_in? && current_user.premium?
       %>
       <%= Nokogiri::HTML::DocumentFragment.parse(@question.answer).to_html.html_safe %> 
       <% else %>
-        <%= link_to "Employer / Recruiter Membership Required", plans_path, class: "btn btn-xs btn-primary" %> 
+        <%= link_to "Answer Hidden by Employer / Recruiter", plans_path, class: "btn btn-xs btn-primary" %> 
       <% end %>
     </section>
     <% if current_user != nil %>
