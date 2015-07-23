@@ -219,6 +219,16 @@ aside {
 
 }
 
+.topics-row {
+  font-size: 1.2em;
+  h2 {
+    font-size: 2em;
+  }
+  h3 {
+    text-align: center;
+  }
+}
+
 @media (max-width: 500px) {
   .featured_list {
     font-size: 1.2em;
@@ -226,11 +236,14 @@ aside {
     list-style-type: none;
   }
   
-  .jumbotron {
+  .intro {
     h2 {
       color:  #e6e6e6;
       font-size: 2em;
       -webkit-text-stroke: 1px #000; 
+    }
+    h1 {
+      margin-top: 30px;
     }
   }
 }

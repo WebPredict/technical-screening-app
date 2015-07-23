@@ -124,43 +124,50 @@
 </div>
 </div>
 
-<div class="row">
+<div class="row topics-row">
   <br>
-  <h1>Technical Screening Topics Include:</h1>
-  <div class="col-md-4">
+  <h2>Some Popular Screening Topics Covered:</h2>
+  <div class="col-md-3">
     <ul>
-    <% @categories_first.each do |category| %>
-    <li style="margin-top: 5px"><% if current_user != nil && current_user.admin? %>
-      <%= link_to edit_category_path(category), class: "btn btn-xs btn-primary" do %>
-        <div class="edit_icon"><i class="glyphicon glyphicon-edit"></i></div> 
-      <% end %>
-    <% end %>
- <%= link_to category.name, questions_path(category_id: category) %>
-    </li>
-    <% end %>
+    <li style="margin-top: 5px"><%= link_to "Algorithms", questions_path(category: "Algorithms") %></li>
+    <li style="margin-top: 5px"><%= link_to "AngularJS", questions_path(category: "AngularJS") %></li>
+    <li style="margin-top: 5px"><%= link_to "Big Data", questions_path(category: "Big Data") %></li>
+    <li style="margin-top: 5px"><%= link_to "Cassandra", questions_path(category: "Cassandra") %></li>
     </ul>
   </div>
-    <div class="col-md-4">
+  <div class="col-md-3">
     <ul>
-    <% @categories_second.each do |category| %>
-    <li style="margin-top: 5px"><% if current_user != nil && current_user.admin? %>
-      <%= link_to edit_category_path(category), class: "btn btn-xs btn-primary" do %>
-        <div class="edit_icon"><i class="glyphicon glyphicon-edit"></i></div> 
-      <% end %>
-    <% end %> <%= link_to category.name, questions_path(category_id: category) %></li>
-    <% end %>
+    <li style="margin-top: 5px"><%= link_to "Data Structures", questions_path(category: "Data Structures") %></li>
+    <li style="margin-top: 5px"><%= link_to "DB Performance", questions_path(category: "DB Performance") %></li>
+    <li style="margin-top: 5px"><%= link_to "Groovy / Grails", questions_path(category: "Groovy / Grails") %></li>
+    <li style="margin-top: 5px"><%= link_to "Hadoop", questions_path(category: "Hadoop") %></li>
     </ul>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-3">
     <ul>
-    <% @categories_third.each do |category| %>
-    <li style="margin-top: 5px"><% if current_user != nil && current_user.admin? %>
-      <%= link_to edit_category_path(category), class: "btn btn-xs btn-primary" do %>
-        <div class="edit_icon"><i class="glyphicon glyphicon-edit"></i></div> 
-      <% end %>
-    <% end %> <%= link_to category.name, questions_path(category_id: category) %></li>
-    <% end %>
+    <li style="margin-top: 5px"><%= link_to "Hibernate", questions_path(category: "Hibernate") %></li>
+    <li style="margin-top: 5px"><%= link_to "HTML", questions_path(category: "HTML") %></li>
+    <li style="margin-top: 5px"><%= link_to "Java", questions_path(category: "Java") %></li>
+    <li style="margin-top: 5px"><%= link_to "JavaScript", questions_path(category: "JavaScript") %></li>
+    </ul>
+  </div>
+  <div class="col-md-3">
+    <ul>
+    <li style="margin-top: 5px"><%= link_to "Node.js", questions_path(category: "Node.js / Express.js") %></li>
+    <li style="margin-top: 5px"><%= link_to "Ruby / Rails", questions_path(category: "Ruby / Rails") %></li>
+    <li style="margin-top: 5px"><%= link_to "Spring MVC", questions_path(category: "Spring Core / MVC") %></li>
+    <li style="margin-top: 5px"><%= link_to "RESTful Web Services", questions_path(category: "Web services (RESTful vs. SOAP)") %></li>
     </ul>
   </div>
 </div>
+<div class="row topics-row">
+    <h3>...and many more technologies! <%= link_to "Sign up now", signup_path %> for a free 2 week trial. No credit card required!</h3>
+</div>
+<div class="row">
+  &nbsp;
+</div>
+<div class="row">
+  &nbsp;
+</div>
+
 <% end %>
