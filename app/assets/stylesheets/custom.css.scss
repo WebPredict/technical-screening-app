@@ -3,6 +3,8 @@
 
 $gray-medium-light: #eaeaea;
 
+$navbar-inverse-bg: #fff;
+
 body {
   padding-top: 50px;
 }
@@ -28,7 +30,8 @@ textarea {
 
 .center-big {
   text-align: center;
-    font-size: 1.2em;
+    font-size: 1.4em;
+  color: #205081;
 }
 
 /* typography */
@@ -90,12 +93,18 @@ p {
 
 /* footer */
 
+.footer-style {
+  background: #f8f8f8;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
 footer {
-  margin-top: 45px;
+  margin-top: 5px;
   padding-top: 5px;
   margin-left: 15px;
   margin-right: 15px;
-  border-top: 1px solid $gray-medium-light;
+  //border-top: 1px solid $gray-medium-light;
   color: $gray-light;
   a {
     color: #555;
@@ -197,8 +206,8 @@ aside {
   }
   
   .ease {
-    color: #000;
-    font-size: 1.2em;
+//    color: #205081;
+    font-size: 1.3em;
   }
 
   .featured_list {
@@ -260,6 +269,7 @@ aside {
     width: 300px;
   }
   .header-responsive {
+    margin-top: 50px;
     font-size: 80%;
   }
   .row {
@@ -516,11 +526,17 @@ span.picture {
 }
 
 .color-row {
-  background: #e6e6e6;  
+  background: #f8f8f8;  
   margin-left: 0px;
   margin-right: 0px;
   padding-top: 10px;
   padding-bottom: 10px;
+  font-size: 1.1em;
+  h3 {
+    text-align: center;
+    font-size: 2em;
+    color: #205081;
+  }
 }
 
 .padded-row {
@@ -560,14 +576,71 @@ span.picture {
 
 .jumbotron {
 //  background-image: image-url("bgpic.jpg");
-  background-image: image-url("AdobeStock_60085706_WM.jpg");
-  background-size: 100%;
+  //background-image: image-url("AdobeStock_60085706_WM.jpg");
+  //background-size: 100%;
+  //background:  image-url("AdobeStock_60085706_WM.jpg") no-repeat center center fixed;
   h1 { 
     font-size: 5em; 
     -webkit-text-stroke: 1px #e6e6e6; 
   }
   
+  h2 {
+//    color:  #e6e6e6;
+  color: #fff;
+   // font-size: 2em;
+    -webkit-text-stroke: 1px #000; 
+  }
+
+  height: 550px;
 }
+
+.intro {
+    height: 550px;
+    //position: relative;
+
+    h1 { 
+      margin-top: 100px;
+    font-size: 5.5em; 
+    -webkit-text-stroke: 1px #e6e6e6; 
+  }
+  
+  h2 {
+//    color:  #e6e6e6;
+  color: #fff;
+    font-size: 2.5em;
+    -webkit-text-stroke: 1px #000; 
+  }
+
+}
+
+.intro:before {
+ // background: #000;
+  //background-image: image-url("AdobeStock_60085706_WM.jpg") no-repeat center center fixed;
+  content: "";
+    background:image-url("AdobeStock_60085706_WM.jpg") no-repeat;
+    background-size: cover;
+    width: 100%;
+    left: 0px;
+    top: 40px;
+    height: 600px;
+    position: absolute;
+    z-index: -1;
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+}
+
+//.zero-blur {
+//    -webkit-filter: blur(0px);
+//    -moz-filter: blur(0px);
+//    -o-filter: blur(0px);
+//    -ms-filter: blur(0px);
+//    filter: blur(0px);
+//    -webkit-transform: translateZ(0); /* works like magic */
+//  opacity: 1.0;
+//}
 
 .stats {
   overflow: auto;
