@@ -17,10 +17,6 @@ textarea {
   resize: vertical;
 }
 
-.panel-narrow {
-  width: 75%;
-}
-
 .center {
   text-align: center;
   h1 {
@@ -209,6 +205,10 @@ aside {
     font-size: 1.3em;
   }
 
+  .panel-narrow {
+    width: 75%;
+  }
+
   .intro {
     h1 { 
       margin-top: 100px;
@@ -257,6 +257,10 @@ aside {
     list-style-type: none;
   }
   
+  .panel-narrow {
+    width: 100%;
+  }
+
   .intro {
     h2 {
       color:  #e6e6e6;
@@ -276,6 +280,10 @@ aside {
     list-style-type: none;
   }
   
+  .panel-narrow {
+    width: 100%;
+  }
+
   .intro {
     h1 { 
       margin-top: 70px;
@@ -296,6 +304,10 @@ aside {
   }
   .laptop-section {
     display: none;
+  }
+
+  .panel-narrow {
+    width: 100%;
   }
 
   h3 {
@@ -343,6 +355,11 @@ div.scrollable {
   .text-responsive {
     font-size:90%;
   }
+  
+  .panel-narrow {
+    width: 100%;
+  }
+
   .mobile-section {
     display: none;
   }
