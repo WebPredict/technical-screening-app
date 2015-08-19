@@ -30,6 +30,8 @@ class StaticPagesController < ApplicationController
 
         @num_tests = @tests.count
         
+        @is_new_user = false 
+        
         if show_all
           @show_all = true
           if params[:sort].blank?
@@ -66,7 +68,8 @@ class StaticPagesController < ApplicationController
         end
         
         if @num_tests == 0 && @num_candidates == 0 && !current_user.companies.any?
-          flash.now[:info] = "Welcome to TechScreen.net! You can view your candidates, candidate test results, tests, job listings, and companies all on this dashboard."
+          flash.now[:info] = "Welcome to TechScreen.net! You can view all of your screening results and candidates on this dashboard."
+          @is_new_user = true
         end
       end      
     else

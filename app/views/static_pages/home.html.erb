@@ -35,12 +35,31 @@
         </div>
       </section>
     </aside>
-      <div class="col-md-8">
-        <%= render 'shared/test_results' %>
-      </div>
-      <div class="col-md-8">
-        <%= render 'shared/candidate_feed' %>
-      </div>
+    
+      <% if @is_new_user %>
+        <div class="col-md-7 col-md-offset-1 new_user_suggestions">
+        <h3>What would you like to accomplish today?</h3>
+        <ul>
+          <li><%= link_to "Set up a candidate's profile", new_candidate_path %></li>
+          <li><%= link_to "Create a new screening test", new_test_path %></li>
+          <li><%= link_to "Screen a candidate", candidates_path %></li>
+          <li><%= link_to "Create screening test questions", new_question_path %></li>
+          <li><%= link_to "Browse existing screening tests", tests_path %></li>
+          <li><%= link_to "Browse existing technical questions", questions_path %></li>
+          <li><%= link_to "Set up job listings", new_job_path %></li>
+          <li><%= link_to "Set up company profiles", new_company_path %></li>
+          <li><%= link_to "Browse help topics", help_path %></li>
+        </ul>
+        </div>
+      <% else %>
+        <div class="col-md-8">
+          <%= render 'shared/test_results' %>
+        </div>
+        <div class="col-md-8">
+          <%= render 'shared/candidate_feed' %>
+        </div>
+      <% end %>
+      
     </div>
       
     <div class="row">
@@ -76,10 +95,10 @@
   </h2>
 
   <%= link_to "Sign up!", signup_path(:membership_level_id => 1), class: "btn btn-lg btn-primary" %>
-  <%= link_to "Overview", about_path, class: "btn btn-lg btn-primary" %>
+  <a href="#overview" class="btn btn-lg btn-primary">Overview</a>
 </div>
 
-<div class="row">
+<div class="row" id ="overview">
     <p class="center-big">TechScreen.net helps you set up and manage screening tests for software development candidates.</p>
 	<p class="center-big">Quickly create tests from a variety of technology topics and thousands of questions, or create your own. </p>
 </div>
@@ -99,31 +118,110 @@
 </div>
 <div class="row"></div>
 <div class="row color-row">
-  <div class="col-md-12">
-    <h3>TechScreen.net is the Better Way to Screen Candidates</h3>
+  <div class="col-md-10 col-md-offset-1">
+    <h3>TechScreen.net is a Powerful, Time-Saving Tool for Recruiters and Managers</h3>
   </div>
-  <div class="col-md-6">
+  
+  <div class="col-md-5 col-md-offset-1">
     <br>
+    <h4><i class="glyphicon glyphicon-filter"></i>For Recruiters</h4>
     <ul class="featured_list">
-    <li><i class="glyphicon glyphicon-ok"></i> Manage Candidates for Your Job Listings</li>
-    <li><i class="glyphicon glyphicon-ok"></i> Make Screening Tests Using Our Question Library</li> 
-    <li><i class="glyphicon glyphicon-ok"></i> Enhance Existing Tests With Your Own Content</li> 
-      <li><i class="glyphicon glyphicon-ok"></i> Evaluate Test Results With Auto-Scoring</li>
-      <li><i class="glyphicon glyphicon-ok"></i> Generate Random Tests For Specific Categories</li>
-      <li><i class="glyphicon glyphicon-ok"></i> Manage Job Listings And Associated Companies</li>
+    <li><i class="glyphicon glyphicon-ok"></i> Screen and Manage Large # of Candidates</li>
+    <li><i class="glyphicon glyphicon-ok"></i> Improve Candidate Quality For Your Clients</li> 
+      <li><i class="glyphicon glyphicon-ok"></i> Easily Share Candiate Test Results with Employers</li>
+    <li><i class="glyphicon glyphicon-ok"></i> Save Time Using Existing Screening Tests</li> 
+    <li><i class="glyphicon glyphicon-ok"></i> Track As Many Job Listings As You Need</li> 
+      <li><i class="glyphicon glyphicon-ok"></i> Set up Company Profiles and Associated Jobs</li>
       <li><i class="glyphicon glyphicon-ok"></i> Customizable Dashboard And Mobile View</li>  
       <li><i class="glyphicon glyphicon-ok"></i> Manage Everything In One Dashboard</li>
       <li><i class="glyphicon glyphicon-ok"></i> Metrics for Insight into Your Placement Successes</li>
       <li><i class="glyphicon glyphicon-ok"></i> Sort + Filter by Highest Scoring Candidates</li>
     </ul>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-5">
     <br>
-        <%= image_tag("dashboard-techscreen.PNG", size: "440x260", alt: "TechScreen.net") %>
+    <h4><i class="glyphicon glyphicon-briefcase"></i> Technical Managers</h4>
+    <ul class="featured_list">
+    <li><i class="glyphicon glyphicon-ok"></i> Screen Candidates for Your Job Listings</li>
+    <li><i class="glyphicon glyphicon-ok"></i> Save Time With Existing Screening Tests</li> 
+    <li><i class="glyphicon glyphicon-ok"></i> Save Time Using Large Technical Question Library</li> 
+      <li><i class="glyphicon glyphicon-ok"></i> Quickly Evaluate Test Results With Auto-Scoring</li>
+      <li><i class="glyphicon glyphicon-ok"></i> Generate Randomized Tests For Specific Categories</li>
+      <li><i class="glyphicon glyphicon-ok"></i> Manage Job Listings And Associated Companies</li>
+      <li><i class="glyphicon glyphicon-ok"></i> Customizable Dashboard And Mobile View</li>  
+      <li><i class="glyphicon glyphicon-ok"></i> Manage Everything In One Dashboard</li>
+      <li><i class="glyphicon glyphicon-ok"></i> Metrics for Insight into Your Hiring Successes</li>
+      <li><i class="glyphicon glyphicon-ok"></i> Sort + Filter by Highest Scoring Candidates</li>
+    </ul>
   </div>
 </div>
 </div>
+<div class="row">
+  &nbsp;
+</div>
 
+<script>
+  function calcSavings () {
+    var num = parseInt($('#num_candidates').val());
+    var spent = parseFloat($('#time_spent').val());
+    var hourly = parseFloat($('#hourly_cost').val());
+    var saved = parseFloat($('#time_saved').val());
+    
+    var oldResult = num * (spent / 60.0) * hourly;
+    var newResult = num * (spent / 60.0) * hourly * ((100.0 - saved) / 100.0);
+
+    var savings = (oldResult - newResult);
+    $('#savings_result').text("$" + savings + " / Month, or $" + (savings * 12) + " / Year!");
+  }
+
+</script>
+
+<div class="row calculator">
+  <div class="col-md-8 col-md-offset-2">
+  <h1>TechScreen.net Estimated Savings Calculator</h1>
+<!--  <h4>Calculate money saved using TechScreen.net for candidate screening</h4> -->
+  <form class="form-horizontal">
+
+    <div class="form-group">
+      <label for="num_candidates" class="col-sm-5 control-label">Number of Candidates / Month</label>
+      <div class="col-sm-6">
+      <input class="form-control" type="text" name="num_candidates" id="num_candidates" value="30" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="time_spent" class="col-sm-5 control-label">Minutes Spent Screening Candidate</label>
+      <div class="col-sm-6">
+      <input class="form-control" type="text" name="time_spent" id="time_spent" value="45" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="hourly_cost" class="col-sm-5 control-label">Hourly Screening Cost</label>
+      <div class="col-sm-6">
+      <div class="input-group"><div class="input-group-addon">$</div><input class="form-control" type="text" name="hourly_cost" id="hourly_cost" value="50" /></div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="time_saved" class="col-sm-5 control-label">% Of Time Saved Using TechScreen</label>
+      <div class="col-sm-6">
+      <input class="form-control" type="text" name="time_saved" id="time_saved" value="50" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="estimated_savings" class="col-sm-5 control-label">Your Estimated Savings</label>
+        <div id="savings_result" class="col-sm-6 savings">$562 / Month, or $6744 / Year!</div>
+    </div>
+  <div class="form-group">
+    <div class="col-sm-offset-5 col-sm-10">
+    <input type="button" name="submit" value="Compute Savings" class="btn btn-primary" onclick="calcSavings()" />
+    </div>
+  </div>
+</form>
+</div>
+</div>
 <div class="row topics-row">
   <br>
   <h2>Some Popular Screening Topics Covered:</h2>
@@ -132,6 +230,7 @@
     <li style="margin-top: 5px"><%= link_to "Algorithms", questions_path(category: "Algorithms") %></li>
     <li style="margin-top: 5px"><%= link_to "AngularJS", questions_path(category: "AngularJS") %></li>
     <li style="margin-top: 5px"><%= link_to "Big Data", questions_path(category: "Big Data") %></li>
+    <li style="margin-top: 5px"><%= link_to "Mongo DB", questions_path(category: "Mongo DB") %></li>
     <li style="margin-top: 5px"><%= link_to "Cassandra", questions_path(category: "Cassandra") %></li>
     </ul>
   </div>
@@ -141,6 +240,7 @@
     <li style="margin-top: 5px"><%= link_to "DB Performance", questions_path(category: "DB Performance") %></li>
     <li style="margin-top: 5px"><%= link_to "Groovy / Grails", questions_path(category: "Groovy / Grails") %></li>
     <li style="margin-top: 5px"><%= link_to "Hadoop", questions_path(category: "Hadoop") %></li>
+    <li style="margin-top: 5px"><%= link_to "JEE / J2EE", questions_path(category: "JEE / J2EE") %></li>
     </ul>
   </div>
   <div class="col-md-3">
@@ -149,6 +249,7 @@
     <li style="margin-top: 5px"><%= link_to "HTML", questions_path(category: "HTML") %></li>
     <li style="margin-top: 5px"><%= link_to "Java", questions_path(category: "Java") %></li>
     <li style="margin-top: 5px"><%= link_to "JavaScript", questions_path(category: "JavaScript") %></li>
+    <li style="margin-top: 5px"><%= link_to "Data Structures", questions_path(category: "Data Structures") %></li>
     </ul>
   </div>
   <div class="col-md-3">
@@ -157,6 +258,7 @@
     <li style="margin-top: 5px"><%= link_to "Ruby / Rails", questions_path(category: "Ruby / Rails") %></li>
     <li style="margin-top: 5px"><%= link_to "Spring MVC", questions_path(category: "Spring Core / MVC") %></li>
     <li style="margin-top: 5px"><%= link_to "RESTful Web Services", questions_path(category: "Web services (RESTful vs. SOAP)") %></li>
+    <li style="margin-top: 5px"><%= link_to "HTML", questions_path(category: "HTML") %></li>
     </ul>
   </div>
 </div>

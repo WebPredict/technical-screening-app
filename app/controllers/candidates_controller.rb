@@ -18,7 +18,7 @@ class CandidatesController < ApplicationController
     @candidates = current_user.candidates
     
     if @candidates == nil || !@candidates.any?
-      flash.now[:info] = "Create a candidate entry to represent a job applicant, which may then perform screening tests. " + 
+      flash.now[:info] = "Create a new candidate to represent a job applicant, which may then perform screening tests. " + 
         "The test results may then be forwarded to employers."
     end
 
