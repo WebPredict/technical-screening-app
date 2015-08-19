@@ -605,11 +605,18 @@ span.picture {
 .new_user_suggestions {
   h3 {
     margin-top: 20px;
+    margin-bottom: 20px;
     color: #000000;
     font-size: 1.6em;
   }
   font-size: 1.4em;
     color: #205081;
+    
+    ul {
+      li {
+        margin-top: 10px;
+      }
+    }
 }
 
 .alert {
