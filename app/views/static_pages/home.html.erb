@@ -185,51 +185,80 @@
   }
 
 </script>
-
+<%= javascript_include_tag "savings_calculator" %>
 <div class="row calculator">
   <div class="col-md-8 col-md-offset-2">
   <h1>TechScreen.net Estimated Savings Calculator</h1>
 <!--  <h4>Calculate money saved using TechScreen.net for candidate screening</h4> -->
-  <form class="form-horizontal">
-
-    <div class="form-group">
-      <label for="num_candidates" class="col-sm-5 control-label">Number of Candidates / Month</label>
-      <div class="col-sm-6">
-      <input class="form-control" type="text" name="num_candidates" id="num_candidates" value="30" />
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="time_spent" class="col-sm-5 control-label">Minutes Spent Screening Candidate</label>
-      <div class="col-sm-6">
-      <input class="form-control" type="text" name="time_spent" id="time_spent" value="45" />
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="hourly_cost" class="col-sm-5 control-label">Hourly Screening Cost</label>
-      <div class="col-sm-6">
-      <div class="input-group"><div class="input-group-addon">$</div><input class="form-control" type="text" name="hourly_cost" id="hourly_cost" value="50" /></div>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="time_saved" class="col-sm-5 control-label">% Of Time Saved Using TechScreen</label>
-      <div class="col-sm-6">
-      <input class="form-control" type="text" name="time_saved" id="time_saved" value="50" />
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="estimated_savings" class="col-sm-5 control-label">Your Estimated Savings</label>
-        <div id="savings_result" class="col-sm-6 savings">$562 / Month, or $6744 / Year!</div>
-    </div>
+  
+<div class="container">
+<form class="form-horizontal">
   <div class="form-group">
-    <div class="col-sm-offset-5 col-sm-10">
-    <input type="button" name="submit" value="Compute Savings" class="btn btn-primary" onclick="calcSavings()" />
+      <label class="col-xs-4 control-label col-sm-offset-1 " for="per-hour-input">$ / hour for interviewers</label>
+      <div class="col-xs-3 col-sm-offset-1">
+        <div class="input-group">
+          <span class="input-group-btn">
+              <button type="button" class="btn  btn_hour-per-interview" id="btn-minus_per-hour" data-type="minus" data-field="quant[1]">
+                <span class="glyphicon glyphicon-minus"></span>
+              </button>
+          </span>
+          <input type="text" name="quant[1]" class="form-control input-number text-center" id="per-hour-input" value="$40.00">
+          <span class="input-group-btn">
+              <button type="button" class="btn btn_hour-per-interview" id="btn-plus_per-hour" data-type="plus" data-field="quant[1]">
+                  <span class="glyphicon glyphicon-plus"></span>
+              </button>
+          </span>
+          
+        </div>
+      </div>
+  </div>
+  
+  <div class="form-group">
+      <label class="col-xs-4 control-label col-sm-offset-1 " for="screenings">Screenings per month</label>
+      <div class="col-xs-3 col-sm-offset-1">
+        <div class="input-group">
+          <span class="input-group-btn">
+              <button type="button" class="btn btn-number" id = "btn-minus_num_candidates"data-type="minus" data-field="quant[2]">
+                <span class="glyphicon glyphicon-minus"></span>
+              </button>
+          </span>
+          <input type="text" class="form-control input-number text-center" id="input_screenings" value="10 Candidates" name="quant[2]">
+          <span class="input-group-btn">
+              <button type="button" class="btn  btn-number" id = "btn-plus_num_candidates" data-type="plus" data-field="quant[2]">
+                  <span class="glyphicon glyphicon-plus"></span>
+              </button>
+          </span>
+        </div>
+      </div>
+  </div>
+  
+  <div class="form-group">
+      <label class="col-xs-4 control-label col-sm-offset-1 " for="time-per-screening">Time Per Screening</label>
+      <div class="col-xs-3 col-sm-offset-1">
+        <div class="input-group">
+          <span class="input-group-btn">
+              <button type="button" class="btn btn-number" id="btn-minus_time_per_candidate" data-type="minus" data-field="quant[3]">
+                <span class="glyphicon glyphicon-minus"></span>
+              </button>
+          </span>
+          <input name="quant[3]" type="text" class="form-control input-number text-center" id="time-per-screening" value="30 Minutes">
+          <span class="input-group-btn">
+              <button type="button" class="btn  btn-number" id = "btn-plus_time_per_candidate" data-type="plus" data-field="quant[3]">
+                  <span class="glyphicon glyphicon-plus"></span>
+              </button>
+          </span>
+        </div>
+      </div>
+  </div>
+  
+  <div class="form-group">
+    <div class="center">
+      <h3 style="display:inline;">Estimated Savings:</h3>
+      <h3 id = "total-screening-cost" class="center" style="display:inline;"></h3>
     </div>
   </div>
 </form>
+</div>
 </div>
 </div>
 <div class="row topics-row">
