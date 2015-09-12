@@ -1,26 +1,46 @@
 <% provide(:title, "About") %>
 <div class="page-header">
-<h1><%= image_tag("big-logo.png", class: "responsive-image") %></h1>
+<h1>TechScreen.net Overview</h1>
 </div>
 <div class="row">
   <div class="col-md-12">
-  <p class="center">
-  TechScreen.net helps you set up screening tests for software development candidates. 
-  Quickly create tests from a variety of technology topics and thousands of questions, or create your own. Easily manage your candidates' results.
-  </p>
+    <p class="center">TechScreen.net helps you set up and manage screening tests for software development candidates. 
+    Quickly create tests from a variety of technology topics and thousands of questions, or create your own. Manage your candidates' results, share with employers. </p>
   </div>
 </div>
 <div class="row">
+    <div class="col-md-4">
+        <div>
+        <h4>View Test Submissions</h4>
+        <%= image_tag("features.png", size: "300x200", alt: "TechScreen.net") %>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div>
+        <h4>Search Screening Questions</h4>
+        <%= image_tag("questions.png", size: "300x200", alt: "TechScreen.net") %>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div>
+        <h4>View Metrics</h4>
+        <%= image_tag("metrics.png", size: "300x200", alt: "TechScreen.net") %>
+        </div>
+    </div>
+</div>
+<br>
+
+<div class="row">
   <div class="col-md-4">
-    <h3>Unlimited Tests</h3>
+    <h3><i class="glyphicon glyphicon-road"></i> Unlimited Tests</h3>
     <p>Create as many screening tests as you'd like, with as many questions as you'd like (as a premium member).</p>
   </div>
     <div class="col-md-4">
-    <h3>Large Question Library</h3>
+    <h3><i class="glyphicon glyphicon-question-sign"></i> Large Question Library</h3>
     <p>Quickly put together screening tests for popular technologies using our existing library of questions and answers.</p>
   </div>
   <div class="col-md-4">
-    <h3>Manage Candidates</h3>
+    <h3><i class="glyphicon glyphicon-user"></i> Manage Candidates</h3>
     <p>Invite as many interview candidates as you'd like to take your tests, score and manage the results (as a premium member).</p>
   </div>
 </div>
@@ -54,3 +74,8 @@
     </ul>
   </div>
 </div>
+
+<h1><%= link_to "Sign up now", signup_path(:membership_level_id => 1) %> or 
+<%= link_to "contact us", contact_path %> for more information about TechScreen.net.</h1>
+<h1>
+<%= image_tag("big-logo.png", class: "responsive-image") %></h1>

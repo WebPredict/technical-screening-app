@@ -21,7 +21,7 @@
 
 <div class="row">
   <div class="col-md-12">
-    <table style="width:400px">
+      <table class="table">
       <tr><th>Name:</th><td><%= @test.name %></td></tr>
       <tr><th>Description:</th><td><%= @test.description %></td></tr>
       <tr><th>Privacy:</th><td>
@@ -37,12 +37,21 @@
     <section>
       <% if @test.questions.any? %>
         <h4>This Test's Questions (<%= @test.questions.count %>):</h4>
-        <table class="table table-bordered show-header">
-          <tr><th>Actions</th><th><%= sortable "content", "Question" %></th><th><%= sortable "answer" %></th>
-          <th><%= sortable "difficulty" %></th><th><%= sortable "question_type" %></th>
-          <th><%= sortable "category" %></th></tr>
-          <%= render @test_questions %>
-        </table>
+        
+        <div class="laptop-section">
+          <table class="table table-bordered show-header">
+            <tr><th>Actions</th><th><%= sortable "content", "Question" %></th><th><%= sortable "answer" %></th>
+            <th><%= sortable "difficulty" %></th><th><%= sortable "question_type" %></th>
+            <th><%= sortable "category" %></th></tr>
+            <%= render @test_questions %>
+          </table>
+        </div>
+        <div class="mobile-section">
+          <div class="list-group">
+            <%= render partial: "questions/mobile_question", collection: @test_questions, as: :question %>
+          </div>
+        </div>
+
         <%= will_paginate @test_questions %>
       <% else %>
       <h3>No questions added to this test yet.</h3>
@@ -51,11 +60,19 @@
     <section>
       <% if @test_results != nil && @test_results.any? %>
         <h4>This Test's Submissions / Results (<%= @test_results.count %>):</h4>
-      <table class="table table-bordered show-header">
-        <tr><th>Actions</th><th>Candidate Name</th><th>Test Name</th><th><%= sortable "name", "Submission Name" %></th>
-        <th><%= sortable "score" %></th><th><%= sortable "time" %></th></tr>
-        <%= render @test_results %>
-      </table>
+        
+        <div class="laptop-section">
+          <table class="table table-bordered show-header">
+            <tr><th>Actions</th><th>Candidate Name</th><th>Test Name</th><th><%= sortable "name", "Submission Name" %></th>
+            <th><%= sortable "score" %></th><th><%= sortable "time" %></th></tr>
+            <%= render @test_results %>
+          </table>
+        </div>
+        <div class="mobile-section">
+          <div class="list-group">
+            <%= render partial: "test_submissions/mobile_test_submission", collection: @test_results, as: :test_submission %>
+          </div>
+        </div>
         <%= will_paginate @test_results %>
       <% else %>
       <h3>No results for this test yet.</h3>

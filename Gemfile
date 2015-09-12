@@ -22,6 +22,8 @@ gem 'newrelic_rpm'
 gem 'chartkick'
 gem 'groupdate'
 
+gem "bootstrap-switch-rails"
+
 gem 'font-awesome-rails'
 gem 'jquery-ui-rails'
 gem "wysiwyg-rails"

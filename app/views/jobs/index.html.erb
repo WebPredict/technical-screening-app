@@ -1,5 +1,5 @@
 <div class="page-header">
-      <section style="float:right">
+      <section class="laptop-section" style="float:right">
       <% if logged_in? %>
       <%= link_to "Create New Job Listing", new_job_path, class: "btn btn-sm btn-primary btn-responsive" %> 
       <% end %>
@@ -8,34 +8,49 @@
 </div>
 
 <div class="row">
-<%= form_tag jobs_path, :class => "nicesearch", :method => 'get' do %>
+<%= form_tag jobs_path, id: "search-jobs-form", :class => "nicesearch", :method => 'get' do %>
     <div class="input-group">
       <%= text_field_tag :search, params[:search], :class => "form-control" %>
         <div class="input-group-btn">
             <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
         </div>
     </div>
+        <br>
+    <div style="float: right">
+      <label>Only Open Jobs 
+          <%= check_box_tag "only_open_jobs", "1", params[:only_open_jobs], data: {"size" => "mini" } %></label>
+      </label>
+    </div>
+
 <% end %>
 </div>
         
 <div class="row">
   <div class="col-md-12">
     <% if @searched %>
-    <% if @jobs.any? %>
-      <h3>Jobs Search Results</h3>
+      <% if @jobs.any? %>
+        <h4>Jobs Search Results</h4>
+      <% else %>
+        <h4>No results found for that search term.</h4>
+      <% end %>
     <% else %>
-      <h3>No results found for that search term.</h3>
-    <% end %>
-    <% else %>
+      <h4>Recent Jobs</h4>
     <% end %>
     <% if @jobs.any? %>
-    <h3>Recent Jobs</h3>
+    <div class="laptop-section">
       <table class="table table-bordered show-header">
         <tr><th>Actions</th><th><%= sortable "name", "Title" %></th><th><%= sortable "description" %></th>
         <th><%= sortable "company_id", "Company" %></th>
-        <th>Created On</th></tr>
+        <th><%= sortable "created_at", "Created On" %></th><th><%= sortable "closed_date", "Closed On" %></th></tr>
         <%= render @jobs %>
       </table>
+      </div>
+    <div class="mobile-section">
+      <div class="list-group">
+        <%= render @jobs %>
+      </div>
+    </div>
+      
       <%= will_paginate @jobs %>
     <% else %>
     <h3>No job listings yet.</h3>
@@ -43,3 +58,19 @@
   </div>
 </div>
 
+<div class="row">
+   <section class="mobile-section" style="float:right">
+      <% if logged_in? %>
+      <%= link_to "Create New Job Listing", new_job_path, class: "btn btn-sm btn-primary btn-responsive" %> 
+      <% end %>
+    </section>
+</div>
+
+<script>
+  $("[name='only_open_jobs']").bootstrapSwitch();
+
+  $('input[name="only_open_jobs"]').on('switchChange.bootstrapSwitch', function(event, state) {
+    $('#search-jobs-form').submit();
+  });
+
+</script>

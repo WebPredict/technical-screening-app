@@ -21,7 +21,7 @@
           
         <%= f.submit "Log in", class: "btn btn-primary" %>
         <div style="float:right">
-        <span></span>New user? <%= link_to "Sign up now!", signup_path %>
+        <span></span>New user? <%= link_to "Sign up now!", signup_path(:membership_level_id => 1) %>
         </div>
       </div>
       

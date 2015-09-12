@@ -3,8 +3,8 @@
     <section class="laptop-section" style="float:right">
         <%= link_to "Search", companies_path, class: "btn btn-sm btn-primary btn-responsive" %> 
         <%= link_to "Add Job Listing", new_job_path(company_id: @company.id), class: "btn btn-sm btn-primary btn-responsive" %> 
-        <%= link_to "Edit Company", edit_company_path(@company), class: "btn btn-sm btn-primary btn-responsive" %> 
-        <%= link_to "Remove Company", @company, method: :delete,
+        <%= link_to "Edit", edit_company_path(@company), class: "btn btn-sm btn-primary btn-responsive" %> 
+        <%= link_to "Remove", @company, method: :delete,
                            data: { confirm: "Delete this company?" }, :class => "btn btn-sm btn-danger btn-responsive" %>
 
     </section>
@@ -26,13 +26,22 @@
     <section>
       <% if @company.jobs.any? %>
         <strong>This Company's Jobs (<%= @company.jobs.count %>)</strong>
+        
+        <div class="laptop-section">
           <table class="table table-bordered show-header">
         <tr><th>Actions</th><th><%= sortable "name", "Title" %></th><th><%= sortable "description" %></th>
         <th><%= sortable "company_id", "Company" %></th>
-        <th>Created On</th></tr>
+        <th>Created On</th><th>Closed On</th></tr>
 
             <%= render @company_jobs %>
           </table>
+          </div>
+          
+        <div class="mobile-section">
+          <div class="list-group">
+            <%= render @company_jobs %>
+          </div>
+        </div>
           <%= will_paginate @company_jobs %>
       <% end %>
     </section>

@@ -1,6 +1,6 @@
 class NotesController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy, :edit, :update, :show, :index]
-  before_action :correct_user,   only: [:destroy, :edit, :update, :show, :index]
+  before_action :correct_user,   only: [:edit, :update, :show, :index]
   
   helper_method :sort_column, :sort_direction
   
@@ -35,9 +35,21 @@ class NotesController < ApplicationController
     end 
   end 
 
+  def destroy
+    @note = Note.find(params[:id])
+    @candidate = @note.candidate 
+    if @candidate.user != current_user
+      redirect_to root_url 
+    else
+      @note.destroy
+      flash[:success] = "Note deleted."
+      redirect_to @candidate 
+    end 
+  end
+  
   private  
     def note_params
-      params.require(:note).permit(:content, :candidate_id)
+      params.require(:note).permit(:id, :content, :candidate_id)
     end 
     
     def correct_user

@@ -4,12 +4,6 @@
     <% end %><%= link_to current_user.name, current_user %></h1>
 <span>
   <% if @jobs != nil %>
-  <%= @jobs.count %>
-    <% if @jobs.count == 1 %>
-    Job Listing
-    <% else %>
-    Job Listings
-    <% end %>
-  <% else %>
-  0 Job Listings
-  <% end %></span>
+    <%= pluralize(@jobs.count, "Job Listing") %>
+  <% end %>
+</span>

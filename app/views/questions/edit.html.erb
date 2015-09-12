@@ -34,13 +34,13 @@
       <div class="checkbox">
         <%= f.label :is_public do %>
           <%= f.check_box :is_public %>
-          Make Question Public (answer is always private)
+          Make Question Public
         <% end %>
       </div>
 
       <div id="free-form">
       <%= f.label :answer %>
-      <%= f.text_area :answer, rows: "10", class: 'form-control' %>
+      <%= f.text_area :answer, rows: "10", class: 'text-small' %>
       </div>
       <div id="short-phrase" style="display:none">
       <%= f.label :short_answer, "Short Phrase Answer" %>
@@ -93,4 +93,22 @@
     $('#question_question_type_id').trigger('change');
   });
 
+  <% if params[:edit_raw].blank? %>
+  $(function() {
+    $('#question_answer').editable({
+      key: '9iH-8G-7hraqag1hnfnD8ciC-9adepbcD2vyz==',
+      inlineMode: false
+    });
+  });
+  <% end %>
+
+  <% if @question.answer == 'A)' %>
+  $('#question_multiple_choice_answer_a').prop("checked", true);
+  <% elsif @question.answer == 'B)' %>
+  $('#question_multiple_choice_answer_b').prop("checked", true);
+  <% elsif @question.answer == 'C)' %>
+  $('#question_multiple_choice_answer_c').prop("checked", true);
+  <% elsif @question.answer == 'D)' %>
+  $('#question_multiple_choice_answer_d').prop("checked", true);
+  <% end %>
 </script>

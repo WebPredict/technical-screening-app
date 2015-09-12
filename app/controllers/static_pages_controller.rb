@@ -23,10 +23,14 @@ class StaticPagesController < ApplicationController
         
         @question = current_user.questions.build
         @candidate = current_user.candidates.build
-        @tests = current_user.tests.paginate(page: params[:page])
+        #@tests = current_user.tests.paginate(page: params[:page])
         @companies = current_user.companies.paginate(page: params[:page])
         
-        @num_tests = current_user.tests.count
+        @tests = current_user.tests
+
+        @num_tests = @tests.count
+        
+        @is_new_user = false 
         
         if show_all
           @show_all = true
@@ -64,7 +68,8 @@ class StaticPagesController < ApplicationController
         end
         
         if @num_tests == 0 && @num_candidates == 0 && !current_user.companies.any?
-          flash.now[:info] = "Welcome to TechScreen.net! You can view your candidates, candidate test results, tests, job listings, and companies all on this dashboard."
+          flash.now[:info] = "Welcome to TechScreen.net! You can view all of your screening results and candidates on this dashboard."
+          @is_new_user = true
         end
       end      
     else
@@ -110,7 +115,8 @@ class StaticPagesController < ApplicationController
   end
 
   def all_categories
-    @categories = Category.all 
+    @categories = Category.joins("LEFT OUTER JOIN questions ON categories.id = questions.category_id").group(:'name').select('name').count
+    
     @categories_arrays = @categories.each_slice(@categories.count / 3).to_a
     @categories_first = @categories_arrays [0]
     @categories_second = @categories_arrays [1]

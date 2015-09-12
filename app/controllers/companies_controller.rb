@@ -65,10 +65,10 @@ class CompaniesController < ApplicationController
   end
 
   def update
+    @company = Company.find(params[:id])
     if params[:commit] == "Cancel"
-      redirect_to root_url
+      redirect_to @company
     else
-      @company = Company.find(params[:id])
       respond_to do |format|
         if @company.update_attributes(company_params)
           format.html { 

@@ -38,11 +38,21 @@
     <section>
       <% if @test_submission.answered_questions.any? %>
         <strong>Answered Questions</strong> (<%= @test_submission.answered_questions.count %>)
+        
+          <div class="laptop-section">
           <table class="table table-bordered show-header">
             <tr><th><%= sortable "question" %></th><th><%= sortable "answer", "Their Answer" %></th>
             <th>Marked As Correct?</th><th>Correct Answer</th></tr>
             <%= render @test_submission_answers %>
           </table>
+          </div>
+          <div class="mobile-section">
+          <div class="list-group">
+            <%= render partial: "answered_questions/mobile_answered_question", collection: @test_submission_answers, 
+              as: :answered_question %>
+          </div>
+        </div>
+        
           <%= will_paginate @test_submission_answers %>
       <% end %>
     </section>

@@ -22,9 +22,9 @@ class QuestionsController < ApplicationController
     if !params[:search].blank?
         query = ' lower(content) LIKE ? OR lower(answer) LIKE ? '
         searchparam = "%#{params[:search].downcase}%"
-        @questions = Question.where(query, searchparam, searchparam)
+        @questions = Question.where(query, searchparam, searchparam).joins(:category)
     else
-      @questions = Question.all
+      @questions = Question.all.joins(:category)
     end
     session[:question_search] = params[:search]
     
@@ -61,8 +61,14 @@ class QuestionsController < ApplicationController
     end
     session[:question_difficulty] = params[:difficulty_id]
 
+    only_mine = params[:only_my_questions]
+    
     if current_user != nil
-      @questions = @questions.where("is_public = ? OR user_id = ?", true, current_user.id).paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
+      if only_mine.blank?
+        @questions = @questions.where("is_public = ? OR user_id = ?", true, current_user.id).paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
+      else
+        @questions = @questions.where("user_id = ?", current_user.id).paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
+      end
     else
       @questions = @questions.where("is_public = ?", true).paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
     end
@@ -88,7 +94,7 @@ class QuestionsController < ApplicationController
         current_user.questions.count > Limits::MAX_QUESTIONS_GOLD
         flash[:info] = "Limit for number of questions for Gold membership level is: " + Limits::MAX_QUESTIONS_GOLD.to_s + ". Upgrade now to increase your limit!"
         redirect_to plans_path
-      elsif current_user.membership_level_id == 4 && current_user.questions.any? && 
+      elsif !current_user.admin? && current_user.membership_level_id == 4 && current_user.questions.any? && 
         current_user.questions.count > Limits::MAX_QUESTIONS_PLATINUM
         flash[:info] = "Limit for number of questions for Platinum membership level is: " + Limits::MAX_QUESTIONS_PLATINUM.to_s + 
         ". Contact us to increase your limit!"
@@ -300,7 +306,8 @@ class QuestionsController < ApplicationController
 
     def question_params
       params.require(:question).permit(:difficulty_id, :category_id, :question_type_id, :content, 
-      :answer, :answer2, :answer3, :answer4, :answer5, :short_answer, :multiple_choice_answer, :is_public)
+      :answer, :answer2, :answer3, :answer4, :answer5, :short_answer, :multiple_choice_answer, 
+      :is_public, :only_my_questions)
     end
     
     def correct_user
@@ -313,7 +320,7 @@ class QuestionsController < ApplicationController
     end
   
     def sort_column
-      Question.column_names.include?(params[:sort]) ? params[:sort] : "category_id"
+      (Question.column_names.include?(params[:sort]) || params[:sort] == "categories.name") ? params[:sort] : "categories.name"
     end
 
     def sort_direction

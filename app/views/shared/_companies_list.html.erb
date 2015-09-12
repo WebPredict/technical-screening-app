@@ -7,14 +7,22 @@
     </div>
   <div class="panel-body">
 <% if @companies && @companies.any? %>
-    <div class="table-responsive">
-      <table class="table">
-    <tr><th>Actions</th><th><%= sortable "name" %></th><th><%= sortable "email" %></th><th><%= sortable "phone" %></th>
-    <th><%= sortable "manager" %></th><th><%= sortable "address" %></th><th>Created On</th></tr>
-      <tbody>
-      <%= render @companies %>
-      </tbody>
-    </table>
+
+    <div class="laptop-section">
+      <div class="table-responsive">
+        <table class="table">
+      <tr><th>Actions</th><th><%= sortable "name" %></th><th><%= sortable "email" %></th><th><%= sortable "phone" %></th>
+      <th><%= sortable "manager" %></th><th><%= sortable "address" %></th><th>Created On</th></tr>
+        <tbody>
+        <%= render @companies %>
+        </tbody>
+      </table>
+      </div>
+    </div>
+    <div class="mobile-section">
+      <div class="list-group">
+        <%= render partial: "companies/mobile_company", collection: @companies, as: :company %>
+      </div>
     </div>
   <%= will_paginate @companies %>
 <% else %>

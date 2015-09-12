@@ -30,6 +30,15 @@ class TestSubmissionsController < ApplicationController
   end
 
   def create
+    if params[:commit] == "Cancel"
+      if logged_in?
+        redirect_to Test.find(params[:test_id])
+      else
+        redirect_to root_url
+      end 
+      return 
+    end 
+    
     if !params[:id].blank?
       @candidate = Candidate.find(params[:id])
     elsif !params[:email].blank?
@@ -47,9 +56,6 @@ class TestSubmissionsController < ApplicationController
       @test_submission.test = Test.find(params[:test_id])
       @test_submission.candidate = @candidate
 
-      @test_submission.start_time = session[:start_time]
-      @test_submission.end_time = Time.now
-
       unanswered = 0
       # load collection
       @test_submission.test.questions.each_with_index do |question, index|
@@ -66,6 +72,7 @@ class TestSubmissionsController < ApplicationController
         flash[:warning] = "You have " + unanswered.to_s + " unanswered question(s). Press Confirm to submit as is, or continue editing."
         render 'new'
       else
+        @test_submission.set_times(session[:start_time], Time.now)
         if @test_submission.save
           flash[:success] = "Test submission created!"
           redirect_to root_url
@@ -91,17 +98,24 @@ class TestSubmissionsController < ApplicationController
   
   def submit_forward_submission
     @test_submission = TestSubmission.find(params[:test_submission_id])
-    @test_submission.candidate.send_results(@test_submission, params[:email])
     
-    if @test_submission.sent_to == nil
-      @test_submission.sent_to = params[:email]
-    else
-      @test_submission.sent_to = @test_submission.sent_to + ", " + params[:email]
-    end 
-    @test_submission.save
-    
-    flash[:success] = "Test results sent!"
-    redirect_to @test_submission
+    email = params[:email]
+    if email =~ /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i   
+      @test_submission.candidate.send_results(@test_submission, params[:email])
+      
+      if @test_submission.sent_to == nil
+        @test_submission.sent_to = params[:email]
+      else
+        @test_submission.sent_to = @test_submission.sent_to + ", " + params[:email]
+      end 
+      @test_submission.save
+      
+      flash[:success] = "Test results sent!"
+      redirect_to @test_submission
+    else 
+      flash.now[:danger] = "Please enter a valid email address."
+      render 'forward_submission'
+    end
   end
   
   def score_test
@@ -151,7 +165,7 @@ class TestSubmissionsController < ApplicationController
     @test_submission.is_scored = true
     @test_submission.save
     @test_submission.update_avg_scores
-    flash[:success] = "Multiple choice and short phrase questions have been automatically scored. You can manually override scores via the 'Score Test' button."
+    flash[:success] = "Multiple choice and short phrase questions have been automatically scored. You can manually override scores via the 'Manually Score Test' button."
     redirect_to @test_submission
   end
   

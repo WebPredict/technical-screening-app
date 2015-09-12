@@ -1,10 +1,17 @@
 <% provide(:title, @job.name) %>
 <div class="page-header">
     <section class="laptop-section" style="float:right">
+        <% if @job.open? %>
+          <%= link_to "Close", close_job_path(id: @job.id), data: { confirm: "Close this job?" }, class: "btn btn-sm btn-primary btn-responsive" %> 
+        <% else %>
+          <%= link_to "Open", open_job_path(id: @job.id), class: "btn btn-sm btn-primary btn-responsive" %> 
+        <% end %>
         <%= link_to "Search", jobs_path, class: "btn btn-sm btn-primary btn-responsive" %> 
         <%= link_to "Create", new_job_path, class: "btn btn-sm btn-primary btn-responsive" %> 
         <%= link_to "Edit", edit_job_path(@job), class: "btn btn-sm btn-primary btn-responsive" %> 
-        <%= link_to "Add Candidate", new_candidate_path(job_id: @job.id), 
+        <%= link_to "Create New Candidate", new_candidate_path(job_id: @job.id), 
+          class: "btn btn-primary btn-sm btn-responsive" %>
+        <%= link_to "Add Existing Candidate", add_candidate_path(job_id: @job.id), 
           class: "btn btn-primary btn-sm btn-responsive" %>
         <%= link_to "Remove", @job, method: :delete,
                            data: { confirm: "Delete this job?" }, :class => "btn btn-sm btn-danger btn-responsive" %>
@@ -14,7 +21,11 @@
 <div class="row min-padded-row">
   <div class="col-md-12">
         <table class="table">
-      <tr><th>Job Title:</th><td><%= @job.name %></td></tr>
+      <tr><th>Job Title:</th><td><%= @job.name %> <% if @job.open? %>
+        <span class="label label-info">Open</span>
+        <% else %>
+        <span class="label label-info">Closed</span>
+        <% end %></td></tr>
       <tr><th>Description:</th><td><%= Nokogiri::HTML::DocumentFragment.parse(@job.description).to_html.html_safe %></td></tr>
       <tr><th>Manager:</th><td><%= @job.manager %></td></tr>
       <tr><th>Company:</th><td><%= link_to @job.company.name, @job.company unless @job.company == nil %></td></tr>
@@ -25,20 +36,34 @@
     <section>
       <% if @job_candidates != nil && @job_candidates.count > 0 %>
         <h4>This Job's Candidates:</h4>
+        
+        <div class="laptop-section">
           <table class="table table-bordered show-header">
             <tr><th>Actions</th><th><%= sortable "name" %></th><th><%= sortable "email" %></th><th><%= sortable "phone" %></th>
-        <th>Created On</th></th><th>Submissions</th></tr>
+            <th>Created On</th></th><th>Submissions</th></tr>
 
             <%= render @job_candidates %>
           </table>
+        </div>
+        <div class="mobile-section">
+          <div class="list-group">
+            <%= render @job_candidates %>
+          </div>
+        </div>
+
           <%= will_paginate @job_candidates %>
         <% else %>
-          <strong>No candidates for this job yet. <%= link_to "Add Candidate", new_candidate_path(job_id: @job.id), 
+          <strong>No candidates for this job yet. <%= link_to "Create New Candidate", new_candidate_path(job_id: @job.id), 
           class: "btn btn-primary btn-sm btn-responsive" %></strong>
         <% end %>
     </section>
     <br><br>
         <section class="mobile-section" style="float:right">
+        <% if @job.open? %>
+          <%= link_to "Close", close_job_path(id: @job.id), data: { confirm: "Close this job?" }, class: "btn btn-sm btn-primary btn-responsive" %> 
+        <% else %>
+          <%= link_to "Open", open_job_path(id: @job.id), class: "btn btn-sm btn-primary btn-responsive" %> 
+        <% end %>
         <%= link_to "Search", jobs_path, class: "btn btn-sm btn-primary btn-responsive" %> 
         <%= link_to "Create", new_job_path, class: "btn btn-sm btn-primary btn-responsive" %> 
         <%= link_to "Edit", edit_job_path(@job), class: "btn btn-sm btn-primary btn-responsive" %> 

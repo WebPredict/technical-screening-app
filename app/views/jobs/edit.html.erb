@@ -33,7 +33,7 @@
         <div style="float:right">
           <%= f.submit "Update Job", class: "btn btn-primary" %>
           <span></span>
-          <%= link_to "Cancel", root_path, class: "btn btn-default" %>
+          <%= f.submit "Cancel", class: "btn btn-default" %>
       </div>
       </div>
           
@@ -44,6 +44,7 @@
 <script>
   $(function() {
     $('#job_description').editable({
+      key: '9iH-8G-7hraqag1hnfnD8ciC-9adepbcD2vyz==',
       inlineMode: false
     });
   });

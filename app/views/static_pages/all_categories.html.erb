@@ -13,11 +13,11 @@
     <ul>
     <% @categories_first.each do |category| %>
     <li style="margin-top: 5px"><% if current_user != nil && current_user.admin? %>
-      <%= link_to edit_category_path(category), class: "btn btn-xs btn-primary" do %>
+      <%= link_to edit_category_by_name_path(name: category[0]), class: "btn btn-xs btn-primary" do %>
         <div class="edit_icon"><i class="glyphicon glyphicon-edit"></i></div> 
       <% end %>
     <% end %>
- <%= link_to category.name, questions_path(category_id: category) %>
+ <%= link_to category[0] + " (" + category[1].to_s + ")", questions_path(category: category[0]) %>
     </li>
     <% end %>
     </ul>
@@ -26,10 +26,10 @@
     <ul>
     <% @categories_second.each do |category| %>
     <li style="margin-top: 5px"><% if current_user != nil && current_user.admin? %>
-      <%= link_to edit_category_path(category), class: "btn btn-xs btn-primary" do %>
+      <%= link_to edit_category_by_name_path(name: category[0]), class: "btn btn-xs btn-primary" do %>
         <div class="edit_icon"><i class="glyphicon glyphicon-edit"></i></div> 
       <% end %>
-    <% end %> <%= link_to category.name, questions_path(category_id: category) %></li>
+    <% end %> <%= link_to category[0] + " (" + category[1].to_s + ")", questions_path(category: category[0]) %></li>
     <% end %>
     </ul>
   </div>
@@ -37,10 +37,10 @@
     <ul>
     <% @categories_third.each do |category| %>
     <li style="margin-top: 5px"><% if current_user != nil && current_user.admin? %>
-      <%= link_to edit_category_path(category), class: "btn btn-xs btn-primary" do %>
+      <%= link_to edit_category_by_name_path(name: category[0]), class: "btn btn-xs btn-primary" do %>
         <div class="edit_icon"><i class="glyphicon glyphicon-edit"></i></div> 
       <% end %>
-    <% end %> <%= link_to category.name, questions_path(category_id: category) %></li>
+    <% end %> <%= link_to category[0] + " (" + category[1].to_s + ")", questions_path(category: category[0]) %></li>
     <% end %>
     </ul>
   </div>

@@ -1,15 +1,37 @@
+<div class="laptop-section">
 <tr id="job-<%= job.id %>">
   <td>
-    <%= link_to "Create Candidate For Job", new_candidate_path(job_id: job.id), class: "btn btn-xs btn-primary" %>
+    <%= link_to "Create Candidate", new_candidate_path(job_id: job.id), class: "btn btn-xs btn-primary" %>
     <div class="button-spacer"></div>
-    <%= link_to "View Candidates For Job", job, class: "btn btn-xs btn-primary" %>
+    <%= link_to "View Candidates", job, class: "btn btn-xs btn-primary" %>
   </td>
   <td><%= link_to job.name, job %></td>
-  <td><%= Nokogiri::HTML::DocumentFragment.parse(job.description).to_html.html_safe %></td>
+  <td><div class="scrollable"><%= Nokogiri::HTML::DocumentFragment.parse(job.description).to_html.html_safe %></div></td>
   <td>
     <% if job.company != nil %>
     <%= link_to job.company.name, job.company %>
     <% end %>
     </td>
   <td><%= job.created_at.strftime("%m/%d/%Y") if job.created_at? %></td>
+  <td><%= job.closed_date.strftime("%m/%d/%Y") if job.closed_date? %></td>
 </tr>
+</div>
+
+<div class="mobile-section">
+    <a class="list-group-item" href="/jobs/<%= job.id %>" >
+        <small class="list-group-item-text">
+            Created on
+            <span><%= job.created_at.strftime("%m/%d/%Y") if job.created_at? %></span>
+        </small>
+        <h4 class="list-group-item-heading"><%= job.name %></h4>
+        <% if job.company != nil %>
+          <p class="list-group-item-text">
+            <strong><%= job.company.name %></strong>
+          </p>
+        <% end %>
+        <br>
+        <p class="list-group-item-text">
+          <div class="scrollable"><%= Nokogiri::HTML::DocumentFragment.parse(job.description).to_html.html_safe %></div>
+        </p>
+    </a>
+</div>
