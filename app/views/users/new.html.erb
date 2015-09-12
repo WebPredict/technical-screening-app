@@ -1,9 +1,13 @@
 <% provide(:title, 'Sign up') %>
-<div class="page-header">
-<h1>Sign Up (<%= link_to "Show Membership Plans", plans_path %>)</h1>
-</div>
+<br>
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
+  <div class="col-md-offset-3">
+<div class="panel panel-default panel-narrow">
+  <div class="panel-heading">
+    <h3 class="panel-title">Sign Up (<a href data-toggle="modal" data-target="#membershipPlans">Show Membership Plans</a>)</h3>
+  </div> 
+  <div class="panel-body">
+
     <%= form_for(@user) do |f| %>
       <%= render 'fields', f: f %>
           <div class="form-group">
@@ -15,7 +19,192 @@
     <% end %>
   </div>
 </div>
+</div>
+
+  </div>
+</div>
 <br>
+
+<!-- Modal -->
+<div class="modal fade" id="membershipPlans" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">TechScreen.net Membership Plan Details</h4>
+      </div>
+      <div class="modal-body">
+        
+    <div class="row">
+        <div class="col-md-1"> </div>
+        <div class="col-xs-12 col-md-3">
+            <div class="panel panel-primary price-panels">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Bronze</h3>
+                </div>
+                <div class="panel-body price-panels-body">
+                    <div class="the-price">
+                        <h1>
+                            $9<span class="subscript">/mo</span></h1>
+                        <small>2 weeks FREE trial</small>
+                    </div>
+                    <table class="table">
+                        <tr>
+                            <td>
+                                10 Job Listings
+                            </td>
+                        </tr>
+                        <tr class="active">
+                            <td>
+                                10 Custom Screening Tests
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                50 Custom Questions
+                            </td>
+                        </tr>
+                        <tr class="active">
+                            <td>
+                                10 Candidates
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Unlimited Results Storage
+                            </td>
+                        </tr>
+                        <tr class="active">
+                            <td>
+                                Weekly Reports
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="panel-footer">
+                    <%= link_to "Sign Up", signup_path(:membership_level_id => 2), class: "btn btn-success" %>
+                    FREE trial</div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-3">
+            <div class="panel panel-success price-panels">
+                <div class="cnrflash">
+                    <div class="cnrflash-inner">
+                        <span class="cnrflash-label">MOST
+                            <br>
+                            POPULAR</span>
+                    </div>
+                </div>
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Gold</h3>
+                </div>
+                <div class="panel-body price-panels-body">
+                    <div class="the-price">
+                        <h1>
+                            $19<span class="subscript">/mo</span></h1>
+                        <small>2 weeks FREE trial</small>
+                    </div>
+                    <table class="table">
+                        <tr>
+                            <td>
+                                50 Job Listings
+                            </td>
+                        </tr>
+                        <tr class="active">
+                            <td>
+                                50 Custom Screening Tests
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                200 Custom Questions
+                            </td>
+                        </tr>
+                        <tr class="active">
+                            <td>
+                                50 Candidates
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Unlimited Results Storage
+                            </td>
+                        </tr>
+                        <tr class="active">
+                            <td>
+                                Weekly Reports
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="panel-footer">
+                    <%= link_to "Sign Up", signup_path(:membership_level_id => 3), class: "btn btn-success" %>
+                    FREE trial</div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-3">
+            <div class="panel panel-info price-panels">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Platinum</h3>
+                </div>
+                <div class="panel-body price-panels-body">
+                    <div class="the-price">
+                        <h1>
+                            $29<span class="subscript">/mo</span></h1>
+                        <small>2 weeks FREE trial</small>
+                    </div>
+                    <table class="table">
+                        <tr>
+                            <td>
+                                200 Job Listings
+                            </td>
+                        </tr>
+                        <tr class="active">
+                            <td>
+                                200 Custom Screening Tests
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                500 Custom Questions
+                            </td>
+                        </tr>
+                        <tr class="active">
+                            <td>
+                                200 Candidates
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Unlimited Results Storage
+                            </td>
+                        </tr>
+                        <tr class="active">
+                            <td>
+                                Weekly Reports
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="panel-footer">
+                    <%= link_to "Sign Up", signup_path(:membership_level_id => 4), class: "btn btn-success" %>
+                     FREE trial</div>
+            </div>
+        </div>
+    </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
   <div style="text-align: center"><small>By signing up, you agree to our <%= link_to "Privacy Policy", privacy_path %> and our 

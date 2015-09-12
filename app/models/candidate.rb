@@ -6,9 +6,11 @@ class Candidate < ActiveRecord::Base
   has_many :test_submissions, dependent: :destroy 
   has_many :notes, dependent: :destroy 
   
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :user_id, presence: true
   validates :name, presence: true
-  validates :email, presence: true
+  validates :email, presence: true, length: { maximum: 255 },
+    format: { with: VALID_EMAIL_REGEX }
   
   def Candidate.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :

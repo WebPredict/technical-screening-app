@@ -1,5 +1,5 @@
 class TestsController < ApplicationController
-  before_action :logged_in_user, only: [:create, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:create, :edit, :update, :destroy, :show, :index]
   before_action :correct_user,   only: [:destroy, :edit, :update]
   
   helper_method :sort_column, :sort_direction
@@ -8,16 +8,35 @@ class TestsController < ApplicationController
   add_breadcrumb "Tests", :tests_path
 
   def index
-    query = ' (is_public = ? OR user_id = ?) '
-    searchparam = ""
-    if !params[:search].blank?
-        query += ' AND (lower(name) LIKE ? OR lower(description) LIKE ?) '
-        searchparam = "%#{params[:search].downcase}%"
-      @tests = Test.where(query, true, current_user, searchparam, searchparam).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 10)
-    else
-      @tests = Test.where(query, true, current_user).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 10)
+    only_mine = params[:only_my_tests]
+    @single_test_select = params[:single_test_select]
+    
+    if !@single_test_select.blank?
+      @candidate = Candidate.find(params[:id])
     end
 
+    if only_mine.blank?
+      query = ' (is_public = ? OR user_id = ?) '
+      searchparam = ""
+      if !params[:search].blank?
+          query += ' AND (lower(name) LIKE ? OR lower(description) LIKE ?) '
+          searchparam = "%#{params[:search].downcase}%"
+        @tests = Test.where(query, true, current_user, searchparam, searchparam).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 10)
+      else
+        @tests = Test.where(query, true, current_user).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 10)
+      end
+    else 
+      query = ' user_id = ? '
+      searchparam = ""
+      if !params[:search].blank?
+          query += ' AND (lower(name) LIKE ? OR lower(description) LIKE ?) '
+          searchparam = "%#{params[:search].downcase}%"
+        @tests = Test.where(query, current_user, searchparam, searchparam).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 10)
+      else
+        @tests = Test.where(query, current_user).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 10)
+      end
+    end 
+    
     if current_user != nil && (current_user.tests == nil || !current_user.tests.any?)
       flash.now[:info] = "You can create a screening test to send to a job candidate, or browse existing tests here. You can also clone and modify existing tests."
     end
@@ -33,13 +52,23 @@ class TestsController < ApplicationController
     query = "id NOT IN (#{question_ids})"
 
     if params[:search] && params[:search] != ''
-        query += ' AND lower(content) LIKE ? '
-        searchparam = "%#{params[:search].downcase}%"
+      query += ' AND lower(content) LIKE ? '
+      searchparam = "%#{params[:search].downcase}%"
       @questions = Question.where(query, @test.id, searchparam).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 10)
     else
       @questions = Question.where(query, @test.id).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 10)
     end
 
+    if !params[:category].blank?
+      found_cat = Category.where("name = ?", params[:category])
+      if found_cat.any?
+        params[:category_id] = found_cat.first.id
+      else
+        params[:category_id] = "0"
+      end
+      @questions = @questions.where("category_id = ?", params[:category_id])
+    end
+    
     @select_mode = true
     @searched = query != ''
     add_breadcrumb "Select Questions", :select_questions_path
@@ -77,7 +106,7 @@ class TestsController < ApplicationController
   
   def create
     if params[:commit] == "Cancel"
-      redirect_to root_url
+      redirect_to tests_path
     else
       if current_user.membership_level_id == 1 && current_user.tests.any? && 
         current_user.tests.count > Limits::MAX_TESTS_FREE
@@ -99,15 +128,20 @@ class TestsController < ApplicationController
       else
 
         @test = current_user.tests.build(test_params)
-        if @test.save
-          flash[:success] = "Test created!"
-          if params[:commit] == "Save And Add Random Questions"
-            redirect_to select_random_questions_path(id: @test.id)
-          else
-            redirect_to select_questions_path(id: @test.id)
-          end 
+        if Test.where("name = ? and user_id = ?", @test.name, current_user.id).count > 0
+          flash.now[:warning] = "You already have a test named " + @test.name + ". Please rename."
+          render 'new'
         else
-          render 'edit'
+          if @test.save
+            flash[:success] = "Test created!"
+            if params[:commit] == "Save And Add Random Questions"
+              redirect_to select_random_questions_path(id: @test.id)
+            else
+              redirect_to select_questions_path(id: @test.id)
+            end 
+          else
+            render 'new'
+          end
         end
       end
     end
@@ -116,7 +150,7 @@ class TestsController < ApplicationController
   def clone_test 
     @test = Test.find(params[:id])
     @clone_test = Test.new
-    @clone_test.name = @test.name
+    @clone_test.name = @test.name + " - CLONE"
     @clone_test.description = @test.description
     @clone_test.user = current_user
     @clone_test.is_public = false
@@ -171,10 +205,10 @@ class TestsController < ApplicationController
   end
 
   def submit_random_questions
+    @test = Test.find(params[:id])
     topic_list = params[:topic_list].split(",").map(&:strip)
     num_per_topic = params[:num_per_topic]
     if topic_list != nil
-      @test = Test.find(params[:id])
       topic_list.each do |topic|
         if topic == nil
           next
@@ -219,7 +253,7 @@ class TestsController < ApplicationController
           else     
             cat_questions = cat_questions.shuffle
             (1..num_per_topic.to_i).each do |index|
-              random_question = cat_questions [index]
+              random_question = cat_questions [index - 1]
                 @test.questions << random_question
             end
           end
@@ -293,7 +327,7 @@ class TestsController < ApplicationController
     def test_params
       params.require(:test).permit(:name, :description, :question_ids, :is_public, :topic_list, 
       :difficulty_level, :num_per_topic, :created_at, :difficulty_level_1, :difficulty_level_2, 
-      :difficulty_level_3)
+      :difficulty_level_3, :only_my_tests)
     end
     
     def correct_user

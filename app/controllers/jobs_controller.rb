@@ -1,6 +1,6 @@
 class JobsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy, :edit, :update, :show]
-  before_action :correct_user,   only: [:destroy, :edit, :update, :show]
+  before_action :correct_user,   only: [:destroy, :edit, :update, :show, :open, :close]
   
   helper_method :sort_column, :sort_direction
 
@@ -15,7 +15,13 @@ class JobsController < ApplicationController
         searchparam = "%#{params[:search].downcase}%"
     end
 
+    only_open = params[:only_open_jobs]
+
     @jobs = Job.where("user_id = ?", current_user.id)
+    
+    if !only_open.blank?
+      @jobs = @jobs.where("closed_date is null")
+    end 
     
     if @jobs != nil
       @jobs = @jobs.paginate(page: params[:page], per_page: 10).order(sort_column + " " + sort_direction)
@@ -99,11 +105,27 @@ class JobsController < ApplicationController
     add_breadcrumb "Edit Job Listing", edit_job_path
   end
 
+  def close
+    @job = Job.find(params[:id])
+    @job.closed_date = Time.now
+    @job.save 
+    flash[:success] = "Job closed."
+    redirect_to @job
+  end
+  
+  def open
+    @job = Job.find(params[:id])
+    @job.closed_date = nil
+    @job.save 
+    flash[:success] = "Job re-opened."
+    redirect_to @job
+  end
+  
   def update
-    if params[:commit] == "Cancel"
-      redirect_to root_url
-    else
       @job = Job.find(params[:id])
+    if params[:commit] == "Cancel"
+      redirect_to @job
+    else
       respond_to do |format|
         if @job.update_attributes(job_params)
           format.html { 
@@ -125,10 +147,60 @@ class JobsController < ApplicationController
     redirect_to jobs_path
   end
 
+  def add_candidate
+    @job = Job.find(params[:job_id])
+    flash.now[:info] = "Select an existing candidate to add to job '" + @job.name + "':"
+
+    @candidates = current_user.candidates
+    @single_candidate_select = true
+ 
+    if @candidates != nil
+      @candidates = @candidates.paginate(page: params[:page], per_page: 10)
+    end
+ 
+    render 'add_candidate'
+  end
+  
+  def filter_add_candidates
+    query = ''
+    searchparam = ""
+    if params[:search] && params[:search] != ''
+        query += ' lower(name) LIKE ? '
+        searchparam = "%#{params[:search].downcase}%"
+    end
+
+    @candidates = current_user.candidates
+    
+    if @candidates != nil
+      @candidates = @candidates.where(query, searchparam).paginate(page: params[:page], per_page: 10)
+    end
+
+    @searched = query != ''
+  end
+
+  def select_add_candidate
+    @job = Job.find(params[:id])
+    if params[:commit] == "Cancel"
+      redirect_to @job 
+    else
+      @candidates = Candidate.find(params[:candidate_ids])
+      
+      if @candidates.any?
+        @job.candidates << @candidates.first 
+        @job.save 
+        flash[:success] = "Candidate " + @candidates.first.name + " added to job '" + @job.name + ".'"
+        redirect_to @job
+      else
+        flash.now[:info] = "Please select a candidate to add."
+        render 'add_candidate'
+      end
+    end
+  end
+
   private
 
     def job_params
-      params.require(:job).permit(:name, :description, :company_id, :manager, :phone)
+      params.require(:job).permit(:name, :description, :company_id, :manager, :phone, :job_id)
     end
     
     def correct_user

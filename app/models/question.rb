@@ -14,22 +14,26 @@ class Question < ActiveRecord::Base
   validates :content, presence: true
   
   def formatted_content
-    answers = content.split("||")
-    
-    formatted = answers [0]
-    if answers.size > 1
-      formatted += " A) " + answers [1]
-    end 
-    if answers.size > 2
-      formatted += " B) " + answers [2]
-    end 
-    if answers.size > 3
-      formatted += " C) " + answers [3]
-    end 
-    if answers.size > 4
-      formatted += " D) " + answers [4]
-    end 
-    return formatted 
+    if question_type_id == 2
+      answers = content.split("||")
+      
+      formatted = answers [0]
+      if answers.size > 1
+        formatted += " A) " + answers [1]
+      end 
+      if answers.size > 2
+        formatted += " B) " + answers [2]
+      end 
+      if answers.size > 3
+        formatted += " C) " + answers [3]
+      end 
+      if answers.size > 4
+        formatted += " D) " + answers [4]
+      end 
+      return formatted 
+    else
+      return content
+    end
   end 
   
 end

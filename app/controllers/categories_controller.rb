@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :logged_in_user, only: [:show]
-  before_action :admin_user,   only: [:create, :edit, :update, :show]
+  before_action :admin_user,   only: [:create, :edit, :update, :show, :edit_by_name]
   
   helper_method :sort_column, :sort_direction
   
@@ -46,19 +46,23 @@ class CategoriesController < ApplicationController
   end
   
   def update
-    @category = Category.find(params[:id])
-    respond_to do |format|
-      if @category.update_attributes(category_params)
-        format.html { 
-          flash[:success] = "Category was successfully updated."
-          redirect_to @category
-        }
-        format.json { render :show, status: :ok, location: @category }
-      else
-        format.html { render :edit }
-        format.json { render json: @category.errors, status: :unprocessable_entity }
+    if params[:commit] == "Cancel"
+      redirect_to all_categories_path
+    else 
+      @category = Category.find(params[:id])
+      respond_to do |format|
+        if @category.update_attributes(category_params)
+          format.html { 
+            flash[:success] = "Category was successfully updated."
+            redirect_to @category
+          }
+          format.json { render :show, status: :ok, location: @category }
+        else
+          format.html { render :edit }
+          format.json { render json: @category.errors, status: :unprocessable_entity }
+        end
       end
-    end
+    end 
   end
   
   def new
@@ -68,6 +72,15 @@ class CategoriesController < ApplicationController
   # GET /categories/1/edit
   def edit
     @category = Category.find(params[:id])
+  end
+
+  def edit_by_name
+    if !params[:name].blank?
+      @category = Category.where('name = ?', params[:name]).first
+    else
+      @category = Category.find(params[:id])
+    end
+    render 'edit'
   end
 
   def show

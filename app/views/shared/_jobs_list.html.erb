@@ -7,14 +7,22 @@
     </div>
   <div class="panel-body">
 <% if @jobs && @jobs.any? %>
+<div class="laptop-section">
     <div class="table-responsive">
     <table class="table">
-      <tr><th>Actions</th><th>Job Name</th><th>Description</th><th>Company</th><th>Created On</th></tr>
+      <tr><th>Actions</th><th>Job Name</th><th>Description</th><th>Company</th><th>Created On</th><th>Closed On</th></tr>
       <tbody>
       <%= render @jobs %>
       </tbody>
     </table>
     </div>
+  </div>
+  <div class="mobile-section">
+    <div class="list-group">
+      <%= render @jobs %>
+    </div>
+  </div>
+
   <%= will_paginate @jobs %>
 <% else %>
 <strong>No job listings yet. <%= link_to "Add one!", new_job_path, class: "btn btn-sm btn-primary" %></strong>

@@ -18,7 +18,7 @@ class CandidatesController < ApplicationController
     @candidates = current_user.candidates
     
     if @candidates == nil || !@candidates.any?
-      flash.now[:info] = "Create a candidate entry to represent a job applicant, which may then perform screening tests. " + 
+      flash.now[:info] = "Create a new candidate to represent a job applicant, which may then perform screening tests. " + 
         "The test results may then be forwarded to employers."
     end
 
@@ -69,7 +69,7 @@ class CandidatesController < ApplicationController
       flash[:success] = "Test sent to candidate " + @candidates.first.name + "."
       redirect_to root_url
     else
-      flash[:info] = "Please select a test to send."
+      flash.now[:info] = "Please select a candidate to send to."
       render 'send_test'
     end
   end
@@ -97,25 +97,31 @@ class CandidatesController < ApplicationController
         redirect_to plans_path
       else
         @candidate = current_user.candidates.build(candidate_params)
-        if @candidate.save
-          flash[:success] = "Candidate created!"
-          if params[:job_id] != '' && params[:job_id] != nil
-            @job = Job.find(params[:job_id])
-            if @job != nil
-              @job.candidates << @candidate 
-              @job.save 
-            end
-          end 
-          
-          if params[:commit] == "Create And Send Test"
-            flash[:info] = "Select test to send to candidate:"
-            @single_test_select = true
-            redirect_to tests_path
-          else 
-            redirect_to @candidate 
-          end
-        else
+        
+        if Candidate.where("email = ? and user_id = ?", @candidate.email, current_user.id).count > 0
+          flash.now[:warning] = "You already have a candidate named " + @candidate.email + ". Please use that one or create one with a different email."
           render 'new'
+        else
+          if @candidate.save
+            flash[:success] = "Candidate created!"
+            if params[:job_id] != '' && params[:job_id] != nil
+              @job = Job.find(params[:job_id])
+              if @job != nil
+                @job.candidates << @candidate 
+                @job.save 
+              end
+            end 
+            
+            if params[:commit] == "Create And Send Test"
+              flash[:info] = "Select test to send to candidate:"
+              @single_test_select = true
+              redirect_to tests_path
+            else 
+              redirect_to @candidate 
+            end
+          else
+            render 'new'
+          end
         end
       end
     end
@@ -129,16 +135,20 @@ class CandidatesController < ApplicationController
 
   def update
     @candidate = Candidate.find(params[:id])
-    respond_to do |format|
-      if @candidate.update_attributes(candidate_params)
-        format.html { 
-            flash[:success] = "Candidate was successfully updated."
-            redirect_to @candidate 
-          }
-        format.json { render :show, status: :ok, location: @candidate }
-      else
-        format.html { render :edit }
-        format.json { render json: @candidate.errors, status: :unprocessable_entity }
+    if params[:commit] == "Cancel"
+      redirect_to @candidate
+    else
+      respond_to do |format|
+        if @candidate.update_attributes(candidate_params)
+          format.html { 
+              flash[:success] = "Candidate was successfully updated."
+              redirect_to @candidate 
+            }
+          format.json { render :show, status: :ok, location: @candidate }
+        else
+          format.html { render :edit }
+          format.json { render json: @candidate.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

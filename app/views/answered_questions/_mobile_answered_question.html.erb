@@ -1,0 +1,30 @@
+  <a class="list-group-item" href="/questions/<%= answered_question.question.id %>" >
+        <small class="list-group-item-text">
+            Created on
+            <span><%= answered_question.question.created_at.strftime("%m/%d/%Y") if answered_question.question.created_at? %></span>
+        </small>
+         <p class="list-group-item-text">
+           <strong><%= answered_question.question.category.name %> / <%= answered_question.question.difficulty.level %> / <%= answered_question.question.question_type.name %></strong>
+           </p>
+        <h4 class="list-group-item-heading">
+          <%= answered_question.question.formatted_content %>
+        </h4>
+          <p class="list-group-item-text">
+	          Their Answer: <%= answered_question.answer %>
+					</p>
+
+          <p class="list-group-item-text">
+					Marked as Correct? 
+			<% if answered_question.correct != nil %>
+    			<% if answered_question.correct? %>
+        			<span class="label label-success">
+          			<%= yes_no(answered_question.correct) %>
+        			</span>
+        			<% else %>
+        			<span class="label label-danger">
+          			<%= yes_no(answered_question.correct) %>
+        			</span>
+      			<% end %>
+    			<% end %>
+          </p>
+    </a>

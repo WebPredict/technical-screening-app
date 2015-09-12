@@ -1,0 +1,17 @@
+    <a class="list-group-item" href="/test_submissions/<%= test_submission.id %>" >
+        <small class="list-group-item-text">
+            Created on
+            <span><%= test_submission.created_at.strftime("%m/%d/%Y") if test_submission.created_at? %></span>
+        </small>
+        <h4 class="list-group-item-heading"><%= test_submission.name %></h4>
+          <p class="list-group-item-text">
+            <strong>Candidate: <%= test_submission.candidate.name %></strong>
+          </p>
+          <p class="list-group-item-text">
+            <strong>Test: <%= test_submission.test.name %></strong>
+          </p>
+        <br>
+        <p class="list-group-item-text">
+          <%= test_submission.formatted_score %> / <%= test_submission.formatted_time %>
+        </p>
+    </a>

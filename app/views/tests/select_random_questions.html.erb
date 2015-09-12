@@ -9,7 +9,7 @@
        <a href class="btn btn-primary btn-xs" data-toggle="modal" data-target="#categoryList">
    Show Categories List
 </a>
-      <%= text_field_tag :topic_list, "Java, SQL", class: 'form-control' %>
+      <%= text_field_tag :topic_list, params[:topic_list], class: 'form-control', placeholder: 'Category List...' %>
 
 
 <!-- Modal -->
@@ -25,7 +25,7 @@
         <div class="row">
             <ul>
             <% @categories.each do |category| %>
-            <li style="margin-top: 5px"><%= category.name %>
+            <li style="margin-top: 5px"><a class="category_link" href="#"><%= category.name %></a>
             </li>
             <% end %>
             </ul>
@@ -43,7 +43,7 @@
       <%= label_tag :difficulty_level, "Difficulty Levels To Include:" %>
       <% Difficulty.all.each do |diff| %>
         <label class="checkbox-inline">
-          <input type="checkbox" name="difficulty_level_<%= diff.id %>" id="difficulty_level_<%= diff.id %>" value="<%= diff.id %>" /> <%= diff.level %>
+          <input type="checkbox" checked name="difficulty_level_<%= diff.id %>" id="difficulty_level_<%= diff.id %>" value="<%= diff.id %>" /> <%= diff.level %>
         </label>
       <% end %>
 
@@ -51,10 +51,29 @@
           <div style="float:right">
             <input class="btn btn-primary" name="commit" type="submit" value="Add Random Questions" />
             <span></span>
-            <%= link_to "Cancel", questions_path, class: "btn btn-default" %>
+            <%= link_to "Cancel", @test, class: "btn btn-default" %>
         </div>
         </div>
 
   <% end %>
   </div>
 </div>
+
+<script>
+  
+  $(function () {
+    $('.category_link').click(function (event) {
+      var categoryDialog = $('#categoryList');
+      
+      var existing = $('#topic_list').val();
+      if (existing == '' || existing == 'Category List...')
+        $('#topic_list').val($(this).text());
+      else
+        $('#topic_list').val(existing + ', ' + $(this).text());
+        
+      categoryDialog.modal('hide');
+      event.stopPropagation();
+    });
+  });
+  
+</script>

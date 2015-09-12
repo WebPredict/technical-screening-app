@@ -7,6 +7,9 @@
       <%= link_to "Create", new_question_path, class: "btn btn-sm btn-primary btn-responsive" %> 
       <% if @question.user_id == @current_user.id %>
         <%= link_to "Edit", edit_question_path(@question), class: "btn btn-sm btn-primary btn-responsive" %> 
+        <% if @current_user.admin? %>
+        <%= link_to "Edit Raw", edit_question_path(@question, edit_raw: true), class: "btn btn-sm btn-primary btn-responsive" %> 
+        <% end %>
         <% if !@question.is_public? %>
         <%= link_to "Remove", @question, method: :delete,
                            data: { confirm: "Delete this question?" }, :class => "btn btn-sm btn-danger btn-responsive" %>
@@ -44,10 +47,12 @@
     </section>
     <section>
       <h4> Answer: </h4> 
-      <% if logged_in? && current_user.premium? %>
+      <% 
+      if logged_in? && current_user.premium?
+      %>
       <%= Nokogiri::HTML::DocumentFragment.parse(@question.answer).to_html.html_safe %> 
       <% else %>
-        <%= link_to "Employer / Recruiter Membership Required", plans_path, class: "btn btn-xs btn-primary" %> 
+        <%= link_to "Answer Hidden by Employer / Recruiter", plans_path, class: "btn btn-xs btn-primary" %> 
       <% end %>
     </section>
     <% if current_user != nil %>

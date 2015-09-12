@@ -30,13 +30,13 @@
       <div class="checkbox">
         <%= f.label :is_public do %>
           <%= f.check_box :is_public %>
-          Make Question Public (answer is always private)
+          Make Question Public 
         <% end %>
       </div>
 
     <div id="free-form">
     <%= f.label :answer %>
-    <%= f.text_area :answer, rows: "10", class: 'form-control' %>
+    <%= f.text_area :answer, rows: "10", class: 'text-small' %>
     </div>
       <div id="short-phrase" style="display:none">
         <div class="alert alert-info">Short Phrase is for one or two word answer questions (e.g. fill-in-the-blank). 
@@ -85,6 +85,14 @@
   $(document).ready(function(){
     $('#question_question_type_id').bind('change', categoryChanged);
     $('#question_question_type_id').trigger('change');
+  });
+
+
+  $(function() {
+    $('#question_answer').editable({
+      key: '9iH-8G-7hraqag1hnfnD8ciC-9adepbcD2vyz==',
+      inlineMode: false
+    });
   });
 
 </script>

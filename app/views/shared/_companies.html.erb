@@ -1,10 +1,18 @@
 <% if @companies && @companies.any? %>
-  <table class="table table-bordered show-header">
-    <tr><th>Actions</th><th><%= sortable "name" %></th><th><%= sortable "email" %></th><th><%= sortable "phone" %></th>
-    <th><%= sortable "manager" %></th><th><%= sortable "address" %></th>
-    <th><%= sortable "created_at", "Created On" %></th></tr>
-    <%= render @companies %>
-  </table>
+  <div class="laptop-section">
+    <table class="table table-bordered show-header">
+      <tr><th>Actions</th><th><%= sortable "name" %></th><th><%= sortable "email" %></th><th><%= sortable "phone" %></th>
+      <th><%= sortable "manager" %></th><th><%= sortable "address" %></th>
+      <th><%= sortable "created_at", "Created On" %></th></tr>
+      <%= render @companies %>
+    </table>
+  </div>
+  <div class="mobile-section">
+    <div class="list-group">
+      <%= render partial: "companies/mobile_company", collection: @companies, as: :company %>
+    </div>
+  </div>
+
   <%= will_paginate @companies %>
 <% end %>
 
