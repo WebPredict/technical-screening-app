@@ -187,15 +187,15 @@
 </script>
 <%= javascript_include_tag "savings_calculator" %>
 <div class="row calculator">
-  <div class="col-md-8 col-md-offset-2">
   <h1>TechScreen.net Estimated Savings Calculator</h1>
+  <div class="col-md-8 col-md-offset-1">
 <!--  <h4>Calculate money saved using TechScreen.net for candidate screening</h4> -->
   
 <div class="container">
-<form class="form-horizontal">
+<form class="form-horizontal calc-section">
   <div class="form-group">
-      <label class="col-xs-4 control-label col-sm-offset-1 " for="per-hour-input">$ / hour for interviewers</label>
-      <div class="col-xs-3 col-sm-offset-1">
+      <label class="col-xs-4 control-label col-sm-offset-1 " for="per-hour-input">$ / Hour For Interviewers</label>
+      <div class="col-xs-3">
         <div class="input-group">
           <span class="input-group-btn">
               <button type="button" class="btn  btn_hour-per-interview" id="btn-minus_per-hour" data-type="minus" data-field="quant[1]">
@@ -214,8 +214,8 @@
   </div>
   
   <div class="form-group">
-      <label class="col-xs-4 control-label col-sm-offset-1 " for="screenings">Screenings per month</label>
-      <div class="col-xs-3 col-sm-offset-1">
+      <label class="col-xs-4 control-label col-sm-offset-1 " for="screenings">Screenings Per Month</label>
+      <div class="col-xs-3">
         <div class="input-group">
           <span class="input-group-btn">
               <button type="button" class="btn btn-number" id = "btn-minus_num_candidates"data-type="minus" data-field="quant[2]">
@@ -234,7 +234,7 @@
   
   <div class="form-group">
       <label class="col-xs-4 control-label col-sm-offset-1 " for="time-per-screening">Time Per Screening</label>
-      <div class="col-xs-3 col-sm-offset-1">
+      <div class="col-xs-3">
         <div class="input-group">
           <span class="input-group-btn">
               <button type="button" class="btn btn-number" id="btn-minus_time_per_candidate" data-type="minus" data-field="quant[3]">
