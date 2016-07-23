@@ -8,7 +8,7 @@ class StaticPagesController < ApplicationController
       
       if current_user.trial_expired?
         log_out
-        flash[:info] = "Your 2 week trial has expired. Please sign up for either the Bronze, Gold, or Platinum subscription to continue using T3KSCR33N."
+        flash[:info] = "Your 2 week trial has expired. Please sign up for either the Bronze, Gold, or Platinum subscription to continue using XYZZY."
         redirect_to plans_path
       else 
         show_all = false
@@ -68,7 +68,7 @@ class StaticPagesController < ApplicationController
         end
         
         if @num_tests == 0 && @num_candidates == 0 && !current_user.companies.any?
-          flash.now[:info] = "Welcome to T3KSCR33N! You can view all of your screening results and candidates on this dashboard."
+          flash.now[:info] = "Welcome to XYZZY! You can view all of your screening results and candidates on this dashboard."
           @is_new_user = true
         end
       end      
