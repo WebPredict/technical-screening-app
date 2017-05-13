@@ -12,7 +12,7 @@ class MembershipsController < ApplicationController
     # TODO we need some sort of security token check here to make sure they've signed up properly
     @user.membership_level = level
     @user.save
-    flash[:success] = "You are now a " + level.name + " Membership level XYZZY member!"
+    flash[:success] = "You are now a " + level.name + " Membership level WebPredict member!"
     redirect_to root_url
   end 
   
@@ -26,7 +26,7 @@ class MembershipsController < ApplicationController
       @user.activate
       @user.save
       log_in @user
-      flash[:success] = "You are now a Bronze Membership level XYZZY member!"
+      flash[:success] = "You are now a Bronze Membership level WebPredict member!"
       redirect_to root_url
     else
       flash[:error] = "Problem with sign up information..."
@@ -44,7 +44,7 @@ class MembershipsController < ApplicationController
       @user.activate
       @user.save
       log_in @user
-      flash[:success] = "You are now a Gold Membership level XYZZY member!"
+      flash[:success] = "You are now a Gold Membership level WebPredict member!"
       redirect_to root_url
     else
       flash[:error] = "Problem with sign up information..."
@@ -62,7 +62,7 @@ class MembershipsController < ApplicationController
       @user.activate
       @user.save
       log_in @user
-      flash[:success] = "You are now a Platinum Membership level XYZZY member!"
+      flash[:success] = "You are now a Platinum Membership level WebPredict member!"
       redirect_to root_url
     else
       flash[:error] = "Problem with sign up information..."
